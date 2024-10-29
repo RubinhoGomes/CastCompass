@@ -3,7 +3,7 @@
 ### Done By: Diogo Esteves (2220XXX) Diogo Silva (2220XXX) Rúben Gomes (2220859)
 ### Built to solve, designed to evolve.
 
-### ![Happy Emoji](https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beaming%20Face%20with%20Smiling%20Eyes.png") Description
+### ![Happy Emoji](https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beaming%20Face%20with%20Smiling%20Eyes.gif") Description
 
 
 ### Requirements
