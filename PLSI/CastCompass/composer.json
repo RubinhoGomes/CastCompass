@@ -5,5 +5,10 @@
             "Rubengomes\\CastCompass\\": "src/"
         }
     },
-    "require": {}
+    "require": {},
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    }
 }
