@@ -27,6 +27,7 @@
   --danger: #dc3545;
   --light: #FFFFFF;
   --dark: #3D464D;
+  --castcompassprimary: #0056b3;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -9265,6 +9266,10 @@ button.bg-dark:focus {
 
 .text-primary {
   color: #FFD333 !important;
+}
+
+.text-castcompass {
+  color: #84eab3 !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {

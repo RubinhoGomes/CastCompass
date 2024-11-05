@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title>Cast & Compass</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+   <!-- <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description"> -->
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -79,8 +79,8 @@
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                    <span class="h2 text-uppercase text-primary bg-dark px-2">Cast</span>
+                    <span class="h2 text-uppercase text-dark bg-primary px-2 ml-n1">Compass</span>
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
