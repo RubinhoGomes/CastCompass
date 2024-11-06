@@ -17,7 +17,8 @@
 * Second, in the folder open the terminal and run the follow commands : 
     * `composer install & php init & php yii migrate`
     * After that install the database inside the project folders.
-
+* Now you can execute the Script created by Cast&Compass to do everything:
+    * Just execute "python3 castcompass.py" and will install everything for you
 
 ### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Astonished%20Face.png" alt="Astonished Face" width="48" height="48" /> Credits
 * Thanks for Yii2 Framework
