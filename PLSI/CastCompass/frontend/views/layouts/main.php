@@ -40,15 +40,47 @@ $menuItems = [
   ['label' => 'About', 'url' => ['/site/about']],
   ['label' => 'Contact', 'url' => ['/site/contact']],
 ];
+
+/*
 if (Yii::$app->user->isGuest) {
   $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
 }
+ */
 
 echo Nav::widget([
   'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
   'items' => $menuItems,
 ]);
 
+$myAccountItems = [];
+
+if (Yii::$app->user->isGuest) {
+  $myAccountItems = [
+  ['label' => 'Signup', 'url' => ['/site/signup']],
+  ['label' => 'Login', 'url' => ['/site/login']],
+];
+} else {
+  $myAccountItems = [
+    HTML::beginForm(['/user/profile'], 'get'),
+    HTML::submitButton('Profile', ['class' => 'btn text-decoration-none']),
+    HTML::endForm(),
+    HTML::beginForm(['/site/logout'], 'post'),
+    HTML::submitButton('Logout ('. Yii::$app->user->identity->username .')', ['class' => 'btn text-decoration-none']),
+    HTML::endForm()  
+  ];
+}
+
+echo Nav::widget([
+  'options' => ['class' => 'navbar-nav ms-auto mb-2 mb-md-0 d-flex'],
+  'items' => [
+    [
+      'label' => 'My Account',
+      'items' => $myAccountItems,
+    ],
+  ],
+]);
+
+/*
 if (Yii::$app->user->isGuest) {
   echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
 } else {
@@ -59,6 +91,8 @@ if (Yii::$app->user->isGuest) {
     )
     . Html::endForm();
 }
+
+ */
 NavBar::end();
 ?>
 </header>
