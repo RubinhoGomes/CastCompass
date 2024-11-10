@@ -37,6 +37,26 @@ phpunit.phar
 /.vagrant
 
 # local Files
+# FrontEnd
+/frontend/config/main-local.php
+/frontend/config/params-local.php
+/frontend/config/test-local.php
+/frontend/config/codeception-local.php
+# BackEnd
+/backend/config/main-local.php
+/backend/config/params-local.php
+/backend/config/test-local.php
+/backend/config/codeception-local.php
+# Common
+/common/config/main-local.php
+/common/config/params-local.php
+/common/config/test-local.php
+/common/config/codeception-local.php 
+# Console 
+/console/config/main-local.php
+/console/config/params-local.php
+/console/config/test-local.php
+/console/config/codeception-local.php
 
 
 # ignore generated files
