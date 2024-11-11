@@ -10,7 +10,7 @@ class RbacController extends Controller
     {
         $auth = Yii::$app->authManager;
         $auth->removeAll();
-        
+
         // Example of adding something
         $loginBO = $auth->createPermission('loginBO');
         $loginBO->description = 'Login to the BackOffice';
@@ -23,9 +23,16 @@ class RbacController extends Controller
 
         // Add the roles
         // For example Admin
-
         $admin = $auth->createRole('admin');
+        // Funcionario Role
+        $funcionario = $auth->createRole('funcionario');
+        // Cliente Role
+        $cliente = $auth->createRole('cliente');
+
+        // Add the roles to the authManager
         $auth->add($admin);
+
+        // Add the permissions to the roles
         $auth->addChild($admin, $loginBO);
 
 
