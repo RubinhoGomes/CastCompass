@@ -24,9 +24,9 @@ class RbacController extends Controller
         // Add the roles
         // For example Admin
         $admin = $auth->createRole('admin');
-        // Funcionario Role
-        $funcionario = $auth->createRole('worker');
-        // Cliente Role
+        //Employee Role
+        $worker = $auth->createRole('worker');
+        // Client Role
         $cliente = $auth->createRole('client');
 
         // Add the roles to the authManager
