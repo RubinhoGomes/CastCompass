@@ -11,21 +11,31 @@ $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+   <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Please fill out the following fields to signup:</p>
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
+            <?php $form = ActiveForm::begin(['id' => 'form-signup', 'enableClientValidation' => true,]); ?>
+               
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'nome')?>
+
+                <?= $form->field($model, 'email')->input('email') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <div class="form-group">
+                <?= $form->field($model, 'nif')->textInput() ?>        
+
+                <?= $form->field($model, 'genero')->dropDownList(['Masculino' => 'Masculino', 'Feminino' => 'Feminino', 'Outro' => 'Outro']) ?>
+
+                <?= $form->field($model, 'telemovel')->textInput() ?>
+
+                <?= $form->field($model, 'morada')->textInput() ?>
+
+               <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 

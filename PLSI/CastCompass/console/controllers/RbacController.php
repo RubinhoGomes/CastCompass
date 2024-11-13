@@ -27,11 +27,12 @@ class RbacController extends Controller
         //Employee Role
         $worker = $auth->createRole('worker');
         // Client Role
-        $cliente = $auth->createRole('client');
+        $client = $auth->createRole('client');
 
         // Add the roles to the authManager
         $auth->add($admin);
-
+        $auth->add($worker);
+        $auth->add($client);
         // Add the permissions to the roles
         $auth->addChild($admin, $loginBO);
 

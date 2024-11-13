@@ -5,6 +5,7 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use common\models\Profile;
 
 /**
  * Signup form
@@ -14,7 +15,12 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
+    public $nome;
+    public $nif;
+    public $dtaNascimento;
+    public $genero;
+    public $telemovel;
+    public $morada;
 
     /**
      * {@inheritdoc}
@@ -23,17 +29,36 @@ class SignupForm extends Model
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
+            ['username', 'required', 'message' => '{attribute} não pode estar vazio.'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
-            ['email', 'required'],
+            ['email', 'required', 'message' => '{attribute} não pode estar vazio.'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
+            ['nome', 'trim'],
+            ['nome', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['nome', 'string', 'max' => 255],
+
+            ['nif', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['nif', 'string', 'max' => 50],
+
+            // To Do Data de Nascimento
+
+            ['genero', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['genero', 'string', 'max' => 50],
+
+            ['telemovel', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['telemovel', 'string', 'max' => 20],
+
+            ['morada', 'required', 'message' => '{attribute} não pode estar vazia.'],
+            ['morada', 'string', 'max' => 255],
+
+            ['password', 'trim'],
+            ['password', 'required', 'message' => '{attribute} não pode estar vazia.'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
@@ -46,17 +71,33 @@ class SignupForm extends Model
     public function signup()
     {
         if (!$this->validate()) {
-            return null;
+            return yii::error($this->errors);
         }
-        
+
         $user = new User();
+        $profile = new Profile();
+
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->save();
 
-        return $user->save() && $this->sendEmail($user);
+        $profile->userID = $user->id;
+        $profile->nome = $this->nome;
+        $profile->nif = $this->nif;
+        $profile->dtaNascimento = date('Y-m-d');
+        $profile->genero = $this->genero;
+        $profile->telemovel = $this->telemovel;
+        $profile->morada = $this->morada;
+        $profile->save();
+
+        $auth = Yii::$app->authManager;
+        $Role = $auth->getRole('client');
+        $auth->assign($Role, $user->id);
+
+        return $user;
     }
 
     /**
