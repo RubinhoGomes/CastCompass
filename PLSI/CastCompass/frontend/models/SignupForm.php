@@ -46,7 +46,7 @@ class SignupForm extends Model
             ['nif', 'required', 'message' => '{attribute} não pode estar vazio.'],
             ['nif', 'string', 'max' => 50],
 
-            // To Do Data de Nascimento
+            // TODO: Data de Nascimento
 
             ['genero', 'required', 'message' => '{attribute} não pode estar vazio.'],
             ['genero', 'string', 'max' => 50],
@@ -62,6 +62,7 @@ class SignupForm extends Model
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
+
 
     /**
      * Signs user up.
@@ -82,7 +83,7 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        $user->save();
+        $user->save(false);
 
         $profile->userID = $user->id;
         $profile->nome = $this->nome;
@@ -91,7 +92,7 @@ class SignupForm extends Model
         $profile->genero = $this->genero;
         $profile->telemovel = $this->telemovel;
         $profile->morada = $this->morada;
-        $profile->save();
+        $profile->save(false);
 
         $auth = Yii::$app->authManager;
         $Role = $auth->getRole('client');
