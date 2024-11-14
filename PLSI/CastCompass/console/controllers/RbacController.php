@@ -16,6 +16,9 @@ class RbacController extends Controller
         $loginBO->description = 'Login to the BackOffice';
         $auth->add($loginBO);
 
+
+
+
         // ----
         // ... CONTINUE THE PERMISSIONS
         //----
