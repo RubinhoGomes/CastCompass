@@ -1,34 +1,26 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
+use yii\base\Model;
+use common\models\User;
+use common\models\Profile;
 
 /**
- * This is the model class for table "user".
- *
- * @property int $id
- * @property string $username
- * @property string $auth_key
- * @property string $password_hash
- * @property string|null $password_reset_token
- * @property string $email
- * @property int $status
- * @property int $created_at
- * @property int $updated_at
- * @property string|null $verification_token
- *
- * @property Profile[] $profiles
+ * Signup form
  */
-class UserForm extends \yii\db\ActiveRecord
+class SignupForm extends Model
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'user';
-    }
+    public $username;
+    public $email;
+    public $password;
+    public $nome;
+    public $nif;
+    public $dtaNascimento;
+    public $genero;
+    public $telemovel;
+    public $morada;
 
     /**
      * {@inheritdoc}
@@ -36,42 +28,97 @@ class UserForm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['password_reset_token'], 'unique'],
+            ['username', 'trim'],
+            ['username', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'trim'],
+            ['email', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+
+            ['nome', 'trim'],
+            ['nome', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['nome', 'string', 'max' => 255],
+
+            ['nif', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['nif', 'string', 'max' => 50],
+
+            // TODO: Data de Nascimento
+
+            ['genero', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['genero', 'string', 'max' => 50],
+
+            ['telemovel', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            ['telemovel', 'string', 'max' => 20],
+
+            ['morada', 'required', 'message' => '{attribute} não pode estar vazia.'],
+            ['morada', 'string', 'max' => 255],
+
+            ['password', 'trim'],
+            ['password', 'required', 'message' => '{attribute} não pode estar vazia.'],
+            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'username' => 'Username',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'verification_token' => 'Verification Token',
-        ];
-    }
 
     /**
-     * Gets query for [[Profiles]].
+     * Signs user up.
      *
-     * @return \yii\db\ActiveQuery
+     * @return bool whether the creating new account was successful and email was sent
      */
-    public function getProfiles()
+    public function signup()
     {
-        return $this->hasMany(Profile::class, ['userID' => 'id']);
+        if (!$this->validate()) {
+            return yii::error($this->errors);
+        }
+
+        $user = new User();
+        $profile = new Profile();
+
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $user->status = User::STATUS_ACTIVE;
+        $user->save(false);
+
+        $profile->userID = $user->id;
+        $profile->nome = $this->nome;
+        $profile->nif = $this->nif;
+        $profile->dtaNascimento = date('Y-m-d');
+        $profile->genero = $this->genero;
+        $profile->telemovel = $this->telemovel;
+        $profile->morada = $this->morada;
+        $profile->save(false);
+
+        $auth = Yii::$app->authManager;
+        $Role = $auth->getRole('client');
+        $auth->assign($Role, $user->id);
+
+        return $user;
     }
+
+    /**
+     * Sends confirmation email to user
+     * @param User $user user model to with email should be send
+     * @return bool whether the email was sent
+     */
+    protected function sendEmail($user)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($this->email)
+            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->send();
+    }
+
 }

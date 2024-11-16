@@ -41,7 +41,7 @@
                         'badge' => '<span class="right badge badge-info"></span>',
                         'items' => [
                             ['label' => 'Main', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Perfil', 'url' => ['profile/index'], 'iconStyle' => 'fa fa-user'],
+                            ['label' => 'Perfil', 'url' => ['user/index'], 'iconStyle' => 'fa fa-user'],
                             //['label' => 'Futuro', 'iconStyle' => 'far'],
                         ]
                     ],
