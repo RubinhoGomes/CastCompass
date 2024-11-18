@@ -12,12 +12,22 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'username')->textInput() ?>
+
+    <?= $form->field($model, 'nome')->textInput() ?>  
+
+    <?= $form->field($model, 'email')->textInput() ?>
+
+    <?php // $form->field($model, 'nome')->textInput() ?>
+
     <?= $form->field($model, 'status')->textInput() ?>
+  
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+   <?php ActiveForm::end(); ?>
 
 </div>

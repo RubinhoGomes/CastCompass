@@ -5,9 +5,11 @@ namespace backend\controllers;
 use common\models\User;
 use app\models\UserSearch;
 use app\models\UserForm;
+use common\models\Profile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -39,6 +41,10 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        if(!Yii::$app->user->can('admin')) {
+          return $this->redirect(['site/login']);
+        }
+
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -56,6 +62,11 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+      
+      if(!Yii::$app->user->can('admin')) {
+          return $this->redirect(['site/login']);
+      }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -68,6 +79,11 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+
+      if(!Yii::$app->user->can('admin')) {
+        return $this->redirect(['site/login']);
+      }
+    
         $model = new User();
 
         if ($this->request->isPost) {
@@ -92,14 +108,42 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (!Yii::$app->user->can('admin')) {
+            return $this->redirect(['site/login']);
         }
 
+        $user = User::findOne($id);
+
+        if(!$user){
+          throw new NotFoundHttpException('O utilizador não existe.');
+        }
+
+        $profile = Profile::findOne(['userID' => $id]);
+
+        if(!$profile){
+          throw new NotFoundHttpException('O perfil do utilizador não existe.');
+        }
+
+
+        $isValidalide = $user->validate() && $profile->validate();
+
+        if($isValidalide){
+          $user->save();
+          $profile->save();
+          return $this->redirect(['view', 'id' => $user->id]);
+        }
+
+        /*$model = $this->findModel($id);*/
+        /**/
+        /*if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {*/
+        /*    return $this->redirect(['view', 'id' => $model->id]);*/
+        /*}*/
+        /**/
+ 
         return $this->render('update', [
-            'model' => $model,
+          'user' => $user,
+          'profile' => $profile,
+
         ]);
     }
 
@@ -112,7 +156,16 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        
+        if (!Yii::$app->user->can('admin')) {
+            return $this->redirect(['site/login']);
+        }
+
+        $user = User::findOne($id);
+        $profile = Profile::findOne(['user_id' => $id]);
+
+        $user->delete();
+        $profile->delete();
 
         return $this->redirect(['index']);
     }

@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Users';
+$this->title = 'Utilizadores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -21,23 +21,46 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
 
+        // This line of code allows you to search using a "search bar" below the User Label
+        // 'filterModel' => $searchModel,
+?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            //'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
+            [
+              'attribute' => 'nome',
+              'value' => function ($model) {
+                return $model->profile->nome;
+              }
+            ],
+
+            [
+              'attribute' => 'morada',
+              'value' => function ($model) {
+                return $model->profile->morada;
+              }
+            ],
+
+            [
+              'attribute' => 'telemovel',
+              'value' => function ($model) {
+                return $model->profile->telemovel;
+              }
+            ],
+
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
+            'email:email',
+            // 'status',
+            // 'created_at:date',
+            // 'updated_at:date',
             //'verification_token',
             [
                 'class' => ActionColumn::className(),
