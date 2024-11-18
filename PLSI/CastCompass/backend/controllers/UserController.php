@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use common\models\User;
-use app\models\UserSearch;
-use app\models\UserForm;
+use backend\models\UserSearch;
+use backend\models\UserForm;
 use common\models\Profile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -83,19 +83,15 @@ class UserController extends Controller
       if(!Yii::$app->user->can('userCreateBO')) {
         return $this->redirect(['site/login']);
       }
-    
-        $model = new User();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
+        
+      $model = new UserForm();
+        
+      if ($model->load($this->request->post()) && $model->createForm()) {
+        return $this->redirect(['view', 'id' => $model->id]);
+      }   
+        
         return $this->render('create', [
-            'model' => $model,
+          'model' => $model,
         ]);
     }
 

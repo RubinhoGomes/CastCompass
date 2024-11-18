@@ -31,10 +31,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'username',
+            [
+              'attribute' => 'profile.nome',
+              'label' => 'Nome',
+            ],
             'email:email',
-            'nome',
-            'morada',
-            'telemovel',
+            [
+              'attribute' => 'profile.nif',
+              'label' => 'NIF',
+            ],
+            [
+              'attribute' => 'profile.dtaNascimento',
+              'label' => 'Data de Nascimento',
+            ],
+            [
+              'attribute' => 'profile.genero',
+              'label' => 'Género',
+            ],
+            [
+              'attribute' => 'profile.telemovel',
+              'label' => 'Telemóvel',
+            ],
+            [
+              'attribute' => 'profile.morada',
+              'label' => 'Morada',
+            ],
             'auth_key',
             'password_hash',
             'password_reset_token',

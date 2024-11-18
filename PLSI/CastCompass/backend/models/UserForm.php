@@ -10,8 +10,9 @@ use common\models\Profile;
 /**
  * Signup form
  */
-class SignupForm extends Model
+class UserForm extends Model
 {
+    public $id;
     public $username;
     public $email;
     public $password;
@@ -101,6 +102,43 @@ class SignupForm extends Model
 
         return $user;
     }
+
+    public function createForm(){
+        if (!$this->validate()) {
+            return null;
+        }
+
+        $user = new User();
+        $profile = new Profile();
+
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $user->status = User::STATUS_ACTIVE;
+        $user->save();
+
+        $profile->userID = $user->id;
+        $profile->nome = $this->nome;
+        $profile->nif = $this->nif;
+        $profile->dtaNascimento = date('Y-m-d');
+        $profile->genero = $this->genero;
+        $profile->telemovel = $this->telemovel;
+        $profile->morada = $this->morada;
+        $profile->save(false);
+
+
+        $this->id = $user->getId();
+        
+        $auth = Yii::$app->authManager;
+        $Role = $auth->getRole('client');
+        $auth->assign($Role, $user->id);
+
+        return $user;
+
+    }
+
 
     /**
      * Sends confirmation email to user
