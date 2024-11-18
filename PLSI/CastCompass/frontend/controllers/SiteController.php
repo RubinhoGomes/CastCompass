@@ -147,6 +147,15 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays shop page.
+     *
+     * @return mixed
+     */
+    public function actionShop()
+    {
+        return $this->render('shop');
+    }
+    /**
      * Signs user up.
      *
      * @return mixed
