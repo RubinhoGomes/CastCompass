@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        if(!Yii::$app->user->can('admin')) {
+        if(!Yii::$app->user->can('userIndexBO')) {
           return $this->redirect(['site/login']);
         }
 
@@ -63,7 +63,7 @@ class UserController extends Controller
     public function actionView($id)
     {
       
-      if(!Yii::$app->user->can('admin')) {
+      if(!Yii::$app->user->can('userViewBO')) {
           return $this->redirect(['site/login']);
       }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
     public function actionCreate()
     {
 
-      if(!Yii::$app->user->can('admin')) {
+      if(!Yii::$app->user->can('userCreateBO')) {
         return $this->redirect(['site/login']);
       }
     
@@ -108,7 +108,7 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (!Yii::$app->user->can('admin')) {
+        if (!Yii::$app->user->can('userUpdateBO')) {
             return $this->redirect(['site/login']);
         }
 
@@ -123,14 +123,15 @@ class UserController extends Controller
         if(!$profile){
           throw new NotFoundHttpException('O perfil do utilizador não existe.');
         }
+        if ($user->load($this->request->post()) && $profile->load($this->request->post())) {
 
+          $isValidalide = $user->validate() && $profile->validate();
 
-        $isValidalide = $user->validate() && $profile->validate();
-
-        if($isValidalide){
-          $user->save();
-          $profile->save();
-          return $this->redirect(['view', 'id' => $user->id]);
+          if($isValidalide){
+            $user->save();
+            $profile->save();
+            return $this->redirect(['view', 'id' => $user->id]);
+          }
         }
 
         /*$model = $this->findModel($id);*/
@@ -157,7 +158,7 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         
-        if (!Yii::$app->user->can('admin')) {
+        if (!Yii::$app->user->can('userDeleteBO')) {
             return $this->redirect(['site/login']);
         }
 

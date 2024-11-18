@@ -59,6 +59,7 @@ class RbacController extends Controller
         // Add the permissions to the roles
         $auth->addChild($admin, $loginBO);
         $auth->addChild($admin, $userIndexBO);
+        $auth->addChild($admin, $userViewBO);
         $auth->addChild($admin, $userCreateBO);
         $auth->addChild($admin, $userUpdateBO);
         $auth->addChild($admin, $userDeleteBO);
