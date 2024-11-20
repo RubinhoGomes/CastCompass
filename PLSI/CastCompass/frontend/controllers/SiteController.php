@@ -155,6 +155,39 @@ class SiteController extends Controller
     {
         return $this->render('shop');
     }
+
+    /**
+     * Displays cart page.
+     *
+     * @return mixed
+     */
+    public function actionCart()
+    {
+        return $this->render('cart');
+    }
+
+
+    /**
+     * Displays cart page.
+     *
+     * @return mixed
+     */
+    public function actionFavorito()
+    {
+        return $this->render('favorito');
+    }
+
+
+    /**
+     * Displays cart page.
+     *
+     * @return mixed
+     */
+    public function actionProfile()
+    {
+        return $this->render('profile');
+    }
+
     /**
      * Signs user up.
      *

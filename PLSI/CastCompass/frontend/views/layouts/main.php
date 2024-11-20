@@ -94,7 +94,7 @@ AppAsset::register($this);
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><?= Yii::$app->user->identity->username ?> <i class="fa fa-angle-down"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="<?= Url::to(['/user/profile']) ?>" class="dropdown-item">Profile</a>
+                                    <a href="<?= Url::to(['/site/profile']) ?>" class="dropdown-item">Profile</a>
 
                                     <!-- Form to handle logout -->
                                     <?php echo Html::beginForm(['/site/logout'], 'post'); ?>
@@ -105,11 +105,11 @@ AppAsset::register($this);
                         <?php endif; ?>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <a href="" class="btn px-0">
+                        <a href="<?= Url::to(['/site/favorito'])?>" class="btn px-0">
                             <i class="fas fa-heart text-primary"></i>
                             <span class="badge text-primary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                         </a>
-                        <a href="" class="btn px-0 ml-3">
+                        <a href="<?= Url::to(['/site/cart'])?>" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             <span class="badge text-primary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                         </a>
