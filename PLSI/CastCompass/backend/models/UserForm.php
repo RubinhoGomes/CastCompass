@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\rbac\Role;
 use yii\base\Model;
 use common\models\User;
 use common\models\Profile;
@@ -22,13 +23,16 @@ class UserForm extends Model
     public $genero;
     public $telemovel;
     public $morada;
+    public $role;
 
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
-        return [
+      return [
+            ['role', 'required', 'message' => '{attribute} não pode estar vazio.'],
+            
             ['username', 'trim'],
             ['username', 'required', 'message' => '{attribute} não pode estar vazio.'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
@@ -70,6 +74,8 @@ class UserForm extends Model
      *
      * @return bool whether the creating new account was successful and email was sent
      */
+
+    /*
     public function signup()
     {
         if (!$this->validate()) {
@@ -102,14 +108,22 @@ class UserForm extends Model
 
         return $user;
     }
+     */
 
-    public function createForm(){
+    public function createForm() {
+
         if (!$this->validate()) {
             return null;
         }
 
         $user = new User();
         $profile = new Profile();
+
+        // How this works?
+        // Simple, we create an Role object, and we get the role from the authManager function
+        // getRole, and we assign the role to the user. This way we can dinamically assign role
+        $role = new Role();
+        $role = Yii::$app->authManager->getRole($this->role);
 
         $user->username = $this->username;
         $user->email = $this->email;
@@ -132,11 +146,9 @@ class UserForm extends Model
         $this->id = $user->getId();
         
         $auth = Yii::$app->authManager;
-        $Role = $auth->getRole('client');
-        $auth->assign($Role, $user->id);
+        $auth->assign($role, $user->id);
 
         return $user;
-
     }
 
 

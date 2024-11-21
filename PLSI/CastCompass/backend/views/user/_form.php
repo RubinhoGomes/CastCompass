@@ -29,6 +29,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'telemovel')->textInput() ?>
 
+    <?= $form->field($model, 'role')->dropDownList(
+      \yii\helpers\ArrayHelper::map(
+        array_filter(Yii::$app->authManager->getRoles(), function($role) {
+          return $role->name !== 'admin';
+        }), 'name', 'name'),
+        ['prompt' => 'Selecione a Role']
+    ) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

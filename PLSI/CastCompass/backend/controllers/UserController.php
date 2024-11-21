@@ -89,7 +89,7 @@ class UserController extends Controller
       if ($model->load($this->request->post()) && $model->createForm()) {
         return $this->redirect(['view', 'id' => $model->id]);
       }   
-        
+
         return $this->render('create', [
           'model' => $model,
         ]);
