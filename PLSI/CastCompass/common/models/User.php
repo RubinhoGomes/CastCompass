@@ -214,4 +214,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function getProfile() {
         return $this->hasOne(Profile::class, ['userID' => 'id']);
     }
+
+    public function getRole(){
+      $auth = Yii::$app->authManager;
+      $roles = $auth->getRolesByUser($this->id);
+      return array_keys($roles)[0] ?? null;
+    }
 }

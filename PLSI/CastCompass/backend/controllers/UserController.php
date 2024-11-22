@@ -108,39 +108,15 @@ class UserController extends Controller
             return $this->redirect(['site/login']);
         }
 
-        $user = User::findOne($id);
+        $user = new UserForm();
+        $user = $user->populateForm($id);
 
-        if(!$user){
-          throw new NotFoundHttpException('O utilizador não existe.');
-        }
-
-        $profile = Profile::findOne(['userID' => $id]);
-
-        if(!$profile){
-          throw new NotFoundHttpException('O perfil do utilizador não existe.');
-        }
-        if ($user->load($this->request->post()) && $profile->load($this->request->post())) {
-
-          $isValidalide = $user->validate() && $profile->validate();
-
-          if($isValidalide){
-            $user->save();
-            $profile->save();
+        if ($user->load($this->request->post()) && $user->updateForm()) {
             return $this->redirect(['view', 'id' => $user->id]);
-          }
         }
 
-        /*$model = $this->findModel($id);*/
-        /**/
-        /*if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {*/
-        /*    return $this->redirect(['view', 'id' => $model->id]);*/
-        /*}*/
-        /**/
- 
         return $this->render('update', [
           'user' => $user,
-          'profile' => $profile,
-
         ]);
     }
 
@@ -159,7 +135,7 @@ class UserController extends Controller
         }
 
         $user = User::findOne($id);
-        $profile = Profile::findOne(['user_id' => $id]);
+        $profile = Profile::findOne(['userID' => $id]);
 
         $user->delete();
         $profile->delete();

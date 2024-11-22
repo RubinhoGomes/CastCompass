@@ -68,31 +68,8 @@ class UserForm extends Model
         ];
     }
 
-/*
-   public function __construct($id = null) {
-      
-      $user = User::findOne($id);
-      $profile = Profile::findOne(['userID' => $id]);
-
-      $UserForm = new UserForm();
-
-      $UserForm->id = $user->id;
-      $UserForm->username = $user->username;
-      $UserForm->email = $user->email;
-      $UserForm->nome = $profile->nome;
-      $UserForm->nif = $profile->nif;
-      $UserForm->dtaNascimento = $profile->dtaNascimento;
-      $UserForm->genero = $profile->genero;
-      $UserForm->telemovel = $profile->telemovel;
-      $UserForm->morada = $profile->morada;
-
-      $UserForm->role = Yii::$app->authManager->getRolesByUser($id);
   
-      return $UserForm;
-   }
-
- */
-   /**
+    /**
      * Signs user up.
      *
      * @return bool whether the creating new account was successful and email was sent
@@ -187,12 +164,10 @@ class UserForm extends Model
     }
         */
 
-        $user = User::findOne($this->id);
-        $profile = Profile::findOne(['userID' => $this->id]);
 
         $user->username = $this->username;
         $user->email = $this->email;
-        $user->updated_at = date('Y-m-d H:i:s');
+        $user->updatedAt = date('Y-m-d H:i:s');
         $user->save(false);
 
         $profile->nome = $this->nome;
@@ -210,29 +185,6 @@ class UserForm extends Model
 
         return true;
     }
- 
-    public function populateForm($id) {
-      
-      $user = User::findOne($id);
-      $profile = Profile::findOne(['userID' => $id]);
-  
-      $userForm = new UserForm();
-      
-      $userForm->id = $user->id;
-      $userForm->username = $user->username;
-      $userForm->email = $user->email;
-      $userForm->nome = $profile->nome;
-      $userForm->nif = $profile->nif;
-      $userForm->dtaNascimento = $profile->dtaNascimento;
-      $userForm->genero = $profile->genero;
-      $userForm->telemovel = $profile->telemovel;
-      $userForm->morada = $profile->morada;
-
-     $userForm->role = $user->getRole(); 
-
-      return $userForm;
-    }
-
 
 
     /**

@@ -20,13 +20,20 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $form->field($user, 'username')->textInput() ?>
 
-    <?= $form->field($profile, 'nome')->textInput() ?>
+    <?= $form->field($user, 'nome')->textInput() ?>
 
-    <?= $form->field($profile, 'morada')->textInput() ?>
+    <?= $form->field($user, 'morada')->textInput() ?>
 
-    <?= $form->field($profile, 'telemovel')->textInput() ?>
+    <?= $form->field($user, 'telemovel')->textInput() ?>
 
     <?= $form->field($user, 'email')->textInput() ?>
+
+  <?= $form->field($user, 'role')->dropDownList(\yii\helpers\ArrayHelper::map(
+    Yii::$app->authManager->getRoles(), 'name', 'name'),
+    ['prompt' => 'Selecione a Role']
+  )
+
+  ?>
 
     <?php /*= $form->field($user, 'password')->passwordInput()*/?>
 

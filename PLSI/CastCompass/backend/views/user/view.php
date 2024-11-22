@@ -59,9 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'auth_key',
             'password_hash',
             'password_reset_token',
-            'status',
-            'created_at',
-            'updated_at',
+            'role',
+            'created_at:date',
+            'updated_at:date',
             'verification_token',
         ],
     ]) ?>

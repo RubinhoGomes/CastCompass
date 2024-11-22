@@ -16,7 +16,6 @@ class RbacController extends Controller
         $loginBO->description = 'Login to the BackOffice';
         $auth->add($loginBO);
 
-
         $userIndexBO = $auth->createPermission('userIndexBO');
         $userIndexBO->description = 'List of users, index, in the BackOffice';
         $auth->add($userIndexBO);

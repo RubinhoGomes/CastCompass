@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'username',
+            'role',
             [
               'attribute' => 'nome',
               'value' => function ($model) {
