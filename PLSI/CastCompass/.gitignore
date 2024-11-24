@@ -23,7 +23,8 @@ Thumbs.db
 # composer itself is not needed
 composer.phar
 composer.lock
-composer.json
+# Commented because it is needed to avoid the error and dependency issue
+# composer.json
 
 # Mac DS_Store Files
 .DS_Store
