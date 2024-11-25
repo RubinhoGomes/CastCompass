@@ -41,15 +41,18 @@
                         'badge' => '<span class="right badge badge-info"></span>',
                         'items' => [
                             ['label' => 'Main', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Perfil', 'url' => ['user/index'], 'iconStyle' => 'fa fa-user'],
+                            ['label' => 'Perfil', 'url' => ['user/index'], 'iconStyle' => 'fa fa-user', 'visible' => Yii::$app->user->can('userIndexBO')],
+                            ['label' => 'Categoria', 'url' => ['categoria/index'], 'iconStyle' => 'fa fa-list', 'visible' => Yii::$app->user->can('categoriaIndexBO')]
                             //['label' => 'Futuro', 'iconStyle' => 'far'],
                         ]
                     ],
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
+                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank', 'visible' => Yii::$app->user->can('admin')],
+                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank', 'visible' => Yii::$app->user->can('admin')],
 
+                  ['label' => 'Inicio', 'icon' => 'tachometer-alt', 'visible' => Yii::$app->user->isGuest],
+                  ['label' => 'Voltar Para o Inicio', 'url' => ['site/index'], 'visible' => Yii::$app->user->isGuest ],
 
                 ],
             ]);
