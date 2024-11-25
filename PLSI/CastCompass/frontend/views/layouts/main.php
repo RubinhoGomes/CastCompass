@@ -94,7 +94,7 @@ AppAsset::register($this);
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><?= Yii::$app->user->identity->username ?> <i class="fa fa-angle-down"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="<?= Url::to(['/site/profile']) ?>" class="dropdown-item">Profile</a>
+                                    <a href="<?= Url::to(['/user/index']) ?>" class="dropdown-item">Profile</a>
 
                                     <!-- Form to handle logout -->
                                     <?php echo Html::beginForm(['/site/logout'], 'post'); ?>
