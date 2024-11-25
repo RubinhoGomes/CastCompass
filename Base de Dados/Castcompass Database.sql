@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 18, 2024 at 05:27 PM
+-- Generation Time: Nov 25, 2024 at 10:51 PM
 -- Server version: 8.0.35
 -- PHP Version: 8.2.20
 
@@ -29,6 +29,7 @@ USE `castcompass`;
 -- Table structure for table `auth_assignment`
 --
 
+DROP TABLE IF EXISTS `auth_assignment`;
 CREATE TABLE `auth_assignment` (
   `item_name` varchar(64) COLLATE utf8mb3_unicode_ci NOT NULL,
   `user_id` varchar(64) COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -40,7 +41,8 @@ CREATE TABLE `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('admin', '2', 1731945801);
+('admin', '2', 1732549404),
+('worker', '51', 1732550129);
 
 -- --------------------------------------------------------
 
@@ -48,6 +50,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 -- Table structure for table `auth_item`
 --
 
+DROP TABLE IF EXISTS `auth_item`;
 CREATE TABLE `auth_item` (
   `name` varchar(64) COLLATE utf8mb3_unicode_ci NOT NULL,
   `type` smallint NOT NULL,
@@ -63,15 +66,20 @@ CREATE TABLE `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('admin', 1, NULL, NULL, NULL, 1731945801, 1731945801),
-('client', 1, NULL, NULL, NULL, 1731945801, 1731945801),
-('loginBO', 2, 'Login to the BackOffice', NULL, NULL, 1731945801, 1731945801),
-('userCreateBO', 2, 'Create a user in the BackOffice', NULL, NULL, 1731945801, 1731945801),
-('userDeleteBO', 2, 'Delete a user in the BackOffice', NULL, NULL, 1731945801, 1731945801),
-('userIndexBO', 2, 'List of users, index, in the BackOffice', NULL, NULL, 1731945801, 1731945801),
-('userUpdateBO', 2, 'Update a user in the BackOffice', NULL, NULL, 1731945801, 1731945801),
-('userViewBO', 2, 'View a user in the BackOffice', NULL, NULL, 1731945801, 1731945801),
-('worker', 1, NULL, NULL, NULL, 1731945801, 1731945801);
+('admin', 1, NULL, NULL, NULL, 1732549404, 1732549404),
+('categoriaCreateBO', 2, 'Create a category in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('categoriaDeleteBO', 2, 'Delete a category in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('categoriaIndexBO', 2, 'List of categories, index, in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('categoriaUpdateBO', 2, 'Update a category in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('categoriaViewBO', 2, 'View a category in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('client', 1, NULL, NULL, NULL, 1732549404, 1732549404),
+('loginBO', 2, 'Login to the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('userCreateBO', 2, 'Create a user in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('userDeleteBO', 2, 'Delete a user in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('userIndexBO', 2, 'List of users, index, in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('userUpdateBO', 2, 'Update a user in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('userViewBO', 2, 'View a user in the BackOffice', NULL, NULL, 1732549404, 1732549404),
+('worker', 1, NULL, NULL, NULL, 1732549404, 1732549404);
 
 -- --------------------------------------------------------
 
@@ -79,6 +87,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 -- Table structure for table `auth_item_child`
 --
 
+DROP TABLE IF EXISTS `auth_item_child`;
 CREATE TABLE `auth_item_child` (
   `parent` varchar(64) COLLATE utf8mb3_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8mb3_unicode_ci NOT NULL
@@ -89,7 +98,13 @@ CREATE TABLE `auth_item_child` (
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('admin', 'categoriaCreateBO'),
+('admin', 'categoriaDeleteBO'),
+('admin', 'categoriaIndexBO'),
+('admin', 'categoriaUpdateBO'),
+('admin', 'categoriaViewBO'),
 ('admin', 'loginBO'),
+('worker', 'loginBO'),
 ('admin', 'userCreateBO'),
 ('admin', 'userDeleteBO'),
 ('admin', 'userIndexBO'),
@@ -102,6 +117,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 -- Table structure for table `auth_rule`
 --
 
+DROP TABLE IF EXISTS `auth_rule`;
 CREATE TABLE `auth_rule` (
   `name` varchar(64) COLLATE utf8mb3_unicode_ci NOT NULL,
   `data` blob,
@@ -115,6 +131,7 @@ CREATE TABLE `auth_rule` (
 -- Table structure for table `carrinhocompra`
 --
 
+DROP TABLE IF EXISTS `carrinhocompra`;
 CREATE TABLE `carrinhocompra` (
   `id` int NOT NULL,
   `profileID` int NOT NULL,
@@ -131,11 +148,19 @@ CREATE TABLE `carrinhocompra` (
 -- Table structure for table `categoria`
 --
 
+DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE `categoria` (
   `id` int NOT NULL,
   `nome` varchar(255) NOT NULL,
   `genero` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nome`, `genero`) VALUES
+(1, 'Nome Updated', 'Genero');
 
 -- --------------------------------------------------------
 
@@ -143,6 +168,7 @@ CREATE TABLE `categoria` (
 -- Table structure for table `fatura`
 --
 
+DROP TABLE IF EXISTS `fatura`;
 CREATE TABLE `fatura` (
   `id` int NOT NULL,
   `carrinhoID` int NOT NULL,
@@ -156,6 +182,7 @@ CREATE TABLE `fatura` (
 -- Table structure for table `favorito`
 --
 
+DROP TABLE IF EXISTS `favorito`;
 CREATE TABLE `favorito` (
   `id` int NOT NULL,
   `profileID` int NOT NULL,
@@ -168,6 +195,7 @@ CREATE TABLE `favorito` (
 -- Table structure for table `itemscarrinho`
 --
 
+DROP TABLE IF EXISTS `itemscarrinho`;
 CREATE TABLE `itemscarrinho` (
   `id` int NOT NULL,
   `carrinhoID` int NOT NULL,
@@ -183,6 +211,7 @@ CREATE TABLE `itemscarrinho` (
 -- Table structure for table `iva`
 --
 
+DROP TABLE IF EXISTS `iva`;
 CREATE TABLE `iva` (
   `id` int NOT NULL,
   `valor` decimal(5,2) NOT NULL
@@ -194,6 +223,7 @@ CREATE TABLE `iva` (
 -- Table structure for table `linhafatura`
 --
 
+DROP TABLE IF EXISTS `linhafatura`;
 CREATE TABLE `linhafatura` (
   `id` int NOT NULL,
   `faturaID` int NOT NULL,
@@ -209,6 +239,7 @@ CREATE TABLE `linhafatura` (
 -- Table structure for table `metodoexpedicao`
 --
 
+DROP TABLE IF EXISTS `metodoexpedicao`;
 CREATE TABLE `metodoexpedicao` (
   `id` int NOT NULL,
   `nome` varchar(255) NOT NULL
@@ -220,6 +251,7 @@ CREATE TABLE `metodoexpedicao` (
 -- Table structure for table `metodopagamento`
 --
 
+DROP TABLE IF EXISTS `metodopagamento`;
 CREATE TABLE `metodopagamento` (
   `id` int NOT NULL,
   `nome` varchar(255) NOT NULL
@@ -231,6 +263,7 @@ CREATE TABLE `metodopagamento` (
 -- Table structure for table `migration`
 --
 
+DROP TABLE IF EXISTS `migration`;
 CREATE TABLE `migration` (
   `version` varchar(180) NOT NULL,
   `apply_time` int DEFAULT NULL
@@ -256,6 +289,7 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- Table structure for table `produto`
 --
 
+DROP TABLE IF EXISTS `produto`;
 CREATE TABLE `produto` (
   `id` int NOT NULL,
   `nome` varchar(255) NOT NULL,
@@ -272,6 +306,7 @@ CREATE TABLE `produto` (
 -- Table structure for table `profile`
 --
 
+DROP TABLE IF EXISTS `profile`;
 CREATE TABLE `profile` (
   `id` int NOT NULL,
   `userID` int NOT NULL,
@@ -288,10 +323,14 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`, `telemovel`, `morada`) VALUES
-(1, 27, '1', 'user', '2024-11-13', 'Masculino', '1', '1'),
+(1, 27, '1', 'user', '2024-11-22', 'Masculino', '123', '123'),
 (2, 28, '1', 'Dinis', '2024-11-13', 'Masculino', '123', 'Morada'),
-(3, 1, '1', 'ASD', '2024-11-01', 'Masculino', '1234', 'Morada'),
-(4, 2, '1', 'admin', '2014-11-01', 'Masculino', '1', 'Morada');
+(3, 1, '1', 'ASD', '2024-11-22', 'Masculino', '1234', 'Morada'),
+(4, 2, '1', 'admin', '2014-11-01', 'Masculino', '1', 'Morada'),
+(13, 44, '1', 'teste', '2024-11-18', '1', '123', 'teste teste'),
+(19, 50, '1', 'Client', '2024-11-20', 'Masculino', '1', 'Client'),
+(20, 51, '1', 'Funcionario', '2024-11-25', 'Masculino', '1', 'Funcionario'),
+(21, 52, '1', 'Worker', '2024-11-22', 'Masculino', '123456789', 'morada');
 
 -- --------------------------------------------------------
 
@@ -299,6 +338,7 @@ INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`,
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL,
   `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -317,10 +357,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(1, 'asd', '1YdAK-Hw--whrllUEJSuLomKaqo0bO5a', '$2y$13$LD580.7UvVVvJIL3fKH7VudFHOvbHS6Ytk7J7mNqKE41snJS99IPG', NULL, 'qweas@sapo.pt', 9, 1729595637, 1729595637, 'zrqx9d-jIp1UJtjhzumfvPvwhI6oMwDe_1729595637'),
+(1, 'asd', '1YdAK-Hw--whrllUEJSuLomKaqo0bO5a', '$2y$13$LD580.7UvVVvJIL3fKH7VudFHOvbHS6Ytk7J7mNqKE41snJS99IPG', NULL, 'qweas@sapo.pt', 9, 1729595637, 1732235220, 'zrqx9d-jIp1UJtjhzumfvPvwhI6oMwDe_1729595637'),
 (2, 'admin', 'YHN_E5_VxYvTV5OR1-J8qwrE2pD30h-6', '$2y$13$3mB2vnqPN58UJnncMUbKt.CmcTzXe7avZ90nmBuKLwn22.07qSwhC', NULL, 'admin@admin.com', 10, 1731079276, 1731079276, 'Ad4nnqn0frGypUpJfJoHsSPc9FONkxTh_1731079276'),
-(27, 'User', 'ytcegCPHN0VlZO8bDuQQmkcdUjwnMC0j', '$2y$13$7k7SwFAQy9AY40B21BLHE.WjAyrnn5FtnsXrvxg8u9oJCeY6beBsm', NULL, 'user@user.com', 10, 1731523900, 1731523900, 'JwunoJH1aPOlHiwDWtO93qXPDDhGr9HE_1731523900'),
-(28, 'Dinis', 'YOgHhjAuO02df7qtgsB4HN9OM0o4gc78', '$2y$13$njpCmsFLTIyw7piN7P1WyuO1HF01ZKXFN01JMtpz4JsxrRkUEoA0e', NULL, 'dinis@hotmail.com', 10, 1731536961, 1731536961, '1QveOH-fA0SkudlSyp24tGa-_AoVtrMV_1731536961');
+(27, 'Snoppy', 'ytcegCPHN0VlZO8bDuQQmkcdUjwnMC0j', '$2y$13$7k7SwFAQy9AY40B21BLHE.WjAyrnn5FtnsXrvxg8u9oJCeY6beBsm', NULL, 'user@user.com', 10, 1731523900, 1732235273, 'JwunoJH1aPOlHiwDWtO93qXPDDhGr9HE_1731523900'),
+(28, 'Dinis', 'YOgHhjAuO02df7qtgsB4HN9OM0o4gc78', '$2y$13$njpCmsFLTIyw7piN7P1WyuO1HF01ZKXFN01JMtpz4JsxrRkUEoA0e', NULL, 'dinis@hotmail.com', 10, 1731536961, 1731536961, '1QveOH-fA0SkudlSyp24tGa-_AoVtrMV_1731536961'),
+(44, 'Teste', 'p1qLkeN0O0HQ5oATAtPf-x1kO6rC7BmZ', '$2y$13$1exSKF0cKcfpm0KDB9Xgwu89C/GD.furvGdICVuj7OWxyB/HqRQk2', NULL, 'teste@teste.com', 10, 1731959318, 1731959318, 'WeYhm2AfN-T31fT8dG-EN3iPAmYpD5uB_1731959318'),
+(50, 'Client', 'WoWn01AZoGGdlsIXoMStv9TNkwokunZ4', '$2y$13$w07sAUWemYqjwYY.HeZmmu.BGyimNvcyevAA2cGyB6m33UgtJT.xW', NULL, 'client@client.com', 10, 1732145687, 1732145687, '7MiZBFY_gcAdcBOOAnrLvoZeYCTX1geI_1732145687'),
+(51, 'Funcionario', 'NtiL1-Qf2wWIlV8MF8h5aM76xLAtKBVs', '$2y$13$DqW5O0lXA4XzeZ18zIYyU.A52HNgc/BuuVW92QOhxCohnYx.9U/CS', NULL, 'funcionario@funcionario.com', 10, 1732145803, 1732550129, 'pbMNFNBuhQ4VmRD2Cak7-TmMs8vPubBV_1732145803'),
+(52, 'Worker', 'XOmF-9HSiJLNGHOMCDES27hHGtvkiHC6', '$2y$13$MWaNeYyb9kOOsihajlVFhO212qyAhdR7El58Zc7tuSiXcTajwYkM.', NULL, 'worker@worker.com', 10, 1732289597, 1732289597, 'qhlW_ktl_mRniHt4OKAlFl7xGyJJqe76_1732289597');
 
 --
 -- Indexes for dumped tables
@@ -452,16 +496,76 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `carrinhocompra`
+--
+ALTER TABLE `carrinhocompra`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `fatura`
+--
+ALTER TABLE `fatura`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `favorito`
+--
+ALTER TABLE `favorito`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `itemscarrinho`
+--
+ALTER TABLE `itemscarrinho`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `iva`
+--
+ALTER TABLE `iva`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `linhafatura`
+--
+ALTER TABLE `linhafatura`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `metodoexpedicao`
+--
+ALTER TABLE `metodoexpedicao`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `metodopagamento`
+--
+ALTER TABLE `metodopagamento`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `produto`
+--
+ALTER TABLE `produto`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
