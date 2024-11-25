@@ -7,6 +7,7 @@ use backend\models\CategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * CategoriaController implements the CRUD actions for Categoria model.
