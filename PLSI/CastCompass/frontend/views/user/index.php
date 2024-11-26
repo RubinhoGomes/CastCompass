@@ -10,12 +10,12 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 /** @var \frontend\models\SignupForm $model */
 
-$this->title = 'Profiles';
+$this->title = 'Perfil de ' . Yii::$app->user->identity->profile->nome;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profile-index">
 
-    <h1><?= Yii::$app->user->identity->username ?></h1>
+    <h1><?= $this->title ?></h1>
 
     <div class="container-fluid pb-5">
         <div class="row px-xl-5">

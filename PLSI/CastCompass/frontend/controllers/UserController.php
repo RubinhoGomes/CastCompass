@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Profile;
+use common\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -104,7 +105,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->userID]);
         }
 
         return $this->render('update', [
@@ -135,8 +136,11 @@ class UserController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Profile::findOne(['id' => $id])) !== null) {
-            return $model;
+        $user = User::findOne($id);
+        $profile = Profile::findOne(['userID' => $id]);
+
+        if ($profile !== null) {
+            return $profile;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
