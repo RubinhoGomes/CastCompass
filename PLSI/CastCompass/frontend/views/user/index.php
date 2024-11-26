@@ -3,6 +3,8 @@
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \frontend\models\SignupForm $model */
+/** @var \frontend\models\EditProfileForm $model */
+
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
@@ -24,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="font-weight-semi-bold mb-4"><?= Yii::$app->user->identity->profile->morada ?></h3>
 
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <button class="btn btn-primary px-3"><i class="fa mr-1"></i> Editar Perfil</button>
+                    <?= Html::a('Editar Perfil', ['user/editar'], ['class' => 'btn btn-primary px-3']) ?>
                 </div>
             </div>
         </div>
