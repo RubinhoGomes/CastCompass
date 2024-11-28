@@ -1,12 +1,14 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use common\models\Produto;
 use app\models\ProdutoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * ProdutoController implements the CRUD actions for Produto model.
@@ -39,7 +41,7 @@ class ProdutoController extends Controller
     public function actionIndex()
     {
 
-      if(!Yii::$app->user->can('produtosIndexBO')) {
+      if(!Yii::$app->user->can('produtoIndexBO')) {
           throw new ForbiddenHttpException('Access denied');
       }
 

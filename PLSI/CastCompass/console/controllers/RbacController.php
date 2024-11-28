@@ -75,26 +75,29 @@ class RbacController extends Controller
         $categoriaDeleteBO->description = 'Delete a category in the BackOffice';
         $auth->add($categoriaDeleteBO);
 
-        
-        $productoIndexBO = $auth->createPermission('productoIndexBO');
-        $productoIndexBO->description = 'List of products, index, in the BackOffice';
-        $auth->add($productoIndexBO);
+        // ----
+        // Product Permissions
+        // ----
+       
+        $produtoIndexBO = $auth->createPermission('produtoIndexBO');
+        $produtoIndexBO->description = 'List of products, index, in the BackOffice';
+        $auth->add($produtoIndexBO);
 
-        $productoViewBO = $auth->createPermission('productoViewBO');
-        $productoViewBO->description = 'View a product in the BackOffice';
-        $auth->add($productoViewBO);
+        $produtoViewBO = $auth->createPermission('produtoViewBO');
+        $produtoViewBO->description = 'View a product in the BackOffice';
+        $auth->add($produtoViewBO);
 
-        $productoCreateBO = $auth->createPermission('productoCreateBO');
-        $productoCreateBO->description = 'Create a product in the BackOffice';
-        $auth->add($productoCreateBO);
+        $produtoCreateBO = $auth->createPermission('produtoCreateBO');
+        $produtoCreateBO->description = 'Create a product in the BackOffice';
+        $auth->add($produtoCreateBO);
 
-        $productoUpdateBO = $auth->createPermission('productoUpdateBO');
-        $productoUpdateBO->description = 'Update a product in the BackOffice';
-        $auth->add($productoUpdateBO);
+        $produtoUpdateBO = $auth->createPermission('produtoUpdateBO');
+        $produtoUpdateBO->description = 'Update a product in the BackOffice';
+        $auth->add($produtoUpdateBO);
 
-        $productoDeleteBO = $auth->createPermission('productoDeleteBO');
-        $productoDeleteBO->description = 'Delete a product in the BackOffice';
-        $auth->add($productoDeleteBO);
+        $produtoDeleteBO = $auth->createPermission('produtoDeleteBO');
+        $produtoDeleteBO->description = 'Delete a product in the BackOffice';
+        $auth->add($produtoDeleteBO);
 
 
 
@@ -136,11 +139,11 @@ class RbacController extends Controller
         $auth->addChild($admin, $categoriaUpdateBO);
         $auth->addChild($admin, $categoriaDeleteBO);
         // Product Permissions
-        $auth->addChild($admin, $productoIndexBO);
-        $auth->addChild($admin, $productoViewBO);
-        $auth->addChild($admin, $productoCreateBO);
-        $auth->addChild($admin, $productoUpdateBO);
-        $auth->addChild($admin, $productoDeleteBO);
+        $auth->addChild($admin, $produtoIndexBO);
+        $auth->addChild($admin, $produtoViewBO);
+        $auth->addChild($admin, $produtoCreateBO);
+        $auth->addChild($admin, $produtoUpdateBO);
+        $auth->addChild($admin, $produtoDeleteBO);
 
         // ##############
         // Add the permissions for the Worker

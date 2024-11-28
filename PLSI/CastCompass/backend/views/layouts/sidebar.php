@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="['site/index']" class="brand-link">
         <img src="<?=$assetDir?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Cast&Compass</span>
     </a>
@@ -44,7 +44,7 @@ echo \hail812\adminlte\widgets\Menu::widget([
                 ['label' => 'Main', 'url' => ['site/index'], 'iconStyle' => 'far'],
                 ['label' => 'Perfil', 'url' => ['user/index'], 'iconStyle' => 'fa fa-user', 'visible' => Yii::$app->user->can('userIndexBO')],
                 ['label' => 'Categoria', 'url' => ['categoria/index'], 'iconStyle' => 'fa fa-list', 'visible' => Yii::$app->user->can('categoriaIndexBO')],
-                ['label' => 'Produtos', 'url' => ['produtos/index'], 'iconStyle' => 'fa fa-tent', 'visible' => Yii::$app->user->can('produtosIndexBO')],
+                ['label' => 'Produto', 'url' => ['produto/index'], 'iconStyle' => 'fa fa-tent', 'visible' => Yii::$app->user->can('produtoIndexBO')],
                 // ['label' => 'Futuro', 'iconStyle' => 'far'],
             ]
         ],

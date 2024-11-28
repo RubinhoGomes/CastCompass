@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nif')->textInput() ?>
 
-    <?= $form->field($model, 'genero')->textInput() ?>
+    <?= $form->field($model, 'genero')->dropDownList(['Masculino' => 'Masculino', 'Feminino' => 'Feminino', 'Outro' => 'Outro'], ['prompt' => 'Selecione o Género']) ?>
 
     <?= $form->field($model, 'telemovel')->textInput() ?>
 

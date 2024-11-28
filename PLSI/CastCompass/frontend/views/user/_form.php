@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'dtaNascimento')->textInput() ?>
 
-    <?= $form->field($model, 'genero')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'genero')->dropDownList(['Masculino' => 'Masculino', 'Feminino' => 'Feminino', 'Outro' => 'Outro']) ?>
 
     <?= $form->field($model, 'telemovel')->textInput(['maxlength' => true]) ?>
 
