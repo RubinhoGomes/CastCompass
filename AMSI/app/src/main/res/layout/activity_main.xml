@@ -24,11 +24,15 @@
             android:layout_weight="0.25" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_carrinho"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/round_button"
-            android:text="Button" />
+            android:textAlignment="center"
+            app:icon="@drawable/ic_shopcart"
+            app:iconSize="50dp"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"/>
 
         <Space
             android:layout_width="wrap_content"
@@ -36,11 +40,15 @@
             android:layout_weight="0.25" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_favoritos"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/round_button"
-            android:text="Button" />
+            android:textAlignment="center"
+            app:icon="@drawable/ic_favorito"
+            app:iconSize="50dp"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"/>
 
         <Space
             android:layout_width="wrap_content"
@@ -48,11 +56,16 @@
             android:layout_weight="0.25" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_notificacao"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/round_button"
-            android:text="Button" />
+            android:textAlignment="center"
+            app:icon="@drawable/ic_notificacao"
+            app:iconSize="50dp"
+            android:text=""
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"/>
 
         <Space
             android:layout_width="wrap_content"
@@ -64,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5" />
+
 
     <Space
         android:layout_width="match_parent"
