@@ -44,8 +44,8 @@ echo \hail812\adminlte\widgets\Menu::widget([
                 ['label' => 'Main', 'url' => ['site/index'], 'iconStyle' => 'far'],
                 ['label' => 'Perfil', 'url' => ['user/index'], 'iconStyle' => 'fa fa-user', 'visible' => Yii::$app->user->can('userIndexBO')],
                 ['label' => 'Categoria', 'url' => ['categoria/index'], 'iconStyle' => 'fa fa-list', 'visible' => Yii::$app->user->can('categoriaIndexBO')],
-                ['label' => 'Produto', 'url' => ['produto/index'], 'iconStyle' => 'fa fa-tent', 'visible' => Yii::$app->user->can('produtoIndexBO')],
-                // ['label' => 'Futuro', 'iconStyle' => 'far'],
+                ['label' => 'Produto', 'url' => ['produto/index'], 'iconStyle' => 'fa fa-store', 'visible' => Yii::$app->user->can('produtoIndexBO')],
+                // ['label' => 'Futuro', 'iconStyle' => 'far'], fa-credit-card WORKS
             ]
         ],
         ['label' => 'Yii2 PROVIDED', 'header' => true],

@@ -14,11 +14,10 @@ use Yii;
  * @property int $stock
  * @property string $descricao
  * @property int $categoriaID
- * @property int $imagemID
  *
  * @property Categoria $categoria
  * @property Favorito[] $favoritos
- * @property Imagem $imagem
+ * @property Imagem[] $imagens
  * @property Itemscarrinho[] $itemscarrinhos
  */
 class Produto extends \yii\db\ActiveRecord
@@ -37,13 +36,12 @@ class Produto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'marca', 'preco', 'stock', 'descricao', 'categoriaID', 'imagemID'], 'required'],
+            [['nome', 'marca', 'preco', 'stock', 'descricao', 'categoriaID'], 'required'],
             [['preco'], 'number'],
-            [['stock', 'categoriaID', 'imagemID'], 'integer'],
+            [['stock', 'categoriaID'], 'integer'],
             [['descricao'], 'string'],
             [['nome', 'marca'], 'string', 'max' => 255],
             [['categoriaID'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::class, 'targetAttribute' => ['categoriaID' => 'id']],
-            [['imagemID'], 'exist', 'skipOnError' => true, 'targetClass' => Imagem::class, 'targetAttribute' => ['imagemID' => 'id']],
         ];
     }
 
@@ -60,7 +58,6 @@ class Produto extends \yii\db\ActiveRecord
             'stock' => 'Stock',
             'descricao' => 'Descricao',
             'categoriaID' => 'Categoria ID',
-            'imagemID' => 'Imagem ID',
         ];
     }
 
@@ -89,9 +86,9 @@ class Produto extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getImagem()
+    public function getImagens()
     {
-        return $this->hasOne(Imagem::class, ['id' => 'imagemID']);
+        return $this->hasMany(Imagem::class, ['produtoID' => 'id']);
     }
 
     /**

@@ -3,11 +3,15 @@
 namespace backend\controllers;
 
 use common\models\Produto;
+use common\models\Imagem;
+use backend\models\ImagemForm;
 use app\models\ProdutoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 use Yii;
 
 /**
@@ -74,21 +78,44 @@ class ProdutoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Produto();
+      $model = new Produto();
+      $imagem = new ImagemForm();
+
+        if(!Yii::$app->user->can('produtoCreateBO')) {
+            throw new ForbiddenHttpException('Access denied');
+        }
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+          if ($model->load($this->request->post())) {
+            if($model->save()) {
+              $this->uploadImage($model->id, $imagem);
+              
+              return $this->redirect(['view', 'id' => $model->id]);
+              }
             }
-        } else {
+          }  else {
             $model->loadDefaultValues();
         }
 
+        
         return $this->render('create', [
             'model' => $model,
+            'imagem' => $imagem,
         ]);
     }
 
+public function uploadImage($id, $imagem){
+
+  if(Yii::$app->request->isPost){
+    $imagem->imagens = UploadedFile::getInstances($imagem, 'imagens');
+
+    if($imagem->saveImage($id)) {
+      return true;
+    }
+
+    return false;
+  }
+}
     /**
      * Updates an existing Produto model.
      * If update is successful, the browser will be redirected to the 'view' page.
