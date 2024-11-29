@@ -3,4 +3,6 @@
     <string name="introduza_o_email">Introduza o email</string>
     <string name="introduza_a_password">Introduza a password</string>
     <string name="login">Login</string>
+    <string name="ndOpen">ndOpen</string>
+    <string name="ndClose">ndClose</string>
 </resources>
