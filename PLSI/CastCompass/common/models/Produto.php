@@ -36,7 +36,7 @@ class Produto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'marca', 'preco', 'stock', 'descricao', 'categoriaID'], 'required'],
+            [['nome', 'marca', 'preco', 'stock', 'descricao', 'categoriaID'], 'required', 'message' => '{attribute} não pode estar vazio'],
             [['preco'], 'number'],
             [['stock', 'categoriaID'], 'integer'],
             [['descricao'], 'string'],
@@ -57,7 +57,7 @@ class Produto extends \yii\db\ActiveRecord
             'preco' => 'Preco',
             'stock' => 'Stock',
             'descricao' => 'Descricao',
-            'categoriaID' => 'Categoria ID',
+            'categoriaID' => 'Categoria',
         ];
     }
 

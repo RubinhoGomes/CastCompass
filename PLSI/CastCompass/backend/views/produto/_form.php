@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\UploadedFile;
+use common\models\Categoria;
 
 /** @var yii\web\View $this */
 /** @var common\models\Produto $model */
@@ -31,7 +32,8 @@ use yii\web\UploadedFile;
 
     <?= $form->field($model, 'descricao')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'categoriaID')->textInput() ?>
+    <?= $form->field($model, 'categoriaID')->dropDownList(\yii\helpers\ArrayHelper::map(
+  Categoria::find()->all(), 'id', 'genero'), ['prompt' => 'Selecione uma categoria']) ?>
 
     <?= $form->field($imagem, 'imagens[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 

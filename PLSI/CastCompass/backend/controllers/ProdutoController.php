@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Produto;
+use common\models\Categoria;
 use common\models\Imagem;
 use backend\models\ImagemForm;
 use app\models\ProdutoSearch;

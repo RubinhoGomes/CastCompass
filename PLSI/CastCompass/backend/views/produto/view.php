@@ -32,11 +32,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'marca',
-            'preco',
+            ['attribute' => 'preco', 'label' => 'Preço', 'format' => ['currency' ,'EUR']],
             'stock',
             'descricao:ntext',
-            'categoriaID',
-            'imagemID',
+            [
+              'attribute' => 'categoriaID',
+              'value' => function ($model) {
+                return $model->categoria->nome; 
+              },
+            ],
+            [
+              'attribute' => 'imagemID',
+              'label' => 'Imagem',
+              'value' => function ($model) {
+                return implode(', ', \yii\helpers\ArrayHelper::getColumn($model->imagens, 'filename'));
+              },
+            ],                
         ],
     ]) ?>
 
