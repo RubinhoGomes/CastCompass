@@ -69,4 +69,5 @@ phpunit.phar
 /backend/web/robots.txt
 
 # ignore upload files
-/frontend/web/uploads
+frontend/web/uploads
+backend/web/uploads
