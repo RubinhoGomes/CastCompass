@@ -13,6 +13,7 @@ use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use Yii;
 
 /**
@@ -122,6 +123,7 @@ class ProdutoController extends Controller
   public function actionUpdate($id)
   {
     $model = $this->findModel($id);
+    $imagem = $this->getImageAndPath($id);
 
     if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
       return $this->redirect(['view', 'id' => $model->id]);
@@ -129,8 +131,28 @@ class ProdutoController extends Controller
 
     return $this->render('update', [
       'model' => $model,
+      'imagem' => $imagem,
     ]);
   }
+
+
+  /**
+   * @brief This function return the path of the image and the filename with extension
+   * @param int $id ID
+   * @return string
+   */
+  public function getImageAndPath($id) {
+    $imagem = Imagem::findOne(['produtoID' => $id]);
+
+    if ($imagem == null) {
+      return null;
+    }
+ 
+   $imagem->filename = Yii::getAlias('@backendUploads') . '/' . $imagem->filename;
+
+    return $imagem;
+  }
+
 
   /**
    * Deletes an existing Produto model.

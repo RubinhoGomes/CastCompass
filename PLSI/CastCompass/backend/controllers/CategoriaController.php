@@ -7,7 +7,6 @@ use backend\models\CategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use Yii;
 
 /**
  * CategoriaController implements the CRUD actions for Categoria model.
@@ -39,8 +38,8 @@ class CategoriaController extends Controller
      */
     public function actionIndex()
     {
-      if(!Yii::$app->user->can('categoriaIndexBO')){
-            throw new ForbiddenHttpException('Access denied');
+      if(!Yii::$app->user->can('categoriaIndexBO')) {
+          throw new ForbiddenHttpException('Access denied');
       }
 
         $searchModel = new CategoriaSearch();
@@ -94,7 +93,8 @@ class CategoriaController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -113,7 +113,8 @@ class CategoriaController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -126,7 +127,8 @@ class CategoriaController extends Controller
      * @return Categoria the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
+    protected function findModel($id)
+    {
         if (($model = Categoria::findOne(['id' => $id])) !== null) {
             return $model;
         }
