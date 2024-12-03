@@ -53,7 +53,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
     private boolean carregarFragmentoInicial() {
         Menu menu = navigationView.getMenu();
-        MenuItem item = menu.getItem(0);
+        MenuItem item = menu.getItem(1);
         item.setChecked(true);
         return onNavigationItemSelected(item);
     }
@@ -83,7 +83,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navGrelha) {
             setTitle(item.getTitle());
-//            fragment = new GrelhaLivrosFragment();
+
         } else {
             enviarEmail();
         }
@@ -99,4 +99,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private void enviarEmail() {
         //TODO: intent implicito ACTION_SEND
     }
+
+
 }

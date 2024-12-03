@@ -30,9 +30,9 @@
             android:background="@drawable/round_button"
             android:textAlignment="center"
             app:icon="@drawable/ic_shopcart"
-            app:iconSize="50dp"
             app:iconGravity="textStart"
-            app:iconPadding="0dp"/>
+            app:iconPadding="0dp"
+            app:iconSize="50dp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -46,9 +46,9 @@
             android:background="@drawable/round_button"
             android:textAlignment="center"
             app:icon="@drawable/ic_favorito"
-            app:iconSize="50dp"
             app:iconGravity="textStart"
-            app:iconPadding="0dp"/>
+            app:iconPadding="0dp"
+            app:iconSize="50dp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -62,10 +62,9 @@
             android:background="@drawable/round_button"
             android:textAlignment="center"
             app:icon="@drawable/ic_notificacao"
-            app:iconSize="50dp"
-            android:text=""
             app:iconGravity="textStart"
-            app:iconPadding="0dp"/>
+            app:iconPadding="0dp"
+            app:iconSize="50dp" />
 
         <Space
             android:layout_width="wrap_content"
