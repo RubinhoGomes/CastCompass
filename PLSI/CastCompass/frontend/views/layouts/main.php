@@ -44,7 +44,8 @@ AppAsset::register($this);
 
                         <!-- Imagem ao lado, fora do botão -->
                         <a href="<?= Yii::$app->homeUrl ?>">
-                            <img src="img/image.jpg" alt="Icon" class="position-absolute"
+                            <img src="<?= Yii::$app->request->baseUrl ?>/img/image.jpg" alt="Icon"
+                                 class="position-absolute"
                                  style="top: 50%; left: -57px; transform: translateY(-50%); width: 50px; height: 50px;">
                         </a>
                     </div>
@@ -52,7 +53,7 @@ AppAsset::register($this);
                          id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                         <div class="navbar-nav w-100">
                             <div class="nav-item dropdown dropright">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i
+                                <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i
                                             class="fa fa-angle-right float-right mt-1"></i></a>
                                 <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                     <a href="" class="dropdown-item">Men's Dresses</a>
