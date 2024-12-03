@@ -53,8 +53,8 @@ class Imagem extends \yii\db\ActiveRecord
      * @brief This function return the path of the uploaded images
      * @return string
      */
-    public function getPath(){
-      return Yii::getAlias('@web') . 'uploads/';
+    public static function getPath(){
+      return Yii::getAlias('@web') . '/uploads/';
     }
   
     /*

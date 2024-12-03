@@ -27,7 +27,7 @@ class ImagemForm extends Model
 
           $key = Yii::$app->getSecurity()->generateRandomString();
 
-          $caminho = Yii::getAlias('@backend/web/uploads/') . $key . '.' . $file->extension;
+          $caminho = Yii::getAlias('@frontend/web/uploads/') . $key . '.' . $file->extension;
 
           $caminhoDir = dirname($caminho);
 
