@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Produto $model */
 
-$this->title = $model->id;
+$this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= DetailView::widget([
-        'model' => $model,
+      'model' => $model,
         'attributes' => [
             'id',
             'nome',
@@ -44,9 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'attribute' => 'imagemID',
               'label' => 'Imagem',
-              'value' => function ($model) {
-                return implode(', ', \yii\helpers\ArrayHelper::getColumn($model->imagens, 'filename'));
-              },
+              'value' => $imagem->filename ?? Yii::getAlias('@notAvailable'),
+              'format' => ['image',['width'=>'100','height'=>'100']],
             ],                
         ],
     ]) ?>

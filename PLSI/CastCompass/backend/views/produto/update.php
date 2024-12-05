@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <div class="p-2">
       <h3>Imagens</h3>
-      <img src='<?= $imagem->filename ?? null ?>' width = "200" class="" >
+      <img src='<?= $imagem->filename ?? Yii::getAlias('@notAvailable') ?>' width = "200" class="" >
     </div>
 
       <div class="form-group">

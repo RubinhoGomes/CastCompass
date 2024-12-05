@@ -34,20 +34,19 @@ class RbacController extends Controller
         $userIndexBO = $auth->createPermission('userIndexBO');
         $userIndexBO->description = 'List of users, index, in the BackOffice';
         $auth->add($userIndexBO);
-
+        // Create
         $userCreateBO = $auth->createPermission('userCreateBO');
         $userCreateBO->description = 'Create a user in the BackOffice';
         $auth->add($userCreateBO);
-
+        // Update
         $userUpdateBO = $auth->createPermission('userUpdateBO');
         $userUpdateBO->description = 'Update a user in the BackOffice';
         $auth->add($userUpdateBO);
-
+        // Delete
         $userDeleteBO = $auth->createPermission('userDeleteBO');
         $userDeleteBO->description = 'Delete a user in the BackOffice';
         $auth->add($userDeleteBO);
-
-
+        // View
         $userViewBO = $auth->createPermission('userViewBO');
         $userViewBO->description = 'View a user in the BackOffice';
         $auth->add($userViewBO);
@@ -55,22 +54,24 @@ class RbacController extends Controller
         // ----
         // Category Permissions
         // ----
+        
+        // Index
         $categoriaIndexBO = $auth->createPermission('categoriaIndexBO');
         $categoriaIndexBO->description = 'List of categories, index, in the BackOffice';
         $auth->add($categoriaIndexBO);
-
+        // View
         $categoriaViewBO = $auth->createPermission('categoriaViewBO');
         $categoriaViewBO->description = 'View a category in the BackOffice';
         $auth->add($categoriaViewBO);
-
+        // Create
         $categoriaCreateBO = $auth->createPermission('categoriaCreateBO');
         $categoriaCreateBO->description = 'Create a category in the BackOffice';
         $auth->add($categoriaCreateBO);
-
+        // Update
         $categoriaUpdateBO = $auth->createPermission('categoriaUpdateBO');
         $categoriaUpdateBO->description = 'Update a category in the BackOffice';
         $auth->add($categoriaUpdateBO);
-
+        // Delete
         $categoriaDeleteBO = $auth->createPermission('categoriaDeleteBO');
         $categoriaDeleteBO->description = 'Delete a category in the BackOffice';
         $auth->add($categoriaDeleteBO);
@@ -78,28 +79,47 @@ class RbacController extends Controller
         // ----
         // Product Permissions
         // ----
-       
+
+        // Index
         $produtoIndexBO = $auth->createPermission('produtoIndexBO');
         $produtoIndexBO->description = 'List of products, index, in the BackOffice';
         $auth->add($produtoIndexBO);
-
+        // View
         $produtoViewBO = $auth->createPermission('produtoViewBO');
         $produtoViewBO->description = 'View a product in the BackOffice';
         $auth->add($produtoViewBO);
-
+        // Create
         $produtoCreateBO = $auth->createPermission('produtoCreateBO');
         $produtoCreateBO->description = 'Create a product in the BackOffice';
         $auth->add($produtoCreateBO);
-
+        // Update
         $produtoUpdateBO = $auth->createPermission('produtoUpdateBO');
         $produtoUpdateBO->description = 'Update a product in the BackOffice';
         $auth->add($produtoUpdateBO);
-
+        // Delete
         $produtoDeleteBO = $auth->createPermission('produtoDeleteBO');
         $produtoDeleteBO->description = 'Delete a product in the BackOffice';
         $auth->add($produtoDeleteBO);
 
+        $ivaIndexBO = $auth->createPermission('ivaIndexBO');
+        $ivaIndexBO->description = 'List of IVA, index, in the BackOffice';
+        $auth->add($ivaIndexBO);
 
+        $ivaViewBO = $auth->createPermission('ivaViewBO');
+        $ivaViewBO->description = 'View a IVA in the BackOffice';
+        $auth->add($ivaViewBO);
+
+        $ivaCreateBO = $auth->createPermission('ivaCreateBO');
+        $ivaCreateBO->description = 'Create a IVA in the BackOffice';
+        $auth->add($ivaCreateBO);
+
+        $ivaUpdateBO = $auth->createPermission('ivaUpdateBO');
+        $ivaUpdateBO->description = 'Update a IVA in the BackOffice';
+        $auth->add($ivaUpdateBO);
+
+        $ivaDeleteBO = $auth->createPermission('ivaDeleteBO');
+        $ivaDeleteBO->description = 'Delete a IVA in the BackOffice';
+        $auth->add($ivaDeleteBO);
 
 
         // ----
@@ -144,6 +164,17 @@ class RbacController extends Controller
         $auth->addChild($admin, $produtoCreateBO);
         $auth->addChild($admin, $produtoUpdateBO);
         $auth->addChild($admin, $produtoDeleteBO);
+        // IVA Permissions
+        $auth->addChild($admin, $ivaIndexBO);
+        $auth->addChild($admin, $ivaViewBO);
+        $auth->addChild($admin, $ivaCreateBO);
+        $auth->addChild($admin, $ivaUpdateBO);
+        $auth->addChild($admin, $ivaDeleteBO);
+ 
+        // ##############
+        // Add the permissions for the Worker
+        // ##############
+
 
         // ##############
         // Add the permissions for the Worker

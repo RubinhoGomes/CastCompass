@@ -44,7 +44,7 @@ AppAsset::register($this);
 
                         <!-- Imagem ao lado, fora do botão -->
                         <a href="<?= Yii::$app->homeUrl ?>">
-                            <img src="img/image.jpg" alt="Icon" class="position-absolute"
+                            <img src="/img/image.jpg" alt="Icon" class="position-absolute"
                                  style="top: 50%; left: -57px; transform: translateY(-50%); width: 50px; height: 50px;">
                         </a>
                     </div>

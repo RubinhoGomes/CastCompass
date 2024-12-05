@@ -44,16 +44,14 @@ class ProdutoController extends Controller
    *
    * @return string
    */
-  public function actionIndex()
-  {
-
+  public function actionIndex() {
     if(!Yii::$app->user->can('produtoIndexBO')) {
       throw new ForbiddenHttpException('Access denied');
     }
 
     $searchModel = new ProdutoSearch();
     $dataProvider = $searchModel->search($this->request->queryParams);
-
+  
     return $this->render('index', [
       'searchModel' => $searchModel,
       'dataProvider' => $dataProvider,
@@ -68,8 +66,15 @@ class ProdutoController extends Controller
    */
   public function actionView($id)
   {
+    if(!Yii::$app->user->can('produtoViewBO')) {
+      throw new ForbiddenHttpException('Access denied');
+    }
+
+    $imagem = $this->getImageAndPath($id);
+ 
     return $this->render('view', [
       'model' => $this->findModel($id),
+      'imagem' => $imagem,
     ]);
   }
 
@@ -80,14 +85,14 @@ class ProdutoController extends Controller
    */
   public function actionCreate()
   {
-    $model = new Produto();
-    $imagem = new ImagemForm();
-
-    if(!Yii::$app->user->can('produtoCreateBO')) {
+   if(!Yii::$app->user->can('produtoCreateBO')) {
       throw new ForbiddenHttpException('Access denied');
     }
 
-    if ($this->request->isPost) {
+    $model = new Produto();
+    $imagem = new ImagemForm();
+
+   if ($this->request->isPost) {
       if ($model->load($this->request->post()) && $model->save()) {
         $this->uploadImage($model->id, $imagem);
         return $this->redirect(['view', 'id' => $model->id]);
@@ -122,6 +127,11 @@ class ProdutoController extends Controller
    */
   public function actionUpdate($id)
   {
+  
+    if(!Yii::$app->user->can('produtoUpdateBO')) {
+      throw new ForbiddenHttpException('Access denied');
+    }
+ 
     $model = $this->findModel($id);
     $imagem = $this->getImageAndPath($id);
 
@@ -163,11 +173,15 @@ class ProdutoController extends Controller
    */
   public function actionDelete($id)
   {
+    if(!Yii::$app->user->can('produtoDeleteBO')) {
+      throw new ForbiddenHttpException('Access denied');
+    }
+    
     $this->findModel($id)->delete();
 
     return $this->redirect(['index']);
   }
-
+ 
   /**
    * Finds the Produto model based on its primary key value.
    * If the model is not found, a 404 HTTP exception will be thrown.

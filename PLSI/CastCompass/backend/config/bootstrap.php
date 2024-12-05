@@ -6,4 +6,4 @@
 
 // Alias to the path of the uploads folder
 Yii::setAlias('@backendUploads',  '../../../frontend/web/uploads');
-
+Yii::setAlias('@notAvailable', '../../../frontend/web/img/notAvailable.png');
