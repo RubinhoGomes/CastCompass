@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\UploadedFile;
 use common\models\Categoria;
+use common\models\Iva;
 
 /** @var yii\web\View $this */
 /** @var common\models\Produto $model */
@@ -34,6 +35,8 @@ use common\models\Categoria;
 
     <?= $form->field($model, 'categoriaID')->dropDownList(\yii\helpers\ArrayHelper::map(
   Categoria::find()->all(), 'id', 'genero'), ['prompt' => 'Selecione uma categoria']) ?>
+
+    <?= $form->field($model, 'ivaID')->dropDownList(\yii\helpers\ArrayHelper::map(Iva::find()->all(), 'id', 'label'), ['prompt' => 'Selecione um IVA']) ?>
 
     <?= $form->field($imagem, 'imagens[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 

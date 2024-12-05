@@ -35,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'preco',
             'stock',
             //'descricao:ntext',
-            //'categoriaID',
+            'categoriaID',
+            'ivaID',
             //'imagemID',
             [
                 'class' => ActionColumn::className(),

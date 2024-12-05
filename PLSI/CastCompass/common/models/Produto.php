@@ -42,6 +42,7 @@ class Produto extends \yii\db\ActiveRecord
             [['descricao'], 'string'],
             [['nome', 'marca'], 'string', 'max' => 255],
             [['categoriaID'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::class, 'targetAttribute' => ['categoriaID' => 'id']],
+            [['ivaID'], 'exist', 'skipOnError' => true, 'targetClass' => Iva::class, 'targetAttribute' => ['ivaID' => 'id']],
         ];
     }
 
@@ -58,6 +59,7 @@ class Produto extends \yii\db\ActiveRecord
             'stock' => 'Stock',
             'descricao' => 'Descricao',
             'categoriaID' => 'Categoria',
+            'ivaID' => 'Iva',
         ];
     }
 
@@ -69,6 +71,15 @@ class Produto extends \yii\db\ActiveRecord
     public function getCategoria()
     {
         return $this->hasOne(Categoria::class, ['id' => 'categoriaID']);
+    }
+    /**
+     * Gets query for [[Iva]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIva()
+    {
+        return $this->hasOne(Iva::class, ['id' => 'ivaID']);
     }
 
     /**

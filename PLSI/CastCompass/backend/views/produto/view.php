@@ -42,6 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
               },
             ],
             [
+              'attribute' => 'ivaID',
+              'value' => function ($model) {
+                return $model->iva->label ?? 'Sem Iva'; 
+              },
+            ],
+            [
               'attribute' => 'imagemID',
               'label' => 'Imagem',
               'value' => $imagem->filename ?? Yii::getAlias('@notAvailable'),

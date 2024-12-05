@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Categoria;
+use common\models\Iva;
 
 /** @var yii\web\View $this */
 /** @var common\models\Produto $model */
@@ -27,6 +28,11 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $form->field($model, 'categoriaID')->dropDownList(\yii\helpers\ArrayHelper::map(
       Categoria::find()->all(), 'id', 'nome'),
       ['prompt' => 'Selecione a Categoria']
+    ) ?>
+
+    <?= $form->field($model, 'ivaID')->dropDownList(\yii\helpers\ArrayHelper::map(
+      Iva::find()->all(), 'id', 'label'),
+      ['prompt' => 'Selecione o IVA']
     ) ?>
 
     <div class="p-2">

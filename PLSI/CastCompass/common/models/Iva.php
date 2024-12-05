@@ -70,4 +70,9 @@ class Iva extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Linhafatura::class, ['ivaID' => 'id']);
     }
+    
+    public function getProdutos()
+    {
+        return $this->hasMany(Produto::class, ['categoriaID' => 'id']);
+    }
 }
