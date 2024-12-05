@@ -1,6 +1,7 @@
 package com.example.castcompass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -79,12 +80,18 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
 
-        if (item.getItemId() == R.id.navLista) {
+        if (item.getItemId() == R.id.navHome) {
             setTitle(item.getTitle());
-        } else if (item.getItemId() == R.id.navGrelha) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.navCarrinho) {
             setTitle(item.getTitle());
-
-        } else {
+        }else if (item.getItemId() == R.id.navFavoritos) {
+            setTitle(item.getTitle());
+        }else if (item.getItemId() == R.id.navMensagens) {
+            setTitle(item.getTitle());
+        }
+        else {
             enviarEmail();
         }
 

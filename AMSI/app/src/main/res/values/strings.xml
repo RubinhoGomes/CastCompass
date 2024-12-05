@@ -5,4 +5,12 @@
     <string name="login">Login</string>
     <string name="ndOpen">ndOpen</string>
     <string name="ndClose">ndClose</string>
+    <string name="register">register</string>
+    <string name="introduza_a_password_repetir">introduza a password outra vez</string>
+    <string name="nome">Nome:</string>
+    <string name="marca">Marca:</string>
+    <string name="preco">Preço:</string>
+    <string name="stock">Stock:</string>
+    <string name="descricao">Descrição</string>
+    <string name="categoria">Categoria:</string>
 </resources>
