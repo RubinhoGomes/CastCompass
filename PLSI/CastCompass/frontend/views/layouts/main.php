@@ -44,13 +44,9 @@ AppAsset::register($this);
 
                         <!-- Imagem ao lado, fora do botão -->
                         <a href="<?= Yii::$app->homeUrl ?>">
-<<<<<<< HEAD
-                            <img src="/img/image.jpg" alt="Icon" class="position-absolute"
-=======
                             <img src="<?= Yii::$app->request->baseUrl ?>/img/image.jpg" alt="Icon"
                                  class="position-absolute"
->>>>>>> 19e55656848f3c8ef1b41a355ff6a34becacb01d
-                                 style="top: 50%; left: -57px; transform: translateY(-50%); width: 50px; height: 50px;">
+                                 style="top: 50%; left: -63px; transform: translateY(-50%); width: 65px; height: 65px;">
                         </a>
                     </div>
                     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
