@@ -35,8 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'preco',
             'stock',
             //'descricao:ntext',
-            'categoriaID',
-            'ivaID',
+            [
+              'attribute' => 'categoriaID',
+              'value' => function ($model) {
+                return $model->categoria->genero;
+              }
+            ],
+            [
+              'attribute' => 'ivaID',
+              'value' => function ($model) {
+                return $model->iva->label ?? 'S/Iva';
+              }
+            ],
             //'imagemID',
             [
                 'class' => ActionColumn::className(),
