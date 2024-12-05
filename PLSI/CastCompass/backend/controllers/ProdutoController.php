@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Produto;
 use common\models\Categoria;
 use common\models\Imagem;
+use common\models\Iva;
 use backend\models\ImagemForm;
 use app\models\ProdutoSearch;
 use yii\web\Controller;
@@ -78,6 +79,28 @@ class ProdutoController extends Controller
     ]);
   }
 
+
+  /**
+    * @brief This function subtracts the IVA from the price
+    * @ Basically, this calculus is the inverse of the adding the IVA but, differently
+    * @ because we don't have the "original" price. we need to use this method
+   * @param float $preco Price
+   * @param int $ivaID IVA ID
+   * @return float
+   */
+  public function subIva($preco, $ivaID) {
+
+    if($ivaID == null) {
+      return $preco;
+    }
+   
+    $iva = Iva::findOne($ivaID);
+
+    $preco = $preco / (1 + $iva->valor);
+
+    return $preco;
+  }
+
   /**
    * Creates a new Produto model.
    * If creation is successful, the browser will be redirected to the 'view' page.
@@ -134,6 +157,8 @@ class ProdutoController extends Controller
  
     $model = $this->findModel($id);
     $imagem = $this->getImageAndPath($id);
+      
+    $model->preco = $this->subIva($model->preco, $model->ivaID);
 
     if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
       return $this->redirect(['view', 'id' => $model->id]);

@@ -63,6 +63,34 @@ class Produto extends \yii\db\ActiveRecord
         ];
     }
 
+
+    /**
+     * @brief This function adds the IVA to the price
+     * @ It calculates the price with the IVA, given the price and the IVA ID
+     * @param $preco
+     * @param $idIva
+     * @return float
+     */
+    public function addIvaPrice($preco, $idIva){
+      $iva = Iva::findOne($idIva);
+      $preco += ($preco * $iva->valor);
+      return $preco;
+    }
+
+
+    /**
+     * @brief This function is called before saving the model
+     * @param $preco
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert){
+        if(parent::beforeSave($insert)){
+          $this->preco = $this->addIvaPrice($this->preco, $this->ivaID);
+          return true;
+        }
+        return false;
+    }
+
     /**
      * Gets query for [[Categoria]].
      *
