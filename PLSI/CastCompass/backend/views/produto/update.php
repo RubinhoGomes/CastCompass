@@ -37,8 +37,16 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <div class="p-2">
       <h3>Imagens</h3>
-      <img src='<?= $imagem->filename ?? Yii::getAlias('@notAvailable') ?>' width = "200" class="" >
-    </div>
+      <div class="row">
+      <div class="col">
+        <div class="row">
+        <img src='<?= $imagem->filename ?? Yii::getAlias('@notAvailable') ?>' width = "200" class="" >
+        </div>
+      <a href="<?= Yii::$app->request->baseUrl . '/produto/deleteimage?id=' . $imagem->id ?>" class="btn btn-danger">Delete</a>
+      </div>
+      <?= $form->field($imagem, 'filename')->fileInput() ?>
+      </div>    
+</div>
 
       <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

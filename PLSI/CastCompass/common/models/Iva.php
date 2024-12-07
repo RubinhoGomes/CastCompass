@@ -51,7 +51,14 @@ class Iva extends \yii\db\ActiveRecord
             'label' => 'Etiqueta',
         ];
     }
+    
 
+    /*
+     * @brief Before save the IVA value is divided by 100
+     * @ to facilitate the products price calculation
+     * @param bool $insert
+     * @return bool
+     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
