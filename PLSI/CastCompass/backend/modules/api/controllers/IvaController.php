@@ -10,4 +10,11 @@ use yii\rest\ActiveController;
 class IvaController extends ActiveController
 {
     public $modelClass = 'common\models\Iva';
+
+    public function actionCount()
+    {
+        $ivasmodel = new $this->modelClass;
+        $recs = $ivasmodel::find()->all();
+        return ['count' => count($recs)];
+    }
 }

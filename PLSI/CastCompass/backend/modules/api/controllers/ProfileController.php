@@ -10,4 +10,11 @@ use yii\rest\ActiveController;
 class ProfileController extends ActiveController
 {
     public $modelClass = 'common\models\Profile';
+
+    public function actionCount()
+    {
+        $profilesmodel = new $this->modelClass;
+        $recs = $profilesmodel::find()->all();
+        return ['count' => count($recs)];
+    }
 }

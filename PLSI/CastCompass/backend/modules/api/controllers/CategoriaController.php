@@ -10,4 +10,11 @@ use yii\rest\ActiveController;
 class CategoriaController extends ActiveController
 {
     public $modelClass = 'common\models\Categoria';
+
+    public function actionCount()
+    {
+        $categoriasmodel = new $this->modelClass;
+        $recs = $categoriasmodel::find()->all();
+        return ['count' => count($recs)];
+    }
 }

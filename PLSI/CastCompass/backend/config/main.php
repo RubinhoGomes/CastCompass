@@ -46,11 +46,36 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/user'],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/profile'],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/produto'],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/iva'],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/categoria'],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/user',
+                    'extraPatterns' => [
+                        'GET count' => 'count', // 'count' é 'actionCount'
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/profile',
+                    'extraPatterns' => [
+                        'GET count' => 'count', // 'count' é 'actionCount'
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/produto',
+                    'extraPatterns' => [
+                        'GET count' => 'count', // 'count' é 'actionCount'
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/iva',
+                    'extraPatterns' => [
+                        'GET count' => 'count', // 'count' é 'actionCount'
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/categoria',
+                    'extraPatterns' => [
+                        'GET count' => 'count', // 'count' é 'actionCount'
+                    ],
+                ],
             ],
         ],
     ],
