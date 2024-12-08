@@ -46,6 +46,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/user'],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/profile'],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/produto'],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/iva'],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/categoria'],
             ],
         ],
     ],
