@@ -206,6 +206,32 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <?php foreach ($produtos as $produto): ?>
+                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <?php if (!empty($produto->imagens)): ?>
+                                <?php $image = $produto->imagens[0]; ?>
+                                <img src="<?= Yii::$app->homeUrl . 'uploads/' . $image->url ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
+                            <?php else: ?>
+                                <img src="path/to/default-image.jpg" alt="Imagem padrão" class="img-fluid">
+                            <?php endif; ?>
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href=""><?= Html::encode($produto->nome) ?></a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5> <?= number_format($produto->preco, 2, ',', '.') ?>$</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <?php endforeach; ?>
                 <div class="col-12">
                     <nav>
                         <ul class="pagination justify-content-center">
