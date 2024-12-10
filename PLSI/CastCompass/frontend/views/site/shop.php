@@ -185,36 +185,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
                 <div class="row">
-                    <?php foreach ($produtos as $produto): ?>
-                        <div class="col-md-3">
-                            <div class="product-card">
-                                <?php if (!empty($produto->imagens)): ?>
-                                    <?php $image = $produto->imagens[0]; ?>
-                                    <img src="<?= Yii::$app->homeUrl . 'uploads/' . $image->url ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
-                                <?php else: ?>
-                                    <img src="path/to/default-image.jpg" alt="Imagem padrão" class="img-fluid">
-                                <?php endif; ?>
-
-                                <h4><?= Html::encode($produto->nome) ?></h4>
-                                <p>Preço: <?= number_format($produto->preco, 2, ',', '.') ?>$</p>
-                                <p>Estoque: <?= Html::encode($produto->stock) ?> unidades</p>
-
-                                <?= Html::a('Mostrar Detalhes', ['site/detail', 'id' => $produto->id], ['class' => 'btn btn-info']) ?>
-                                <?= Html::a('Adicionar ao Carrinho', ['cart/add', 'id' => $produto->id], ['class' => 'btn btn-primary']) ?>
-
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-                <?php foreach ($produtos as $produto): ?>
+              <?php foreach ($produtos as $produto): ?>
                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
                             <?php if (!empty($produto->imagens)): ?>
                                 <?php $image = $produto->imagens[0]; ?>
-                                <img src="<?= Yii::$app->homeUrl . 'uploads/' . $image->url ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
+                                <img src="<?= Yii::getAlias('@uploads') . '/' . $image->filename ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
                             <?php else: ?>
-                                <img src="path/to/default-image.jpg" alt="Imagem padrão" class="img-fluid">
+                            <img src="<?=Yii::getAlias('@default') ?>" alt="Imagem padrão" class="img-fluid">
                             <?php endif; ?>
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
