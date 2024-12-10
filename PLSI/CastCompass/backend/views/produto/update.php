@@ -41,9 +41,19 @@ $this->params['breadcrumbs'][] = 'Update';
       <div class="col">
         <div class="row">
         <img src='<?= $imagem->filename ?? Yii::getAlias('@notAvailable') ?>' width = "200" class="" >
-        </div>
-      <a href="<?= Yii::$app->request->baseUrl . '/produto/deleteimage?id=' . $imagem->id ?>" class="btn btn-danger">Delete</a>
+        </div> 
+      <?php if($imagem) { ?>
+<?= Html::a ('Delete', ['delete-image', 'id' => $imagem->id ], [
+    'class' => 'btn btn-danger',
+    'data-method' => 'post',
+    'data-confirm' => 'Tens a certeza que queres eliminar ?',
+
+]) ?>
+      <?php } ?>
       </div>
+<?php if(!$imagem) {
+      $imagem = new common\models\Imagem();
+    } ?>
       <?= $form->field($imagem, 'filename')->fileInput() ?>
       </div>    
 </div>

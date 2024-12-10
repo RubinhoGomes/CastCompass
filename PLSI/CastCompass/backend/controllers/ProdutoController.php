@@ -156,7 +156,6 @@ class ProdutoController extends Controller
     }
  
     $model = $this->findModel($id);
-    $imagem = $this->getImageAndPath($id);
       
     $model->preco = $this->subIva($model->preco, $model->ivaID);
 
@@ -168,6 +167,31 @@ class ProdutoController extends Controller
       'model' => $model,
       'imagem' => $imagem,
     ]);
+  }
+
+
+  public function actionDeleteImage($id) {
+    if(!Yii::$app->user->can('produtoUpdateBO')) {
+      throw new ForbiddenHttpException('Access denied');
+    }
+      
+    $imagem = Imagem::findOne($id);
+
+    if(!$imagem){
+      throw new Exception("Error Processing Request", 1);
+    }
+ 
+    if($imagem->deleteImage()){
+      Yii::$app->session->setFlash('success', 'Image deleted successfully.');     
+    } else {
+      Yii::$app->session->setFlash('success', 'Image deleted successfully.');
+     }
+
+    return $this->render('update', [
+      'model' => $this->findModel($imagem->produtoID),
+      'imagem' => $imagem,
+    ]);
+
   }
 
 
