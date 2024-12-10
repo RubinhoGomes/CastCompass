@@ -137,10 +137,11 @@ class ProdutoController extends Controller
       if($imagem->saveImage($id)) {
         return true;
       }
-
-      return false;
     }
+    return false;
   }
+
+
   /**
    * Updates an existing Produto model.
    * If update is successful, the browser will be redirected to the 'view' page.
@@ -156,15 +157,25 @@ class ProdutoController extends Controller
     }
  
     $model = $this->findModel($id);
-      
+    $imagemProduto = Imagem::findAll(['produtoID' => $id]) ?? null;
+  
+    if($imagemProduto){
+      foreach ($imagemProduto as $img) {
+        $img->filename = Yii::getAlias('@backendUploads') . '/' . $img->filename;
+      }
+    }
+
+    $imagem = new ImagemForm();
     $model->preco = $this->subIva($model->preco, $model->ivaID);
 
     if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+      $this->uploadImage($model->id, $imagem);
       return $this->redirect(['view', 'id' => $model->id]);
     }
 
     return $this->render('update', [
       'model' => $model,
+      'imagemProduto' => $imagemProduto,
       'imagem' => $imagem,
     ]);
   }

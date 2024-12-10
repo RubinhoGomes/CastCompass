@@ -40,22 +40,20 @@ $this->params['breadcrumbs'][] = 'Update';
       <div class="row">
       <div class="col">
         <div class="row">
-        <img src='<?= $imagem->filename ?? Yii::getAlias('@notAvailable') ?>' width = "200" class="" >
+          <?php foreach ($imagemProduto as $img) { ?>
+          <img src='<?= $img->filename ?? Yii::getAlias('@notAvailable') ?>' width = "200" class="" >
         </div> 
-      <?php if($imagem) { ?>
-<?= Html::a ('Delete', ['delete-image', 'id' => $imagem->id ], [
+      <?php if($img) { ?>
+<?= Html::a ('Delete', ['delete-image', 'id' => $img->id ], [
     'class' => 'btn btn-danger',
     'data-method' => 'post',
     'data-confirm' => 'Tens a certeza que queres eliminar ?',
 
 ]) ?>
-      <?php } ?>
+      <?php } }?>
       </div>
-<?php if(!$imagem) {
-      $imagem = new common\models\Imagem();
-    } ?>
-      <?= $form->field($imagem, 'filename')->fileInput() ?>
-      </div>    
+    <?= $form->field($imagem, 'imagens[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+ </div>    
 </div>
 
       <div class="form-group">

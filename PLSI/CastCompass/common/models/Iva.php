@@ -29,7 +29,7 @@ class Iva extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['valor', 'label'], 'required'],
+            [['valor', 'label'], 'required', 'message' => '{attribute} é de preenchimento obrigatório'],
             [['valor'], 'number'],
             // Compare the value and return an error 
             ['valor', 'compare', 'compareValue' => 23, 'operator' => '<=', 'type' => 'number',

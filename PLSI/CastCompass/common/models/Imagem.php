@@ -29,7 +29,7 @@ class Imagem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['filename', 'produtoID'], 'required'],
+            [['filename', 'produtoID'], 'required', 'message' => '{attribute} é obrigatório'],
             [['filename'], 'string'],
             [['filename'], 'unique'],
             [['produtoID'], 'integer'],
