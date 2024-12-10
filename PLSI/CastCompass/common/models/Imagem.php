@@ -56,7 +56,17 @@ class Imagem extends \yii\db\ActiveRecord
     public static function getPath(){
       return Yii::getAlias('@web') . '/uploads/';
     }
-  
+
+    public function deleteImage(){
+        
+      if(file_exists(Yii::getAlias('@backendUploads') . $this->filename)){
+          unlink(Yii::getAlias('@uploads') . $this->filename);
+      }
+
+      return $this->delete();
+
+    }
+
     /*
      * @brief This function return the path of the image and the filename with extension 
      *
