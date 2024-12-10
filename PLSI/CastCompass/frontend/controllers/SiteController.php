@@ -15,6 +15,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Produto;
 
 /**
  * Site controller
@@ -152,7 +153,23 @@ class SiteController extends Controller
      */
     public function actionShop()
     {
-        return $this->render('shop');
+        $produtos = Produto::find()->all();
+        return $this->render('shop', [
+            'produtos' => $produtos,
+        ]);
+    }
+
+    public function actionDetail($id)
+    {
+        $produto = Produto::findOne($id);
+
+
+        $imagens = $produto->getImagens()->all();
+
+        return $this->render('detail', [
+            'produto' => $produto,
+            'imagens' => $imagens,
+        ]);
     }
 
     /**

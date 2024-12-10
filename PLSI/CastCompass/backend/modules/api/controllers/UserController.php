@@ -10,4 +10,11 @@ use yii\rest\ActiveController;
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
+
+    public function actionCount()
+    {
+        $usersmodel = new $this->modelClass;
+        $recs = $usersmodel::find()->all();
+        return ['count' => count($recs)];
+    }
 }
