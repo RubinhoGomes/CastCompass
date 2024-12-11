@@ -20,8 +20,7 @@ class RbacController extends Controller
         $loginBO = $auth->createPermission('loginBO');
         $loginBO->description = 'Login to the BackOffice';
         $auth->add($loginBO);
-
-        
+       
         // ####################
         // Admin Only Permissions
         // ####################
@@ -101,6 +100,11 @@ class RbacController extends Controller
         $produtoDeleteBO->description = 'Delete a product in the BackOffice';
         $auth->add($produtoDeleteBO);
 
+
+        // ----
+        // IVA Permissions
+        // ----
+
         $ivaIndexBO = $auth->createPermission('ivaIndexBO');
         $ivaIndexBO->description = 'List of IVA, index, in the BackOffice';
         $auth->add($ivaIndexBO);
@@ -123,8 +127,52 @@ class RbacController extends Controller
 
 
         // ----
-        // ... CONTINUE THE PERMISSIONS
-        //----
+        // Metodo de Pagamento Permissions
+        // ----
+
+        $mpIndexBO = $auth->createPermission('mpIndexBO');
+        $mpIndexBO->description = 'List of Payment Methods, index, in the BackOffice';
+        $auth->add($mpIndexBO);
+
+        $mpViewBO = $auth->createPermission('mpViewBO');
+        $mpViewBO->description = 'View the Payment Methods in the BackOffice';
+        $auth->add($mpViewBO);
+
+        $mpCreateBO = $auth->createPermission('mpCreateBO');
+        $mpCreateBO->description = 'Create a Payment Method in the BackOffice';
+        $auth->add($mpCreateBO);
+
+        $mpUpdateBO = $auth->createPermission('mpUpdateBO');
+        $mpUpdateBO->description = 'Update a Payment Method in the BackOffice';
+        $auth->add($mpUpdateBO);
+
+        $mpDeleteBO = $auth->createPermission('mpDeleteBO');
+        $mpDeleteBO->description = 'Delete a Payment Method in the BackOffice';
+        $auth->add($mpDeleteBO);
+
+        // ----
+        // Encomenda Permissions
+        // ----
+        
+        $encomendaIndexBO = $auth->createPermission('encomendaIndexBO');
+        $encomendaIndexBO->description = 'List of all orders, index, in the BackOffice';
+        $auth->add($encomendaIndexBO);
+
+        $encomendaViewBO = $auth->createPermission('encomendaViewBO');
+        $encomendaViewBO->description = 'View a order in the BackOffice';
+        $auth->add($encomendaViewBO);
+
+        $encomendaCreateBO = $auth->createPermission('encomendaCreateBO');
+        $encomendaCreateBO->description = 'Create a order in the BackOffice';
+        $auth->add($encomendaCreateBO);
+
+        $encomendaUpdateBO = $auth->createPermission('encomendaUpdateBO');
+        $encomendaUpdateBO->description = 'Update a order in the BackOffice';
+        $auth->add($encomendaUpdateBO);
+
+        $encomendaDeleteBO = $auth->createPermission('encomendaDeleteBO');
+        $encomendaDeleteBO->description = 'Delete a order in the BackOffice';
+        $auth->add($encomendaDeleteBO);
 
 
         // Add the roles
@@ -170,7 +218,20 @@ class RbacController extends Controller
         $auth->addChild($admin, $ivaCreateBO);
         $auth->addChild($admin, $ivaUpdateBO);
         $auth->addChild($admin, $ivaDeleteBO);
- 
+        // Metodo de Pagamento Permissions
+        $auth->addChild($admin, $mpIndexBO);
+        $auth->addChild($admin, $mpViewBO);
+        $auth->addChild($admin, $mpCreateBO);
+        $auth->addChild($admin, $mpUpdateBO);
+        $auth->addChild($admin, $mpDeleteBO);
+        // Encomenda Permissions
+        $auth->addChild($admin, $encomendaIndexBO);
+        $auth->addChild($admin, $encomendaViewBO);
+        $auth->addChild($admin, $encomendaCreateBO);
+        $auth->addChild($admin, $encomendaUpdateBO);
+        $auth->addChild($admin, $encomendaDeleteBO);
+
+
         // ##############
         // Add the permissions for the Worker
         // ##############
