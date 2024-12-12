@@ -117,9 +117,6 @@ $this->title = 'Home';
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <a class="text-decoration-none" href="">
                     <div class="cat-item d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                        </div>
                         <div class="flex-fill pl-3">
                             <h6><?= Html::encode($categoria->nome) ?></h6>
                             <small class="text-body">100 Products</small>
@@ -137,11 +134,16 @@ $this->title = 'Home';
     <div class="container-fluid pt-5 pb-3">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-light text-primary pr-3">Featured Products</span></h2>
         <div class="row px-xl-5">
-            <?php foreach ($produtos as $produto): ?>
+            <?php foreach (array_slice($produtos, 0, 4) as $produto): ?>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+                        <?php if (!empty($produto->imagens)): ?>
+                            <?php $image = $produto->imagens[0]; ?>
+                            <img src="<?= Yii::getAlias('@uploads') . '/' . $image->filename ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
+                        <?php else: ?>
+                            <img src="<?=Yii::getAlias('@default') ?>" alt="Imagem padrão" class="img-fluid">
+                        <?php endif; ?>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
