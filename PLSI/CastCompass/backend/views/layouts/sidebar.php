@@ -41,19 +41,21 @@ echo \hail812\adminlte\widgets\Menu::widget([
             'icon' => 'tachometer-alt',
             'badge' => '<span class="right badge badge-info"></span>',
             'items' => [
-                ['label' => 'Main', 'url' => ['site/index'], 'iconStyle' => 'far'],
+                ['label' => 'Main', 'url' => ['site/index'], 'iconStyle' => 'far', 'visible' => Yii::$app->user->can('loginBO')],
                 ['label' => 'Perfil', 'url' => ['user/index'], 'iconStyle' => 'fa fa-user', 'visible' => Yii::$app->user->can('userIndexBO')],
                 ['label' => 'Categoria', 'url' => ['categoria/index'], 'iconStyle' => 'fa fa-list', 'visible' => Yii::$app->user->can('categoriaIndexBO')],
                 ['label' => 'Produto', 'url' => ['produto/index'], 'iconStyle' => 'fa fa-store', 'visible' => Yii::$app->user->can('produtoIndexBO')],
                 ['label' => 'Iva', 'url' => ['iva/index'], 'iconStyle' => 'fa fa-money-bill', 'visible' => Yii::$app->user->can('ivaIndexBO')],
+                ['label' => 'Metodos de Pagamentos', 'url' => ['metodopagamento/index'], 'iconStyle' => 'fa fa-credit-card', 'visible' => Yii::$app->user->can('mpIndexBO')],
+                ['label' => 'Metodos de Entrega', 'url' => ['metodoexpedicao/index'], 'iconStyle' => 'fa fa-car', 'visible' => Yii::$app->user->can('encomendaIndexBO')]
                 // ['label' => 'Futuro', 'iconStyle' => 'far'], fa-credit-card WORKS
             ]
         ],
-        ['label' => 'Yii2 PROVIDED', 'header' => true],
+        ['label' => 'Cast&Compass', 'header' => true],
         ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank', 'visible' => Yii::$app->user->can('admin')],
         ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank', 'visible' => Yii::$app->user->can('admin')],
-        ['label' => 'Inicio', 'header' => true, 'icon' => 'tachometer-alt', 'visible' => Yii::$app->user->isGuest],
-        ['label' => 'Voltar Para o Inicio', 'url' => ['site/index'], 'visible' => Yii::$app->user->isGuest],
+        //['label' => 'Inicio', 'header' => true, 'icon' => 'tachometer-alt', 'visible' => !Yii::$app->user->can('admin')],
+        ['label' => 'Voltar Para o Inicio', 'icon' => '', 'url' => ['../../frontend/web/'], 'visible' => !Yii::$app->user->can('admin')],
     ]
 ]);
             ?>

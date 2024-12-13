@@ -6,7 +6,9 @@ use common\models\Metodopagamento;
 use backend\models\MetodopagamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * MetodopagamentoController implements the CRUD actions for Metodopagamento model.

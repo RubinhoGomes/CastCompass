@@ -6,7 +6,9 @@ use common\models\Metodoexpedicao;
 use backend\models\MetodoexpedicaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * MetodoexpedicaoController implements the CRUD actions for Metodoexpedicao model.
