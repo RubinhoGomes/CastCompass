@@ -24,9 +24,9 @@ class SiteController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'logout'],
+                        'actions' => ['login', 'error'],
                         'allow' => true,
-                        'roles' => ['?', '@'],
+                        'roles' => ['?'],
                     ],
                     [
                         'actions' => ['logout', 'index', 'error'],
@@ -84,7 +84,14 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+          if(Yii::$app->user->identity->role == 'admin' || Yii::$app->user->identity->role == 'worker'){
             return $this->goBack();
+          }
+          
+          Yii::$app->user->logout();
+          Yii::$app->session->setFlash('error', 'Não tens permissões para aceder');
+          return $this->redirect(['site/login']);
         }
 
         $model->password = '';

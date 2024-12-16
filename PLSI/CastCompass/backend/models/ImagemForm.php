@@ -55,5 +55,4 @@ class ImagemForm extends Model
         }
       }
     }
-
 }
