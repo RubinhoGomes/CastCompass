@@ -36,7 +36,7 @@ use common\models\Iva;
     <?= $form->field($model, 'categoriaID')->dropDownList(\yii\helpers\ArrayHelper::map(
   Categoria::find()->all(), 'id', 'genero'), ['prompt' => 'Selecione uma categoria']) ?>
 
-    <?= $form->field($model, 'ivaID')->dropDownList(\yii\helpers\ArrayHelper::map(Iva::find()->all(), 'id', 'label'), ['prompt' => 'Selecione um IVA']) ?>
+    <?= $form->field($model, 'ivaID')->dropDownList(\yii\helpers\ArrayHelper::map(Iva::find()->all(), 'id', 'valor'), ['prompt' => 'Selecione um IVA']) ?>
 
     <?= $form->field($imagem, 'imagens[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 

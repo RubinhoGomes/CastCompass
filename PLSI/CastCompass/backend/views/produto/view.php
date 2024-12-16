@@ -37,14 +37,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'descricao:ntext',
             [
               'attribute' => 'categoriaID',
+              'format' => 'raw',
               'value' => function ($model) {
-                return $model->categoria->nome; 
+                return \yii\helpers\HTML::a($model->categoria->nome, 
+                  ['categoria/view', 'id' => $model->categoria->id]); 
               },
             ],
             [
               'attribute' => 'ivaID',
+              'format' => 'raw',
               'value' => function ($model) {
-                return $model->iva->label ?? 'Sem Iva'; 
+                return \yii\helpers\HTML::a( 
+                  $model->iva->label ?? 'Sem Iva',
+                  ['iva/view', 'id' => $model->iva->id]
+                ); 
               },
             ],
             [

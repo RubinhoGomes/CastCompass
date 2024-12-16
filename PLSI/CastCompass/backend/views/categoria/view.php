@@ -35,4 +35,21 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <h2>Produtos</h2>
+
+<?= \yii\grid\GridView::widget([
+  'dataProvider' => new \yii\data\ActiveDataProvider([
+    'query' => $model->getProdutos(),
+    'pagination' => ['pageSize' => 7],
+  ]),
+  'columns' => [
+    'id',
+    'nome',
+    'marca',
+    'descricao',
+    'stock',
+    'preco',
+  ],
+]) ?>
+
 </div>
