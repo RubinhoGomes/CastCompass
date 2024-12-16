@@ -26,10 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 </thead>
                 <tbody class="align-middle">
                 <?php foreach ($favoritos as $favorito): ?>
-                <tr>
+                <tr onclick="window.location='<?= \yii\helpers\Url::to(['site/detail', 'id' => $favorito->produto->id]) ?>'">
                     <td class="align-middle"><?= Html::encode($favorito->produto->nome) ?></td>
                     <td class="align-middle"><?= number_format($favorito->produto->preco, 2, ',', '.') ?>$</td>
-                    <td class="align-middle"><a class="btn btn-sm btn-danger" href="<?= yii\helpers\Url::to(['favoritos/remove', 'id' => $favorito->id]) ?>"><i class="fa fa-times"></i> Remover</a></td>
+                    <td class="align-middle">
+                        <a class="btn btn-sm btn-danger" href="<?= yii\helpers\Url::to(['favoritos/remove', 'id' => $favorito->id]) ?>"><i class="fa fa-times"></i> Remover</a></td>
                 </tr>
                 <?php endforeach; ?>
                 </tbody>
