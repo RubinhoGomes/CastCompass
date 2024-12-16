@@ -110,7 +110,7 @@ $categorias = Categoria::find()->all();
                                 <?php endif; ?>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                <a href="<?= Url::to(['/site/favorito']) ?>" class="btn px-0">
+                                <a href="<?= Url::to(['/favoritos/index']) ?>" class="btn px-0">
                                     <i class="fas fa-heart text-primary"></i>
                                     <span class="badge text-primary border border-secondary rounded-circle"
                                           style="padding-bottom: 2px;">0</span>
