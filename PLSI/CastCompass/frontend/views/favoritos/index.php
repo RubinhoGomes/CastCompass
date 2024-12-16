@@ -6,7 +6,9 @@
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
+use common\models\Favorito;
 
+$favoritos = Favorito::find()->where(['profileID' => Yii::$app->user->identity->profile->id])->all();
 $this->title = 'Favoritos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -23,11 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 </thead>
                 <tbody class="align-middle">
+                <?php foreach ($favoritos as $favorito): ?>
                 <tr>
-                    <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Product Name</td>
-                    <td class="align-middle">$150</td>
-                    <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                    <td class="align-middle"><?= Html::encode($favorito->produto->nome) ?></td>
+                    <td class="align-middle"><?= number_format($favorito->produto->preco, 2, ',', '.') ?>$</td>
+                    <td class="align-middle"><a class="btn btn-sm btn-danger" href="<?= yii\helpers\Url::to(['favoritos/remove', 'id' => $favorito->id]) ?>"><i class="fa fa-times"></i> Remover</a></td>
                 </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

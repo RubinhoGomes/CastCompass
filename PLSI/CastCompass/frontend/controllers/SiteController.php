@@ -17,6 +17,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Produto;
+use common\models\Favorito;
+
 
 /**
  * Site controller
@@ -80,6 +82,14 @@ class SiteController extends Controller
         $produtos = Produto::find()->all();
         $categorias = Categoria::find()->all();
 
+        if (!Yii::$app->user->isGuest) {
+            $profileID = Yii::$app->user->identity->profile->id;
+            $numFavoritos = Favorito::find()
+                ->where(['profileID' => $profileID])
+                ->count();
+        } else {
+            $numFavoritos = 0;
+        }
         return $this->render('index', [
             'produtos' => $produtos,
             'categorias' => $categorias,

@@ -13,7 +13,16 @@ use yii\bootstrap5\NavBar;
 use yii\bootstrap5\Dropdown;
 use common\models\Categoria;
 use yii\helpers\Url;
+use common\models\Favorito;
 
+if (!Yii::$app->user->isGuest) {
+$profileID = Yii::$app->user->identity->profile->id;
+    $numFavoritos = Favorito::find()
+        ->where(['profileID' => $profileID])
+        ->count();
+} else {
+    $numFavoritos = 0;
+}
 AppAsset::register($this);
 $categorias = Categoria::find()->all();
 ?>
@@ -113,7 +122,7 @@ $categorias = Categoria::find()->all();
                                 <a href="<?= Url::to(['/favoritos/index']) ?>" class="btn px-0">
                                     <i class="fas fa-heart text-primary"></i>
                                     <span class="badge text-primary border border-secondary rounded-circle"
-                                          style="padding-bottom: 2px;">0</span>
+                                          style="padding-bottom: 2px;"><?= $numFavoritos ?></span>
                                 </a>
                                 <a href="<?= Url::to(['/carrinho/index']) ?>" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
