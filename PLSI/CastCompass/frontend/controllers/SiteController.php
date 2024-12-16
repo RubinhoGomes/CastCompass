@@ -83,7 +83,6 @@ class SiteController extends Controller
         return $this->render('index', [
             'produtos' => $produtos,
             'categorias' => $categorias,
-
         ]);
 
     }
@@ -179,38 +178,6 @@ class SiteController extends Controller
             'produto' => $produto,
             'imagens' => $imagens,
         ]);
-    }
-
-    /**
-     * Displays cart page.
-     *
-     * @return mixed
-     */
-    public function actionCart()
-    {
-        return $this->render('cart');
-    }
-
-
-    /**
-     * Displays cart page.
-     *
-     * @return mixed
-     */
-    public function actionFavorito()
-    {
-        return $this->render('favorito');
-    }
-
-
-    /**
-     * Displays cart page.
-     *
-     * @return mixed
-     */
-    public function actionProfile()
-    {
-        return $this->render('profile');
     }
 
     /**

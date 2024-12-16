@@ -37,8 +37,8 @@
                 <div class="h-100 bg-light p-30">
                     <h3><?= Html::encode($produto->nome) ?></h3>
                     <h5 >Marca: <?= Html::encode($produto->marca) ?></h5>
-                    <h5 >Genero: <?= Html::encode($produto->categoria->genero) ?></h5>
-                    <h4 class="font-weight-semi-bold mb-4"><?= number_format($produto->preco, 2, ',', '.') ?>$</h4>
+                    <h5 >Categoria: <?= Html::encode($produto->categoria->genero) ?></h5>
+                    <h4 class="font-weight-semi-bold mb-4"><?= number_format($produto->preco, 2, ',', '.') ?> €</h4>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
@@ -46,7 +46,7 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                            <input type="text" class="form-control bg-light border-0 text-center" value="1" >
                             <div class="input-group-btn">
                                 <button class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
