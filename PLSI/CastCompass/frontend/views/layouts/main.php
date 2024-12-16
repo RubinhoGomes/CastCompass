@@ -80,7 +80,7 @@ $categorias = Categoria::find()->all();
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
                                                 class="fa fa-angle-down mt-1"></i></a>
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                        <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Shopping Cart</a>
                                         <a href="checkout.html" class="dropdown-item">Checkout</a>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ $categorias = Categoria::find()->all();
                                     <span class="badge text-primary border border-secondary rounded-circle"
                                           style="padding-bottom: 2px;">0</span>
                                 </a>
-                                <a href="<?= Url::to(['/site/cart']) ?>" class="btn px-0 ml-3">
+                                <a href="<?= Url::to(['/carrinho/index']) ?>" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
                                     <span class="badge text-primary border border-secondary rounded-circle"
                                           style="padding-bottom: 2px;">0</span>
