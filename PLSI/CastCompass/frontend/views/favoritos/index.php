@@ -15,12 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- Cart Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
-        <div class="col-lg-8 table-responsive mb-5">
+        <div class="col-lg-12 table-responsive mb-5">
             <table class="table table-light table-borderless table-hover text-center mb-0">
                 <thead class="thead-dark">
                 <tr>
                     <th>Products</th>
                     <th>Price</th>
+                    <th>Imagem</th>
                     <th>Remove</th>
                 </tr>
                 </thead>
@@ -29,6 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tr onclick="window.location='<?= \yii\helpers\Url::to(['site/detail', 'id' => $favorito->produto->id]) ?>'">
                     <td class="align-middle"><?= Html::encode($favorito->produto->nome) ?></td>
                     <td class="align-middle"><?= number_format($favorito->produto->preco, 2, ',', '.') ?>$</td>
+                    <td><div class="product-img position-relative overflow-hidden">
+                            <?php if (!empty($produto->imagens)): ?>
+                                <?php $image = $produto->imagens[0]; ?>
+                                <img src="<?= Yii::getAlias('@uploads') . '/' . $image->filename ?>" alt="<?= Html::encode($produto->nome) ?>"  width="100" class="img-fluid">
+                            <?php else: ?>
+                                <img src="<?=Yii::getAlias('@default') ?>" alt="Imagem padrão" class="img-fluid"  width="100">
+                            <?php endif; ?>
+                        </div></td>
                     <td class="align-middle">
                         <a class="btn btn-sm btn-danger" href="<?= yii\helpers\Url::to(['favoritos/remove', 'id' => $favorito->id]) ?>"><i class="fa fa-times"></i> Remover</a></td>
                 </tr>
