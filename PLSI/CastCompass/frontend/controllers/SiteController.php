@@ -84,12 +84,10 @@ class SiteController extends Controller
 
         if (!Yii::$app->user->isGuest) {
             $profileID = Yii::$app->user->identity->profile->id;
-            $numFavoritos = Favorito::find()
-                ->where(['profileID' => $profileID])
-                ->count();
         } else {
             $numFavoritos = 0;
         }
+
         return $this->render('index', [
             'produtos' => $produtos,
             'categorias' => $categorias,

@@ -23,6 +23,7 @@ $profileID = Yii::$app->user->identity->profile->id;
 } else {
     $numFavoritos = 0;
 }
+
 AppAsset::register($this);
 $categorias = Categoria::find()->all();
 ?>
