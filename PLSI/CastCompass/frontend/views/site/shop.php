@@ -171,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             class="far fa-heart"></i></a>
                                             <?php else: ?>
                                                 <a class="btn btn-outline-dark btn-square"
-                                                   href="<?= yii\helpers\Url::to(['favoritos/remove', 'produtoID' => $produto->id]) ?>"><i
+                                                   href="<?= yii\helpers\Url::to(['favoritos/add', 'produtoID' => $produto->id]) ?>"><i
                                                             class="fas fa-heart"></i></a>
                                             <?php endif; ?>
                                         <?php endif; ?>

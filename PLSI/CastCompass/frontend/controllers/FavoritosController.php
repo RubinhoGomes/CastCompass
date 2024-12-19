@@ -12,9 +12,15 @@ class  FavoritosController extends \yii\web\Controller
         return $this->render('index');
     }
 
+
+    /* This functons adds a product to the user's favourites list.
+     * Also, if that products already exists, delete it.
+     * TODO: Change the logic. And Change the Shop, Too messy for showing differents Icons
+     *
+     */
     public function actionAdd($produtoID)
     {
-        $favorito = new Favorito();
+        $favoritoNovo = new Favorito();
 
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/login']);
@@ -22,23 +28,28 @@ class  FavoritosController extends \yii\web\Controller
 
         $profileID = Yii::$app->user->identity->profile->id;
 
-        $existe = Favorito::find()
+        $favorito = Favorito::find()
             ->where(['profileID' => $profileID, 'produtoID' => $produtoID])
             ->one();
 
-        if ($existe) {
-            Yii::$app->session->setFlash('info', 'O produto já está nos seus favoritos.');
-        }else{
-            $favorito->profileID = $profileID;
-            $favorito->produtoID = $produtoID;
-
-            if ($favorito->save()) {
-                Yii::$app->session->setFlash('success', 'Produto adicionado aos favoritos com sucesso!');
-            } else {
-                Yii::$app->session->setFlash('error', 'Não foi possível adicionar o produto aos favoritos.');
-            }
-
+        if ($favorito) {
+          if ($favorito->delete()){
+            Yii::$app->session->setFlash('success', 'Produto removido dos favoritos com sucesso!');
+          }
         }
+        else {
+          $favoritoNovo->profileID = $profileID;
+          $favoritoNovo->produtoID = $produtoID;
+        }
+
+        if($favoritoNovo->produtoID != null) {
+          if ($favoritoNovo->save()) {
+            Yii::$app->session->setFlash('success', 'Produto adicionado aos favoritos com sucesso!');
+          } else {
+            Yii::$app->session->setFlash('error', 'Erro ao adicionar produto aos favoritos');
+          }
+        }
+
         return $this->redirect(Yii::$app->request->referrer ?: ['site/shop']);
     }
 
@@ -52,5 +63,4 @@ class  FavoritosController extends \yii\web\Controller
 
         return $this->redirect(['favoritos/index']);
     }
-
 }
