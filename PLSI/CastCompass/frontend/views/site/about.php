@@ -13,7 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Bem-vindo à Nossa Loja de Campismo!</h1>
+    <h2><?= Html::encode($this->title) ?></h2>
 
-    <p>Teste</p>
+    <p>Na nossa loja de campismo, a aventura está sempre à sua espera! Oferecemos uma vasta seleção de tendas, mochilas, equipamentos e acessórios para todas as suas aventuras ao ar livre. Seja para iniciantes ou exploradores experientes, garantimos produtos de alta qualidade e atendimento especializado para que você aproveite ao máximo a natureza com segurança e conforto.</p>
 </div>
