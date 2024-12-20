@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use common\models\User;
 use common\models\Profile;
+use common\models\Carrinho;
 
 /**
  * Signup form
@@ -98,6 +99,11 @@ class SignupForm extends Model
         $auth = Yii::$app->authManager;
         $Role = $auth->getRole('client');
         $auth->assign($Role, $user->id);
+
+        $carrinho = new Carrinho();
+        $carrinho->profileID = $profile->id;
+        $carrinho->save(false);
+
 
         return $user;
     }

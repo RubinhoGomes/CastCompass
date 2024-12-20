@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "carrinhocompra".
+ * This is the model class for table "carrinho".
  *
  * @property int $id
  * @property int $profileID
@@ -21,14 +21,14 @@ use Yii;
  * @property Metodopagamento $metodoPagamento
  * @property Profile $profile
  */
-class CarrinhoCompra extends \yii\db\ActiveRecord
+class Carrinho extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'carrinhocompra';
+        return 'carrinho';
     }
 
     /**
@@ -54,12 +54,12 @@ class CarrinhoCompra extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'profileID' => 'Profile ID',
+            'profileID' => 'Utilizador',
             'dataCompra' => 'Data Compra',
             'valorTotal' => 'Valor Total',
             'quantidade' => 'Quantidade',
-            'metodoExpedicaoID' => 'Metodo Expedicao ID',
-            'metodoPagamentoID' => 'Metodo Pagamento ID',
+            'metodoExpedicaoID' => 'Metodo Expedicao',
+            'metodoPagamentoID' => 'Metodo Pagamento',
         ];
     }
 
