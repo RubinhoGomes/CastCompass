@@ -2,11 +2,14 @@
 
 namespace frontend\controllers;
 
+use common\models\Profile;
 use common\models\Carrinho;
 use common\models\CarrinhoSearch;
+use common\models\Itemscarrinho;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * CarrinhoController implements the CRUD actions for Carrinho model.
@@ -38,14 +41,43 @@ class CarrinhoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CarrinhoSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+      $profile = Profile::findOne(['userID' => Yii::$app->user->id]);
+     
+      if($profile == null) {
+        return $this->redirect(['site/login']);
+      }
+      
+      $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+      if($carrinho === NULL) {
+        if($this->CreateCarrinho($profile->id)) {
+          $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
+        }
+      }
+
+      $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinho->id]);
+
+      return $this->render('index', [
+        'carrinho' => $carrinho,
+        'itens' => $itens,
+      ]);
     }
+
+    public function CreateCarrinho($profileID) {
+      $carrinho = new Carrinho();
+      $carrinho->profileID = $profileID;
+      $carrinho->dataCompra = NULL;
+      $carrinho->valorTotal = NULL;
+      $carrinho->quantidade = NULL;
+      $carrinho->metodoPagamentoID = NULL;
+      $carrinho->metodoExpedicaoID = NULL;
+      if($carrinho->save(false)) {
+        return true;
+      }
+
+      return false;
+    }
+
 
     /**
      * Displays a single Carrinho model.
@@ -60,10 +92,13 @@ class CarrinhoController extends Controller
         ]);
     }
 
-    public function actionAdd($id) {
-        $model = findModel($id);
-        $model->profileID = $id;
-        $model->save();
+    public function actionAdd($idCarrinho, $idProduto, $quantidade) {
+        $carrinho = findModel($idCarrinho);
+        $item = new Itemscarrinho();
+        $item->carrinhoID = idCarrinho;
+        $item->produtoID = idProduto;
+        $item->quantidade = $quantidade;
+
         return $this->redirect(['index']);
     }
 

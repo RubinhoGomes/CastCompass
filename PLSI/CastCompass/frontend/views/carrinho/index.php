@@ -17,32 +17,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Carrinho', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'profileID',
-            'dataCompra',
-            'valorTotal',
-            'quantidade',
-            //'metodoExpedicaoID',
-            //'metodoPagamentoID',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Carrinho $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <table class="table table-light table-borderless table-hover text-center mb-0">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Products</th>
+                    <th>Price</th>
+                    <th>Imagem</th>
+                </tr>
+                </thead>
+                <tbody class="align-middle">
+                <?php foreach ($itens as $item): ?>
+                <tr onclick="window.location='<?= \yii\helpers\Url::to(['site/detail', 'id' => $item->produtoID]) ?>'">
+                    <td class="align-middle"><?= Html::encode($item->quantidade) ?></td>
+                    <td class="align-middle"><?= number_format($item->valorTotal, 2, ',', '.') ?>$</td>
+                    <td><div class="product-img position-relative overflow-hidden">
+                        <img src="<?=Yii::getAlias('@default') ?>" alt="Imagem padrão" class="img-fluid"  width="100">
+                        </div></td>
+</tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 </div>

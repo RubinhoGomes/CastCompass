@@ -119,7 +119,7 @@ $this->title = 'Home';
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="flex-fill pl-3">
                             <h6><?= Html::encode($categoria->nome) ?></h6>
-                            <small class="text-body">100 Products</small>
+                            <small class="text-body"> <?= $categoria->getProdutos()->count(); ?> </small>
                         </div>
                     </div>
                 </a>
@@ -140,9 +140,9 @@ $this->title = 'Home';
                     <div class="product-img position-relative overflow-hidden">
                         <?php if (!empty($produto->imagens)): ?>
                             <?php $image = $produto->imagens[0]; ?>
-                            <img src="<?= Yii::getAlias('@uploads') . '/' . $image->filename ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
+                            <img src="<?= 'uploads' . '/' . $image->filename ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
                         <?php else: ?>
-                            <img src="<?=Yii::getAlias('@default') ?>" alt="Imagem padrão" class="img-fluid">
+                            <img src="img/notAvailable.png" alt="Imagem padrão" class="img-fluid">
                         <?php endif; ?>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>

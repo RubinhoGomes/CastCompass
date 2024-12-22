@@ -165,8 +165,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     class="fa fa-shopping-cart"></i></a>
                                         <?php if (!Yii::$app->user->isGuest):
                                             $favorito = Favorito::find()->where(['produtoID' => $produto->id, 'profileID' => Yii::$app->user->identity->profile->id])->one(); ?>
-                                        <a class="btn btn-outline-dark btn-square"
-                                        href="<?= yii\helpers\Url::to(['favoritos/add', 'produtoID' => $produto->id]) ?>"><i class="<?= Favorito::getIcon($favorito); ?> fa-heart"></i></a>
+                                                <a class="btn btn-outline-dark btn-square"
+                                                href="<?= yii\helpers\Url::to(['favoritos/add', 'produtoID' => $produto->id]) ?>"><i class="<?= Favorito::getIcon($favorito); ?> fa-heart"></i></a>
                                         <?php endif; ?>
                                         <a class="btn btn-outline-dark btn-square"
                                            href="<?= \yii\helpers\Url::to(['site/detail', 'id' => $produto->id]) ?>"><i

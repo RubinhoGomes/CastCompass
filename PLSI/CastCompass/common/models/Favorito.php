@@ -49,6 +49,19 @@ class Favorito extends \yii\db\ActiveRecord
         ];
     }
 
+    /*
+     * @brief This function returns the "keyword" to the icon. If the favourite doens't exists
+     * returns the "hollow / empty" keyword. Otherwise it returns the "full" keyword.
+     */
+    public static function getIcon($favorito) {
+      if($favorito != null) {
+        return "fas";
+      }
+
+      return "far";
+
+    }
+
     /**
      * Gets query for [[Produto]].
      *

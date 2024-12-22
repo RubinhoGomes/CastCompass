@@ -102,6 +102,11 @@ class SignupForm extends Model
 
         $carrinho = new Carrinho();
         $carrinho->profileID = $profile->id;
+        $carrinho->dataCompra = NULL;
+        $carrinho->valorTotal = NULL;
+        $carrinho->quantidade = NULL;
+        $carrinho->metodoPagamentoID = NULL;
+        $carrinho->metodoExpedicaoID = NULL;
         $carrinho->save(false);
 
 
