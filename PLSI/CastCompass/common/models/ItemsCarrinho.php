@@ -14,7 +14,7 @@ use Yii;
  * @property int $quantidade
  * @property float $valorTotal
  *
- * @property Carrinhocompra $carrinho
+ * @property Carrinho $carrinho
  * @property Produto $produto
  */
 class ItemsCarrinho extends \yii\db\ActiveRecord
@@ -37,7 +37,7 @@ class ItemsCarrinho extends \yii\db\ActiveRecord
             [['carrinhoID', 'produtoID', 'quantidade'], 'integer'],
             [['valorTotal'], 'number'],
             [['nome'], 'string', 'max' => 255],
-            [['carrinhoID'], 'exist', 'skipOnError' => true, 'targetClass' => Carrinhocompra::class, 'targetAttribute' => ['carrinhoID' => 'id']],
+            [['carrinhoID'], 'exist', 'skipOnError' => true, 'targetClass' => Carrinho::class, 'targetAttribute' => ['carrinhoID' => 'id']],
             [['produtoID'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::class, 'targetAttribute' => ['produtoID' => 'id']],
         ];
     }
@@ -64,7 +64,7 @@ class ItemsCarrinho extends \yii\db\ActiveRecord
      */
     public function getCarrinho()
     {
-        return $this->hasOne(Carrinhocompra::class, ['id' => 'carrinhoID']);
+        return $this->hasOne(Carrinho::class, ['id' => 'carrinhoID']);
     }
 
     /**

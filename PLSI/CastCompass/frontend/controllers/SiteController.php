@@ -85,7 +85,8 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             $profileID = Yii::$app->user->identity->profile->id;
         } else {
-            $numFavoritos = 0;
+          $numFavoritos = 0;
+          $numCarrinho = 0;
         }
 
         return $this->render('index', [
