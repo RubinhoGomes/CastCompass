@@ -23,9 +23,13 @@ $profileID = Yii::$app->user->identity->profile->id;
         ->where(['profileID' => $profileID])
         ->count();
     $carrinho = Carrinho::findOne(['profileID' => $profileID]);
+if($carrinho){
     $numCarrinho = ItemsCarrinho::find()
         ->where(['carrinhoID' => $carrinho->id])
         ->count();
+    } else {
+        $numCarrinho = 0;
+    }
 } else {
   $numFavoritos = 0;
   $numCarrinho = 0;
