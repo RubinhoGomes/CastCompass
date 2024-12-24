@@ -57,6 +57,16 @@ class ItemsCarrinho extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getImagem() {
+      $produto = Produto::findOne(['id' => $this->produtoID]);
+
+      if($produto != NULL && !empty($produto->imagens)) {
+        return $produto->imagens[0]->filename;
+      }
+
+      return NULL;
+    }
+
     /**
      * Gets query for [[Carrinho]].
      *

@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Carrinho;
+use common\models\ItemsCarrinho;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -23,23 +24,45 @@ $this->params['breadcrumbs'][] = $this->title;
             <table class="table table-light table-borderless table-hover text-center mb-0">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Products</th>
-                    <th>Price</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
                     <th>Imagem</th>
+                    <th>Remover</th>
                 </tr>
                 </thead>
                 <tbody class="align-middle">
                 <?php foreach ($itens as $item): ?>
                 <tr onclick="window.location='<?= \yii\helpers\Url::to(['site/detail', 'id' => $item->produtoID]) ?>'">
-                    <td class="align-middle"><?= Html::encode($item->quantidade) ?></td>
+                    <td class="align-middle"><?= $item->nome ?></td>
+                    <td class="align-middle">
+                    <a href="<?= yii\helpers\Url::to(['items-carrinho/sub-quant', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-minus"></i></a>
+                    <?= Html::encode($item->quantidade) ?>
+                    <a href="<?= yii\helpers\Url::to(['items-carrinho/add-quant', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-plus"></i></a>
+                    </td>
                     <td class="align-middle"><?= number_format($item->valorTotal, 2, ',', '.') ?>$</td>
                     <td><div class="product-img position-relative overflow-hidden">
+                      <?php if(!$item->getImagem()) {?>
                         <img src="<?=Yii::getAlias('@default') ?>" alt="Imagem padrão" class="img-fluid"  width="100">
-                        </div></td>
-</tr>
-                <?php endforeach; ?>
+                      <?php } else{ ?>
+                        <img src="<?=Yii::getAlias('@uploads') . '/' . $item->getImagem() ?>" alt="Imagem do produto" class="img-fluid"  width="100">
+                      <?php } ?>
+                    </div></td>
+                    <td class="align-middle">
+                    <a href="<?= yii\helpers\Url::to(['items-carrinho/remove', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-trash-alt"></i></a>
+                </tr>
+                <?php endforeach; ?>                               
                 </tbody>
             </table>
+
+            <div class="row py-3">
+                <div class="col-lg-6">
+                    <a href="<?= Url::to(['site/shop']) ?>" class="btn btn-primary">Continuar comprando</a>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <a href="<?= Url::to(['carrinho/checkout']) ?>" class="btn btn-primary">Finalizar compra</a>
+                </div>          
+
         </div>
     </div>
 </div>

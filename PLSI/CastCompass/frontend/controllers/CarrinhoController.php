@@ -6,6 +6,8 @@ use common\models\Profile;
 use common\models\Carrinho;
 use common\models\CarrinhoSearch;
 use common\models\Itemscarrinho;
+use common\models\MetodoPagamento;
+use common\models\MetodoExpedicao;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -78,6 +80,34 @@ class CarrinhoController extends Controller
       return false;
     }
 
+
+    public function actionCheckout() {
+      $profile = Profile::findOne(['userID' => Yii::$app->user->id]);
+     
+      if($profile == null) {
+        return $this->redirect(['site/login']);
+      }
+      
+      $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
+
+      if($carrinho === NULL) {
+        if($this->CreateCarrinho($profile->id)) {
+          $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
+        }
+      }
+
+      $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinho->id]);
+
+      $metodoPagamento = MetodoPagamento::find()->all();
+      $metodoExpedicao = MetodoExpedicao::find()->all();
+
+      return $this->render('checkout', [
+        'carrinho' => $carrinho,
+        'itens' => $itens,
+        'metodoPagamento' => $metodoPagamento,
+        'metodoExpedicao' => $metodoExpedicao,
+      ]);
+    }
 
     /**
      * Displays a single Carrinho model.
