@@ -36,9 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tr onclick="window.location='<?= \yii\helpers\Url::to(['site/detail', 'id' => $item->produtoID]) ?>'">
                     <td class="align-middle"><?= $item->nome ?></td>
                     <td class="align-middle">
-                    <a href="<?= yii\helpers\Url::to(['items-carrinho/sub-quant', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-minus"></i></a>
+                    <a class="btn btn-primary btn-minus" href="<?= yii\helpers\Url::to(['items-carrinho/sub-quant', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-minus"></i></a>
                     <?= Html::encode($item->quantidade) ?>
-                    <a href="<?= yii\helpers\Url::to(['items-carrinho/add-quant', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-plus"></i></a>
+                    <a class="btn btn-primary btn-plus"  href="<?= yii\helpers\Url::to(['items-carrinho/add-quant', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-plus"></i></a>
                     </td>
                     <td class="align-middle"><?= number_format($item->valorTotal, 2, ',', '.') ?>$</td>
                     <td><div class="product-img position-relative overflow-hidden">
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       <?php } ?>
                     </div></td>
                     <td class="align-middle">
-                    <a href="<?= yii\helpers\Url::to(['items-carrinho/remove', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-trash-alt"></i></a>
+                        <a class="btn btn-sm btn-danger" href="<?= yii\helpers\Url::to(['items-carrinho/remove', 'produtoId' => $item->produtoID]) ?>"><i class="fa fa-times"></i> Remover</a></td>
                 </tr>
                 <?php endforeach; ?>                               
                 </tbody>

@@ -5,7 +5,8 @@ use common\models\Profile;
 use common\models\Categoria;
 use common\models\Produto;
 use common\models\Iva;
-
+use common\models\Metodopagamento;
+use common\models\Metodoexpedicao;
 
 ?>
 <div class="container-fluid">
@@ -25,8 +26,16 @@ use common\models\Iva;
                 'title' => $numCategorias = Categoria::find()->count(),
                 'text' => 'Categorias',
                 'icon' => 'fa fa-list',
+                'theme'=> 'red',
                 'linkText' => 'More Info',
                 'linkUrl' => ['/categoria/index'],
+            ]) ?>
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => $numMetodopagamentos = Metodopagamento::find()->count(),
+                'text' => 'Metodos de pagamento',
+                'icon' => 'fa fa-credit-card',
+                'linkText' => 'More Info',
+                'linkUrl' => ['/metodopagamento/index'],
             ]) ?>
         </div>
 
@@ -43,9 +52,17 @@ use common\models\Iva;
             <?= \hail812\adminlte\widgets\SmallBox::widget([
                 'title' => $numIvas = Iva::find()->count(),
                 'text' => 'Ivas',
+                'theme'=> 'red',
                 'icon' => 'fa fa-money-bill',
                 'linkText' => 'More Info',
                 'linkUrl' => ['/iva/index'],
+            ]) ?>
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => $numMetodoexpedicao = Metodoexpedicao::find()->count(),
+                'text' => 'Metodos de Entrega',
+                'icon' => 'fa fa-truck',
+                'linkText' => 'More Info',
+                'linkUrl' => ['/metodoexpedicao/index'],
             ]) ?>
         </div>
 

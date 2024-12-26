@@ -53,7 +53,7 @@
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                        <a class="btn btn-primary px-3" href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
                     </div>
 
                     <!-- Compartilhar -->
@@ -90,11 +90,7 @@
 
     
 
-    
-    
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-    
+
     
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
