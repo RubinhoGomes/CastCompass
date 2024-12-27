@@ -115,7 +115,7 @@ $this->title = 'Home';
         <div class="row px-xl-5 pb-3">
             <?php foreach ($categorias as $categoria): ?>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" href="<?= yii\helpers\Url::to(['site/shop', 'categoriaId' => $categoria->id]) ?>">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="flex-fill pl-3">
                             <h6><?= Html::encode($categoria->nome) ?></h6>

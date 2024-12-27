@@ -76,10 +76,12 @@ $categorias = Categoria::find()->all();
                          id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                         <div class="navbar-nav w-100">
                             <?php foreach ($categorias as $categoria): ?>
-                                <a href="" class="nav-item nav-link">   <?= Html::encode($categoria->nome) ?></a>
+                                <a href="<?= yii\helpers\Url::to(['site/shop', 'categoriaId' => $categoria->id]) ?>" class="nav-item nav-link">   <?= Html::encode($categoria->nome) ?></a>
                             <?php endforeach; ?>
                         </div>
+
                     </nav>
+
                 </div>
 
                 <!-- Main Navbar (right side) -->

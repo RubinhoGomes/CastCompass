@@ -168,11 +168,41 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionShop()
+    public function actionShop($categoriaId = null)
     {
-        $produtos = Produto::find()->all();
+        $query = Produto::find();
+
+
+        if ($categoriaId) {
+            $query->andWhere(['categoriaID' => $categoriaId]);
+        }
+
+
+        if ($precos = Yii::$app->request->get('price', [])) {
+            if (!in_array('all', $precos)) {
+                if (in_array('0-10', $precos)) {
+                    $query->andWhere(['between', 'preco', 0, 10]);
+                }
+                if (in_array('10-20', $precos)) {
+                    $query->andWhere(['between', 'preco', 10, 20]);
+                }
+                if (in_array('20-30', $precos)) {
+                    $query->andWhere(['between', 'preco', 20, 30]);
+                }
+                if (in_array('30-40', $precos)) {
+                    $query->andWhere(['between', 'preco', 30, 40]);
+                }
+                if (in_array('40-50', $precos)) {
+                    $query->andWhere(['between', 'preco', 40, 50]);
+                }
+            }
+        }
+        $produtos = $query->all();
+        $categorias = Categoria::find()->all();
+
         return $this->render('shop', [
             'produtos' => $produtos,
+            'categorias' => $categorias,
         ]);
     }
 
