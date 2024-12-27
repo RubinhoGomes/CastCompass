@@ -10,7 +10,7 @@ $this->title = 'Checkout';
 $this->params['breadcrumbs'][] = ['label' => 'Carrinhos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="carrinho-create">
+<div class="carrinho-checkout">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </table>
 
             <div class="row py-3">
-                <?php $form = ActiveForm::begin(); ?>
-                  <div class="col-lg-6">
+              <?php $form = ActiveForm::begin(['id' => 'form-checkout', 'enableClientValidation' => true, 'options' => ['method' => 'post']]); ?>
+                 <div class="col-lg-6">
                     <p> Metodo de Expedição: </p>
                     <select name="metodoExpedicao" id="metodoExpedicao">
                         <?php foreach ($metodoExpedicao as $metodo): ?>
@@ -65,6 +65,10 @@ $this->params['breadcrumbs'][] = $this->title;
                       <?php endforeach; ?>
                   </select>
                 </div>
+
+                   <select name="carrinhoId" id="carrinhoId" style="display: none">
+                      <option value="<?= $itens[0]->carrinhoID ?>"></option>
+                  </select>
 
                 <div class="form-group">
                   <?= Html::submitButton('Comprar', ['class' => 'btn btn-success']) ?>

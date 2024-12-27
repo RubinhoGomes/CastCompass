@@ -11,9 +11,13 @@ use Yii;
  * @property int $carrinhoID
  * @property float $valorTotal
  * @property float $ivaTotal
+ * @property int $metodoPagamentoID
+ * @property int $metodoExpedicaoID
  *
- * @property Carrinhocompra $carrinho
+ * @property Carrinho $carrinho
  * @property Linhafatura[] $linhafaturas
+ * @property Metodoexpedicao $metodoExpedicao
+ * @property Metodopagamento $metodoPagamento
  */
 class Fatura extends \yii\db\ActiveRecord
 {
@@ -31,10 +35,12 @@ class Fatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['carrinhoID', 'valorTotal', 'ivaTotal'], 'required'],
-            [['carrinhoID'], 'integer'],
+            [['carrinhoID', 'valorTotal', 'ivaTotal', 'metodoPagamentoID', 'metodoExpedicaoID'], 'required'],
+            [['carrinhoID', 'metodoPagamentoID', 'metodoExpedicaoID'], 'integer'],
             [['valorTotal', 'ivaTotal'], 'number'],
-            [['carrinhoID'], 'exist', 'skipOnError' => true, 'targetClass' => Carrinhocompra::class, 'targetAttribute' => ['carrinhoID' => 'id']],
+            [['carrinhoID'], 'exist', 'skipOnError' => true, 'targetClass' => Carrinho::class, 'targetAttribute' => ['carrinhoID' => 'id']],
+            [['metodoExpedicaoID'], 'exist', 'skipOnError' => true, 'targetClass' => Metodoexpedicao::class, 'targetAttribute' => ['metodoExpedicaoID' => 'id']],
+            [['metodoPagamentoID'], 'exist', 'skipOnError' => true, 'targetClass' => Metodopagamento::class, 'targetAttribute' => ['metodoPagamentoID' => 'id']],
         ];
     }
 
@@ -45,9 +51,11 @@ class Fatura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'carrinhoID' => 'Carrinho ID',
+            'carrinhoID' => 'Carrinho',
             'valorTotal' => 'Valor Total',
             'ivaTotal' => 'Iva Total',
+            'metodoPagamentoID' => 'Metodo Pagamento',
+            'metodoExpedicaoID' => 'Metodo Expedicao',
         ];
     }
 
@@ -58,7 +66,7 @@ class Fatura extends \yii\db\ActiveRecord
      */
     public function getCarrinho()
     {
-        return $this->hasOne(Carrinhocompra::class, ['id' => 'carrinhoID']);
+        return $this->hasOne(Carrinho::class, ['id' => 'carrinhoID']);
     }
 
     /**
@@ -69,5 +77,25 @@ class Fatura extends \yii\db\ActiveRecord
     public function getLinhafaturas()
     {
         return $this->hasMany(Linhafatura::class, ['faturaID' => 'id']);
+    }
+
+    /**
+     * Gets query for [[MetodoExpedicao]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMetodoExpedicao()
+    {
+        return $this->hasOne(Metodoexpedicao::class, ['id' => 'metodoExpedicaoID']);
+    }
+
+    /**
+     * Gets query for [[MetodoPagamento]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMetodoPagamento()
+    {
+        return $this->hasOne(Metodopagamento::class, ['id' => 'metodoPagamentoID']);
     }
 }

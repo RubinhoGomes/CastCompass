@@ -6,6 +6,9 @@ use common\models\Profile;
 use common\models\Carrinho;
 use common\models\CarrinhoSearch;
 use common\models\Itemscarrinho;
+use common\models\Fatura;
+use common\models\Linhafatura;
+use common\models\Produto;
 use common\models\MetodoPagamento;
 use common\models\MetodoExpedicao;
 use yii\web\Controller;
@@ -97,7 +100,11 @@ class CarrinhoController extends Controller
       }
 
       $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinho->id]);
-
+      
+      if(Yii::$app->request->isPost){
+        $this->fazerCompra($_POST["carrinhoId"], $_POST["metodoPagamento"], $_POST["metodoExpedicao"]);
+      }
+        
       $metodoPagamento = MetodoPagamento::find()->all();
       $metodoExpedicao = MetodoExpedicao::find()->all();
 
@@ -107,6 +114,42 @@ class CarrinhoController extends Controller
         'metodoPagamento' => $metodoPagamento,
         'metodoExpedicao' => $metodoExpedicao,
       ]);
+    }
+
+
+    public function fazerCompra($carrinhoId, $metodoPagId, $metodoExpId){
+      $carrinho = Carrinho::findOne(['id' => $carrinhoId]);
+      $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinhoId]);
+
+      // Fatura Code
+      $fatura = new Fatura();
+      
+      $fatura->carrinhoID = $carrinhoId;
+      $fatura->valorTotal = $carrinho->valorTotal ?? $itens[0]->valorTotal;
+      $fatura->ivaTotal = $carrinho->valorTotal ?? $itens[0]->valorTotal;
+      $fatura->metodoPagamentoID = $metodoPagId;
+      $fatura->metodoExpedicaoID = $metodoExpId;
+
+      if($fatura->save(false)){
+        foreach($itens as $item){
+          $linhaFatura = new Linhafatura();
+          $linhaFatura->faturaID = $fatura->id;
+          $linhaFatura->produtoID = $item->produtoID;
+          $linhaFatura->quantidade = $item->quantidade;
+          $linhaFatura->valor = $item->valorTotal;
+          $linhaFatura->valorIva = $item->valorTotal;
+          $linhaFatura->ivaID = Produto::findOne(['id' => $item->produtoID])->ivaID;
+          $linhaFatura->save(false);
+        }
+      }
+
+      foreach($itens as $item){
+        $item->delete();
+      }
+
+      Yii::$app->session->setFlash('success', 'Compra efetuada com sucesso!');
+      return $this->redirect(['site/index']);
+
     }
 
     /**

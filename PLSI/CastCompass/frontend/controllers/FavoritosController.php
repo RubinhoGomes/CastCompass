@@ -53,5 +53,14 @@ class  FavoritosController extends \yii\web\Controller
         return $this->redirect(Yii::$app->request->referrer ?: ['site/shop']);
     }
 
-    
+    public function actionRemove($id){
+      $favorito = Favorito::findOne(['id' => $id]);
+
+      if($favorito){
+        $favorito->delete();
+        Yii::$app->session->setFlash('success', 'Produto removido dos favoritos com sucesso');
+      }
+
+      return $this->redirect(['favoritos/index']);
+    }   
 }
