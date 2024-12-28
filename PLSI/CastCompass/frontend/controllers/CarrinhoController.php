@@ -9,6 +9,7 @@ use common\models\Itemscarrinho;
 use common\models\Fatura;
 use common\models\Linhafatura;
 use common\models\Produto;
+use common\models\Iva;
 use common\models\MetodoPagamento;
 use common\models\MetodoExpedicao;
 use yii\web\Controller;
@@ -59,7 +60,8 @@ class CarrinhoController extends Controller
           $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
         }
       }
-
+      
+      $this->calcularValorTotal($carrinho->id);
       $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinho->id]);
 
       return $this->render('index', [
@@ -108,8 +110,7 @@ class CarrinhoController extends Controller
       $metodoPagamento = MetodoPagamento::find()->all();
       $metodoExpedicao = MetodoExpedicao::find()->all();
 
-      return $this->render('checkout', [
-        'carrinho' => $carrinho,
+      return $this->render('checkout', [ 'carrinho' => $carrinho,
         'itens' => $itens,
         'metodoPagamento' => $metodoPagamento,
         'metodoExpedicao' => $metodoExpedicao,
@@ -118,26 +119,29 @@ class CarrinhoController extends Controller
 
 
     public function fazerCompra($carrinhoId, $metodoPagId, $metodoExpId){
+      $this->alterarValoresCarrinho($carrinhoId);
+
       $carrinho = Carrinho::findOne(['id' => $carrinhoId]);
       $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinhoId]);
-
+      
       // Fatura Code
       $fatura = new Fatura();
-      
+
       $fatura->carrinhoID = $carrinhoId;
-      $fatura->valorTotal = $carrinho->valorTotal ?? $itens[0]->valorTotal;
-      $fatura->ivaTotal = $carrinho->valorTotal ?? $itens[0]->valorTotal;
+      $fatura->valorTotal = $carrinho->valorTotal;
+      $fatura->ivaTotal = $this->calcularIvaTotal($carrinhoId);
       $fatura->metodoPagamentoID = $metodoPagId;
       $fatura->metodoExpedicaoID = $metodoExpId;
 
       if($fatura->save(false)){
         foreach($itens as $item){
+          $produto = Produto::findOne(['id' => $item->produtoID]);
           $linhaFatura = new Linhafatura();
           $linhaFatura->faturaID = $fatura->id;
           $linhaFatura->produtoID = $item->produtoID;
           $linhaFatura->quantidade = $item->quantidade;
           $linhaFatura->valor = $item->valorTotal;
-          $linhaFatura->valorIva = $item->valorTotal;
+          $linhaFatura->valorIva = $item->valorTotal - ($this->subIva($produto->preco, $produto->ivaID) * $item->quantidade);
           $linhaFatura->ivaID = Produto::findOne(['id' => $item->produtoID])->ivaID;
           $linhaFatura->save(false);
         }
@@ -151,6 +155,67 @@ class CarrinhoController extends Controller
       return $this->redirect(['site/index']);
 
     }
+
+    public function calcularValorTotal($carrinhoId){
+      $carrinho = Carrinho::findOne(['id' => $carrinhoId]);
+      $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinhoId]);
+      $valorTotal = 0;
+      foreach($itens as $item){
+        $valorTotal += $item->valorTotal;
+      }
+      $carrinho->valorTotal = $valorTotal;
+      $carrinho->save(false);
+    }
+
+    public function calcularIvaTotal($carrinhoId){
+      $carrinho = Carrinho::findOne(['id' => $carrinhoId]);
+      $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinhoId]);
+      $ivaTotal = 0;
+      foreach($itens as $item){
+        $produto = Produto::findOne(['id' => $item->produtoID]);
+        $ivaTotal += $item->valorTotal - ($this->subIva($produto->preco, $produto->ivaID) * $item->quantidade);
+      }
+      
+      return $ivaTotal;
+
+    }
+
+    public function calcularQuantidadeTotal($carrinhoId){
+      $carrinho = Carrinho::findOne(['id' => $carrinhoId]);
+      $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinhoId]);
+      $quantidadeTotal = 0;
+      foreach($itens as $item){
+        $quantidadeTotal += $item->quantidade;
+      }
+      $carrinho->quantidade = $quantidadeTotal;
+      $carrinho->save(false);
+    }
+
+    public function alterarValoresCarrinho($carrinhoId){
+      $this->calcularValorTotal($carrinhoId);
+      $this->calcularQuantidadeTotal($carrinhoId);
+    }
+
+    /**
+     * @brief This function subtracts the IVA from the price to get the original value
+     * @param float $preco Price
+     * @param int $ivaID IVA ID
+     * @return float
+     */
+    public function subIva($preco, $ivaID) {
+
+      if($ivaID == null) {
+        return $preco;
+      }
+
+      $iva = Iva::findOne($ivaID);
+
+      $preco = $preco / (1 + $iva->valor);
+
+      return $preco;
+    }
+
+ 
 
     /**
      * Displays a single Carrinho model.

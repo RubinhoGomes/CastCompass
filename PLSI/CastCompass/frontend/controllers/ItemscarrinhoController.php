@@ -36,6 +36,10 @@ class ItemsCarrinhoController extends \yii\web\Controller
         $item->quantidade += 1;
         $item->valorTotal += $produto->preco;
         $item->save();
+
+        $carrinho->valorTotal += $produto->preco;
+        $carrinho->quantidade += 1;
+
         Yii::$app->session->setFlash('success', 'Produto ja existe no carrinho, foi adicionado mais uma quantidade ao produto com sucesso!');
       
       } else {
@@ -46,6 +50,11 @@ class ItemsCarrinhoController extends \yii\web\Controller
         $item->quantidade = 1;
         $item->valorTotal = $produto->preco;
         $item->save();
+
+        $carrinho->valorTotal += $produto->preco;
+        $carrinho->quantidade += 1;
+        $carrinho->save();
+
         Yii::$app->session->setFlash('success', 'Produto adicionado ao carrinho com sucesso!');
       
       }
@@ -69,9 +78,13 @@ class ItemsCarrinhoController extends \yii\web\Controller
       $item->quantidade += 1;
       $item->valorTotal += $produto->preco;
       $item->save();
-      
+
+      $carrinho->valorTotal += $produto->preco;
+      $carrinho->quantidade += 1;      
+      $carrinho->save();
+
       Yii::$app->session->setFlash('success', 'Quantidade do produto aumentada com sucesso!');
-      
+
       return $this->redirect(['carrinho/index']);
     }
 
@@ -84,12 +97,20 @@ class ItemsCarrinhoController extends \yii\web\Controller
         $item->quantidade -= 1;
         $item->valorTotal -= $produto->preco;
         $item->save();
-      
+
+        $carrinho->valorTotal -= $produto->preco;
+        $carrinho->quantidade -= 1;
+        $carrinho->save();
+
         Yii::$app->session->setFlash('success', 'Quantidade do produto diminuida com sucesso!');
       
       } else {
+        $carrinho->valorTotal -= $item->valorTotal;
+        $carrinho->quantidade -= 1;
+
         $item->delete();
-      
+        $carrinho->save();
+
         Yii::$app->session->setFlash('success', 'Produto removido do carrinho com sucesso!');
       }
 
@@ -100,7 +121,7 @@ class ItemsCarrinhoController extends \yii\web\Controller
       $produto = Produto::findOne($produtoId);
       $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
       $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
-      if($item->delete()){
+      if($item->delete() && $this->atualizarCarrinho($carrinho, $item->valorTotal, $item->quantidade)) {
         Yii::$app->session->setFlash('success', 'Produto removido do carrinho com sucesso!');
       } else {
         Yii::$app->session->setFlash('error', 'Erro ao remover produto do carrinho!');
@@ -108,4 +129,11 @@ class ItemsCarrinhoController extends \yii\web\Controller
     
       return $this->redirect(['carrinho/index']);
     }
+
+    public function atualizarCarrinho($carrinho, $valor, $quantidade) {
+      $carrinho->valorTotal -= $valor;
+      $carrinho->quantidade -= $quantidade;
+      return $carrinho->save();
+    }
+
 }

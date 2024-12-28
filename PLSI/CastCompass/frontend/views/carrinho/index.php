@@ -59,6 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-lg-6">
                     <a href="<?= Url::to(['site/shop']) ?>" class="btn btn-primary">Continuar comprando</a>
                 </div>
+                <div>
+                  <p><?= $carrinho->valorTotal ?></p>
+                </div>
                 <div class="col-lg-6 text-right">
                     <a href="<?= Url::to(['carrinho/checkout']) ?>" class="btn btn-primary">Finalizar compra</a>
                 </div>          

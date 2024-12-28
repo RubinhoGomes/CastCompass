@@ -81,9 +81,7 @@ class ProdutoController extends Controller
 
 
   /**
-    * @brief This function subtracts the IVA from the price
-    * @ Basically, this calculus is the inverse of the adding the IVA but, differently
-    * @ because we don't have the "original" price. we need to use this method
+   * @brief This function subtracts the IVA from the price
    * @param float $preco Price
    * @param int $ivaID IVA ID
    * @return float
@@ -168,7 +166,7 @@ class ProdutoController extends Controller
     $imagem = new ImagemForm();
     $model->preco = $this->subIva($model->preco, $model->ivaID);
 
-    if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+    if ($this->request->isPost && $model->load($this->request->post()) && $model->save(false)) {
       $this->uploadImage($model->id, $imagem);
       return $this->redirect(['view', 'id' => $model->id]);
     }
