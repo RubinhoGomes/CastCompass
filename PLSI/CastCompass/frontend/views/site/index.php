@@ -22,7 +22,7 @@ $this->title = 'Home';
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item position-relative active" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="img/tenda-1.jpg" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="<?= Yii::getAlias('@image') . '/'?>tenda-1.jpg" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Campismo</h1>
@@ -32,7 +32,7 @@ $this->title = 'Home';
                             </div>
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="img/tenda-2.jpg" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="<?= Yii::getAlias('@image') . '/'?>tenda-2.jpg" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Tendas</h1>
@@ -42,7 +42,7 @@ $this->title = 'Home';
                             </div>
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="img/tenda-3.jpg" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="<?= Yii::getAlias('@image') . '/'?>tenda-3.jpg" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Equipamentos de campismos</h1>
@@ -56,7 +56,7 @@ $this->title = 'Home';
             </div>
             <div class="col-lg-4">
                 <div class="product-offer mb-30" style="height: 200px;">
-                    <img class="img-fluid" src="img/oferta-1.jpg" alt="">
+                    <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-1.jpg" alt="">
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 20%</h6>
                         <h3 class="text-white mb-3">Special Offer</h3>
@@ -64,7 +64,7 @@ $this->title = 'Home';
                     </div>
                 </div>
                 <div class="product-offer mb-30" style="height: 200px;">
-                    <img class="img-fluid" src="img/oferta-2.jpg" alt="">
+                    <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-2.jpg" alt="">
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 20%</h6>
                         <h3 class="text-white mb-3">Special Offer</h3>
@@ -140,9 +140,9 @@ $this->title = 'Home';
                     <div class="product-img position-relative overflow-hidden">
                         <?php if (!empty($produto->imagens)): ?>
                             <?php $image = $produto->imagens[0]; ?>
-                            <img src="<?= 'uploads' . '/' . $image->filename ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
+                            <img src="<?= Yii::getAlias('@uploads') . '/' . $image->filename ?>" alt="<?= Html::encode($produto->nome) ?>" class="img-fluid">
                         <?php else: ?>
-                            <img src="img/notAvailable.png" alt="Imagem padrão" class="img-fluid">
+                        <img src="<?= Yii::getAlias('@default')?>" alt="Imagem padrão" class="img-fluid">
                         <?php endif; ?>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
@@ -169,7 +169,7 @@ $this->title = 'Home';
         <div class="row px-xl-5">
             <div class="col-md-6">
                 <div class="product-offer mb-30" style="height: 300px;">
-                    <img class="img-fluid" src="img/oferta-1.jpg" alt="">
+                <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-1.jpg" alt="">
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 20%</h6>
                         <h3 class="text-white mb-3">Special Offer</h3>
@@ -179,7 +179,7 @@ $this->title = 'Home';
             </div>
             <div class="col-md-6">
                 <div class="product-offer mb-30" style="height: 300px;">
-                    <img class="img-fluid" src="img/oferta-2.jpg" alt="">
+                    <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-2.jpg" alt="">
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 20%</h6>
                         <h3 class="text-white mb-3">Special Offer</h3>
@@ -199,28 +199,28 @@ $this->title = 'Home';
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
                     <div class="bg-light p-4">
-                        <img src="img/vendor-1.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-1.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-2.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-2.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-3.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-3.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-4.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-4.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-5.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-5.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-6.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-6.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-7.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-7.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-8.jpg" alt="">
+                        <img src="<?= Yii::getAlias('@image') . '/'?>vendor-8.jpg" alt="">
                     </div>
                 </div>
             </div>
