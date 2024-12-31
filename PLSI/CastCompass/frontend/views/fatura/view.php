@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead class="table-primary">
                     <tr>
                         <th class="text-center">#</th>
-                        <th>Product Name</th>
-                        <th class="text-center">Quantity</th>
-                        <th class="text-end">Price</th>
-                        <th class="text-end">Subtotal</th>
+                        <th>Nome do Produto</th>
+                        <th class="text-center">Quantidade</th>
+                        <th class="text-end">Preço</th>
+                        <th class="text-end">Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,8 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row mt-4">
         <div class="col text-end">
             <a href="/fatura/download-pdf?id=<?= $model->id ?>" class="btn btn-success">Download PDF</a>
-            <a href="/fatura/download-pdf?id=<?= $model->id ?>&download=false" class="btn btn-info">Imprimir Fatura</a>
-            <a href=" <?= Url::to(['fatura/index'])  ?> " class="btn btn-secondary">Voltar para as Faturas</a>
+            <a href="<?= Url::to(['fatura/print', 'id' => $model->id]) ?>" class="btn btn-info">Imprimir Fatura</a>
+            <a href=" <?= Url::to(['fatura/index'])  ?>" class="btn btn-secondary">Voltar para as Faturas</a>
         </div>
     </div>
 </div>    

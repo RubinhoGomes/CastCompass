@@ -66,20 +66,12 @@ class FaturaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionPrint($id)
     {
-        $model = new Fatura();
+      $fatura = Fatura::findOne(['id' => $id]);
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
+        return $this->render('print', [
+            'model' => $fatura,
         ]);
     }
 
