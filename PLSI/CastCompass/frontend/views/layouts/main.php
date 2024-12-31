@@ -105,6 +105,9 @@ $categorias = Categoria::find()->all();
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                         <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Shopping Cart</a>
                                         <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                        <a href="<?= Url::to(['/favoritos/index']) ?>" class="dropdown-item">Favorites</a>
+                                        <a href="<?= Url::to(['/user/index']) ?>" class="dropdown-item">Profile</a>
+                                        <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
                                     </div>
                                 </div>
                                 <a href="<?= Url::to(['/site/contact']) ?>" class="nav-item nav-link">Contact</a>
@@ -123,6 +126,7 @@ $categorias = Categoria::find()->all();
                                                     class="fa fa-angle-down"></i></a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                             <a href="<?= Url::to(['/user/index']) ?>" class="dropdown-item">Profile</a>
+                                            <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
 
                                             <!-- Form to handle logout -->
                                             <?php echo Html::beginForm(['/site/logout'], 'post'); ?>

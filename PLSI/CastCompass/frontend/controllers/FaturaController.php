@@ -55,9 +55,8 @@ class FaturaController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
+    public function actionView($id) {
+      return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }

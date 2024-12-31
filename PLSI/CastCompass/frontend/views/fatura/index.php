@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <hr>
                             <div class="d-flex justify-content-between align-items-center">
                               <h6>Total: € <?= $fatura->valorTotal ?></h6>
-                              <a href="<?= Url::to(['fatura/view', 'id' => $linhas->produto->id]) ?>" class="btn btn-primary btn-sm">Ver Fatura</a>
+                              <a href="<?= Url::to(['fatura/view', 'id' => $fatura->id]) ?>" class="btn btn-primary btn-sm">Ver Fatura</a>
                         </div>
                       </div>
                     </div>
