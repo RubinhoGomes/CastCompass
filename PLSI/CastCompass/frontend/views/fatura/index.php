@@ -18,50 +18,54 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Fatura', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-  <div class="card w-50">
-    <!-- Card Header -->
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center" 
-         data-bs-toggle="collapse" 
-         data-bs-target="#receiptDetails" 
-         aria-expanded="false" 
-         aria-controls="receiptDetails">
-      <div class="d-flex align-items-center">
-        <img src="https://via.placeholder.com/50" alt="Receipt Image" class="rounded-circle me-3">
-        <div>
-          <h5 class="mb-0">Receipt #12345</h5>
-          <small>Date: 2024-12-30</small>
-        </div>
-      </div>
-      <span class="rotate-arrow">&#x25BC;</span> <!-- Down Arrow Icon -->
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>  
+    <div class="row g-4">
+        <?php foreach ($faturas as $fatura): ?>
+            <div class="col-md-6">
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+                         data-bs-toggle="collapse"
+                         data-bs-target="#collapse-<?php echo $fatura->id; ?>"
+                         aria-expanded="false"
+                         aria-controls="collapse-<?php echo $fatura->id; ?>"
+                         style="cursor: pointer;">
+                        <h5 class="mb-0"><?= $fatura->id ?></h5>
+                        <small><?= $fatura->id ?></small>
+                    </div>
+                    <div id="collapse-<?= $fatura->id ?>" class="collapse">
+                        <div class="card-body">
+                            <h6>Products:</h6>
+                            <ul class="list-group">
+                              <?php foreach ($fatura->linhafaturas as $linhas): ?>
+                              <a href="<?= Url::to(['site/detail', 'id' => $linhas->produto->id]) ?>">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Product Image -->
+                                        <img src="<?= Yii::getAlias('@uploads') . '/' . $linhas->produto->imagens[0]->filename ?>" 
+                                             alt="Product Image" 
+                                             class="rounded me-3" 
+                                             style="width: 40px; height: 40px; object-fit: cover;">
+                                        <span><?= $linhas->produto->nome . ' (' . $linhas->quantidade . ')' ?></span>
+</div>
+                                    <span>€ <?= $linhas->produto->preco ?></span>
+                                </li>
+                              </a>
+                            <?php endforeach; ?>
+                            </ul>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <h6>Total: € <?= $fatura->valorTotal ?></h6>
+                              <a href="<?= Url::to(['fatura/view', 'id' => $linhas->produto->id]) ?>" class="btn btn-primary btn-sm">Ver Fatura</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
+</div>
 
-    <!-- Collapsible Section -->
-    <div id="receiptDetails" class="collapse">
-      <div class="card-body">
-        <h6 class="fw-bold mb-3">Products:</h6>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Product 1</span>
-            <span>$10.00</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Product 2</span>
-            <span>$15.50</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Product 3</span>
-            <span>$7.25</span>
-          </li>
-        </ul>
-        <hr>
-        <h6 class="fw-bold">Total: $32.75</h6>
-      </div>
-    </div>
-  </div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 

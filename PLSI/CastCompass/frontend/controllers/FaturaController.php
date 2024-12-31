@@ -4,9 +4,12 @@ namespace frontend\controllers;
 
 use common\models\Fatura;
 use common\models\FaturaSearch;
+use common\models\LinhaFatura;
+use common\models\Carrinho;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * FaturaController implements the CRUD actions for Fatura model.
@@ -38,12 +41,11 @@ class FaturaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new FaturaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $carrinho = Carrinho::findOne(['profileID' => Yii::$app->user->identity->profile->id]);
+        $faturas = Fatura::findAll(['carrinhoID' => $carrinho->id]);
+      
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+          'faturas' => $faturas,
         ]);
     }
 
