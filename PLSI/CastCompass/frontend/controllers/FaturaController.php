@@ -71,7 +71,7 @@ class FaturaController extends Controller
       $fatura = Fatura::findOne(['id' => $id]);
 
         return $this->render('print', [
-            'model' => $fatura,
+            'fatura' => $fatura,
         ]);
     }
 
