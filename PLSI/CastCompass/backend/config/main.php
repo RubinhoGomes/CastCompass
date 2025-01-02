@@ -76,6 +76,25 @@ return [
                         'GET count' => 'count', // 'count' é 'actionCount'
                     ],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/metodopagamento',
+                    'extraPatterns' => [
+                        'GET count' => 'count', // 'count' é 'actionCount'
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/metodoexpedicao',
+                    'extraPatterns' => [
+                        'GET count' => 'count', // 'count' é 'actionCount'
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/favoritos',
+                    'extraPatterns' => [
+                        'GET count' => 'count',// 'count' é 'actionCount'
+                        'GET profilefavoritos' => 'profilefavoritos',
+                    ],
+                ],
             ],
         ],
     ],
