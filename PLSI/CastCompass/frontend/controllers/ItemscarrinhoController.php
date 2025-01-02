@@ -26,8 +26,9 @@ class ItemsCarrinhoController extends \yii\web\Controller
       $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
 
       if($carrinho === NULL) {
+        $carrinho = new Carrinho();
         if($carrinho->CreateCarrinho($this->getProfile(Yii::$app->user->id))) {
-        $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
+          $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
         }
       }
 

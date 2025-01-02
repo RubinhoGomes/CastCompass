@@ -73,11 +73,9 @@ class CarrinhoController extends Controller
     public function CreateCarrinho($profileID) {
       $carrinho = new Carrinho();
       $carrinho->profileID = $profileID;
-      $carrinho->dataCompra = NULL;
       $carrinho->valorTotal = NULL;
       $carrinho->quantidade = NULL;
-      $carrinho->metodoPagamentoID = NULL;
-      $carrinho->metodoExpedicaoID = NULL;
+      
       if($carrinho->save(false)) {
         return true;
       }
@@ -102,7 +100,12 @@ class CarrinhoController extends Controller
       }
 
       $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinho->id]);
-      
+
+      if($itens == null) {
+        Yii::$app->session->setFlash('error', 'O carrinho está vazio!');
+        return $this->redirect(['site/shop']);
+      }
+
       if(Yii::$app->request->isPost){
         $this->fazerCompra($_POST["carrinhoId"], $_POST["metodoPagamento"], $_POST["metodoExpedicao"]);
       }
