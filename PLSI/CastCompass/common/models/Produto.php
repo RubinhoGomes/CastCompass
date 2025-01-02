@@ -91,6 +91,55 @@ class Produto extends \yii\db\ActiveRecord
         return false;
     }
 
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            foreach ($this->imagens as $imagem) {
+                $imagem->delete();
+            }
+
+            foreach ($this->favoritos as $favorito) {
+                $favorito->delete();
+            }
+
+            foreach ($this->itemscarrinhos as $item) {
+                $item->delete();
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+
+        $message = "O produto {$this->nome} foi eliminado.";
+
+        $this->FazPublishNoMosquitto('DELETE', $message);
+    }
+
+
+    private function FazPublishNoMosquitto($canal, $msg)
+    {
+        $server = '127.0.0.1';
+        $port = 1883;
+        $username = "admin";
+        $password = "12345678";
+        $client_id = 'phpMQTT-publisher';
+
+        $mqtt = new \common\mosquitto\phpMQTT($server, $port, $client_id);
+
+        if ($mqtt->connect(true, NULL, $username, $password)) {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        } else {
+            file_put_contents("debug.output","Time out!");
+        }
+    }
+
     /**
      * Gets query for [[Categoria]].
      *
