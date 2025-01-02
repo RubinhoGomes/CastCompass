@@ -91,7 +91,27 @@ class Produto extends \yii\db\ActiveRecord
         return false;
     }
 
-    public function beforeDelete()
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        $id=$this->id;
+        $nome=$this->nome;
+        $marca=$this->marca;
+        $preco=$this->preco;
+        $stock=$this->stock;
+        $descricao=$this->descricao;
+        $categoriaID=$this->categoriaID;
+        $ivaID=$this->ivaID;
+
+        $mensagem = "Um novo produto {$this->nome} foi adicionado.";
+        $mensagem2 = "O produto {$this->nome} foi atualizado.";
+
+        if($insert)
+            $this->FazPublishNoMosquitto("INSERT",$mensagem);
+        else
+            $this->FazPublishNoMosquitto("UPDATE",$mensagem2);
+    }
+        public function beforeDelete()
     {
         if (parent::beforeDelete()) {
             foreach ($this->imagens as $imagem) {
