@@ -7,12 +7,13 @@ use yii\filters\ContentNegotiator;
 use yii\web\Response;
 use yii\filters\auth\HttpBasicAuth;
 
+
 /**
  * Default controller for the `api` module
  */
-class ProfileController extends ActiveController
+class LinhafaturaController extends ActiveController
 {
-    public $modelClass = 'common\models\Profile';
+    public $modelClass = 'common\models\Linhafatura';
 
     public function behaviors() {
         $behaviors = parent::behaviors();
@@ -28,6 +29,7 @@ class ProfileController extends ActiveController
         ];
         return $behaviors;
     }
+
     public function authf($username, $password)
     {
         $user = \common\models\User::findByUsername($username);
@@ -37,20 +39,11 @@ class ProfileController extends ActiveController
         }
         throw new \yii\web\ForbiddenHttpException('No authentication'); //403
     }
-
-
     public function actionCount()
     {
-        $profilesmodel = new $this->modelClass;
-        $recs = $profilesmodel::find()->all();
+        $metodosmodel = new $this->modelClass;
+        $recs = $metodosmodel::find()->all();
         return ['count' => count($recs)];
-    }
-
-    public function actionProcurarnomes($nome)
-    {
-        $profiles = $this->modelClass::find()
-            ->where(['nome' => $nome])->all();
-        return $profiles;
     }
 
 }

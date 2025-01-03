@@ -49,50 +49,78 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/user',
                     'extraPatterns' => [
-                        'GET count' => 'count', // 'count' é 'actionCount'
+                        'GET count' => 'count',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/profile',
                     'extraPatterns' => [
-                        'GET count' => 'count', // 'count' é 'actionCount'
+                        'GET count' => 'count',
+                        'GET procurarnomes' => 'procurarnomes',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/produto',
                     'extraPatterns' => [
-                        'GET count' => 'count', // 'count' é 'actionCount'
+                        'GET count' => 'count',
+                        'GET procurarnomes' => 'procurarnomes',
+                        'GET filtrarporcategoria' => 'filtrarporcategoria',
+
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/iva',
                     'extraPatterns' => [
-                        'GET count' => 'count', // 'count' é 'actionCount'
+                        'GET count' => 'count',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/categoria',
                     'extraPatterns' => [
-                        'GET count' => 'count', // 'count' é 'actionCount'
+                        'GET count' => 'count',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/metodopagamento',
                     'extraPatterns' => [
-                        'GET count' => 'count', // 'count' é 'actionCount'
+                        'GET count' => 'count',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/metodoexpedicao',
                     'extraPatterns' => [
-                        'GET count' => 'count', // 'count' é 'actionCount'
+                        'GET count' => 'count',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/favoritos',
                     'extraPatterns' => [
-                        'GET count' => 'count',// 'count' é 'actionCount'
+                        'GET count' => 'count',
                         'GET profilefavoritos' => 'profilefavoritos',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/carrinho',
+                    'extraPatterns' => [
+                        'GET count' => 'count',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/itenscarrinho',
+                    'extraPatterns' => [
+                        'GET count' => 'count',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/linhafatura',
+                    'extraPatterns' => [
+                        'GET count' => 'count',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/fatura',
+                    'extraPatterns' => [
+                        'GET count' => 'count',
                     ],
                 ],
             ],

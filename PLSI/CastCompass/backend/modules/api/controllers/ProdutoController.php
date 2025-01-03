@@ -45,5 +45,20 @@ class ProdutoController extends ActiveController
         $recs = $produtosmodel::find()->all();
         return ['count' => count($recs)];
     }
+
+    public function actionProcurarnomes($nome)
+    {
+        $produtos = $this->modelClass::find()
+            ->where(['nome' => $nome])->all();
+        return $produtos;
+    }
+
+    public function actionFiltrarporcategoria($categoriaid){
+        $produtos = $this->modelClass::find()
+            ->where(['categoriaID' => $categoriaid])->all();
+        return $produtos;
+    }
+
+
 }
 
