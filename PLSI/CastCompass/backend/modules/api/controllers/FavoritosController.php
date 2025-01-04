@@ -2,6 +2,7 @@
 
 namespace backend\modules\api\controllers;
 
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
@@ -17,9 +18,9 @@ class FavoritosController extends ActiveController
 
     public function behaviors() {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = ['class' =>
-            HttpBasicAuth::className(),
-            'auth' => [$this, 'authf'],
+        $behaviors['authenticator'] = [
+            'class' => QueryParamAuth::className(),
+            'tokenParam' => 'access-token',
         ];
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::class,

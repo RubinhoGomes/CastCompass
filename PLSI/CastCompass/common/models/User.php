@@ -72,7 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -116,6 +116,7 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => self::STATUS_INACTIVE
         ]);
     }
+
 
     /**
      * Finds out if password reset token is valid

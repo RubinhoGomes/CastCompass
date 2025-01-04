@@ -2,6 +2,7 @@
 
 namespace backend\modules\api\controllers;
 
+use yii\filters\auth\QueryParamAuth;
 use yii\filters\contentNegotiator;
 use yii\rest\ActiveController;
 use yii\web\Response;
@@ -17,10 +18,11 @@ class UserController extends ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = ['class' =>
-            HttpBasicAuth::className(),
-            'auth' => [$this, 'authf'],
+        $behaviors['authenticator'] = [
+            'class' => QueryParamAuth::className(),
+            'tokenParam' => 'access-token',
         ];
+
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::class,
             'formats' => [
@@ -29,16 +31,7 @@ class UserController extends ActiveController
         ];
         return $behaviors;
     }
-
-    public function authf($username, $password)
-    {
-        $user = \common\models\User::findByUsername($username);
-        if ($user && $user->validatePassword($password))
-        {
-            return $user;
-        }
-        throw new \yii\web\ForbiddenHttpException('No authentication'); //403
-    }
+    
 
     public function actionCount()
     {
