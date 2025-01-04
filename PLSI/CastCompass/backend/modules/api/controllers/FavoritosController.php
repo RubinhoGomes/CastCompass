@@ -63,4 +63,13 @@ class FavoritosController extends ActiveController
 
         return $favoritos;
     }
+
+    public function actionCountfavoritos($profileID){
+        $count = $this->modelClass::find()
+            ->where(['profileID' => $profileID])
+            ->count();
+
+        return ['Numero de favoritos do profile' => $count];
+
+    }
 }

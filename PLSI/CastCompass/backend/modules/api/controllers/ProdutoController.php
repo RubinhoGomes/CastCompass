@@ -33,6 +33,14 @@ class ProdutoController extends ActiveController
         return $behaviors;
     }
 
+    public function actionCountproducts($categoriaID){
+        $count = $this->modelClass::find()
+            ->where(['categoriaID' => $categoriaID])
+            ->count();
+
+        return ['Numero produtos da categoria' => $count];
+
+    }
 
     public function actionCount()
     {
@@ -52,6 +60,43 @@ class ProdutoController extends ActiveController
         $produtos = $this->modelClass::find()
             ->where(['categoriaID' => $categoriaid])->all();
         return $produtos;
+    }
+
+    public function actionPreco($id)
+    {
+        $rec = $this->modelClass::find()->select(['preco'])
+            ->where(['id' => $id])->one(); //objeto json
+        return $rec;
+    }
+
+
+    public function actionMarca($id)
+    {
+        $rec = $this->modelClass::find()->select(['marca'])
+            ->where(['id' => $id])->one(); //objeto json
+        return $rec;
+    }
+
+
+    public function actionStock($id)
+    {
+        $rec = $this->modelClass::find()->select(['stock'])
+            ->where(['id' => $id])->one(); //objeto json
+        return $rec;
+    }
+
+    public function actionNome($id)
+    {
+        $rec = $this->modelClass::find()->select(['nome'])
+            ->where(['id' => $id])->one(); //objeto json
+        return $rec;
+    }
+
+    public function actionDescricao($id)
+    {
+        $rec = $this->modelClass::find()->select(['descricao'])
+            ->where(['id' => $id])->one(); //objeto json
+        return $rec;
     }
 
 

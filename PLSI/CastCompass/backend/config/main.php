@@ -64,8 +64,13 @@ return [
                     'extraPatterns' => [
                         'GET count' => 'count',
                         'GET procurarnomes' => 'procurarnomes',
+                        'GET countproducts' => 'countproducts',
                         'GET filtrarporcategoria' => 'filtrarporcategoria',
-
+                        'GET {id}/nome' => 'nome',
+                        'GET {id}/marca' => 'marca',
+                        'GET {id}/preco' => 'preco',
+                        'GET {id}/stock' => 'stock',
+                        'GET {id}/descricao' => 'descricao',
                     ],
                 ],
                 [
@@ -97,6 +102,7 @@ return [
                     'extraPatterns' => [
                         'GET count' => 'count',
                         'GET profilefavoritos' => 'profilefavoritos',
+                        'GET countfavoritos' => 'countfavoritos',
                     ],
                 ],
                 [
