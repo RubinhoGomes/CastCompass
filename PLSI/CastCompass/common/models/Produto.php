@@ -105,8 +105,8 @@ class Produto extends \yii\db\ActiveRecord
         else
             $this->FazPublishNoMosquitto("UPDATE",$mensagemupdate);
     }
-        public function beforeDelete()
-    {
+    
+    public function beforeDelete() {
         if (parent::beforeDelete()) {
             foreach ($this->imagens as $imagem) {
                 $imagem->delete();
