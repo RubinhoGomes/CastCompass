@@ -7,12 +7,10 @@ modules:
     enabled:
         - Asserts
         - Tests\Support\Helper\Unit
-        - Db
-config:
-    Db:
-        dsn: 'mysql:host=127.0.0.1;port=8889;dbname=castcompass'
-        user: 'root'
-        password: 'root'
-        dump: 'tests/_data/dump.sql'
-        populate: true
-        cleanup: true
+        - Db:
+            dsn: 'mysql:host=127.0.0.1;port=8889;dbname=castcompass'
+            user: 'root'
+            password: 'root'
+            populate: false
+            cleanup: false
+    step_decorators: ~
