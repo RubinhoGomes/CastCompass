@@ -1,2 +1,11 @@
 suite_namespace: backend\tests\unit
 actor: UnitTester
+modules:
+  enabled:
+    - Yii2:
+        part: [orm, email, fixtures]
+    - Asserts:
+    - Db:
+        dsn: 'mysql:host=127.0.0.1;port=8889;dbname=castcompass'
+        user: 'root'
+        password: 'root'

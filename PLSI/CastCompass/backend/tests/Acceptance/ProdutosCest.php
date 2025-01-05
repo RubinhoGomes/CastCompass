@@ -12,7 +12,7 @@ class ProdutosCest
     {
     }
 
-    // tests
+    // This test is to test the essential functionality of the Cast&Compass application
     public function tryToTest(AcceptanceTester $I)
     {
       $I->amOnPage('site/login');
@@ -22,8 +22,9 @@ class ProdutosCest
       $I->click('Login');
       $I->wait(3);
 
-      $I->amOnPage('produto/create');
+      $I->amOnPage('produto/index');
       $I->wait(3);
+      $I->click('Criar Produto');
       $I->fillField('Nome', 'Produto Teste');
       $I->fillField('Marca', 'Marca Teste');
       $I->fillField('Descricao', 'Descrição do Produto Teste');
@@ -33,6 +34,6 @@ class ProdutosCest
       $I->selectOption('Iva', '0.23');
       $I->attachFile('Imagens', 'produto.png');
       $I->click('Save');
-      $I->wait(3);
+      $I->wait(10);
     }
 }

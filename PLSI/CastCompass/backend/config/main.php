@@ -18,7 +18,7 @@ return [
         ],
     ],
     'components' => [
-        'request' => [
+      'request' => [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
