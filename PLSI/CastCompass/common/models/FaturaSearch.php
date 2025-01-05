@@ -17,7 +17,7 @@ class FaturaSearch extends Fatura
     public function rules()
     {
         return [
-            [['id', 'carrinhoID', 'metodoPagamentoID', 'metodoExpedicaoID'], 'integer'],
+            [['id', 'carrinhoID', 'metodoPagamentoID', 'metodoExpedicaoID', 'data'], 'integer'],
             [['valorTotal', 'ivaTotal'], 'number'],
         ];
     }
@@ -62,6 +62,7 @@ class FaturaSearch extends Fatura
             'carrinhoID' => $this->carrinhoID,
             'valorTotal' => $this->valorTotal,
             'ivaTotal' => $this->ivaTotal,
+            'data' => $this->data,
             'metodoPagamentoID' => $this->metodoPagamentoID,
             'metodoExpedicaoID' => $this->metodoExpedicaoID,
         ]);

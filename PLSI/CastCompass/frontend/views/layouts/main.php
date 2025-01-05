@@ -103,10 +103,9 @@ $categorias = Categoria::find()->all();
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
                                                 class="fa fa-angle-down mt-1"></i></a>
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Shopping Cart</a>
-                                        <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                        <a href="<?= Url::to(['/favoritos/index']) ?>" class="dropdown-item">Favorites</a>
-                                        <a href="<?= Url::to(['/user/index']) ?>" class="dropdown-item">Profile</a>
+                                        <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Carrinho</a>
+                                        <a href="<?= Url::to(['/favoritos/index']) ?>" class="dropdown-item">Favoritos</a>
+                                        <a href="<?= Url::to(['/user/index']) ?>" class="dropdown-item">Perfil</a>
                                         <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
                                     </div>
                                 </div>
@@ -179,12 +178,9 @@ $categorias = Categoria::find()->all();
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i
-                                            class="fa fa-angle-right mr-2"></i>Checkout</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                                <a class="text-secondary mb-2" href=""><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="<?= Url::to(['/carrinho/index']) ?>"><i class="fa fa-angle-right mr-2"></i>Carrinho</a>
+                                <a class="text-secondary" href=""><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
 

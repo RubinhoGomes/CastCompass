@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Data da Fatura:</h5>
-                                    <p>12 Oct, 2020</p>
+                                    <p><?= Yii::$app->formatter->asDate($fatura->data)?></p>
                                 </div> 
                            </div>
                         </div>
