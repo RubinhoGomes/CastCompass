@@ -1,0 +1,12 @@
+actor: AcceptanceTester
+suite_namespace: backend\tests\Acceptance
+modules:
+    # enable helpers as array
+    enabled:
+    - WebDriver:
+          url: 'http://localhost:8888/Projeto/CastCompass/PLSI/CastCompass/backend/web/'
+          browser: chrome
+          window_size: maximize
+    - Yii2:
+          part: init
+          cleanup: false
