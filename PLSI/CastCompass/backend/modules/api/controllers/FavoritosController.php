@@ -32,15 +32,6 @@ class FavoritosController extends ActiveController
     }
 
 
-    public function authf($username, $password)
-    {
-        $user = \common\models\User::findByUsername($username);
-        if ($user && $user->validatePassword($password))
-        {
-            return $user;
-        }
-        throw new \yii\web\ForbiddenHttpException('No authentication'); //403
-    }
     public function actionCount()
     {
         $metodosmodel = new $this->modelClass;

@@ -4,7 +4,6 @@ namespace backend\modules\api\controllers;
 
 
 use yii\filters\auth\HttpBasicAuth;
-use yii\helpers\Json;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
