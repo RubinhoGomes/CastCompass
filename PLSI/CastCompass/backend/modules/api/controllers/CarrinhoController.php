@@ -7,6 +7,7 @@ use yii\rest\ActiveController;
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
 use yii\filters\auth\HttpBasicAuth;
+use backend\modules\api\components\CustomAuth;
 
 
 /**
@@ -18,9 +19,8 @@ class CarrinhoController extends ActiveController
 
     public function behaviors() {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = ['class' =>
-            HttpBasicAuth::className(),
-            'auth' => [$this, 'auth'],
+        $behaviors['authenticator'] = [
+            'class' => CustomAuth::className(),
         ];
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::class,
@@ -31,15 +31,6 @@ class CarrinhoController extends ActiveController
         return $behaviors;
     }
 
-    public function auth($username, $password)
-    {
-        $user = \common\models\User::findByUsername($username);
-        if ($user && $user->validatePassword($password))
-        {
-            return $user;
-        }
-        throw new \yii\web\ForbiddenHttpException('No authentication'); //403
-    }
 
     public function actionCount()
     {
@@ -47,5 +38,46 @@ class CarrinhoController extends ActiveController
         $recs = $metodosmodel::find()->all();
         return ['count' => count($recs)];
     }
+
+    public function actionCriarcarrinho()
+    {
+        $user = \Yii::$app->user->identity;
+
+        if (!$user) {
+            return [
+                'status' => 'error',
+                'message' => 'Usuário não autenticado.',
+            ];
+        }
+
+        $profile = \common\models\Profile::findOne(['userID' => $user->id]);
+
+        if (!$profile) {
+            return [
+                'status' => 'error',
+                'message' => 'Perfil não encontrado.',
+            ];
+        }
+
+        $carrinho = new $this->modelClass;
+        $carrinho->profileID = $profile->id;
+        $carrinho->valorTotal = 0;
+        $carrinho->quantidade = 0;
+
+        if ($carrinho->save()) {
+            return [
+                'status' => 'success',
+                'message' => 'Carrinho criado com sucesso.',
+                'data' => $carrinho,
+            ];
+        } else {
+            return [
+                'status' => 'error',
+                'message' => 'Erro ao criar o carrinho.',
+                'errors' => $carrinho->errors,
+            ];
+        }
+    }
+
 
 }

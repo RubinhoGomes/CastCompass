@@ -7,6 +7,8 @@ use yii\rest\ActiveController;
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
 use yii\filters\auth\HttpBasicAuth;
+use backend\modules\api\components\CustomAuth;
+
 
 /**
  * Default controller for the `api` module
@@ -17,9 +19,8 @@ class ProfileController extends ActiveController
 
     public function behaviors() {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = ['class' =>
-            HttpBasicAuth::className(),
-            'auth' => [$this, 'auth'],
+        $behaviors['authenticator'] = [
+            'class' => CustomAuth::className(),
         ];
 
         $behaviors['contentNegotiator'] = [
@@ -31,15 +32,6 @@ class ProfileController extends ActiveController
         return $behaviors;
     }
 
-    public function auth($username, $password)
-    {
-        $user = \common\models\User::findByUsername($username);
-        if ($user && $user->validatePassword($password))
-        {
-            return $user;
-        }
-        throw new \yii\web\ForbiddenHttpException('No authentication'); //403
-    }
 
     public function actionCount()
     {

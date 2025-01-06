@@ -103,12 +103,14 @@ return [
                         'GET count' => 'count',
                         'GET profilefavoritos' => 'profilefavoritos',
                         'GET countfavoritos' => 'countfavoritos',
+                        'POST adicionarfavorito' => 'adicionarfavorito',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/carrinho',
                     'extraPatterns' => [
                         'GET count' => 'count',
+                        'POST criarcarrinho' => 'criarcarrinho',
                     ],
                 ],
                 [

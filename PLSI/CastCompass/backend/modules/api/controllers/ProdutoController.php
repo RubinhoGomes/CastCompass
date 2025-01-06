@@ -7,6 +7,7 @@ use yii\web\Response;
 use yii\filters\ContentNegotiator;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
+use backend\modules\api\components\CustomAuth;
 
 
 /**
@@ -19,9 +20,8 @@ class ProdutoController extends ActiveController
     public function behaviors() {
         $behaviors = parent::behaviors();
 
-        $behaviors['authenticator'] = ['class' =>
-            HttpBasicAuth::className(),
-            'auth' => [$this, 'auth'],
+        $behaviors['authenticator'] = [
+            'class' => CustomAuth::className(),
         ];
 
         $behaviors['contentNegotiator'] = [
@@ -33,15 +33,6 @@ class ProdutoController extends ActiveController
         return $behaviors;
     }
 
-    public function auth($username, $password)
-    {
-        $user = \common\models\User::findByUsername($username);
-        if ($user && $user->validatePassword($password))
-        {
-            return $user;
-        }
-        throw new \yii\web\ForbiddenHttpException('No authentication'); //403
-    }
 
     public function actionCountproducts($categoriaID){
         $count = $this->modelClass::find()
