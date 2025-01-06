@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                          aria-expanded="false"
                          aria-controls="collapse-<?php echo $fatura->id; ?>"
                          style="cursor: pointer;">
-                        <h5 class="mb-0"><?= $fatura->id ?></h5>
+                        <h5 class="mb-0"><?= Yii::$app->formatter->asDate($fatura->data) ?></h5>
                         <small><?= $fatura->id ?></small>
                     </div>
                     <div id="collapse-<?= $fatura->id ?>" class="collapse">

@@ -11,6 +11,7 @@ use Yii;
  * @property int $carrinhoID
  * @property float $valorTotal
  * @property float $ivaTotal
+ * @property int $data
  * @property int $metodoPagamentoID
  * @property int $metodoExpedicaoID
  *
@@ -35,8 +36,8 @@ class Fatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['carrinhoID', 'valorTotal', 'ivaTotal', 'metodoPagamentoID', 'metodoExpedicaoID'], 'required'],
-            [['carrinhoID', 'metodoPagamentoID', 'metodoExpedicaoID'], 'integer'],
+            [['carrinhoID', 'valorTotal', 'ivaTotal', 'metodoPagamentoID', 'metodoExpedicaoID', 'data'], 'required'],
+            [['carrinhoID', 'metodoPagamentoID', 'metodoExpedicaoID', 'data'], 'integer'],
             [['valorTotal', 'ivaTotal'], 'number'],
             [['carrinhoID'], 'exist', 'skipOnError' => true, 'targetClass' => Carrinho::class, 'targetAttribute' => ['carrinhoID' => 'id']],
             [['metodoExpedicaoID'], 'exist', 'skipOnError' => true, 'targetClass' => Metodoexpedicao::class, 'targetAttribute' => ['metodoExpedicaoID' => 'id']],
@@ -54,6 +55,7 @@ class Fatura extends \yii\db\ActiveRecord
             'carrinhoID' => 'Carrinho',
             'valorTotal' => 'Valor Total',
             'ivaTotal' => 'Iva Total',
+            'data' => 'Data',
             'metodoPagamentoID' => 'Metodo Pagamento',
             'metodoExpedicaoID' => 'Metodo Expedicao',
         ];

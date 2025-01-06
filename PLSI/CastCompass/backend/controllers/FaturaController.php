@@ -1,15 +1,14 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use common\models\Fatura;
 use common\models\FaturaSearch;
-use common\models\LinhaFatura;
-use common\models\Carrinho;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+use yii\web\ForbiddenHttpException;
 
 /**
  * FaturaController implements the CRUD actions for Fatura model.
@@ -41,11 +40,11 @@ class FaturaController extends Controller
      */
     public function actionIndex()
     {
-        $carrinho = Carrinho::findOne(['profileID' => Yii::$app->user->identity->profile->id]);
-        $faturas = Fatura::findAll(['carrinhoID' => $carrinho->id]);
-      
+ 
+      $fatura = Fatura::find()->all();
+
         return $this->render('index', [
-          'faturas' => $faturas,
+            'fatura' => $fatura,
         ]);
     }
 
@@ -55,21 +54,36 @@ class FaturaController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
       return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Prints the receipt.
+     * Creates a new Fatura model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
      */
-    public function actionPrint($id)
+    public function actionCreate()
     {
-      $fatura = Fatura::findOne(['id' => $id]);
+      if(!Yii::$app->user->can('faturaCreateB')){
+        throw new ForbiddenHttpException('Access denied');
+      }
 
-        return $this->render('print', [
-            'fatura' => $fatura,
+        $model = new Fatura();
+      
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
         ]);
     }
 
@@ -82,7 +96,11 @@ class FaturaController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+      if(!Yii::$app->user->can('faturaUpdateB')){
+        throw new ForbiddenHttpException('Access denied');
+      }
+   
+      $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -102,7 +120,11 @@ class FaturaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+      if(!Yii::$app->user->can('faturaDeleteB')){
+        throw new ForbiddenHttpException('Access denied');
+      }
+
+       $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

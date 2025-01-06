@@ -133,6 +133,7 @@ class CarrinhoController extends Controller
       $fatura->carrinhoID = $carrinhoId;
       $fatura->valorTotal = $carrinho->valorTotal;
       $fatura->ivaTotal = $this->calcularIvaTotal($carrinhoId);
+      $fatura->data = strtotime(date('Y-m-d'));
       $fatura->metodoPagamentoID = $metodoPagId;
       $fatura->metodoExpedicaoID = $metodoExpId;
 
