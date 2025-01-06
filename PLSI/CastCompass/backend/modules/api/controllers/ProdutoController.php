@@ -20,9 +20,6 @@ class ProdutoController extends ActiveController
     public function behaviors() {
         $behaviors = parent::behaviors();
 
-        $behaviors['authenticator'] = [
-            'class' => CustomAuth::className(),
-        ];
 
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::class,
