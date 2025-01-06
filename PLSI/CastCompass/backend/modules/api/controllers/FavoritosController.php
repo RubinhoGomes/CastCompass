@@ -74,55 +74,53 @@ class FavoritosController extends ActiveController
 
     }
 
-    public function actionAdicionarfavorito()
+    public function actionAdicionarremoverfavorito($produtoID)
     {
         $user = \Yii::$app->user->identity;
+
         if (!$user) {
-            throw new \yii\web\ForbiddenHttpException('Usuário não autenticado.');
+            return [
+                'success' => false,
+                'message' => 'Usuário não autenticado.',
+            ];
         }
 
         $profile = \common\models\Profile::findOne(['userID' => $user->id]);
+
         if (!$profile) {
-            throw new \yii\web\NotFoundHttpException('Perfil não encontrado para o usuário.');
-        }
-
-        $request = \Yii::$app->request;
-        $produtoID = $request->post('produtoID');
-
-        if (!$produtoID) {
             return [
-                'status' => 'error',
-                'message' => 'ID do produto não fornecido.',
+                'success' => false,
+                'message' => 'Perfil do usuário não encontrado.',
             ];
         }
 
-        $favoritoExistente = \common\models\Favorito::find()
-            ->where(['profileID' => $profile->id, 'produtoID' => $produtoID])
+        $model = $this->modelClass::find()
+            ->where(['produtoID' => $produtoID, 'profileID' => $profile->id])
             ->one();
 
-        if ($favoritoExistente) {
+        if ($model) {
+            $model->delete();
             return [
-                'status' => 'error',
-                'message' => 'Este item já está nos favoritos.',
-            ];
-        }
-
-        $favorito = new $this->modelClass;
-        $favorito->profileID = $profile->id;
-        $favorito->$produtoID = $produtoID;
-
-        if ($favorito->save()) {
-            return [
-                'status' => 'success',
-                'message' => 'Produto adicionado aos favoritos com sucesso.',
-                'data' => $favorito,
+                'success' => true,
+                'message' => 'Favorito removido com sucesso.',
             ];
         } else {
-            return [
-                'status' => 'error',
-                'message' => 'Erro ao adicionar o item aos favoritos.',
-                'errors' => $favorito->errors,
-            ];
+            $model = new \common\models\Favorito();
+            $model->profileID = $profile->id;
+            $model->produtoID = $produtoID;
+
+            if ($model->save()) {
+                return [
+                    'success' => true,
+                    'message' => 'Favorito adicionado com sucesso.',
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => 'Erro ao adicionar favorito.',
+                    'errors' => $model->errors,
+                ];
+            }
         }
     }
 }

@@ -103,7 +103,7 @@ return [
                         'GET count' => 'count',
                         'GET profilefavoritos' => 'profilefavoritos',
                         'GET countfavoritos' => 'countfavoritos',
-                        'POST adicionarfavorito' => 'adicionarfavorito',
+                        'POST adicionarremoverfavorito' => 'adicionarremoverfavorito',
                     ],
                 ],
                 [
