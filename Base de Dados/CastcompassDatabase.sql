@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 16-Dez-2024 às 14:58
+-- Tempo de geração: 06-Jan-2025 às 19:48
 -- Versão do servidor: 8.2.0
 -- versão do PHP: 8.2.0
 
@@ -41,7 +41,17 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('admin', '2', 1733356457);
+('admin', '2', 1734101071),
+('client', '54', 1734708759),
+('client', '55', 1734708854),
+('client', '56', 1734708978),
+('client', '57', 1734709024),
+('client', '58', 1734709117),
+('client', '59', 1734809173),
+('client', '60', 1734809227),
+('client', '61', 1734809300),
+('client', '62', 1734809389),
+('client', '63', 1734809462);
 
 -- --------------------------------------------------------
 
@@ -68,30 +78,40 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('admin', 1, NULL, NULL, NULL, 1733356457, 1733356457),
-('categoriaCreateBO', 2, 'Create a category in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('categoriaDeleteBO', 2, 'Delete a category in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('categoriaIndexBO', 2, 'List of categories, index, in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('categoriaUpdateBO', 2, 'Update a category in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('categoriaViewBO', 2, 'View a category in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('client', 1, NULL, NULL, NULL, 1733356457, 1733356457),
-('ivaCreateBO', 2, 'Create a IVA in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('ivaDeleteBO', 2, 'Delete a IVA in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('ivaIndexBO', 2, 'List of IVA, index, in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('ivaUpdateBO', 2, 'Update a IVA in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('ivaViewBO', 2, 'View a IVA in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('loginBO', 2, 'Login to the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('produtoCreateBO', 2, 'Create a product in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('produtoDeleteBO', 2, 'Delete a product in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('produtoIndexBO', 2, 'List of products, index, in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('produtoUpdateBO', 2, 'Update a product in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('produtoViewBO', 2, 'View a product in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('userCreateBO', 2, 'Create a user in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('userDeleteBO', 2, 'Delete a user in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('userIndexBO', 2, 'List of users, index, in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('userUpdateBO', 2, 'Update a user in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('userViewBO', 2, 'View a user in the BackOffice', NULL, NULL, 1733356457, 1733356457),
-('worker', 1, NULL, NULL, NULL, 1733356457, 1733356457);
+('admin', 1, NULL, NULL, NULL, 1734101071, 1734101071),
+('categoriaCreateBO', 2, 'Create a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('categoriaDeleteBO', 2, 'Delete a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('categoriaIndexBO', 2, 'List of categories, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('categoriaUpdateBO', 2, 'Update a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('categoriaViewBO', 2, 'View a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('client', 1, NULL, NULL, NULL, 1734101071, 1734101071),
+('encomendaCreateBO', 2, 'Create a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('encomendaDeleteBO', 2, 'Delete a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('encomendaIndexBO', 2, 'List of all orders, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('encomendaUpdateBO', 2, 'Update a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('encomendaViewBO', 2, 'View a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('ivaCreateBO', 2, 'Create a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('ivaDeleteBO', 2, 'Delete a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('ivaIndexBO', 2, 'List of IVA, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('ivaUpdateBO', 2, 'Update a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('ivaViewBO', 2, 'View a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('loginBO', 2, 'Login to the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('mpCreateBO', 2, 'Create a Payment Method in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('mpDeleteBO', 2, 'Delete a Payment Method in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('mpIndexBO', 2, 'List of Payment Methods, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('mpUpdateBO', 2, 'Update a Payment Method in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('mpViewBO', 2, 'View the Payment Methods in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('produtoCreateBO', 2, 'Create a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('produtoDeleteBO', 2, 'Delete a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('produtoIndexBO', 2, 'List of products, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('produtoUpdateBO', 2, 'Update a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('produtoViewBO', 2, 'View a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('userCreateBO', 2, 'Create a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('userDeleteBO', 2, 'Delete a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('userIndexBO', 2, 'List of users, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('userUpdateBO', 2, 'Update a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('userViewBO', 2, 'View a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
+('worker', 1, NULL, NULL, NULL, 1734101071, 1734101071);
 
 -- --------------------------------------------------------
 
@@ -117,6 +137,11 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('admin', 'categoriaIndexBO'),
 ('admin', 'categoriaUpdateBO'),
 ('admin', 'categoriaViewBO'),
+('admin', 'encomendaCreateBO'),
+('admin', 'encomendaDeleteBO'),
+('admin', 'encomendaIndexBO'),
+('admin', 'encomendaUpdateBO'),
+('admin', 'encomendaViewBO'),
 ('admin', 'ivaCreateBO'),
 ('admin', 'ivaDeleteBO'),
 ('admin', 'ivaIndexBO'),
@@ -124,6 +149,11 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('admin', 'ivaViewBO'),
 ('admin', 'loginBO'),
 ('worker', 'loginBO'),
+('admin', 'mpCreateBO'),
+('admin', 'mpDeleteBO'),
+('admin', 'mpIndexBO'),
+('admin', 'mpUpdateBO'),
+('admin', 'mpViewBO'),
 ('admin', 'produtoCreateBO'),
 ('admin', 'produtoDeleteBO'),
 ('admin', 'produtoIndexBO'),
@@ -153,23 +183,28 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `carrinhocompra`
+-- Estrutura da tabela `carrinho`
 --
 
-DROP TABLE IF EXISTS `carrinhocompra`;
-CREATE TABLE IF NOT EXISTS `carrinhocompra` (
+DROP TABLE IF EXISTS `carrinho`;
+CREATE TABLE IF NOT EXISTS `carrinho` (
   `id` int NOT NULL AUTO_INCREMENT,
   `profileID` int NOT NULL,
-  `dataCompra` date NOT NULL,
-  `valorTotal` decimal(10,2) NOT NULL,
-  `quantidade` int NOT NULL,
-  `metodoExpedicaoID` int NOT NULL,
-  `metodoPagamentoID` int NOT NULL,
+  `valorTotal` decimal(10,2) DEFAULT NULL,
+  `quantidade` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `profileID` (`profileID`),
-  KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
-  KEY `metodoPagamentoID` (`metodoPagamentoID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `profileID` (`profileID`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `carrinho`
+--
+
+INSERT INTO `carrinho` (`id`, `profileID`, `valorTotal`, `quantidade`) VALUES
+(5, 2, '0.00', 3),
+(6, 4, '123.00', 3),
+(15, 4, '0.00', 0),
+(16, 4, '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -205,9 +240,21 @@ CREATE TABLE IF NOT EXISTS `fatura` (
   `carrinhoID` int NOT NULL,
   `valorTotal` decimal(10,2) NOT NULL,
   `ivaTotal` decimal(10,2) NOT NULL,
+  `metodoPagamentoID` int NOT NULL,
+  `metodoExpedicaoID` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `carrinhoID` (`carrinhoID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `carrinhoID` (`carrinhoID`),
+  KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
+  KEY `metodoPagamentoID` (`metodoPagamentoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `fatura`
+--
+
+INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoPagamentoID`, `metodoExpedicaoID`) VALUES
+(18, 5, '158.22', '26.77', 1, 1),
+(19, 6, '135.30', '25.30', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -223,7 +270,16 @@ CREATE TABLE IF NOT EXISTS `favorito` (
   PRIMARY KEY (`id`),
   KEY `profileID` (`profileID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `favorito`
+--
+
+INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
+(46, 2, 20),
+(47, 4, 18),
+(50, 4, 16);
 
 -- --------------------------------------------------------
 
@@ -238,14 +294,19 @@ CREATE TABLE IF NOT EXISTS `imagem` (
   `produtoID` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `imagem`
 --
 
 INSERT INTO `imagem` (`id`, `filename`, `produtoID`) VALUES
-(5, 'HTR3Ojh9Tn0qRJahwJwcV0G6aEyCfmWf.png', 17);
+(6, 'zG5iIl_BsoOrib425e8VTghk5g_m70u4.png', 16),
+(7, 'yVUi1nfOIB2RGaT7VP1NHgnz9rNCoXlX.png', 16),
+(14, 'lSH3qQL1EZn7iTP9G200qnOWmWhhlodj.jpg', 20),
+(15, 'f-3VKaQaOfiMrqlZI5UA90wEBdoiJOWV.jpg', 20),
+(18, '9LLSELJu7e49z21TWrIZKs09ob1XN_BJ.jpg', 18),
+(19, 'nXB9CNnRGUMlRShDFaAhbzDXE3j_nJGK.jpg', 22);
 
 -- --------------------------------------------------------
 
@@ -264,7 +325,14 @@ CREATE TABLE IF NOT EXISTS `itemscarrinho` (
   PRIMARY KEY (`id`),
   KEY `carrinhoID` (`carrinhoID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `itemscarrinho`
+--
+
+INSERT INTO `itemscarrinho` (`id`, `carrinhoID`, `produtoID`, `nome`, `quantidade`, `valorTotal`) VALUES
+(36, 6, 18, 'Tenda', 1, '123.00');
 
 -- --------------------------------------------------------
 
@@ -302,10 +370,22 @@ CREATE TABLE IF NOT EXISTS `linhafatura` (
   `quantidade` int NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `valorIva` decimal(10,2) NOT NULL,
+  `produtoID` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `faturaID` (`faturaID`),
-  KEY `ivaID` (`ivaID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ivaID` (`ivaID`),
+  KEY `produtoID` (`produtoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `linhafatura`
+--
+
+INSERT INTO `linhafatura` (`id`, `faturaID`, `ivaID`, `quantidade`, `valor`, `valorIva`, `produtoID`) VALUES
+(19, 18, 1, 1, '123.00', '23.00', 18),
+(20, 18, 2, 2, '35.22', '3.77', 16),
+(21, 19, 1, 1, '123.00', '23.00', 18),
+(22, 19, 1, 1, '12.30', '2.30', 20);
 
 -- --------------------------------------------------------
 
@@ -318,7 +398,14 @@ CREATE TABLE IF NOT EXISTS `metodoexpedicao` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `metodoexpedicao`
+--
+
+INSERT INTO `metodoexpedicao` (`id`, `nome`) VALUES
+(1, 'CTT');
 
 -- --------------------------------------------------------
 
@@ -331,7 +418,14 @@ CREATE TABLE IF NOT EXISTS `metodopagamento` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `metodopagamento`
+--
+
+INSERT INTO `metodopagamento` (`id`, `nome`) VALUES
+(1, 'MBWay');
 
 -- --------------------------------------------------------
 
@@ -379,18 +473,17 @@ CREATE TABLE IF NOT EXISTS `produto` (
   PRIMARY KEY (`id`),
   KEY `categoriaID` (`categoriaID`),
   KEY `ivaID` (`ivaID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
 INSERT INTO `produto` (`id`, `nome`, `marca`, `preco`, `stock`, `descricao`, `categoriaID`, `ivaID`) VALUES
-(8, 'Nome', 'Marca', '14.76', 12, 'Descricao', 2, 1),
-(15, 'Nome', 'Marca', '1.23', 1, 'Descricao', 1, 1),
-(16, 'Nome', 'Marca', '11.20', 12, 'Descricao', 2, 2),
-(17, 'Nome', 'Marca', '17.22', 12, 'Descricao', 2, 1),
-(18, 'proc', 'marc', '5.00', 2, 'Pracascasc', 1, 2);
+(16, 'Nome', 'Marca', '17.61', 12, 'Descricao', 2, 2),
+(18, 'Tenda', 'SigmaBoy', '123.00', 10, 'Esta tenda é sigma', 2, 1),
+(20, 'Tes', 'sfs', '12.30', 2, 'asasdasdasd', 1, 1),
+(22, 'weqwerwqrqwr', 'qwrqwrqwrqwr', '151.29', 12, 'asdfadasd', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -410,7 +503,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `morada` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `profile`
@@ -425,7 +518,9 @@ INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`,
 (19, 50, '1', 'Client', '2024-11-20', 'Masculino', '1', 'Client'),
 (20, 51, '1', 'Funcionario', '2024-11-25', 'Masculino', '1', 'Funcionario'),
 (21, 52, '1', 'Worker', '2024-11-22', 'Masculino', '123456789', 'morada'),
-(22, 53, '12345', 'Carolina', '2024-11-26', 'Feminino', '12345', 'Morada');
+(22, 53, '12345', 'Carolina', '2024-11-26', 'Feminino', '12345', 'Morada'),
+(27, 58, '12345678', 'Teste', '2024-12-20', 'Masculino', '123456789', 'Morada'),
+(32, 63, '12345678', 'TesteCarrinho', '2024-12-21', 'Masculino', '123456789', 'Morada');
 
 -- --------------------------------------------------------
 
@@ -449,7 +544,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
@@ -464,7 +559,9 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (50, 'Client', 'WoWn01AZoGGdlsIXoMStv9TNkwokunZ4', '$2y$13$w07sAUWemYqjwYY.HeZmmu.BGyimNvcyevAA2cGyB6m33UgtJT.xW', NULL, 'client@client.com', 10, 1732145687, 1732145687, '7MiZBFY_gcAdcBOOAnrLvoZeYCTX1geI_1732145687'),
 (51, 'Funcionario', 'NtiL1-Qf2wWIlV8MF8h5aM76xLAtKBVs', '$2y$13$DqW5O0lXA4XzeZ18zIYyU.A52HNgc/BuuVW92QOhxCohnYx.9U/CS', NULL, 'funcionario@funcionario.com', 10, 1732145803, 1732550129, 'pbMNFNBuhQ4VmRD2Cak7-TmMs8vPubBV_1732145803'),
 (52, 'Worker', 'XOmF-9HSiJLNGHOMCDES27hHGtvkiHC6', '$2y$13$MWaNeYyb9kOOsihajlVFhO212qyAhdR7El58Zc7tuSiXcTajwYkM.', NULL, 'worker@worker.com', 10, 1732289597, 1732289597, 'qhlW_ktl_mRniHt4OKAlFl7xGyJJqe76_1732289597'),
-(53, 'Carolina', 'to-0GuXrsZX4XsP-W6bOHfHmEQRAIr4S', '$2y$13$V0tfVlIZ5YSuUkf0L3cc/ufsOqqglB/nBrScGc.qHlbdMhCVO3M5C', NULL, 'Carolina@carolina.pt', 10, 1732647176, 1732647176, 'O8J2_r5llmUuBas0Gxga9D1_8bvuoFWg_1732647176');
+(53, 'Carolina', 'to-0GuXrsZX4XsP-W6bOHfHmEQRAIr4S', '$2y$13$V0tfVlIZ5YSuUkf0L3cc/ufsOqqglB/nBrScGc.qHlbdMhCVO3M5C', NULL, 'Carolina@carolina.pt', 10, 1732647176, 1732647176, 'O8J2_r5llmUuBas0Gxga9D1_8bvuoFWg_1732647176'),
+(58, 'TesteCarrinho', 'RI67ZlEShy3xsUnOjWygxWN-MOJQo7Si', '$2y$13$/bysTsjPh5uFp7H5B8mngen5IgN1Rl7Ozd8S7Je3XJIql/z44X0zm', NULL, 'testeCarrinho@teste.com', 10, 1734709117, 1734709117, 'kHpP7U6YvGUZIXXwE4LwDa-FweoGeKJq_1734709117'),
+(63, 'TesteCarrinho2', 'B9i393yLMh3y3VkOEm6bXPlWtaac7wmB', '$2y$13$gUXNvOCECaij4gP1OMi/te1owzf/hvFGBTR3e8J3POLAgHKSFnN0K', NULL, 'testecarrinho@hotmail.com', 10, 1734809462, 1734809462, 'nkAYsosM6DBzCAkpEBq21Htgra92q9FE_1734809462');
 
 --
 -- Restrições para despejos de tabelas
@@ -490,18 +587,18 @@ ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `carrinhocompra`
+-- Limitadores para a tabela `carrinho`
 --
-ALTER TABLE `carrinhocompra`
-  ADD CONSTRAINT `carrinhocompra_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`),
-  ADD CONSTRAINT `carrinhocompra_ibfk_2` FOREIGN KEY (`metodoExpedicaoID`) REFERENCES `metodoexpedicao` (`id`),
-  ADD CONSTRAINT `carrinhocompra_ibfk_3` FOREIGN KEY (`metodoPagamentoID`) REFERENCES `metodopagamento` (`id`);
+ALTER TABLE `carrinho`
+  ADD CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`);
 
 --
 -- Limitadores para a tabela `fatura`
 --
 ALTER TABLE `fatura`
-  ADD CONSTRAINT `fatura_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinhocompra` (`id`);
+  ADD CONSTRAINT `fatura_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`),
+  ADD CONSTRAINT `fatura_ibfk_2` FOREIGN KEY (`metodoExpedicaoID`) REFERENCES `metodoexpedicao` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fatura_ibfk_3` FOREIGN KEY (`metodoPagamentoID`) REFERENCES `metodopagamento` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Limitadores para a tabela `favorito`
@@ -520,7 +617,7 @@ ALTER TABLE `imagem`
 -- Limitadores para a tabela `itemscarrinho`
 --
 ALTER TABLE `itemscarrinho`
-  ADD CONSTRAINT `itemscarrinho_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinhocompra` (`id`),
+  ADD CONSTRAINT `itemscarrinho_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`),
   ADD CONSTRAINT `itemscarrinho_ibfk_2` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`);
 
 --
@@ -528,13 +625,14 @@ ALTER TABLE `itemscarrinho`
 --
 ALTER TABLE `linhafatura`
   ADD CONSTRAINT `linhafatura_ibfk_1` FOREIGN KEY (`faturaID`) REFERENCES `fatura` (`id`),
-  ADD CONSTRAINT `linhafatura_ibfk_2` FOREIGN KEY (`ivaID`) REFERENCES `iva` (`id`);
+  ADD CONSTRAINT `linhafatura_ibfk_2` FOREIGN KEY (`ivaID`) REFERENCES `iva` (`id`),
+  ADD CONSTRAINT `linhafatura_ibfk_3` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Limitadores para a tabela `produto`
 --
 ALTER TABLE `produto`
-  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`categoriaID`) REFERENCES `categoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`categoriaID`) REFERENCES `categoria` (`id`),
   ADD CONSTRAINT `produto_ibfk_2` FOREIGN KEY (`ivaID`) REFERENCES `iva` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
