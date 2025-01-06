@@ -53,6 +53,12 @@ return [
                     ],
                 ],
                 [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/login',
+                    'extraPatterns' => [
+                        'POST login' => 'login',
+                    ],
+                ],
+                [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/profile',
                     'extraPatterns' => [
                         'GET count' => 'count',
