@@ -8,7 +8,8 @@ use yii\filters\ContentNegotiator;
 use yii\web\Response;
 use yii\filters\auth\HttpBasicAuth;
 use backend\modules\api\components\CustomAuth;
-
+use common\models\User;
+use Yii;
 
 /**
  * Default controller for the `api` module
@@ -41,7 +42,7 @@ class CarrinhoController extends ActiveController
 
     public function actionCriarcarrinho()
     {
-        $user = \Yii::$app->user->identity;
+      $user = User::findOne(['auth_key' => Yii::$app->request->get('token')]);
 
         if (!$user) {
             return [
