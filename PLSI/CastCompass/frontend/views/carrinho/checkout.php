@@ -47,39 +47,40 @@ $this->params['breadcrumbs'][] = $this->title;
             </table>
 
             <div class="row py-3">
-              <?php $form = ActiveForm::begin(['id' => 'form-checkout', 'enableClientValidation' => true, 'options' => ['method' => 'post']]); ?>
-                 <div class="col-lg-6">
-                    <p> Metodo de Expedição: </p>
-                    <select name="metodoExpedicao" id="metodoExpedicao">
-                        <?php foreach ($metodoExpedicao as $metodo): ?>
-                            <option value="<?= $metodo->id ?>"><?= $metodo->nome ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                <?php $form = ActiveForm::begin(['id' => 'form-checkout', 'enableClientValidation' => true, 'options' => ['method' => 'post']]); ?>
+
+                <div class="col-lg-6 mb-3">
+                    <h5 class="mb-3">Método de Expedição:</h5>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select name="metodoExpedicao" id="metodoExpedicao" class="form-control custom-select">
+                                <?php foreach ($metodoExpedicao as $metodo): ?>
+                                    <option value="<?= $metodo->id ?>"><?= $metodo->nome ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-lg-6 text-right">
-                  <p> Metodo de Pagamento: </p>
-                  <select name="metodoPagamento" id="metodoPagamento">
-                      <?php foreach ($metodoPagamento as $metodoP): ?>
-                          <option value="<?= $metodoP->id ?>"><?= $metodoP->nome ?></option>
-                      <?php endforeach; ?>
-                  </select>
+                <div class="col-lg-6 mb-3">
+                    <h5 class="mb-3">Método de Pagamento:</h5>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select name="metodoPagamento" id="metodoPagamento" class="form-control custom-select">
+                                <?php foreach ($metodoPagamento as $metodoP): ?>
+                                    <option value="<?= $metodoP->id ?>"><?= $metodoP->nome ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                   <select name="carrinhoId" id="carrinhoId" style="display: none">
-                      <option value="<?= $itens[0]->carrinhoID ?>"></option>
-                  </select>
-
-                <div class="form-group">
-                  <?= Html::submitButton('Comprar', ['class' => 'btn btn-success']) ?>
+                <div class="col-lg-12 text-center mt-4">
+                    <input type="hidden" name="carrinhoId" id="carrinhoId" value="<?= $itens[0]->carrinhoID ?>">
+                    <?= Html::submitButton('Finalizar Compra', ['class' => 'btn btn-success btn-lg px-5']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>
-
-              </div>
-
-
-
-                           
+            </div>
 
 </div>

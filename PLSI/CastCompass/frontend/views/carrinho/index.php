@@ -53,14 +53,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 <?php endforeach; ?>                               
                 </tbody>
+                <tr>
+                    <th>total:</th>
+                    <th><?= $carrinho->valorTotal ?></th>
+                </tr>
             </table>
 
             <div class="row py-3">
                 <div class="col-lg-6">
                     <a href="<?= Url::to(['site/shop']) ?>" class="btn btn-primary">Continuar comprando</a>
-                </div>
-                <div>
-                  <p><?= $carrinho->valorTotal ?></p>
                 </div>
                 <div class="col-lg-6 text-right">
                     <a href="<?= Url::to(['carrinho/checkout']) ?>" class="btn btn-primary">Finalizar compra</a>
