@@ -112,14 +112,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                              class="img-fluid">
                                     <?php endif; ?>
                                     <div class="product-action">
-<<<<<<< HEAD
+
                                         <a class="btn btn-outline-dark btn-square"
-                                           href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-=======
-                                      <a class="btn btn-outline-dark btn-square"
-                                            href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i class="fa fa-shopping-cart"></i></a>
->>>>>>> a621b26 (✅ Added A funcional Test ✅)
+                                           href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i class="fa fa-shopping-cart"></i></a>
                                         <?php if (!Yii::$app->user->isGuest):
                                             $favorito = Favorito::find()->where(['produtoID' => $produto->id, 'profileID' => Yii::$app->user->identity->profile->id])->one(); ?>
                                             <a class="btn btn-outline-dark btn-square"
