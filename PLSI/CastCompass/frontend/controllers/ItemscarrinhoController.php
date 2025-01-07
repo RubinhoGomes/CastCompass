@@ -11,28 +11,81 @@ use common\models\Profile;
 
 class ItemsCarrinhoController extends \yii\web\Controller
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render('index');
     }
 
     public function getProfile($id) {
-      return Profile::findOne(['userID' => $id])->id;
+        return Profile::findOne(['userID' => $id])->id;
     }
 
     public function actionCreate($produtoId) {
-      
-      $produto = Produto::findOne($produtoId);
-      $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
+        $profile = Profile::findOne(['userID' => Yii::$app->user->id]);
+        $produto = Produto::findOne($produtoId);
+        $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
 
-      if($carrinho === NULL) {
-        $carrinho = new Carrinho();
-        if($carrinho->CreateCarrinho($this->getProfile(Yii::$app->user->id))) {
-          $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
+        if ($carrinho === NULL) {
+            if ($this->CreateCarrinho($profile->id)) {
+                $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
+            }
         }
-      }
 
-      if($this->checkExists($produtoId, $carrinho)) {
+        if ($this->checkExists($produtoId, $carrinho)) {
+            $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
+            $item->quantidade += 1;
+            $item->valorTotal += $produto->preco;
+            $item->save();
+
+            $carrinho->valorTotal += $produto->preco;
+            $carrinho->quantidade += 1;
+
+            Yii::$app->session->setFlash('success', 'Produto ja existe no carrinho, foi adicionado mais uma quantidade ao produto com sucesso!');
+
+        } else {
+            $item = new Itemscarrinho();
+            $item->produtoID = $produtoId;
+            $item->carrinhoID = $carrinho->id;
+            $item->nome = $produto->nome;
+            $item->quantidade = 1;
+            $item->valorTotal = $produto->preco;
+            $item->save();
+
+            $carrinho->valorTotal += $produto->preco;
+            $carrinho->quantidade += 1;
+            $carrinho->save();
+
+            Yii::$app->session->setFlash('success', 'Produto adicionado ao carrinho com sucesso!');
+
+        }
+
+        return $this->redirect(['site/shop']);
+    }
+
+    public function CreateCarrinho($profileID) {
+        $carrinho = new Carrinho();
+        $carrinho->profileID = $profileID;
+        $carrinho->valorTotal = NULL;
+        $carrinho->quantidade = NULL;
+
+        if ($carrinho->save(false)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function checkExists($produtoId, $carrinho) {
+        $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinho->id, 'produtoID' => $produtoId]);
+        if ($itens != NULL) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function actionAddQuant($produtoId) {
+        $produto = Produto::findOne($produtoId);
+        $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
         $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
         $item->quantidade += 1;
         $item->valorTotal += $produto->preco;
@@ -40,101 +93,59 @@ class ItemsCarrinhoController extends \yii\web\Controller
 
         $carrinho->valorTotal += $produto->preco;
         $carrinho->quantidade += 1;
-
-        Yii::$app->session->setFlash('success', 'Produto ja existe no carrinho, foi adicionado mais uma quantidade ao produto com sucesso!');
-      
-      } else {
-        $item = new Itemscarrinho();
-        $item->produtoID = $produtoId;
-        $item->carrinhoID = $carrinho->id;
-        $item->nome = $produto->nome;
-        $item->quantidade = 1;
-        $item->valorTotal = $produto->preco;
-        $item->save();
-
-        $carrinho->valorTotal += $produto->preco;
-        $carrinho->quantidade += 1;
         $carrinho->save();
 
-        Yii::$app->session->setFlash('success', 'Produto adicionado ao carrinho com sucesso!');
-      
-      }
+        Yii::$app->session->setFlash('success', 'Quantidade do produto aumentada com sucesso!');
 
-      return $this->redirect(['site/shop']);
-    }
-
-    public function checkExists($produtoId, $carrinho) {
-      $itens = Itemscarrinho::findAll(['carrinhoID' => $carrinho->id, 'produtoID' => $produtoId]);
-      if($itens != NULL) {
-        return true;
-      }
-
-      return false;
-    }
-
-    public function actionAddQuant($produtoId) {
-      $produto = Produto::findOne($produtoId);
-      $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
-      $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
-      $item->quantidade += 1;
-      $item->valorTotal += $produto->preco;
-      $item->save();
-
-      $carrinho->valorTotal += $produto->preco;
-      $carrinho->quantidade += 1;      
-      $carrinho->save();
-
-      Yii::$app->session->setFlash('success', 'Quantidade do produto aumentada com sucesso!');
-
-      return $this->redirect(['carrinho/index']);
+        return $this->redirect(['carrinho/index']);
     }
 
     public function actionSubQuant($produtoId) {
-      $produto = Produto::findOne($produtoId);
-      $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);  
-      $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
+        $produto = Produto::findOne($produtoId);
+        $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
+        $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
 
-      if($item->quantidade > 1) {
-        $item->quantidade -= 1;
-        $item->valorTotal -= $produto->preco;
-        $item->save();
+        if ($item->quantidade > 1) {
+            $item->quantidade -= 1;
+            $item->valorTotal -= $produto->preco;
+            $item->save();
 
-        $carrinho->valorTotal -= $produto->preco;
-        $carrinho->quantidade -= 1;
-        $carrinho->save();
+            $carrinho->valorTotal -= $produto->preco;
+            $carrinho->quantidade -= 1;
+            $carrinho->save();
 
-        Yii::$app->session->setFlash('success', 'Quantidade do produto diminuida com sucesso!');
-      
-      } else {
-        $carrinho->valorTotal -= $item->valorTotal;
-        $carrinho->quantidade -= 1;
+            Yii::$app->session->setFlash('success', 'Quantidade do produto diminuida com sucesso!');
 
-        $item->delete();
-        $carrinho->save();
+        } else {
+            $carrinho->valorTotal -= $item->valorTotal;
+            $carrinho->quantidade -= 1;
 
-        Yii::$app->session->setFlash('success', 'Produto removido do carrinho com sucesso!');
-      }
+            $item->delete();
+            $carrinho->save();
 
-      return $this->redirect(['carrinho/index']);
+            Yii::$app->session->setFlash('success', 'Produto removido do carrinho com sucesso!');
+        }
+
+        return $this->redirect(['carrinho/index']);
     }
 
     public function actionRemove($produtoId) {
-      $produto = Produto::findOne($produtoId);
-      $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
-      $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
-      if($item->delete() && $this->atualizarCarrinho($carrinho, $item->valorTotal, $item->quantidade)) {
-        Yii::$app->session->setFlash('success', 'Produto removido do carrinho com sucesso!');
-      } else {
-        Yii::$app->session->setFlash('error', 'Erro ao remover produto do carrinho!');
-      }
-    
-      return $this->redirect(['carrinho/index']);
+        $produto = Produto::findOne($produtoId);
+        $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
+        $item = Itemscarrinho::findOne(['produtoID' => $produtoId, 'carrinhoID' => $carrinho->id]);
+        if ($item->delete() && $this->atualizarCarrinho($carrinho, $item->valorTotal, $item->quantidade)) {
+            Yii::$app->session->setFlash('success', 'Produto removido do carrinho com sucesso!');
+        } else {
+            Yii::$app->session->setFlash('error', 'Erro ao remover produto do carrinho!');
+        }
+
+        return $this->redirect(['carrinho/index']);
     }
 
     public function atualizarCarrinho($carrinho, $valor, $quantidade) {
-      $carrinho->valorTotal -= $valor;
-      $carrinho->quantidade -= $quantidade;
-      return $carrinho->save();
+        $carrinho->valorTotal -= $valor;
+        $carrinho->quantidade -= $quantidade;
+        return $carrinho->save();
     }
 
 }

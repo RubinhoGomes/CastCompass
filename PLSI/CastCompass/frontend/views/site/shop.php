@@ -36,9 +36,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         class="bg-light text-primary pr-3">Filter by Categoria</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
+                    <div class="btn-success col-lg-6 custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <a class="btn px-3"
+                           href="<?= yii\helpers\Url::to(['site/shop']) ?>">Reset Filters
+                        </a>
+                    </div>
                     <?php foreach ($categorias as $categoria): ?>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <a class="btn px-3" href="<?= yii\helpers\Url::to(['site/shop', 'categoriaId' => $categoria->id]) ?>">
+                            <a class="btn px-3"
+                               href="<?= yii\helpers\Url::to(['site/shop', 'categoriaId' => $categoria->id]) ?>">
                                 <?= Html::encode($categoria->nome) ?>
                             </a>
                         </div>
@@ -106,13 +112,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                              class="img-fluid">
                                     <?php endif; ?>
                                     <div class="product-action">
-                                      <a class="btn btn-outline-dark btn-square"
-                                            href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i
+                                        <a class="btn btn-outline-dark btn-square"
+                                           href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i
                                                     class="fa fa-shopping-cart"></i></a>
                                         <?php if (!Yii::$app->user->isGuest):
                                             $favorito = Favorito::find()->where(['produtoID' => $produto->id, 'profileID' => Yii::$app->user->identity->profile->id])->one(); ?>
-                                        <a class="btn btn-outline-dark btn-square"
-                                        href="<?= yii\helpers\Url::to(['favoritos/add', 'produtoID' => $produto->id]) ?>"><i class="<?= Favorito::getIcon($favorito); ?> fa-heart"></i></a>
+                                            <a class="btn btn-outline-dark btn-square"
+                                               href="<?= yii\helpers\Url::to(['favoritos/add', 'produtoID' => $produto->id]) ?>"><i
+                                                        class="<?= Favorito::getIcon($favorito); ?> fa-heart"></i></a>
                                         <?php endif; ?>
                                         <a class="btn btn-outline-dark btn-square"
                                            href="<?= \yii\helpers\Url::to(['site/detail', 'id' => $produto->id]) ?>"><i

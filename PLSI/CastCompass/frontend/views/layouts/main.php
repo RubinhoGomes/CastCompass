@@ -105,7 +105,7 @@ $categorias = Categoria::find()->all();
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                         <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Carrinho</a>
                                         <a href="<?= Url::to(['/favoritos/index']) ?>" class="dropdown-item">Favoritos</a>
-                                        <a href="<?= Url::to(['/user/index']) ?>" class="dropdown-item">Perfil</a>
+                                        <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>" class="dropdown-item">Perfil</a>
                                         <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@ $categorias = Categoria::find()->all();
                                            data-toggle="dropdown"><?= Yii::$app->user->identity->username ?> <i
                                                     class="fa fa-angle-down"></i></a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="<?= Url::to(['/user/index']) ?>" class="dropdown-item">Profile</a>
+                                            <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>" class="dropdown-item">Profile</a>
                                             <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
 
                                             <!-- Form to handle logout -->
@@ -169,18 +169,18 @@ $categorias = Categoria::find()->all();
         <div class="container-fluid bg-dark text-secondary mt-1 pt-1">
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Rua de Leiria</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>support@castcompass.cc</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+351 261 347 552</p>
                 </div>
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href=""><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="<?= Yii::$app->homeUrl ?>"><i class="fa fa-angle-right mr-2"></i>Home</a>
                                 <a class="text-secondary mb-2" href="<?= Url::to(['/carrinho/index']) ?>"><i class="fa fa-angle-right mr-2"></i>Carrinho</a>
-                                <a class="text-secondary" href=""><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                                <a class="text-secondary" href="<?= Url::to(['/site/contact']) ?>"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
 

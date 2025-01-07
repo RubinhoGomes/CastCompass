@@ -51,14 +51,14 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-5 mb-5">
             <div class="bg-light p-30 mb-30">
-                <iframe style="width: 100%; height: 250px;"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                        frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63903.30426161421!2d-8.847158083435808!3d39.75405421756919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd22731534c9b2b9%3A0x4daf832739d43c6c!2sLeiria!5e1!3m2!1spt-PT!2spt!4v1736285237090!5m2!1spt-PT!2spt"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="bg-light p-30 mb-3">
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Rua de Leiria</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>support@castcompass.cc</p>
+                <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+351 261 347 552</p>
             </div>
         </div>
     </div>

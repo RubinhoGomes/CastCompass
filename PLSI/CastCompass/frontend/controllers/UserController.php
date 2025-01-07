@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * UserController implements the CRUD actions for Profile model.
@@ -122,9 +123,13 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        Yii::$app->user->logout();
+        $user = User::findOne($id);
 
-        return $this->redirect(['index']);
+        $this->findModel($id)->delete();
+        $user->delete();
+
+        return $this->goHome();
     }
 
     /**
