@@ -115,7 +115,6 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/carrinho',
                     'extraPatterns' => [
-                        'GET count' => 'count',
                         'POST criarcarrinho' => 'criarcarrinho',
                     ],
                 ],
