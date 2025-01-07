@@ -4,5 +4,6 @@ Yii::setAlias('@frontend', dirname(dirname(__DIR__)) . '/frontend');
 Yii::setAlias('@backend', dirname(dirname(__DIR__)) . '/backend');
 Yii::setAlias('@console', dirname(dirname(__DIR__)) . '/console');
 Yii::setAlias('@uploads', '../uploads');
+Yii::setAlias('@uploadshome', 'uploads');
 Yii::setAlias('@default', '../img/notAvailable.png');
 Yii::setAlias('@image', '../../frontend/web/img');
