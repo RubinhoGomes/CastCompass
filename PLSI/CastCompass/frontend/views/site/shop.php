@@ -119,6 +119,9 @@ $this->params['breadcrumbs'][] = $this->title;
 =======
                                       <a class="btn btn-outline-dark btn-square"
                                             href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i class="fa fa-shopping-cart"></i></a>
+<<<<<<< HEAD
+>>>>>>> a621b26 (✅ Added A funcional Test ✅)
+=======
 >>>>>>> a621b26 (✅ Added A funcional Test ✅)
                                         <?php if (!Yii::$app->user->isGuest):
                                             $favorito = Favorito::find()->where(['produtoID' => $produto->id, 'profileID' => Yii::$app->user->identity->profile->id])->one(); ?>
