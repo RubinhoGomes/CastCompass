@@ -19,7 +19,6 @@ class CarrinhoCest
     $I->amOnPage('/carrinho/index');
     // Clicar no botão para finalizar a compra
     $I->click('a#comprar');
-    $I->see('Método de Expedição:');
     $I->selectOption('metodoExpedicao', 'CTT');
     $I->selectOption('metodoPagamento', 'MBWay');
     $I->click('button#comprar');

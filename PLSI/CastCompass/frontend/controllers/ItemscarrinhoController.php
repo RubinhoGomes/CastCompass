@@ -38,7 +38,8 @@ class ItemsCarrinhoController extends \yii\web\Controller
 
             $carrinho->valorTotal += $produto->preco;
             $carrinho->quantidade += 1;
-
+            $carrinho->save();
+        
             Yii::$app->session->setFlash('success', 'Produto ja existe no carrinho, foi adicionado mais uma quantidade ao produto com sucesso!');
 
         } else {
