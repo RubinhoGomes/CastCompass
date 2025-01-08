@@ -53,11 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5 class="mb-3">Método de Expedição:</h5>
                     <div class="form-group">
                         <div class="input-group">
-                            <select name="metodoExpedicao" id="metodoExpedicao" class="form-control custom-select me">
-                                <?php foreach ($metodoExpedicao as $metodo): ?>
-                                    <option value="<?= $metodo->id ?>"><?= $metodo->nome ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <?= Html::dropDownList('metodoExpedicao', null,
+                                \yii\helpers\ArrayHelper::map($metodoExpedicao, 'id', 'nome'), [
+                                    'class' => 'form-control custom-select me',
+                                    'prompt' => 'Selecione um método'
+                                ])
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -66,11 +67,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5 class="mb-3">Método de Pagamento:</h5>
                     <div class="form-group">
                         <div class="input-group">
-                            <select name="metodoPagamento" id="metodoPagamento" class="form-control custom-select">
-                                <?php foreach ($metodoPagamento as $metodoP): ?>
-                                    <option value="<?= $metodoP->id ?>"><?= $metodoP->nome ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <?= Html::dropDownList('metodoPagamento', null,
+                                \yii\helpers\ArrayHelper::map($metodoPagamento, 'id', 'nome'), [
+                                    'class' => 'form-control custom-select me',
+                                    'prompt' => 'Selecione um método'
+                                ])
+                            ?>
                         </div>
                     </div>
                 </div>
