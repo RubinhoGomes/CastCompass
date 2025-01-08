@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Categoria $model */
 
-$this->title = $model->id;
+$this->title = $model->genero;
 $this->params['breadcrumbs'][] = ['label' => 'Categorias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -37,19 +37,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2>Produtos</h2>
 
-<?= \yii\grid\GridView::widget([
-  'dataProvider' => new \yii\data\ActiveDataProvider([
-    'query' => $model->getProdutos(),
-    'pagination' => ['pageSize' => 7],
-  ]),
-  'columns' => [
-    'id',
-    'nome',
-    'marca',
-    'descricao',
-    'stock',
-    'preco',
-  ],
-]) ?>
+    <?= \yii\grid\GridView::widget([
+        'dataProvider' => new \yii\data\ActiveDataProvider([
+            'query' => $model->getProdutos(),
+            'pagination' => ['pageSize' => 7],
+        ]),
+        'columns' => [
+            'id',
+            'nome',
+            'marca',
+            'descricao',
+            'stock',
+            'preco',
+        ],
+    ]) ?>
 
 </div>

@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <p><?= Html::encode($produto->descricao) ?></p>
+                        <p><?= nl2br(Html::encode($produto->descricao)) ?></p>
                     </div>
                 </div>
             </div>

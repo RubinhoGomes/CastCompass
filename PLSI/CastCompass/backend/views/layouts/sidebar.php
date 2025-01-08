@@ -44,6 +44,7 @@ echo \hail812\adminlte\widgets\Menu::widget([
                 ['label' => 'Pagina Inicial', 'url' => ['site/index'], 'iconStyle' => 'fa fa-ghost', 'visible' => Yii::$app->user->can('loginBO')],
                 ['label' => 'Perfil', 'url' => ['user/index'], 'iconStyle' => 'fa fa-user', 'visible' => Yii::$app->user->can('userIndexBO')],
                 ['label' => 'Categoria', 'url' => ['categoria/index'], 'iconStyle' => 'fa fa-list', 'visible' => Yii::$app->user->can('categoriaIndexBO')],
+                ['label' => 'Fatura', 'url' => ['fatura/index'], 'iconStyle' => 'fa fa-print', 'visible' => Yii::$app->user->can('faturaIndexBO')],
                 ['label' => 'Produto', 'url' => ['produto/index'], 'iconStyle' => 'fa fa-store', 'visible' => Yii::$app->user->can('produtoIndexBO')],
                 ['label' => 'Iva', 'url' => ['iva/index'], 'iconStyle' => 'fa fa-money-bill', 'visible' => Yii::$app->user->can('ivaIndexBO')],
                 ['label' => 'Metodos de Pagamentos', 'url' => ['metodopagamento/index'], 'iconStyle' => 'fa fa-credit-card', 'visible' => Yii::$app->user->can('mpIndexBO')],

@@ -48,6 +48,13 @@ $categorias = Categoria::find()->all();
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
+    <style>
+        .text-truncate {
+            white-space: normal;
+            word-wrap: break-word;
+            display: block;
+        }
+    </style>
     <body class="d-flex flex-column h-100">
     <?php $this->beginBody() ?>
 

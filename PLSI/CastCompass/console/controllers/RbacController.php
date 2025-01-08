@@ -174,6 +174,17 @@ class RbacController extends Controller
         $encomendaDeleteBO->description = 'Delete a order in the BackOffice';
         $auth->add($encomendaDeleteBO);
 
+        // ----
+        // Fatura Permissions
+        // ----
+
+        $faturaIndexBO = $auth->createPermission('faturaIndexBO');
+        $faturaIndexBO->description = 'List of all invoices, index, in the BackOffice';
+        $auth->add($faturaIndexBO);
+
+        $faturaViewBO = $auth->createPermission('faturaViewBO');
+        $faturaViewBO->description = 'View a invoice in the BackOffice';
+        $auth->add($faturaViewBO);
 
         // Add the roles
         // For example Admin
@@ -230,6 +241,11 @@ class RbacController extends Controller
         $auth->addChild($admin, $encomendaCreateBO);
         $auth->addChild($admin, $encomendaUpdateBO);
         $auth->addChild($admin, $encomendaDeleteBO);
+        // Fatura Permissions
+        $auth->addChild($admin, $faturaIndexBO);
+        $auth->addChild($admin, $faturaViewBO);
+        $auth->addChild($worker, $faturaIndexBO);
+        $auth->addChild($worker, $faturaViewBO);
 
 
         // ##############

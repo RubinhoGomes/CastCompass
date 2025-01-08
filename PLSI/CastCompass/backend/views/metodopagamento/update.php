@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Metodopagamento $model */
 
-$this->title = 'Editar Metodo de Pagamento: ' . $model->id;
+$this->title = 'Editar Metodo de Pagamento: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Metodopagamentos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

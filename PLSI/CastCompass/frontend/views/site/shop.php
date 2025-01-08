@@ -129,9 +129,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                                 <div class="text-center py-4">
                                     <a class="h6 text-decoration-none text-truncate"
-                                       href=""><?= Html::encode($produto->nome) ?></a>
+                                       href="<?= \yii\helpers\Url::to(['site/detail', 'id' => $produto->id]) ?>"><?= Html::encode($produto->nome) ?></a>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5> <?= number_format($produto->preco, 2, ',', '.') ?>$</h5>
+                                        <h5> <?= number_format($produto->preco, 2, ',', '.') ?>€</h5>
                                     </div>
                                 </div>
                             </div>
