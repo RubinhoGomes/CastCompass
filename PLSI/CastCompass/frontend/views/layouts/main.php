@@ -184,7 +184,7 @@ $categorias = Categoria::find()->all();
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Rua de Leiria</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>support@castcompass.cc</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i><a href="mailto:support@castcompass.cc">support@castcompass.cc</a></p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+351 261 347 552</p>
                 </div>
                 <div class="col-lg-8 col-md-12">
@@ -204,12 +204,12 @@ $categorias = Categoria::find()->all();
                         <div class="col-md-4 mb-5">
                             <h6 class="text-secondary text-uppercase mt-4 mb-3">Siga-nos</h6>
                             <div class="d-flex">
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i
+                                <a class="btn btn-primary btn-square mr-2" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-primary btn-square mr-2" href=""><i
                                             class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i
+                                <a class="btn btn-primary btn-square mr-2" href=""><i
                                             class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
