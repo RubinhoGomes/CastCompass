@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5 class="mb-3">Método de Expedição:</h5>
                     <div class="form-group">
                         <div class="input-group">
-                            <?= Html::dropDownList('metodoExpedicao', null,
+                            <?= Html::dropDownList('metodoExpedicaoID', \yii\helpers\ArrayHelper::map($metodoExpedicao, 'id', 'id'),
                                 \yii\helpers\ArrayHelper::map($metodoExpedicao, 'id', 'nome'), [
                                     'class' => 'form-control custom-select me',
                                     'prompt' => 'Selecione um método'
