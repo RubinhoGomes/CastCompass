@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 08-Jan-2025 às 20:15
+-- Tempo de geração: 08-Jan-2025 às 22:44
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.2.0
 
@@ -44,6 +44,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('admin', '2', 1736364639),
+('client', '71', 1736369769),
+('client', '72', 1736370179),
 ('worker', '51', 1736365002);
 
 -- --------------------------------------------------------
@@ -193,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `carrinho` (
   `quantidade` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `profileID` (`profileID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `carrinho`
@@ -203,8 +205,9 @@ INSERT INTO `carrinho` (`id`, `profileID`, `valorTotal`, `quantidade`) VALUES
 (2, 32, NULL, NULL),
 (3, 22, '0.00', 5),
 (4, 2, NULL, NULL),
-(5, 4, '130.37', 2),
-(12, 39, '0.00', 6);
+(5, 4, '0.00', 0),
+(14, 41, '0.00', 0),
+(15, 19, '115.61', 1);
 
 -- --------------------------------------------------------
 
@@ -252,14 +255,23 @@ CREATE TABLE IF NOT EXISTS `fatura` (
   KEY `carrinhoID` (`carrinhoID`),
   KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
   KEY `metodoPagamentoID` (`metodoPagamentoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `fatura`
 --
 
 INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoExpedicaoID`, `data`, `metodoPagamentoID`) VALUES
-(20, 12, '515.25', '96.35', 1, 1736294400, 1);
+(20, 12, '515.25', '96.35', 1, 1736294400, 1),
+(21, 12, '171.75', '32.12', 1, 1736294400, 1),
+(22, 13, '578.05', '108.09', 1, 1736294400, 1),
+(23, 13, '115.61', '21.62', 1, 1736294400, 1),
+(24, 13, '115.61', '21.62', 1, 1736294400, 1),
+(25, 13, '115.61', '21.62', 1, 1736294400, 1),
+(26, 13, '115.61', '21.62', 1, 1736294400, 1),
+(27, 14, '115.61', '21.62', 1, 1736294400, 1),
+(28, 14, '115.61', '21.62', 1, 1736294400, 1),
+(29, 14, '115.61', '21.62', 1, 1736294400, 1);
 
 -- --------------------------------------------------------
 
@@ -275,14 +287,15 @@ CREATE TABLE IF NOT EXISTS `favorito` (
   PRIMARY KEY (`id`),
   KEY `profileID` (`profileID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `favorito`
 --
 
 INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
-(1, 39, 21);
+(1, 39, 21),
+(2, 19, 21);
 
 -- --------------------------------------------------------
 
@@ -329,14 +342,14 @@ CREATE TABLE IF NOT EXISTS `itemscarrinho` (
   PRIMARY KEY (`id`),
   KEY `carrinhoID` (`carrinhoID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `itemscarrinho`
 --
 
 INSERT INTO `itemscarrinho` (`id`, `carrinhoID`, `produtoID`, `nome`, `quantidade`, `valorTotal`) VALUES
-(34, 5, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 2, '231.22');
+(55, 15, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, '115.61');
 
 -- --------------------------------------------------------
 
@@ -379,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `linhafatura` (
   KEY `faturaID` (`faturaID`),
   KEY `ivaID` (`ivaID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `linhafatura`
@@ -387,7 +400,17 @@ CREATE TABLE IF NOT EXISTS `linhafatura` (
 
 INSERT INTO `linhafatura` (`id`, `faturaID`, `ivaID`, `quantidade`, `valor`, `valorIva`, `produtoID`) VALUES
 (1, 20, 1, 3, '346.83', '64.85', 21),
-(2, 20, 1, 3, '168.42', '31.49', 22);
+(2, 20, 1, 3, '168.42', '31.49', 22),
+(3, 21, 1, 1, '115.61', '21.62', 21),
+(4, 21, 1, 1, '56.14', '10.50', 22),
+(5, 22, 1, 5, '578.05', '108.09', 21),
+(6, 23, 1, 1, '115.61', '21.62', 21),
+(7, 24, 1, 1, '115.61', '21.62', 21),
+(8, 25, 1, 1, '115.61', '21.62', 21),
+(9, 26, 1, 1, '115.61', '21.62', 21),
+(10, 27, 1, 1, '115.61', '21.62', 21),
+(11, 28, 1, 1, '115.61', '21.62', 21),
+(12, 29, 1, 1, '115.61', '21.62', 21);
 
 -- --------------------------------------------------------
 
@@ -508,7 +531,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `morada` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `profile`
@@ -526,7 +549,7 @@ INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`,
 (22, 53, '12345', 'Carolina', '2024-11-26', 'Feminino', '12345', 'Morada'),
 (27, 58, '12345678', 'Teste', '2024-12-20', 'Masculino', '123456789', 'Morada'),
 (32, 63, '12345678', 'TesteCarrinho', '2024-12-21', 'Masculino', '123456789', 'Morada'),
-(39, 70, '1233456', 'ze', '2025-01-08', 'Masculino', '234', 'dgf');
+(41, 72, '12435', 'ze', '2025-01-08', 'Masculino', '723456', 'ghusdf');
 
 -- --------------------------------------------------------
 
@@ -550,7 +573,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
@@ -568,7 +591,7 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (53, 'Carolina', 'to-0GuXrsZX4XsP-W6bOHfHmEQRAIr4S', '$2y$13$V0tfVlIZ5YSuUkf0L3cc/ufsOqqglB/nBrScGc.qHlbdMhCVO3M5C', NULL, 'Carolina@carolina.pt', 10, 1732647176, 1732647176, 'O8J2_r5llmUuBas0Gxga9D1_8bvuoFWg_1732647176'),
 (58, 'TesteCarrinho', 'RI67ZlEShy3xsUnOjWygxWN-MOJQo7Si', '$2y$13$/bysTsjPh5uFp7H5B8mngen5IgN1Rl7Ozd8S7Je3XJIql/z44X0zm', NULL, 'testeCarrinho@teste.com', 10, 1734709117, 1734709117, 'kHpP7U6YvGUZIXXwE4LwDa-FweoGeKJq_1734709117'),
 (63, 'TesteCarrinho2', 'B9i393yLMh3y3VkOEm6bXPlWtaac7wmB', '$2y$13$gUXNvOCECaij4gP1OMi/te1owzf/hvFGBTR3e8J3POLAgHKSFnN0K', NULL, 'testecarrinho@hotmail.com', 10, 1734809462, 1734809462, 'nkAYsosM6DBzCAkpEBq21Htgra92q9FE_1734809462'),
-(70, 'ze', 'rXrthGPLmISSFkFYbr7OBmrWk9VxvlJw', '$2y$13$eGbpnhZmSstQEffmEd7xzu9zkgAiagiFHgD2NFg/U5wxShj7WaAnW', NULL, 'ze@gmail.com', 10, 1736294481, 1736294481, 'DUOt96ozGDNqtlciNExqGeuFrnB7oBxi_1736294481');
+(72, 'ze', 'R_XJGzcf_y80bsY4lmN7t26YNr06H3KX', '$2y$13$B6/dvGZGB2trA/2UHuJS.umYiihQKuNK.dCOmeDBIWBsmMDHj8ksu', NULL, 'ze@gmail.com', 10, 1736370179, 1736370179, '-2nWbHDvWnwHlyWvdFSnB_T8iU8pp8Aq_1736370179');
 
 --
 -- Restrições para despejos de tabelas
