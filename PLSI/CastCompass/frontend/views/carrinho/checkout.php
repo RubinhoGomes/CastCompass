@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5 class="mb-3">Método de Expedição:</h5>
                     <div class="form-group">
                         <div class="input-group">
-                            <?= Html::dropDownList('metodoExpedicaoID', \yii\helpers\ArrayHelper::map($metodoExpedicao, 'id', 'id'),
+                            <?= Html::dropDownList('metodoExpedicao', \yii\helpers\ArrayHelper::map($metodoExpedicao, 'id', 'id'),
                                 \yii\helpers\ArrayHelper::map($metodoExpedicao, 'id', 'nome'), [
                                     'class' => 'form-control custom-select me',
                                     'prompt' => 'Selecione um método'
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5 class="mb-3">Método de Pagamento:</h5>
                     <div class="form-group">
                         <div class="input-group">
-                            <?= Html::dropDownList('metodoPagamento', null,
+                            <?= Html::dropDownList('metodoPagamento', \yii\helpers\ArrayHelper::map($metodoPagamento, 'id', 'id'),
                                 \yii\helpers\ArrayHelper::map($metodoPagamento, 'id', 'nome'), [
                                     'class' => 'form-control custom-select me',
                                     'prompt' => 'Selecione um método'
@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="col-lg-12 text-center mt-4">
                     <input type="hidden" name="carrinhoId" id="carrinhoId" value="<?= $itens[0]->carrinhoID ?>">
-                    <?= Html::submitButton('Finalizar Compra', ['class' => 'btn btn-success btn-lg px-5']) ?>
+                    <?= Html::submitButton('Finalizar Compra', ['class' => 'btn btn-success btn-lg px-5', 'id' => 'comprar']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>
