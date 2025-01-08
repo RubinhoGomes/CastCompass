@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 06-Jan-2025 às 19:48
--- Versão do servidor: 8.2.0
+-- Tempo de geração: 08-Jan-2025 às 20:10
+-- Versão do servidor: 8.0.31
 -- versão do PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -41,17 +41,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('admin', '2', 1734101071),
-('client', '54', 1734708759),
-('client', '55', 1734708854),
-('client', '56', 1734708978),
-('client', '57', 1734709024),
-('client', '58', 1734709117),
-('client', '59', 1734809173),
-('client', '60', 1734809227),
-('client', '61', 1734809300),
-('client', '62', 1734809389),
-('client', '63', 1734809462);
+('admin', '2', 1736364639),
+('worker', '51', 1736365002);
 
 -- --------------------------------------------------------
 
@@ -78,40 +69,42 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('admin', 1, NULL, NULL, NULL, 1734101071, 1734101071),
-('categoriaCreateBO', 2, 'Create a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('categoriaDeleteBO', 2, 'Delete a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('categoriaIndexBO', 2, 'List of categories, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('categoriaUpdateBO', 2, 'Update a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('categoriaViewBO', 2, 'View a category in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('client', 1, NULL, NULL, NULL, 1734101071, 1734101071),
-('encomendaCreateBO', 2, 'Create a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('encomendaDeleteBO', 2, 'Delete a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('encomendaIndexBO', 2, 'List of all orders, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('encomendaUpdateBO', 2, 'Update a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('encomendaViewBO', 2, 'View a order in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('ivaCreateBO', 2, 'Create a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('ivaDeleteBO', 2, 'Delete a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('ivaIndexBO', 2, 'List of IVA, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('ivaUpdateBO', 2, 'Update a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('ivaViewBO', 2, 'View a IVA in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('loginBO', 2, 'Login to the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('mpCreateBO', 2, 'Create a Payment Method in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('mpDeleteBO', 2, 'Delete a Payment Method in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('mpIndexBO', 2, 'List of Payment Methods, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('mpUpdateBO', 2, 'Update a Payment Method in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('mpViewBO', 2, 'View the Payment Methods in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('produtoCreateBO', 2, 'Create a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('produtoDeleteBO', 2, 'Delete a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('produtoIndexBO', 2, 'List of products, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('produtoUpdateBO', 2, 'Update a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('produtoViewBO', 2, 'View a product in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('userCreateBO', 2, 'Create a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('userDeleteBO', 2, 'Delete a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('userIndexBO', 2, 'List of users, index, in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('userUpdateBO', 2, 'Update a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('userViewBO', 2, 'View a user in the BackOffice', NULL, NULL, 1734101071, 1734101071),
-('worker', 1, NULL, NULL, NULL, 1734101071, 1734101071);
+('admin', 1, NULL, NULL, NULL, 1736364639, 1736364639),
+('categoriaCreateBO', 2, 'Create a category in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('categoriaDeleteBO', 2, 'Delete a category in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('categoriaIndexBO', 2, 'List of categories, index, in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('categoriaUpdateBO', 2, 'Update a category in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('categoriaViewBO', 2, 'View a category in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('client', 1, NULL, NULL, NULL, 1736364639, 1736364639),
+('encomendaCreateBO', 2, 'Create a order in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('encomendaDeleteBO', 2, 'Delete a order in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('encomendaIndexBO', 2, 'List of all orders, index, in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('encomendaUpdateBO', 2, 'Update a order in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('encomendaViewBO', 2, 'View a order in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('faturaIndexBO', 2, 'List of all invoices, index, in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('faturaViewBO', 2, 'View a invoice in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('ivaCreateBO', 2, 'Create a IVA in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('ivaDeleteBO', 2, 'Delete a IVA in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('ivaIndexBO', 2, 'List of IVA, index, in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('ivaUpdateBO', 2, 'Update a IVA in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('ivaViewBO', 2, 'View a IVA in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('loginBO', 2, 'Login to the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('mpCreateBO', 2, 'Create a Payment Method in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('mpDeleteBO', 2, 'Delete a Payment Method in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('mpIndexBO', 2, 'List of Payment Methods, index, in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('mpUpdateBO', 2, 'Update a Payment Method in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('mpViewBO', 2, 'View the Payment Methods in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('produtoCreateBO', 2, 'Create a product in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('produtoDeleteBO', 2, 'Delete a product in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('produtoIndexBO', 2, 'List of products, index, in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('produtoUpdateBO', 2, 'Update a product in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('produtoViewBO', 2, 'View a product in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('userCreateBO', 2, 'Create a user in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('userDeleteBO', 2, 'Delete a user in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('userIndexBO', 2, 'List of users, index, in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('userUpdateBO', 2, 'Update a user in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('userViewBO', 2, 'View a user in the BackOffice', NULL, NULL, 1736364639, 1736364639),
+('worker', 1, NULL, NULL, NULL, 1736364639, 1736364639);
 
 -- --------------------------------------------------------
 
@@ -142,6 +135,10 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('admin', 'encomendaIndexBO'),
 ('admin', 'encomendaUpdateBO'),
 ('admin', 'encomendaViewBO'),
+('admin', 'faturaIndexBO'),
+('worker', 'faturaIndexBO'),
+('admin', 'faturaViewBO'),
+('worker', 'faturaViewBO'),
 ('admin', 'ivaCreateBO'),
 ('admin', 'ivaDeleteBO'),
 ('admin', 'ivaIndexBO'),
@@ -194,17 +191,18 @@ CREATE TABLE IF NOT EXISTS `carrinho` (
   `quantidade` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `profileID` (`profileID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `carrinho`
 --
 
 INSERT INTO `carrinho` (`id`, `profileID`, `valorTotal`, `quantidade`) VALUES
-(5, 2, '0.00', 3),
-(6, 4, '123.00', 3),
-(15, 4, '0.00', 0),
-(16, 4, '0.00', 0);
+(2, 32, NULL, NULL),
+(3, 22, '0.00', 5),
+(4, 2, NULL, NULL),
+(5, 4, '130.37', 2),
+(12, 39, '0.00', 6);
 
 -- --------------------------------------------------------
 
@@ -218,15 +216,20 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `nome` varchar(255) NOT NULL,
   `genero` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `categoria`
 --
 
 INSERT INTO `categoria` (`id`, `nome`, `genero`) VALUES
-(1, 'Nome Updated', 'Genero'),
-(2, 'Pesca Desportiva', 'Pesca Desportiva');
+(1, 'Tenda', 'Tendas'),
+(2, 'Pesca Desportiva', 'Pesca Desportiva'),
+(3, 'Colchões', 'Colchões'),
+(4, 'Saco Cama', 'Saco Cama'),
+(5, 'Bomba', 'Bomba'),
+(6, 'Almofada', 'Almofada'),
+(7, 'Cobertor', 'Cobertor');
 
 -- --------------------------------------------------------
 
@@ -240,21 +243,21 @@ CREATE TABLE IF NOT EXISTS `fatura` (
   `carrinhoID` int NOT NULL,
   `valorTotal` decimal(10,2) NOT NULL,
   `ivaTotal` decimal(10,2) NOT NULL,
-  `metodoPagamentoID` int NOT NULL,
   `metodoExpedicaoID` int NOT NULL,
+  `data` int NOT NULL,
+  `metodoPagamentoID` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `carrinhoID` (`carrinhoID`),
   KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
   KEY `metodoPagamentoID` (`metodoPagamentoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `fatura`
 --
 
-INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoPagamentoID`, `metodoExpedicaoID`) VALUES
-(18, 5, '158.22', '26.77', 1, 1),
-(19, 6, '135.30', '25.30', 1, 1);
+INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoExpedicaoID`, `data`, `metodoPagamentoID`) VALUES
+(20, 12, '515.25', '96.35', 1, 1736294400, 1);
 
 -- --------------------------------------------------------
 
@@ -270,16 +273,14 @@ CREATE TABLE IF NOT EXISTS `favorito` (
   PRIMARY KEY (`id`),
   KEY `profileID` (`profileID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `favorito`
 --
 
 INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
-(46, 2, 20),
-(47, 4, 18),
-(50, 4, 16);
+(1, 39, 21);
 
 -- --------------------------------------------------------
 
@@ -294,19 +295,20 @@ CREATE TABLE IF NOT EXISTS `imagem` (
   `produtoID` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `imagem`
 --
 
 INSERT INTO `imagem` (`id`, `filename`, `produtoID`) VALUES
-(6, 'zG5iIl_BsoOrib425e8VTghk5g_m70u4.png', 16),
-(7, 'yVUi1nfOIB2RGaT7VP1NHgnz9rNCoXlX.png', 16),
-(14, 'lSH3qQL1EZn7iTP9G200qnOWmWhhlodj.jpg', 20),
-(15, 'f-3VKaQaOfiMrqlZI5UA90wEBdoiJOWV.jpg', 20),
-(18, '9LLSELJu7e49z21TWrIZKs09ob1XN_BJ.jpg', 18),
-(19, 'nXB9CNnRGUMlRShDFaAhbzDXE3j_nJGK.jpg', 22);
+(15, 'uI4-d5_8aXpNP-3raozVJZ8MRLMfVjf2.jpg', 21),
+(16, 'YsY9xJfuRpiPlB3v87ynTa9T-ZmB3HcF.jpg', 22),
+(17, 'U6yVjbauJOUumvCmUJ4u1uJClbvK0DGj.jpg', 23),
+(18, '81OFc7owq3eXJZPSJWcZDCpnT_JnCLRm.jpg', 24),
+(19, 'QQ9Af6Zj5P0Xc5m-46rQAyJi7LBB_fWI.jpg', 25),
+(20, 'OOGXx7xe-S4Ga9INkeO2IEaBETMVQsAN.jpg', 26),
+(21, 'L0W2mUbM-H7O1nkL6V0qW_rfc-QVMH6N.jpg', 27);
 
 -- --------------------------------------------------------
 
@@ -325,14 +327,14 @@ CREATE TABLE IF NOT EXISTS `itemscarrinho` (
   PRIMARY KEY (`id`),
   KEY `carrinhoID` (`carrinhoID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `itemscarrinho`
 --
 
 INSERT INTO `itemscarrinho` (`id`, `carrinhoID`, `produtoID`, `nome`, `quantidade`, `valorTotal`) VALUES
-(36, 6, 18, 'Tenda', 1, '123.00');
+(34, 5, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 2, '231.22');
 
 -- --------------------------------------------------------
 
@@ -375,17 +377,15 @@ CREATE TABLE IF NOT EXISTS `linhafatura` (
   KEY `faturaID` (`faturaID`),
   KEY `ivaID` (`ivaID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `linhafatura`
 --
 
 INSERT INTO `linhafatura` (`id`, `faturaID`, `ivaID`, `quantidade`, `valor`, `valorIva`, `produtoID`) VALUES
-(19, 18, 1, 1, '123.00', '23.00', 18),
-(20, 18, 2, 2, '35.22', '3.77', 16),
-(21, 19, 1, 1, '123.00', '23.00', 18),
-(22, 19, 1, 1, '12.30', '2.30', 20);
+(1, 20, 1, 3, '346.83', '64.85', 21),
+(2, 20, 1, 3, '168.42', '31.49', 22);
 
 -- --------------------------------------------------------
 
@@ -473,17 +473,20 @@ CREATE TABLE IF NOT EXISTS `produto` (
   PRIMARY KEY (`id`),
   KEY `categoriaID` (`categoriaID`),
   KEY `ivaID` (`ivaID`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
 INSERT INTO `produto` (`id`, `nome`, `marca`, `preco`, `stock`, `descricao`, `categoriaID`, `ivaID`) VALUES
-(16, 'Nome', 'Marca', '17.61', 12, 'Descricao', 2, 2),
-(18, 'Tenda', 'SigmaBoy', '123.00', 10, 'Esta tenda é sigma', 2, 1),
-(20, 'Tes', 'sfs', '12.30', 2, 'asasdasdasd', 1, 1),
-(22, 'weqwerwqrqwr', 'qwrqwrqwrqwr', '151.29', 12, 'asdfadasd', 1, 1);
+(21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 'VIDAXL', '115.61', 10, 'Esta tenda de campismo com aspeto moderno protege-o de intempéries e proporciona um local confortável para aventuras de todo o tipo.\r\n\r\nDesign totalmente à prova de água: esta tenda de campismo, feita de poliéster com revestimento de PU, é à prova de água e resistente ao vento.\r\nAs costuras coladas evitam eficazmente a infiltração da água da chuva, enquanto a cobertura de chão resistente ajuda a manter o interior seco e confortável.\r\n\r\nBoa ventilação e proteção contra mosquitos: as paredes de malha não só oferecem uma excelente ventilação, como também mantêm eficazmente os insetos afastados, garantindo aos utilizadores uma experiência confortável e livre de insetos.\r\n\r\nCobertura impermeável removível: a cobertura impermeável removível pode ser anexada ao topo da tenda para proteção contra intempéries e privacidade.\r\n\r\nLeve e portátil: o design dobrável e leve permite-lhe embalar facilmente a tenda e guardá-la no saco de transporte incluído para facilitar o transporte.\r\n\r\nFácil montagem e desmontagem: montar e desmontar a tenda é muito fácil graças aos postes de fibra de vidro altamente flexíveis e leves e ao conveniente sistema de conexão por pinos e anéis.\r\n\r\nAtenção: Mantenha todas as chamas e fontes de calor afastadas do tecido deste produto.\r\n\r\nCor: azul\r\nMaterial da tenda: poliéster 185T revestido a PU\r\nMaterial de rede: poliéster 68D\r\nMaterial da base: PE\r\nDimensões internas da tenda: 200 x 234 x 122 cm (C x L x A) Dimensões externas: 300 x 250 x 132 cm (C x L x A)\r\nDimensões da embalagem: 58 x 16,5 x 16,5 cm (C x L x A)\r\nQuantidade de utilizadores: 4 pessoas\r\nPeso: 5 kg\r\nTipo de tenda: tenda de campismo\r\nForma: cúpula\r\nQuantidade de quartos: 1\r\nNúmero de portas: 1\r\nQuantidade de janelas: 2\r\nCom acesso duplo com fecho de correr e cobertura impermeável removível\r\nInclui porta e Montagem necessária: sim\r\n\r\nA entrega inclui: 1 x Toldo 1 x Cobertura impermeável para tenda 1 x Saco de transporte', 1, 1),
+(22, 'Saco-cama Bestway', 'PAVILLO', '56.14', 26, 'Se procura as novidades mais procuradas no mercado, apresentamos-lhe Saco-cama Bestway Azul\r\n\r\nTipo: Saco-cama\r\nInclui: Bolsa de transporte\r\nTemperatura aprox.: 3º - 8 ºC\r\nMedidas aprox.: 190 x 84 cm\r\nCor: Azul\r\nMaterial: Plástico e Poliéster\r\nCaracterísticas: Exterior\r\nLimpar com pano húmido\r\nUso recomendado: Praia, Jardim e Camping\r\nForma: Quadrado\r\nTipo de fecho: Fecho de correr\r\nGénero: Unissexo adultos\r\nIdade recomendada: Todas as idades', 4, 1),
+(23, 'Bomba Elétrica Desportos Outdoor Adulto Preto', 'BESTWAY', '38.12', 41, 'Bomba de Ar Elétrica\r\nDescrição\r\nA Bomba de Ar Elétrica é a escolha ideal para inflar rapidamente seus equipamentos esportivos aquáticos. Com um design elegante, esta bomba elétrica de alta qualidade garante eficiência e praticidade em suas atividades ao ar livre.\r\n\r\nCaracterísticas Principais\r\n• Alta eficiência: Infla bóias, colchões de ar, piscinas infláveis e outros equipamentos aquáticos com facilidade e rapidez.\r\n• Fácil de usar: Compatível com tomadas padrão, é simples de operar e transportar.\r\n• Leve e compacta: Ideal para levar em suas aventuras ao ar livre.\r\nBenefícios\r\n• Rapidez e praticidade: Nunca mais perca tempo inflando manualmente e aproveite ao máximo suas atividades na água.\r\n• Portabilidade: Leve e fácil de transportar, podendo ser utilizada em diversos locais.\r\n• Durabilidade: Construída com materiais de alta qualidade para garantir longa vida útil.\r\nUtilização\r\nEsta bomba elétrica é perfeita para desportos outdoor, proporcionando momentos de lazer e diversão sem preocupações. Seja na praia, piscina ou acampamento, tenha sempre à disposição esta bomba eficiente e durável.\r\n\r\nCompra Segura\r\nAdquira agora a Bomba de Ar Elétrica e garanta inflar seus equipamentos esportivos de forma rápida e conveniente. Leve sua diversão aquática a um novo nível com esta bomba de alto desempenho.\r\n\r\nNão perca mais tempo e invista na Bomba de Ar Elétrica para garantir momentos de lazer inesquecíveis e práticos. Aproveite a liberdade de inflar seus equipamentos onde quer que esteja, de maneira rápida e eficiente.', 5, 1),
+(24, 'Almofada de viagem', 'HIGHLANDER', '17.21', 12, 'Almofada\r\n\r\nDescanse a sua cabeça numa almofada de viagem macia e confortável.\r\n\r\nVantagens:\r\nLeve e muito compacta\r\nFácil de utilizar\r\nConcebida para utilização em actividades de lazer no exterior\r\nCaracterísticas:\r\nPeso: 165g\r\nTamanho: 22 cm x 30 cm x 7 cm\r\nMaterial: Tecido - 65% poliéster, 35% algodão - Enchimento - 450g/m2 de fibra oca de poliéster', 6, 1),
+(25, 'Colchão de campismo Intex Dura-Beam Deluxe Ultra Plush com cabeceira', 'INTEX', '122.94', 33, 'Dura-Beam Deluxe Series INTEX modelo Ultra Plush Headbed Airbed com cabeceira e medidas: 152 x 236 x 46 cm. Superfície flocada e nervurada, estrutura interior com tecnologia Fiber-Tech. Possui bomba elétrica integrada para inflar e esvaziar, pronta em apenas 5 minutos. Inclui bolsa de transporte com alças. Colchão de fácil dobragem, em vinil resistente. Projetado para duas pessoas, peso máximo 272 kg.\r\n\r\n• Cama insuflável INTEX para duas pessoas, série Dura-Beam Deluxe modleo Ultra Plush com cabeceiro, medidas: 152x236x46 cm, suporta um peso máximo de 272 kg\r\n• Construção interior com tecnologia Fiber-Tech, maior adaptação, rigidez e conforto, a cama não deforma com as utilizações, superfície e borda flocadas\r\n• Cabeceiro embutido de tato suave e estrutura afunilada para maior conforto, perfeita para ler, ver televisão ou evitar que as almofadas caiam no solo\r\n• Bomba elétrica embutida de enchimento e esvaziamento, tempo de enchimento aproximado: 5 minutos, inclui-se saco de transporte com asas\r\n• Fabricada em vinil de elevada qualidade e resistência, a altura da cama facilitao acesso e a saída, perfeita como cama de convidados ou para viajar', 3, 1),
+(26, 'Cobertor elétrico - Manta de aquecimento - 200 x 180 cm', 'Rockerz Fitness', '98.34', 18, 'Quer manter-se bem quente durante o inverno? Então o cobertor elétrico de dupla face Rockerz Home é a solução ideal! O cobertor é perfeito para uma noite agradável no sofá ou como cobertor extra na sua cama. Com nada menos que 9 ajustes de temperatura, pode definir exatamente o calor que mais lhe convém. Quer precise de um calor subtil para dormir confortavelmente ou de um calor intenso para vencer o frio do inverno, este cobertor é a sua fonte de calor fiável. Além disso, o cobertor elétrico é um investimento inteligente porque pode baixar um pouco a temperatura do termóstato, o que pode ajudar a reduzir os seus custos de energia.\r\n\r\n9 definições de aquecimento e desligamento automático\r\nCom o prático comando à distância, tem controlo total sobre o calor do seu cobertor de aquecimento elétrico. Desfrute de nada menos que 9 configurações de calor diferentes, que variam entre uns agradáveis ​​29 °C e uns aconchegantes 43 °C, tudo ao seu alcance com o toque de um botão. A definição da função de desligamento automático é igualmente fácil, com 9 definições de tempo disponíveis, que variam entre 20 minutos e 3 horas. Após este tempo, o cobertor desligar-se-á automaticamente. O cobertor está também equipado com proteção contra sobreaquecimento, tornando-o à prova de fogo. E para maior facilidade de utilização, este cobertor elétrico tem um cabo generoso de nada mais nada menos que 2,3 metros.\r\n\r\nMaterial excecionalmente macio para um conforto ideal\r\nEste cobertor elétrico é cuidadosamente feito de 100% flanela (exterior) e lã sherpa (interior). A flanela proporciona uma camada exterior macia e sedosa, enquanto o velo sherpa acrescenta uma camada extra de calor e suavidade. Com a sua combinação única de flanela e lã sherpa, o cobertor elétrico aquecido Rockerz Home envolve-o num oásis de conforto. Graças ao material grosso com forro quente, este é um item essencial para enfrentar os dias frios com conforto!\r\n\r\nOs benefícios do cobertor elétrico Rockerz Home:\r\n• O must-have para os dias frios\r\n• Tecido macio e sedoso\r\n• Eficiência energética - bom para a sua carteira\r\n• 9 regulações de calor (29° C a 43° C)\r\n• Desligamento automático até 3 horas\r\n• Tamanho ideal - 180 x 200 cm (duplo)\r\n• Cabo XL - 2,3 metros\r\n• Adapta-se a qualquer interior\r\n• Lavável: lavar à mão\r\n\r\nConteúdo da embalagem\r\n➜ 1 x cobertor elétrico\r\n➜ 1 x Comando à distância com cabo\r\n➜ 1 x Manual\r\n\r\nEspecificações\r\nVoltagem: 220V-240V\r\nFrequência: 50-60Hz\r\nWatts: 160 watts\r\nLavável: Lavar à mão\r\nCertificados: CE, FC, RoHS', 7, 1),
+(27, 'Pesca de Fundo no Mar SEACOAST 500 350 80-150 G (Conjunto)', 'CAPERLAN', '73.80', 26, 'Características da Cana SEACOAST-500 350 Telescópica\r\n- Comprimento: 3,50 m\r\n- Volume: 1,03 m\r\n- Número de secções: 6 elementos\r\n- Peso: 430 g\r\n- Potência: 80-150 g\r\n- Peso otimizado para lançar: 110 g\r\n- Material: carbono e fibra de vidro\r\n- Passadores: 4 passadores ligados + 1 passador de cabeça colado\r\n- Porta-carreto: tubular de enroscar\r\n- Ação semiparabólica', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -503,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `morada` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `profile`
@@ -516,11 +519,12 @@ INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`,
 (4, 2, '1', 'admin', '2014-11-01', 'Masculino', '1', 'Morada'),
 (13, 44, '1', 'teste', '2024-11-18', '1', '123', 'teste teste'),
 (19, 50, '1', 'Client', '2024-11-20', 'Masculino', '1', 'Client'),
-(20, 51, '1', 'Funcionario', '2024-11-25', 'Masculino', '1', 'Funcionario'),
+(20, 51, '1', 'Funcionario', '2025-01-08', 'Masculino', '1', 'Funcionario'),
 (21, 52, '1', 'Worker', '2024-11-22', 'Masculino', '123456789', 'morada'),
 (22, 53, '12345', 'Carolina', '2024-11-26', 'Feminino', '12345', 'Morada'),
 (27, 58, '12345678', 'Teste', '2024-12-20', 'Masculino', '123456789', 'Morada'),
-(32, 63, '12345678', 'TesteCarrinho', '2024-12-21', 'Masculino', '123456789', 'Morada');
+(32, 63, '12345678', 'TesteCarrinho', '2024-12-21', 'Masculino', '123456789', 'Morada'),
+(39, 70, '1233456', 'ze', '2025-01-08', 'Masculino', '234', 'dgf');
 
 -- --------------------------------------------------------
 
@@ -544,7 +548,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
@@ -557,11 +561,12 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (28, 'Dinis', 'YOgHhjAuO02df7qtgsB4HN9OM0o4gc78', '$2y$13$njpCmsFLTIyw7piN7P1WyuO1HF01ZKXFN01JMtpz4JsxrRkUEoA0e', NULL, 'dinis@hotmail.com', 10, 1731536961, 1731536961, '1QveOH-fA0SkudlSyp24tGa-_AoVtrMV_1731536961'),
 (44, 'Teste', 'p1qLkeN0O0HQ5oATAtPf-x1kO6rC7BmZ', '$2y$13$1exSKF0cKcfpm0KDB9Xgwu89C/GD.furvGdICVuj7OWxyB/HqRQk2', NULL, 'teste@teste.com', 10, 1731959318, 1731959318, 'WeYhm2AfN-T31fT8dG-EN3iPAmYpD5uB_1731959318'),
 (50, 'Client', 'WoWn01AZoGGdlsIXoMStv9TNkwokunZ4', '$2y$13$w07sAUWemYqjwYY.HeZmmu.BGyimNvcyevAA2cGyB6m33UgtJT.xW', NULL, 'client@client.com', 10, 1732145687, 1732145687, '7MiZBFY_gcAdcBOOAnrLvoZeYCTX1geI_1732145687'),
-(51, 'Funcionario', 'NtiL1-Qf2wWIlV8MF8h5aM76xLAtKBVs', '$2y$13$DqW5O0lXA4XzeZ18zIYyU.A52HNgc/BuuVW92QOhxCohnYx.9U/CS', NULL, 'funcionario@funcionario.com', 10, 1732145803, 1732550129, 'pbMNFNBuhQ4VmRD2Cak7-TmMs8vPubBV_1732145803'),
+(51, 'Funcionario', 'NtiL1-Qf2wWIlV8MF8h5aM76xLAtKBVs', '$2y$13$DqW5O0lXA4XzeZ18zIYyU.A52HNgc/BuuVW92QOhxCohnYx.9U/CS', NULL, 'funcionario@funcionario.com', 10, 1732145803, 1736365002, 'pbMNFNBuhQ4VmRD2Cak7-TmMs8vPubBV_1732145803'),
 (52, 'Worker', 'XOmF-9HSiJLNGHOMCDES27hHGtvkiHC6', '$2y$13$MWaNeYyb9kOOsihajlVFhO212qyAhdR7El58Zc7tuSiXcTajwYkM.', NULL, 'worker@worker.com', 10, 1732289597, 1732289597, 'qhlW_ktl_mRniHt4OKAlFl7xGyJJqe76_1732289597'),
 (53, 'Carolina', 'to-0GuXrsZX4XsP-W6bOHfHmEQRAIr4S', '$2y$13$V0tfVlIZ5YSuUkf0L3cc/ufsOqqglB/nBrScGc.qHlbdMhCVO3M5C', NULL, 'Carolina@carolina.pt', 10, 1732647176, 1732647176, 'O8J2_r5llmUuBas0Gxga9D1_8bvuoFWg_1732647176'),
 (58, 'TesteCarrinho', 'RI67ZlEShy3xsUnOjWygxWN-MOJQo7Si', '$2y$13$/bysTsjPh5uFp7H5B8mngen5IgN1Rl7Ozd8S7Je3XJIql/z44X0zm', NULL, 'testeCarrinho@teste.com', 10, 1734709117, 1734709117, 'kHpP7U6YvGUZIXXwE4LwDa-FweoGeKJq_1734709117'),
-(63, 'TesteCarrinho2', 'B9i393yLMh3y3VkOEm6bXPlWtaac7wmB', '$2y$13$gUXNvOCECaij4gP1OMi/te1owzf/hvFGBTR3e8J3POLAgHKSFnN0K', NULL, 'testecarrinho@hotmail.com', 10, 1734809462, 1734809462, 'nkAYsosM6DBzCAkpEBq21Htgra92q9FE_1734809462');
+(63, 'TesteCarrinho2', 'B9i393yLMh3y3VkOEm6bXPlWtaac7wmB', '$2y$13$gUXNvOCECaij4gP1OMi/te1owzf/hvFGBTR3e8J3POLAgHKSFnN0K', NULL, 'testecarrinho@hotmail.com', 10, 1734809462, 1734809462, 'nkAYsosM6DBzCAkpEBq21Htgra92q9FE_1734809462'),
+(70, 'ze', 'rXrthGPLmISSFkFYbr7OBmrWk9VxvlJw', '$2y$13$eGbpnhZmSstQEffmEd7xzu9zkgAiagiFHgD2NFg/U5wxShj7WaAnW', NULL, 'ze@gmail.com', 10, 1736294481, 1736294481, 'DUOt96ozGDNqtlciNExqGeuFrnB7oBxi_1736294481');
 
 --
 -- Restrições para despejos de tabelas
@@ -590,7 +595,7 @@ ALTER TABLE `auth_item_child`
 -- Limitadores para a tabela `carrinho`
 --
 ALTER TABLE `carrinho`
-  ADD CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`);
+  ADD CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `fatura`
@@ -604,27 +609,27 @@ ALTER TABLE `fatura`
 -- Limitadores para a tabela `favorito`
 --
 ALTER TABLE `favorito`
-  ADD CONSTRAINT `favorito_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`),
-  ADD CONSTRAINT `favorito_ibfk_2` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`);
+  ADD CONSTRAINT `favorito_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorito_ibfk_2` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `imagem`
 --
 ALTER TABLE `imagem`
-  ADD CONSTRAINT `imagem_ibfk_1` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `imagem_ibfk_1` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `itemscarrinho`
 --
 ALTER TABLE `itemscarrinho`
-  ADD CONSTRAINT `itemscarrinho_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`),
-  ADD CONSTRAINT `itemscarrinho_ibfk_2` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`);
+  ADD CONSTRAINT `itemscarrinho_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `itemscarrinho_ibfk_2` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `linhafatura`
 --
 ALTER TABLE `linhafatura`
-  ADD CONSTRAINT `linhafatura_ibfk_1` FOREIGN KEY (`faturaID`) REFERENCES `fatura` (`id`),
+  ADD CONSTRAINT `linhafatura_ibfk_1` FOREIGN KEY (`faturaID`) REFERENCES `fatura` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `linhafatura_ibfk_2` FOREIGN KEY (`ivaID`) REFERENCES `iva` (`id`),
   ADD CONSTRAINT `linhafatura_ibfk_3` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
