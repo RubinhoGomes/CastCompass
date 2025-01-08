@@ -20,6 +20,11 @@ class ItemsCarrinhoController extends \yii\web\Controller
     }
 
     public function actionCreate($produtoId) {
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->session->setFlash('error', 'Tens de estar logado para adicionar produtos ao carrinho!');
+            return $this->redirect(['site/login']);
+        }
+
         $profile = Profile::findOne(['userID' => Yii::$app->user->id]);
         $produto = Produto::findOne($produtoId);
         $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
