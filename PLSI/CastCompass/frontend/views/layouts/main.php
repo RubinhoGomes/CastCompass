@@ -15,24 +15,26 @@ use common\models\Categoria;
 use yii\helpers\Url;
 use common\models\Favorito;
 use common\models\Carrinho;
-use common\models\ItemsCarrinho;;
+use common\models\ItemsCarrinho;
+
+;
 
 if (!Yii::$app->user->isGuest) {
-$profileID = Yii::$app->user->identity->profile->id;
+    $profileID = Yii::$app->user->identity->profile->id;
     $numFavoritos = Favorito::find()
         ->where(['profileID' => $profileID])
         ->count();
     $carrinho = Carrinho::findOne(['profileID' => $profileID]);
-if($carrinho){
-    $numCarrinho = ItemsCarrinho::find()
-        ->where(['carrinhoID' => $carrinho->id])
-        ->count();
+    if ($carrinho) {
+        $numCarrinho = ItemsCarrinho::find()
+            ->where(['carrinhoID' => $carrinho->id])
+            ->count();
     } else {
         $numCarrinho = 0;
     }
 } else {
-  $numFavoritos = 0;
-  $numCarrinho = 0;
+    $numFavoritos = 0;
+    $numCarrinho = 0;
 }
 
 AppAsset::register($this);
@@ -68,7 +70,7 @@ $categorias = Categoria::find()->all();
                         <!-- Botão Categories -->
                         <a class="btn d-flex align-items-center justify-content-between bg-primary w-100"
                            data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                            <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                            <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categorias</h6>
                             <i class="fa fa-angle-down text-dark"></i>
                         </a>
 
@@ -83,7 +85,8 @@ $categorias = Categoria::find()->all();
                          id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                         <div class="navbar-nav w-100">
                             <?php foreach ($categorias as $categoria): ?>
-                                <a href="<?= yii\helpers\Url::to(['site/shop', 'categoriaId' => $categoria->id]) ?>" class="nav-item nav-link">   <?= Html::encode($categoria->nome) ?></a>
+                                <a href="<?= yii\helpers\Url::to(['site/shop', 'categoriaId' => $categoria->id]) ?>"
+                                   class="nav-item nav-link">   <?= Html::encode($categoria->nome) ?></a>
                             <?php endforeach; ?>
                         </div>
 
@@ -105,25 +108,27 @@ $categorias = Categoria::find()->all();
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="<?= Yii::$app->homeUrl ?>" class="nav-item nav-link active">Home</a>
-                                <a href="<?= Url::to(['/site/shop']) ?>" class="nav-item nav-link">Shop</a>
+                                <a href="<?= Url::to(['/site/shop']) ?>" class="nav-item nav-link">Loja</a>
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas <i
                                                 class="fa fa-angle-down mt-1"></i></a>
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                         <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Carrinho</a>
-                                        <a href="<?= Url::to(['/favoritos/index']) ?>" class="dropdown-item">Favoritos</a>
-                                        <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>" class="dropdown-item">Perfil</a>
+                                        <a href="<?= Url::to(['/favoritos/index']) ?>"
+                                           class="dropdown-item">Favoritos</a>
+                                        <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>"
+                                           class="dropdown-item">Perfil</a>
                                         <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
                                     </div>
                                 </div>
-                                <a href="<?= Url::to(['/site/contact']) ?>" class="nav-item nav-link">Contact</a>
-                                <a href="<?= Url::to(['/site/about']) ?>" class="nav-item nav-link">About</a>
+                                <a href="<?= Url::to(['/site/contact']) ?>" class="nav-item nav-link">Contacte-nos</a>
+                                <a href="<?= Url::to(['/site/about']) ?>" class="nav-item nav-link">Sobre Nós</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0">
                                 <?php if (Yii::$app->user->isGuest): ?>
                                     <!-- If guest, show Login and Signup -->
                                     <a href="<?= Url::to(['/site/login']) ?>" class="nav-item nav-link">Login</a>
-                                    <a href="<?= Url::to(['/site/signup']) ?>" class="nav-item nav-link">Signup</a>
+                                    <a href="<?= Url::to(['/site/signup']) ?>" class="nav-item nav-link">Registar-se</a>
                                 <?php else: ?>
                                     <!-- If logged in, show Profile and Logout -->
                                     <div class="nav-item dropdown">
@@ -131,8 +136,10 @@ $categorias = Categoria::find()->all();
                                            data-toggle="dropdown"><?= Yii::$app->user->identity->username ?> <i
                                                     class="fa fa-angle-down"></i></a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>" class="dropdown-item">Profile</a>
-                                            <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
+                                            <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>"
+                                               class="dropdown-item">Perfil</a>
+                                            <a href="<?= Url::to(['/fatura/index']) ?>"
+                                               class="dropdown-item">Faturas</a>
 
                                             <!-- Form to handle logout -->
                                             <?php echo Html::beginForm(['/site/logout'], 'post'); ?>
@@ -151,7 +158,7 @@ $categorias = Categoria::find()->all();
                                 <a href="<?= Url::to(['/carrinho/index']) ?>" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
                                     <span class="badge text-primary border border-secondary rounded-circle"
-                                    style="padding-bottom: 2px;"><?= $numCarrinho ?></span>
+                                          style="padding-bottom: 2px;"><?= $numCarrinho ?></span>
                                 </a>
                             </div>
                         </div>
@@ -183,16 +190,19 @@ $categorias = Categoria::find()->all();
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                            <h5 class="text-secondary text-uppercase mb-4">Acesso Rápido</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="<?= Yii::$app->homeUrl ?>"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="<?= Url::to(['/carrinho/index']) ?>"><i class="fa fa-angle-right mr-2"></i>Carrinho</a>
-                                <a class="text-secondary" href="<?= Url::to(['/site/contact']) ?>"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                                <a class="text-secondary mb-2" href="<?= Yii::$app->homeUrl ?>"><i
+                                            class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="<?= Url::to(['/carrinho/index']) ?>"><i
+                                            class="fa fa-angle-right mr-2"></i>Carrinho</a>
+                                <a class="text-secondary" href="<?= Url::to(['/site/contact']) ?>"><i
+                                            class="fa fa-angle-right mr-2"></i>Contacte-nos</a>
                             </div>
                         </div>
 
                         <div class="col-md-4 mb-5">
-                            <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+                            <h6 class="text-secondary text-uppercase mt-4 mb-3">Siga-nos</h6>
                             <div class="d-flex">
                                 <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-primary btn-square mr-2" href="#"><i

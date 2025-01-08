@@ -47,14 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                              style="width: 40px; height: 40px; object-fit: cover;">
                                         <span><?= $linhas->produto->nome . ' (' . $linhas->quantidade . ')' ?></span>
 </div>
-                                    <span>€ <?= $linhas->produto->preco ?></span>
+                                    <span><?= $linhas->produto->preco ?>€</span>
                                 </li>
                               </a>
                             <?php endforeach; ?>
                             </ul>
                             <hr>
                             <div class="d-flex justify-content-between align-items-center">
-                              <h6>Total: € <?= $fatura->valorTotal ?></h6>
+                              <h6>Total: <?= $fatura->valorTotal ?>€</h6>
                               <a href="<?= Url::to(['fatura/view', 'id' => $fatura->id]) ?>" class="btn btn-primary btn-sm">Ver Fatura</a>
                         </div>
                       </div>

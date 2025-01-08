@@ -8,7 +8,7 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Detail';
+$this->title = 'Detalhes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3><?= Html::encode($produto->nome) ?></h3>
                 <h5>Marca: <?= Html::encode($produto->marca) ?></h5>
                 <h5>Categoria: <?= Html::encode($produto->categoria->genero) ?></h5>
-                <h4 class="font-weight-semi-bold mb-4"><?= number_format($produto->preco, 2, ',', '.') ?> €</h4>
+                <h4 class="font-weight-semi-bold mb-4"><?= number_format($produto->preco, 2, ',', '.') ?>€</h4>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
@@ -57,18 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <a class="btn btn-primary px-3"
                        href="<?= yii\helpers\Url::to(['items-carrinho/create', 'produtoId' => $produto->id]) ?>"><i
-                                class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
-                </div>
-
-                <!-- Compartilhar -->
-                <div class="d-flex pt-2">
-                    <strong class="text-dark mr-2">Share on:</strong>
-                    <div class="d-inline-flex">
-                        <a class="text-dark px-2" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="text-dark px-2" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="text-dark px-2" href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a class="text-dark px-2" href=""><i class="fab fa-pinterest"></i></a>
-                    </div>
+                                class="fa fa-shopping-cart mr-1"></i> Adicionar ao Carrinho</a>
                 </div>
             </div>
         </div>

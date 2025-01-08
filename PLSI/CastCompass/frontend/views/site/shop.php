@@ -10,7 +10,7 @@ use yii\bootstrap5\ActiveForm;
 use common\models\Favorito;
 use yii\widgets\LinkPager;
 
-$this->title = 'Shop';
+$this->title = 'Loja';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- Breadcrumb Start -->
@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <h5 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                        class="bg-light text-primary pr-3">Filter by Categoria</span></h5>
+                        class="bg-light text-primary pr-3">Filtrar por Categoria</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="btn-success col-lg-6 custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <a class="btn px-3"
-                           href="<?= yii\helpers\Url::to(['site/shop']) ?>">Reset Filters
+                           href="<?= yii\helpers\Url::to(['site/shop']) ?>">Remover Filtros
                         </a>
                     </div>
                     <?php foreach ($categorias as $categoria): ?>
@@ -54,40 +54,40 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- Price Start -->
             <h5 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                        class="bg-light text-primary pr-3">Filter by price</span></h5>
+                        class="bg-light text-primary pr-3">Filtrar por Preço</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form method="get" action="<?= yii\helpers\Url::to(['site/shop']) ?>">
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="all" id="price-all">
-                        <label class="custom-control-label" for="price-all">All Price</label>
+                        <label class="custom-control-label" for="price-all">Qualquer Preço</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="0-25" id="price-1">
-                        <label class="custom-control-label" for="price-1">€0 - €25</label>
+                        <label class="custom-control-label" for="price-1">0€ - 25€</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="25-50" id="price-2">
-                        <label class="custom-control-label" for="price-2">€25 - €50</label>
+                        <label class="custom-control-label" for="price-2">25€ - 50€</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="50-75" id="price-3">
-                        <label class="custom-control-label" for="price-3">€50 - €75</label>
+                        <label class="custom-control-label" for="price-3">50€ - 75€</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="75-100" id="price-4">
-                        <label class="custom-control-label" for="price-4">€75 - €100</label>
+                        <label class="custom-control-label" for="price-4">75€ - 100€</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="100-150" id="price-5">
-                        <label class="custom-control-label" for="price-5">€100 - €150</label>
+                        <label class="custom-control-label" for="price-5">100€ - 150€</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+                    <button type="submit" class="btn btn-primary mt-3">Aplciar Filtros</button>
                 </form>
             </div>
             <!-- Price End -->

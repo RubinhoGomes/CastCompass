@@ -28,7 +28,7 @@ $this->title = 'Home';
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Campismo</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Bem-vindo à nossa loja de campismo, onde a aventura começa! Aqui você encontra tudo o que precisa para explorar a natureza com conforto e segurança.</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Compre Agora</a>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ $this->title = 'Home';
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Tendas</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">As nossas tendas são sinônimo de qualidade e conforto, projetadas para garantir proteção e tranquilidade em todas as suas aventuras ao ar livre.</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Compre Agora</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@ $this->title = 'Home';
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Equipamentos de campismos</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Os nossos equipamentos de campismo combinam durabilidade, praticidade e inovação, para que você aproveite cada momento na natureza ao máximo.</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Compre Agora</a>
                                 </div>
                             </div>
                         </div>
@@ -59,17 +59,17 @@ $this->title = 'Home';
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-1.jpg" alt="">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="site/shop" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
+                        <h3 class="text-white mb-3">Oferta Especial</h3>
+                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
                     </div>
                 </div>
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-2.jpg" alt="">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="site/shop" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
+                        <h3 class="text-white mb-3">Oferta Especial</h3>
+                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
                     </div>
                 </div>
             </div>
@@ -84,25 +84,25 @@ $this->title = 'Home';
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                    <h5 class="font-weight-semi-bold m-0">Produtos de Qualidade</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+                    <h5 class="font-weight-semi-bold m-0">Portes Grátis</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                    <h5 class="font-weight-semi-bold m-0">14-Dias para Reembolso</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                    <h5 class="font-weight-semi-bold m-0">Suporte 24/7</h5>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@ $this->title = 'Home';
 
     <!-- Categories Start -->
     <div class="container-fluid pt-5">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-light text-primary pr-3">Categories</span></h2>
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-light text-primary pr-3">Categorias</span></h2>
         <div class="row px-xl-5 pb-3">
             <?php foreach ($categorias as $categoria): ?>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
@@ -133,7 +133,7 @@ $this->title = 'Home';
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-light text-primary pr-3">Featured Products</span></h2>
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-light text-primary pr-3">Produtos Destacados</span></h2>
         <div class="row px-xl-5">
             <?php foreach (array_slice($produtos, 0, 4) as $produto): ?>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
@@ -172,9 +172,9 @@ $this->title = 'Home';
                 <div class="product-offer mb-30" style="height: 300px;">
                 <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-1.jpg" alt="">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="site/shop" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
+                        <h3 class="text-white mb-3">Oferta Especial</h3>
+                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
                     </div>
                 </div>
             </div>
@@ -182,9 +182,9 @@ $this->title = 'Home';
                 <div class="product-offer mb-30" style="height: 300px;">
                     <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-2.jpg" alt="">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="site/shop" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
+                        <h3 class="text-white mb-3">Oferta Especial</h3>
+                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
                     </div>
                 </div>
             </div>

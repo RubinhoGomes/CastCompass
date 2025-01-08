@@ -2,6 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
+
 /** @var \frontend\models\SignupForm $model */
 
 use yii\bootstrap5\Html;
@@ -20,22 +21,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead class="thead-dark">
                 <tr>
                     <th>Imagem</th>
-                    <th>Products</th>
-                    <th>Price</th>
-                    <th>Remove</th>
+                    <th>Produtos</th>
+                    <th>Preço</th>
+                    <th>Remover</th>
                 </tr>
                 </thead>
                 <tbody class="align-middle">
                 <?php foreach ($favoritos as $favorito): ?>
-                <tr onclick="window.location='<?= \yii\helpers\Url::to(['site/detail', 'id' => $favorito->produto->id]) ?>'">
-                    <td><div class="product-img position-relative overflow-hidden">
-                                <img src="<?= Yii::getAlias('@uploads') . '/' . $favorito->produto->imagens[0]->filename ?? Yii::getAlias('@default')?>" alt="<?= Html::encode($favorito->produto->nome) ?>"  width="100" class="img-fluid">
-                    </div></td>
-                   <td class="align-middle"><?= Html::encode($favorito->produto->nome) ?></td>
-                    <td class="align-middle"><?= number_format($favorito->produto->preco, 2, ',', '.') ?>$</td>
-                    <td class="align-middle">
-                        <a class="btn btn-sm btn-danger" href="<?= yii\helpers\Url::to(['favoritos/remove', 'id' => $favorito->id]) ?>"><i class="fa fa-times"></i> Remover</a></td>
-                </tr>
+                    <tr onclick="window.location='<?= \yii\helpers\Url::to(['site/detail', 'id' => $favorito->produto->id]) ?>'">
+                        <td>
+                            <div class="product-img position-relative overflow-hidden">
+                                <img src="<?= Yii::getAlias('@uploads') . '/' . $favorito->produto->imagens[0]->filename ?? Yii::getAlias('@default') ?>"
+                                     alt="<?= Html::encode($favorito->produto->nome) ?>" width="100" class="img-fluid">
+                            </div>
+                        </td>
+                        <td class="align-middle"><?= Html::encode($favorito->produto->nome) ?></td>
+                        <td class="align-middle"><?= number_format($favorito->produto->preco, 2, ',', '.') ?>€</td>
+                        <td class="align-middle">
+                            <a class="btn btn-sm btn-danger"
+                               href="<?= yii\helpers\Url::to(['favoritos/remove', 'id' => $favorito->id]) ?>"><i
+                                        class="fa fa-times"></i> Remover</a></td>
+                    </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>

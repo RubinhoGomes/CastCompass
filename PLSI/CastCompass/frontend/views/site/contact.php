@@ -8,12 +8,12 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Contactos';
+$this->title = 'Contacte-nos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- Contact Start -->
 <div class="container-fluid">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-light text-primary pr-3">Contact us</span>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-light text-primary pr-3">Contacte-nos</span>
     </h2>
     <div class="row px-xl-5">
         <div class="col-lg-7 mb-5">
@@ -21,29 +21,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div id="success"></div>
                 <form name="sentMessage" id="contactForm" novalidate="novalidate">
                     <div class="control-group">
-                        <input type="text" class="form-control" id="name" placeholder="Your Name"
+                        <input type="text" class="form-control" id="name" placeholder="Nome"
                                required="required" data-validation-required-message="Please enter your name"/>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="control-group">
-                        <input type="email" class="form-control" id="email" placeholder="Your Email"
+                        <input type="email" class="form-control" id="email" placeholder="Email"
                                required="required" data-validation-required-message="Please enter your email"/>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="control-group">
-                        <input type="text" class="form-control" id="subject" placeholder="Subject"
+                        <input type="text" class="form-control" id="subject" placeholder="Assunto"
                                required="required" data-validation-required-message="Please enter a subject"/>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="control-group">
-                            <textarea class="form-control" rows="8" id="message" placeholder="Message"
+                            <textarea class="form-control" rows="8" id="message" placeholder="Mensagem"
                                       required="required"
                                       data-validation-required-message="Please enter your message"></textarea>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div>
-                        <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
-                            Message
+                        <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Enviar Mensagem
                         </button>
                     </div>
                 </form>

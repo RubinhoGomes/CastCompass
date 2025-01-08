@@ -11,7 +11,7 @@ use yii\grid\GridView;
 /** @var common\models\CarrinhoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Carrinhos';
+$this->title = 'Carrinho';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="carrinho-index">
@@ -48,21 +48,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::encode($item->quantidade) ?>
                     <a class="btn btn-primary btn-plus"  href="<?= yii\helpers\Url::to(['items-carrinho/add-quant', 'produtoId' => $item->produtoID]) ?>" style="color: pink"><i class="fas fa-plus"></i></a>
                     </td>
-                    <td class="align-middle"><?= number_format($item->valorTotal, 2, ',', '.') ?>$</td>
+                    <td class="align-middle"><?= number_format($item->valorTotal, 2, ',', '.') ?>€</td>
                    <td class="align-middle">
                         <a class="btn btn-sm btn-danger" href="<?= yii\helpers\Url::to(['items-carrinho/remove', 'produtoId' => $item->produtoID]) ?>"><i class="fa fa-times"></i> Remover</a></td>
                 </tr>
                 <?php endforeach; ?>                               
                 </tbody>
                 <tr>
-                    <th>total:</th>
-                    <th><?= $carrinho->valorTotal ?></th>
+                    <th>Total:</th>
+                    <th></th>
+                    <th></th>
+                    <th><?= number_format($carrinho->valorTotal, 2, ',', '.') ?>€</th>
+                    <th></th>
                 </tr>
             </table>
 
             <div class="row py-3">
                 <div class="col-lg-6">
-                    <a href="<?= Url::to(['site/shop']) ?>" class="btn btn-secondary">Continuar comprando</a>
+                    <a href="<?= Url::to(['site/shop']) ?>" class="btn btn-secondary">Continuar a comprar</a>
                 </div>
                 <div class="col-lg-6 text-right">
                     <a href="<?= Url::to(['carrinho/checkout']) ?>" name="comprar" id="comprar" class="btn btn-primary">Finalizar compra</a>
