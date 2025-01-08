@@ -153,6 +153,10 @@ class CarrinhoController extends Controller
             $item->delete();
         }
 
+        $carrinho->valorTotal = 0;
+        $carrinho->quantidade = 0;
+        $carrinho->save(false);
+
         Yii::$app->session->setFlash('success', 'Compra efetuada com sucesso!');
         return $this->redirect(['site/index']);
 
