@@ -18,7 +18,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Produto;
 use common\models\Favorito;
-
+use yii\data\Pagination;
 
 /**
  * Site controller
@@ -172,6 +172,10 @@ class SiteController extends Controller
     {
         $query = Produto::find();
 
+        $paginas = new Pagination([
+            'defaultPageSize' => 6,
+            'totalCount' => $query->count(),
+        ]);
 
         if ($categoriaId) {
             $query->andWhere(['categoriaID' => $categoriaId]);
@@ -180,29 +184,35 @@ class SiteController extends Controller
 
         if ($precos = Yii::$app->request->get('price', [])) {
             if (!in_array('all', $precos)) {
-                if (in_array('0-10', $precos)) {
-                    $query->andWhere(['between', 'preco', 0, 10]);
+                if (in_array('0-25', $precos)) {
+                    $query->andWhere(['between', 'preco', 0, 25]);
                 }
-                if (in_array('10-20', $precos)) {
-                    $query->andWhere(['between', 'preco', 10, 20]);
+                if (in_array('25-50', $precos)) {
+                    $query->andWhere(['between', 'preco', 25, 50]);
                 }
-                if (in_array('20-30', $precos)) {
-                    $query->andWhere(['between', 'preco', 20, 30]);
+                if (in_array('50-75', $precos)) {
+                    $query->andWhere(['between', 'preco', 50, 75]);
                 }
-                if (in_array('30-40', $precos)) {
-                    $query->andWhere(['between', 'preco', 30, 40]);
+                if (in_array('75-100', $precos)) {
+                    $query->andWhere(['between', 'preco', 75, 100]);
                 }
-                if (in_array('40-50', $precos)) {
-                    $query->andWhere(['between', 'preco', 40, 50]);
+                if (in_array('100-150', $precos)) {
+                    $query->andWhere(['between', 'preco', 100, 150]);
                 }
             }
         }
-        $produtos = $query->all();
+
+        $produtos =  $query
+            ->offset($paginas->offset)
+            ->limit($paginas->limit)
+            ->all();;
+
         $categorias = Categoria::find()->all();
 
         return $this->render('shop', [
             'produtos' => $produtos,
             'categorias' => $categorias,
+            'paginas' => $paginas,
         ]);
     }
 

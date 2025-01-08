@@ -8,6 +8,7 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use common\models\Favorito;
+use yii\widgets\LinkPager;
 
 $this->title = 'Shop';
 $this->params['breadcrumbs'][] = $this->title;
@@ -62,28 +63,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" name="price[]" value="0-10" id="price-1">
-                        <label class="custom-control-label" for="price-1">$0 - $10</label>
+                        <input type="checkbox" class="custom-control-input" name="price[]" value="0-25" id="price-1">
+                        <label class="custom-control-label" for="price-1">$0 - $25</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" name="price[]" value="10-20" id="price-2">
-                        <label class="custom-control-label" for="price-2">$10 - $20</label>
+                        <input type="checkbox" class="custom-control-input" name="price[]" value="25-50" id="price-2">
+                        <label class="custom-control-label" for="price-2">$25 - $50</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" name="price[]" value="20-30" id="price-3">
-                        <label class="custom-control-label" for="price-3">$20 - $30</label>
+                        <input type="checkbox" class="custom-control-input" name="price[]" value="50-75" id="price-3">
+                        <label class="custom-control-label" for="price-3">$50 - $75</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" name="price[]" value="30-40" id="price-4">
-                        <label class="custom-control-label" for="price-4">$30 - $40</label>
+                        <input type="checkbox" class="custom-control-input" name="price[]" value="75-100" id="price-4">
+                        <label class="custom-control-label" for="price-4">$75 - $100</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" name="price[]" value="40-50" id="price-5">
-                        <label class="custom-control-label" for="price-5">$40 - $50</label>
+                        <input type="checkbox" class="custom-control-input" name="price[]" value="100-150" id="price-5">
+                        <label class="custom-control-label" for="price-5">$100 - $150</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
@@ -139,13 +140,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php endforeach; ?>
                     <div class="col-12">
                         <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
+                            <?= LinkPager::widget([
+                                'pagination' => $paginas,
+                                'options' => ['class' => 'pagination justify-content-center'],
+                                'linkOptions' => ['class' => 'page-link'],
+                                'prevPageLabel' => 'Previous',
+                                'nextPageLabel' => 'Next',
+                                'disabledPageCssClass' => 'disabled',
+                                'activePageCssClass' => 'active',
+                            ]); ?>
                         </nav>
                     </div>
                 </div>
