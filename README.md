@@ -5,6 +5,11 @@
 
 ### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beaming%20Face%20with%20Smiling%20Eyes.png" alt="Beaming Face with Smiling Eyes" width="48" height="48" /> Description
 
+### Utilizadores
+* Conta Admin: admin Password: 12345678
+* Conta Funcionário: funcionario Password: 12345678
+* Conta Cliente: ze Password: 12345678
+
 
 ### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Anxious%20Face%20with%20Sweat.png" alt="Anxious Face with Sweat" width="48" height="48" /> Requirements
 * Composer
