@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5 class="mb-3">Método de Expedição:</h5>
                     <div class="form-group">
                         <div class="input-group">
-                            <select name="metodoExpedicao" id="metodoExpedicao" class="form-control custom-select">
+                            <select name="metodoExpedicao" id="metodoExpedicao" class="form-control custom-select me">
                                 <?php foreach ($metodoExpedicao as $metodo): ?>
                                     <option value="<?= $metodo->id ?>"><?= $metodo->nome ?></option>
                                 <?php endforeach; ?>
