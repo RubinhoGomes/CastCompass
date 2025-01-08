@@ -28,6 +28,7 @@ class ProdutoCest
         $I->fillField('Produto[stock]', '10');
         $I->selectOption('Produto[categoriaID]', 'Genero');
         $I->selectOption('Produto[ivaID]', '0.23');
+        $I->attachFile('input[type="file"][name="ImagemForm[imagens][]"]', 'produto.png');
         $I->click('form button[type=submit]');
     }
 }

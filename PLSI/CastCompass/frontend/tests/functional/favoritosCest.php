@@ -20,8 +20,6 @@ class favoritosCest
         $I->amOnPage('/site/shop');
         $I->click('.fa-heart');
         $I->amOnPage('/favoritos/index');
-        //$I->see('tbody.align-middle');
-        $I->click('.fa');
-
+        $I->see('Produto1');
     }
 }
