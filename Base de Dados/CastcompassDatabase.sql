@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 08-Jan-2025 às 22:44
+-- Tempo de geração: 08-Jan-2025 às 22:55
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.2.0
 
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('admin', '2', 1736364639),
+('client', '1', 1736376816),
 ('client', '71', 1736369769),
 ('client', '72', 1736370179),
 ('worker', '51', 1736365002);
@@ -540,7 +541,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
 INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`, `telemovel`, `morada`) VALUES
 (1, 27, '1', 'user', '2024-11-27', 'Masculino', '123', '123'),
 (2, 28, '1', 'Dinis', '2024-11-13', 'Masculino', '123', 'Morada'),
-(3, 1, '1', 'ASD', '2024-11-22', 'Masculino', '1234', 'Morada'),
+(3, 1, '1', 'ASD', '2025-01-08', 'Masculino', '1234', 'Morada'),
 (4, 2, '1', 'admin', '2014-11-01', 'Masculino', '1', 'Morada'),
 (13, 44, '1', 'teste', '2024-11-18', '1', '123', 'teste teste'),
 (19, 50, '1', 'Client', '2024-11-20', 'Masculino', '1', 'Client'),
@@ -580,7 +581,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(1, 'asd', '1YdAK-Hw--whrllUEJSuLomKaqo0bO5a', '$2y$13$LD580.7UvVVvJIL3fKH7VudFHOvbHS6Ytk7J7mNqKE41snJS99IPG', NULL, 'qweas@sapo.pt', 9, 1729595637, 1732235220, 'zrqx9d-jIp1UJtjhzumfvPvwhI6oMwDe_1729595637'),
+(1, 'asd', '1YdAK-Hw--whrllUEJSuLomKaqo0bO5a', '$2y$13$LD580.7UvVVvJIL3fKH7VudFHOvbHS6Ytk7J7mNqKE41snJS99IPG', NULL, 'qweas@sapo.pt', 9, 1729595637, 1736376816, 'zrqx9d-jIp1UJtjhzumfvPvwhI6oMwDe_1729595637'),
 (2, 'admin', 'YHN_E5_VxYvTV5OR1-J8qwrE2pD30h-6', '$2y$13$3mB2vnqPN58UJnncMUbKt.CmcTzXe7avZ90nmBuKLwn22.07qSwhC', NULL, 'admin@admin.com', 10, 1731079276, 1731079276, 'Ad4nnqn0frGypUpJfJoHsSPc9FONkxTh_1731079276'),
 (27, 'Snoppy', 'ytcegCPHN0VlZO8bDuQQmkcdUjwnMC0j', '$2y$13$7k7SwFAQy9AY40B21BLHE.WjAyrnn5FtnsXrvxg8u9oJCeY6beBsm', NULL, 'user@user.com', 10, 1731523900, 1732742912, 'JwunoJH1aPOlHiwDWtO93qXPDDhGr9HE_1731523900'),
 (28, 'Dinis', 'YOgHhjAuO02df7qtgsB4HN9OM0o4gc78', '$2y$13$njpCmsFLTIyw7piN7P1WyuO1HF01ZKXFN01JMtpz4JsxrRkUEoA0e', NULL, 'dinis@hotmail.com', 10, 1731536961, 1731536961, '1QveOH-fA0SkudlSyp24tGa-_AoVtrMV_1731536961'),
