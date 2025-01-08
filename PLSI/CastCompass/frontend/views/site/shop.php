@@ -64,27 +64,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="0-25" id="price-1">
-                        <label class="custom-control-label" for="price-1">$0 - $25</label>
+                        <label class="custom-control-label" for="price-1">€0 - €25</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="25-50" id="price-2">
-                        <label class="custom-control-label" for="price-2">$25 - $50</label>
+                        <label class="custom-control-label" for="price-2">€25 - €50</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="50-75" id="price-3">
-                        <label class="custom-control-label" for="price-3">$50 - $75</label>
+                        <label class="custom-control-label" for="price-3">€50 - €75</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="75-100" id="price-4">
-                        <label class="custom-control-label" for="price-4">$75 - $100</label>
+                        <label class="custom-control-label" for="price-4">€75 - €100</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" class="custom-control-input" name="price[]" value="100-150" id="price-5">
-                        <label class="custom-control-label" for="price-5">$100 - $150</label>
+                        <label class="custom-control-label" for="price-5">€100 - €150</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
