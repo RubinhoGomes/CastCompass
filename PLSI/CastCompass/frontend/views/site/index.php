@@ -27,7 +27,7 @@ $this->title = 'Home';
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Campismo</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Bem-vindo à nossa loja de campismo, onde a aventura começa! Aqui você encontra tudo o que precisa para explorar a natureza com conforto e segurança.</p>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Bem-vindo à nossa loja de campismo, onde a aventura começa! Aqui encontras tudo o que precisas para explorar a natureza com conforto e segurança.</p>
                                     <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Compre Agora</a>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@ $this->title = 'Home';
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Tendas</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">As nossas tendas são sinônimo de qualidade e conforto, projetadas para garantir proteção e tranquilidade em todas as suas aventuras ao ar livre.</p>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">As nossas tendas são sinónimo de qualidade e conforto, projetadas para garantir proteção e tranquilidade em todas as tuas aventuras ao ar livre.</p>
                                     <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Compre Agora</a>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@ $this->title = 'Home';
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Equipamentos de campismos</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Os nossos equipamentos de campismo combinam durabilidade, praticidade e inovação, para que você aproveite cada momento na natureza ao máximo.</p>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Os nossos equipamentos de campismo combinam durabilidade, praticabilidade e inovação, para que possas aproveitar cada momento na natureza ao máximo.</p>
                                     <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="site/shop">Compre Agora</a>
                                 </div>
                             </div>

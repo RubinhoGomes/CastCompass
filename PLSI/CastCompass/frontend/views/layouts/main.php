@@ -110,7 +110,7 @@ $categorias = Categoria::find()->all();
                                 <a href="<?= Yii::$app->homeUrl ?>" class="nav-item nav-link active">Home</a>
                                 <a href="<?= Url::to(['/site/shop']) ?>" class="nav-item nav-link">Loja</a>
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas <i
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button">Páginas <i
                                                 class="fa fa-angle-down mt-1"></i></a>
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                         <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Carrinho</a>
@@ -132,8 +132,8 @@ $categorias = Categoria::find()->all();
                                 <?php else: ?>
                                     <!-- If logged in, show Profile and Logout -->
                                     <div class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle"
-                                           data-toggle="dropdown"><?= Yii::$app->user->identity->username ?> <i
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                           role="button"><?= Yii::$app->user->identity->username ?> <i
                                                     class="fa fa-angle-down"></i></a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                             <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>"

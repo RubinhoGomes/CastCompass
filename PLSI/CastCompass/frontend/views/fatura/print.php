@@ -76,12 +76,11 @@
                                         <td>
                                             <div>
                                             <h5 class="text-truncate font-size-14 mb-1"><?= $linha->produto->nome?></h5>
-                                                <p class="text-muted mb-0"> <?= $linha->produto->descricao ?> </p>
                                             </div>
                                         </td>
-                                        <td>€ <?= $linha->produto->preco?></td>
+                                        <td><?= number_format($linha->produto->preco, 2, ',', '.')?>€</td>
                                         <td><?= $linha->quantidade ?></td>
-                                        <td class="text-end">€ <?= $linha->valor?></td>
+                                        <td class="text-end"><?= number_format($linha->valor, 2, ',', '.')?>€</td>
                                     </tr>
                                     <?php
                                       $i++;
@@ -98,12 +97,12 @@
                                     <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end">
                                             Iva</th>
-                                            <td class="border-0 text-end">€ <?= $fatura->ivaTotal?></td>
+                                            <td class="border-0 text-end"><?= number_format($fatura->ivaTotal, 2, ',', '.')?>€</td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end">Total</th>
-                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold">€<?= $fatura->valorTotal ?></h4></td>
+                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold"><?= number_format($fatura->valorTotal, 2, ',', '.') ?>€</h4></td>
                                     </tr>
                                     <!-- end tr -->
                                 </tbody><!-- end tbody -->
