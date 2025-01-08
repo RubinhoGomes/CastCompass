@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var common\models\Fatura $model */
 
-$this->title = Yii::$app->user->identity->profile->nome . ': ' . $model->id;
+$this->title = Yii::$app->formatter->asDate($model->data);
 $this->params['breadcrumbs'][] = ['label' => 'Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -62,7 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Action Buttons -->
     <div class="row mt-4">
         <div class="col text-end">
-            <a href="/fatura/download-pdf?id=<?= $model->id ?>" class="btn btn-success">Download PDF</a>
+<!--            <a href="/fatura/download-pdf?id=--><?php //= $model->id ?><!--" class="btn btn-success">Download PDF</a>-->
+            <a href="" class="btn btn-success">Download PDF</a>
             <a href="<?= Url::to(['fatura/print', 'id' => $model->id]) ?>" class="btn btn-info">Imprimir Fatura</a>
             <a href=" <?= Url::to(['fatura/index'])  ?>" class="btn btn-secondary">Voltar para as Faturas</a>
         </div>
