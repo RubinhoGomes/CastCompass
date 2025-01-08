@@ -6,7 +6,7 @@ namespace frontend\tests\Functional;
 use frontend\tests\FunctionalTester;
 use common\models\User;
 
-class favoritosCest
+class FaturaCest
 {
     public function _before(FunctionalTester $I)
     {
@@ -17,11 +17,7 @@ class favoritosCest
     // tests
     public function tryToTest(FunctionalTester $I)
     {
-        $I->amOnPage('/site/shop');
-        $I->click('.fa-heart');
-        $I->amOnPage('/favoritos/index');
-        //$I->see('tbody.align-middle');
-        $I->click('.fa');
-
+        $I->amOnPage('/fatura/index');
+       // $I->click('div.class-card');
     }
 }
