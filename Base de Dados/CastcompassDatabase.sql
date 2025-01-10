@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 08-Jan-2025 às 22:55
+-- Tempo de geração: 08-Jan-2025 às 23:50
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.2.0
 
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `carrinho` (
   `quantidade` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `profileID` (`profileID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `carrinho`
@@ -205,10 +205,10 @@ CREATE TABLE IF NOT EXISTS `carrinho` (
 INSERT INTO `carrinho` (`id`, `profileID`, `valorTotal`, `quantidade`) VALUES
 (2, 32, NULL, NULL),
 (3, 22, '0.00', 5),
-(4, 2, NULL, NULL),
 (5, 4, '0.00', 0),
 (14, 41, '0.00', 0),
-(15, 19, '115.61', 1);
+(15, 19, '115.61', 1),
+(16, 20, '115.61', 1);
 
 -- --------------------------------------------------------
 
@@ -256,23 +256,15 @@ CREATE TABLE IF NOT EXISTS `fatura` (
   KEY `carrinhoID` (`carrinhoID`),
   KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
   KEY `metodoPagamentoID` (`metodoPagamentoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `fatura`
 --
 
 INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoExpedicaoID`, `data`, `metodoPagamentoID`) VALUES
-(20, 12, '515.25', '96.35', 1, 1736294400, 1),
-(21, 12, '171.75', '32.12', 1, 1736294400, 1),
-(22, 13, '578.05', '108.09', 1, 1736294400, 1),
-(23, 13, '115.61', '21.62', 1, 1736294400, 1),
-(24, 13, '115.61', '21.62', 1, 1736294400, 1),
-(25, 13, '115.61', '21.62', 1, 1736294400, 1),
-(26, 13, '115.61', '21.62', 1, 1736294400, 1),
-(27, 14, '115.61', '21.62', 1, 1736294400, 1),
-(28, 14, '115.61', '21.62', 1, 1736294400, 1),
-(29, 14, '115.61', '21.62', 1, 1736294400, 1);
+(30, 14, '171.75', '32.12', 1, 1736294400, 1),
+(31, 5, '153.73', '28.75', 1, 1736294400, 1);
 
 -- --------------------------------------------------------
 
@@ -288,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `favorito` (
   PRIMARY KEY (`id`),
   KEY `profileID` (`profileID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `favorito`
@@ -296,7 +288,9 @@ CREATE TABLE IF NOT EXISTS `favorito` (
 
 INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
 (1, 39, 21),
-(2, 19, 21);
+(2, 19, 21),
+(3, 41, 21),
+(4, 4, 22);
 
 -- --------------------------------------------------------
 
@@ -343,14 +337,15 @@ CREATE TABLE IF NOT EXISTS `itemscarrinho` (
   PRIMARY KEY (`id`),
   KEY `carrinhoID` (`carrinhoID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `itemscarrinho`
 --
 
 INSERT INTO `itemscarrinho` (`id`, `carrinhoID`, `produtoID`, `nome`, `quantidade`, `valorTotal`) VALUES
-(55, 15, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, '115.61');
+(55, 15, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, '115.61'),
+(56, 16, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, '115.61');
 
 -- --------------------------------------------------------
 
@@ -393,25 +388,17 @@ CREATE TABLE IF NOT EXISTS `linhafatura` (
   KEY `faturaID` (`faturaID`),
   KEY `ivaID` (`ivaID`),
   KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `linhafatura`
 --
 
 INSERT INTO `linhafatura` (`id`, `faturaID`, `ivaID`, `quantidade`, `valor`, `valorIva`, `produtoID`) VALUES
-(1, 20, 1, 3, '346.83', '64.85', 21),
-(2, 20, 1, 3, '168.42', '31.49', 22),
-(3, 21, 1, 1, '115.61', '21.62', 21),
-(4, 21, 1, 1, '56.14', '10.50', 22),
-(5, 22, 1, 5, '578.05', '108.09', 21),
-(6, 23, 1, 1, '115.61', '21.62', 21),
-(7, 24, 1, 1, '115.61', '21.62', 21),
-(8, 25, 1, 1, '115.61', '21.62', 21),
-(9, 26, 1, 1, '115.61', '21.62', 21),
-(10, 27, 1, 1, '115.61', '21.62', 21),
-(11, 28, 1, 1, '115.61', '21.62', 21),
-(12, 29, 1, 1, '115.61', '21.62', 21);
+(13, 30, 1, 1, '115.61', '21.62', 21),
+(14, 30, 1, 1, '56.14', '10.50', 22),
+(15, 31, 1, 1, '115.61', '21.62', 21),
+(16, 31, 1, 1, '38.12', '7.13', 23);
 
 -- --------------------------------------------------------
 
@@ -540,7 +527,6 @@ CREATE TABLE IF NOT EXISTS `profile` (
 
 INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`, `telemovel`, `morada`) VALUES
 (1, 27, '1', 'user', '2024-11-27', 'Masculino', '123', '123'),
-(2, 28, '1', 'Dinis', '2024-11-13', 'Masculino', '123', 'Morada'),
 (3, 1, '1', 'ASD', '2025-01-08', 'Masculino', '1234', 'Morada'),
 (4, 2, '1', 'admin', '2014-11-01', 'Masculino', '1', 'Morada'),
 (13, 44, '1', 'teste', '2024-11-18', '1', '123', 'teste teste'),
@@ -584,7 +570,6 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (1, 'asd', '1YdAK-Hw--whrllUEJSuLomKaqo0bO5a', '$2y$13$LD580.7UvVVvJIL3fKH7VudFHOvbHS6Ytk7J7mNqKE41snJS99IPG', NULL, 'qweas@sapo.pt', 9, 1729595637, 1736376816, 'zrqx9d-jIp1UJtjhzumfvPvwhI6oMwDe_1729595637'),
 (2, 'admin', 'YHN_E5_VxYvTV5OR1-J8qwrE2pD30h-6', '$2y$13$3mB2vnqPN58UJnncMUbKt.CmcTzXe7avZ90nmBuKLwn22.07qSwhC', NULL, 'admin@admin.com', 10, 1731079276, 1731079276, 'Ad4nnqn0frGypUpJfJoHsSPc9FONkxTh_1731079276'),
 (27, 'Snoppy', 'ytcegCPHN0VlZO8bDuQQmkcdUjwnMC0j', '$2y$13$7k7SwFAQy9AY40B21BLHE.WjAyrnn5FtnsXrvxg8u9oJCeY6beBsm', NULL, 'user@user.com', 10, 1731523900, 1732742912, 'JwunoJH1aPOlHiwDWtO93qXPDDhGr9HE_1731523900'),
-(28, 'Dinis', 'YOgHhjAuO02df7qtgsB4HN9OM0o4gc78', '$2y$13$njpCmsFLTIyw7piN7P1WyuO1HF01ZKXFN01JMtpz4JsxrRkUEoA0e', NULL, 'dinis@hotmail.com', 10, 1731536961, 1731536961, '1QveOH-fA0SkudlSyp24tGa-_AoVtrMV_1731536961'),
 (44, 'Teste', 'p1qLkeN0O0HQ5oATAtPf-x1kO6rC7BmZ', '$2y$13$1exSKF0cKcfpm0KDB9Xgwu89C/GD.furvGdICVuj7OWxyB/HqRQk2', NULL, 'teste@teste.com', 10, 1731959318, 1731959318, 'WeYhm2AfN-T31fT8dG-EN3iPAmYpD5uB_1731959318'),
 (50, 'Client', 'WoWn01AZoGGdlsIXoMStv9TNkwokunZ4', '$2y$13$w07sAUWemYqjwYY.HeZmmu.BGyimNvcyevAA2cGyB6m33UgtJT.xW', NULL, 'client@client.com', 10, 1732145687, 1732145687, '7MiZBFY_gcAdcBOOAnrLvoZeYCTX1geI_1732145687'),
 (51, 'Funcionario', 'NtiL1-Qf2wWIlV8MF8h5aM76xLAtKBVs', '$2y$13$DqW5O0lXA4XzeZ18zIYyU.A52HNgc/BuuVW92QOhxCohnYx.9U/CS', NULL, 'funcionario@funcionario.com', 10, 1732145803, 1736365002, 'pbMNFNBuhQ4VmRD2Cak7-TmMs8vPubBV_1732145803'),
