@@ -26,7 +26,11 @@ class ProdutoCest
         $I->fillField('Produto[descricao]', 'Descricao Teste');
         $I->fillField('Produto[preco]', '10');
         $I->fillField('Produto[stock]', '10');
+<<<<<<< HEAD
         $I->selectOption('Produto[categoriaID]', '1');
+=======
+        $I->selectOption('Produto[categoriaID]', 'Tendas');
+>>>>>>> 1ec725f (⚡️ Fixed some tests ⚡️)
         $I->selectOption('Produto[ivaID]', '0.23');
         $I->attachFile('input[type="file"][name="ImagemForm[imagens][]"]', 'produto.png');
         $I->click('form button[type=submit]');
