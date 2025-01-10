@@ -3,9 +3,10 @@ actor: UnitTester
 modules:
   enabled:
     - Yii2:
-        part: [orm, email, fixtures]
+        part: [ orm, email, fixtures ]
     - Asserts:
     - Db:
-        dsn: 'mysql:host=127.0.0.1;port=8889;dbname=castcompass'
+        dsn: 'mysql:host=127.0.0.1;dbname=castcompass'
         user: 'root'
-        password: 'root'
+        password: ''
+        cleanup: false

@@ -1,5 +1,12 @@
 suite_namespace: backend\tests\functional
 actor: FunctionalTester
 modules:
-    enabled:
-        - Yii2
+  enabled:
+    - Yii2:
+        part: [ orm, email, fixtures ]
+    - Asserts:
+    - Db:
+        dsn: 'mysql:host=127.0.0.1;dbname=castcompass'
+        user: 'root'
+        password: ''
+        cleanup: false
