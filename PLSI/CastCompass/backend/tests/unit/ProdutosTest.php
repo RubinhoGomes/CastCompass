@@ -71,7 +71,7 @@ class ProdutoTest extends \Codeception\Test\Unit
         $imagem->produtoID = '';
         $this->assertFalse($imagem->validate(['produtoID']));
 
-        $imagem->produtoID = '16';
+        $imagem->produtoID = '21';
         $this->assertTrue($imagem->validate(['produtoID']));
 
         $imagem->filename = '';
