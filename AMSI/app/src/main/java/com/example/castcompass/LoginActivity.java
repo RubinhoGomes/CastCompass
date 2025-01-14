@@ -36,15 +36,20 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         String user = etUsername.getText().toString();
         String pass = etPassword.getText().toString();
 
-        if(!isPasswordValida(pass)) {
-            etPassword.setError("Password inválida");
-            return;
-        }
 
-        Singleton singleton = Singleton.getInstance(this);
-        singleton.setLoginListener(this);
+        Intent intent = new Intent(this, MenuMainActivity.class);
+        startActivity(intent);
+        finish();
 
-        singleton.loginAPI(user, pass, getApplicationContext());
+       // if(!isPasswordValida(pass)) {
+         //   etPassword.setError("Password inválida");
+           // return;
+     //   }
+
+   //     Singleton singleton = Singleton.getInstance(this);
+ //       singleton.setLoginListener(this);
+
+       // singleton.loginAPI(user, pass, getApplicationContext());
     }
 
     private boolean isUsernameValido(String username) {
