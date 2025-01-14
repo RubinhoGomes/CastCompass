@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,58 +13,69 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.castcompass.listeners.LoginListener;
+import com.example.castcompass.models.Singleton;
 
-    public static final int TAMANHO_MINIMO_SENHA = 4;
-    public static final String EMAIL = "Email";
+public class LoginActivity extends AppCompatActivity implements LoginListener {
 
-    public EditText etEmail;
-    public EditText etPassword;
-
+    private EditText etUsername, etPassword;
+    public static final int MAX_CHAR = 4, MIN_CHAR = 3;
+    public static final String USER = "USER";
+    public static final String TOKEN = "token";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        etEmail = findViewById(R.id.etEmail);
+        setTitle("Login");
+        //inicializar
+        etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
     }
 
     public void onClickLogin(View view) {
-        //TODO: código para validar email e password
-        //usar o setError das TextViews para mostrar mensagens de erro
-        String email = etEmail.getText().toString();
-        String password = etPassword.getText().toString();
+        String user = etUsername.getText().toString();
+        String pass = etPassword.getText().toString();
 
-        if (!isEmailValid(email)) {
-            etEmail.setError("Email inválido");
+        if(!isPasswordValida(pass)) {
+            etPassword.setError("Password inválida");
             return;
         }
 
-        if (!isPasswordValid(password)) {
-            etPassword.setError("Tem de ter 4 ou mais Caracteres");
-            return;
-        }
+        Singleton singleton = Singleton.getInstance(this);
+        singleton.setLoginListener(this);
 
-//        Toast.makeText(this,"Login efetuado com sucesso", Toast.LENGTH_LONG).show();
-//        Intent intent = new Intent(this, MainActivity.class);
-        Intent intent = new Intent(this, MenuMainActivity.class);
-        intent.putExtra(EMAIL, email);
-        startActivity(intent);
-        finish();
+        singleton.loginAPI(user, pass, getApplicationContext());
     }
 
-    public boolean isEmailValid(String email) {
-        if (email == null) {
+    private boolean isUsernameValido(String username) {
+        if(username == null)
             return false;
-        }
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
+        return username.length() >= MIN_CHAR;
     }
 
-    public boolean isPasswordValid(String password) {
-        if (password == null) {
+    private boolean isPasswordValida(String pass) {
+        if(pass == null)
             return false;
+        return pass.length() >= MAX_CHAR;
+    }
+
+    @Override
+    public void onUpdateLogin(String token) {
+        if(token != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(USER, etUsername.getText().toString());
+
+            // SharedPreferences sharedToken  = getSharedPreferences("DADOS_USER", MODE_PRIVATE);
+            // SharedPreferences.Editor editor  = sharedToken.edit();
+            // editor.putString("username", etUsername.getText().toString());
+            // editor.apply();
+            // startActivity(intent);
+            finish();
         }
-        return password.length() >= TAMANHO_MINIMO_SENHA;
+        else {
+            Toast.makeText(this, "Token incorreto", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

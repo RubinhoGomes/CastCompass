@@ -29,7 +29,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
-    private String email = "Sem Email!";
+    private String username = "Sem Username!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +60,20 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void carregarCabecalho() {
-        email = getIntent().getStringExtra(LoginActivity.EMAIL);
+        username = getIntent().getStringExtra(LoginActivity.USER);
         SharedPreferences sharedPrefUser = getSharedPreferences("DADOS_USER", Context.MODE_PRIVATE);
 
-        if (email != null) {
+        if (username != null) {
             SharedPreferences.Editor editor = sharedPrefUser.edit();
-            editor.putString("EMAIL", email);
+            editor.putString("USERNAME", username);
             editor.apply();
         } else {
-            email = sharedPrefUser.getString("EMAIL", "Sem Email!");
+            username = sharedPrefUser.getString("USERNAME", "Sem Username!");
         }
 
         View headerView = navigationView.getHeaderView(0);
-        TextView nav_tvEmail = headerView.findViewById(R.id.tvEmail);
-        nav_tvEmail.setText(email);
+        TextView nav_tvUsername = headerView.findViewById(R.id.tvUsername);
+        nav_tvUsername.setText(username);
     }
 
     @Override
