@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.models.Singleton;
+import com.example.castcompass.models.Utilizador;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
@@ -36,20 +37,15 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         String user = etUsername.getText().toString();
         String pass = etPassword.getText().toString();
 
-
-        Intent intent = new Intent(this, MenuMainActivity.class);
-        startActivity(intent);
-        finish();
-
        // if(!isPasswordValida(pass)) {
          //   etPassword.setError("Password inválida");
            // return;
      //   }
 
-   //     Singleton singleton = Singleton.getInstance(this);
- //       singleton.setLoginListener(this);
+       Singleton singleton = Singleton.getInstance(this);
+       singleton.setLoginListener(this);
 
-       // singleton.loginAPI(user, pass, getApplicationContext());
+       singleton.loginAPI(user, pass, getApplicationContext());
     }
 
     private boolean isUsernameValido(String username) {
@@ -66,10 +62,13 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     @Override
-    public void onUpdateLogin(String token) {
-        if(token != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra(USER, etUsername.getText().toString());
+    public void onUpdateLogin(Utilizador utilizador) {
+        if(utilizador.token != null) {
+            Intent intent = new Intent(this, MenuMainActivity.class);
+            intent.putExtra(TOKEN, utilizador.getToken());
+            intent.putExtra(USER, utilizador.getUsername());
+
+            startActivity(intent);
 
             // SharedPreferences sharedToken  = getSharedPreferences("DADOS_USER", MODE_PRIVATE);
             // SharedPreferences.Editor editor  = sharedToken.edit();

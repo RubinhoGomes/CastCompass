@@ -39,9 +39,9 @@ public class Singleton {
 
     private ProdutosListener produtosListener;
 
-    private String login;
-    private static String urlApiLogin = "http://127.0.0.1:8888/Projeto/CastCompass/PLSI/CastCompass/backend/web/api/login/login/";
-    private static String urlApiProdutos = "http://localhost/CastCompass/PLSI/CastCompass/backend/web/api/produtos";
+    private Utilizador login;
+    private static String urlApiLogin = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
+    private static String urlApiProdutos = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/produtos";
 
     private ArrayList<Produto> listaProdutos;
 
@@ -83,8 +83,6 @@ public class Singleton {
                 public void onResponse(String response) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String token = jsonObject.getString("token");
-                        int id = jsonObject.getInt("id");
 
                         login = LoginJsonParser.loginJsonParser(response);
 
@@ -92,8 +90,12 @@ public class Singleton {
                         // editor.putString("token", jsonObject.getString("token"));
                         // editor.apply();
 
+                        if(loginListener != null) {
+                            loginListener.onUpdateLogin(login);
+                        }
+
                         Toast.makeText(context, "Login efetuado com sucesso com o", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, "Token: " + token, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Token: " + login.getToken(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(context, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -107,10 +109,19 @@ public class Singleton {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put("username", username);
-                    params.put("password", password);
+                    //params.put("username", username);
+                    //params.put("password", password);
                     return params;
                 }
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+                    String credentials = username + ":" + password;
+                    String auth = "Basic " + android.util.Base64.encodeToString(credentials.getBytes(), android.util.Base64.NO_WRAP);
+                    headers.put("Authorization", auth);
+                    return headers;
+                }
+
             };
             volleyQueue.add(request);
         }
@@ -123,17 +134,12 @@ public class Singleton {
                 try {
                     // Parse do JSON retornado pela API
                     JSONArray jsonArray = new JSONArray(response);
-                    listaProdutos.clear(); // Limpar a lista anterior
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        Produto produto = ProdutosJsonParser.parserJsonProduto(jsonObject.toString());
-                        listaProdutos.add(produto);
-                    }
+                    ArrayList<Produto> produto = ProdutosJsonParser.parserJsonProdutos(jsonArray, context);
 
                     // Notificar o listener que a lista foi atualizada
                     if (produtosListener != null) {
-                        produtosListener.onRefreshListaProdutos(listaProdutos);
+                        produtosListener.onRefreshListaProdutos(produto);
                     }
 
                 } catch (Exception e) {

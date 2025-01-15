@@ -1,5 +1,7 @@
 package com.example.castcompass.listeners;
 
+import com.example.castcompass.models.Utilizador;
+
 public interface LoginListener {
-    void onUpdateLogin(String token);
+    void onUpdateLogin(Utilizador utilizador);
 }
