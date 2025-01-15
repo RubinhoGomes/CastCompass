@@ -6,13 +6,15 @@ import android.content.Context;
 import android.widget.Toast;
 
 //
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Imports from CastCompass
 import com.example.castcompass.listeners.LoginListener;
+import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.utils.LoginJsonParser;
 import com.example.castcompass.utils.util;
-
+import com.example.castcompass.utils.ProdutosJsonParser;
 // Imports from Volley
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,7 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
+import java.util.ArrayList;
 
 // For now I know this is the imports to use the HashMap and Map, and of course ArrayList
 // I will need to check the import for the Volley
@@ -35,9 +37,18 @@ public class Singleton {
     private static RequestQueue volleyQueue;
     private LoginListener loginListener;
 
-    private String login;
-    private static String urlApiLogin = "http://127.0.0.1:8888/Projeto/CastCompass/PLSI/CastCompass/frontend/web/api/login/login/";
+    private ProdutosListener produtosListener;
 
+    private String login;
+    private static String urlApiLogin = "http://127.0.0.1:8888/Projeto/CastCompass/PLSI/CastCompass/backend/web/api/login/login/";
+    private static String urlApiProdutos = "http://localhost/CastCompass/PLSI/CastCompass/backend/web/api/produtos";
+
+    private ArrayList<Produto> listaProdutos;
+
+
+    public void setProdutosListener(ProdutosListener produtosListener) {
+        this.produtosListener = produtosListener;
+    }
 
     // CONSTRUCTOR
 
@@ -50,9 +61,8 @@ public class Singleton {
     }
 
     private Singleton(Context context) {
-
-            // Produtos
-            // Produtos Helper
+        volleyQueue = Volley.newRequestQueue(context);
+        listaProdutos = new ArrayList<>();
     }
 
     // LISTENERS
@@ -104,5 +114,43 @@ public class Singleton {
             };
             volleyQueue.add(request);
         }
+    }
+
+    public void getAllProdutosAPI(final Context context) {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiProdutos, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    // Parse do JSON retornado pela API
+                    JSONArray jsonArray = new JSONArray(response);
+                    listaProdutos.clear(); // Limpar a lista anterior
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Produto produto = ProdutosJsonParser.parserJsonProduto(jsonObject.toString());
+                        listaProdutos.add(produto);
+                    }
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (produtosListener != null) {
+                        produtosListener.onRefreshListaProdutos(listaProdutos);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar produtos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    public ArrayList<Produto> getProdutosBD() {
+        return listaProdutos;
     }
 }

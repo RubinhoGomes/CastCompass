@@ -81,9 +81,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         Fragment fragment = null;
 
         if (item.getItemId() == R.id.navHome) {
+            fragment = new ListaProdutosFragment();
             setTitle(item.getTitle());
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
         } else if (item.getItemId() == R.id.navCarrinho) {
             setTitle(item.getTitle());
         }else if (item.getItemId() == R.id.navFavoritos) {

@@ -33,7 +33,10 @@ public class ProdutosJsonParser {
                 int categoriaID = produtoJSON.getInt("categoriaID");
                 int ivaID = produtoJSON.getInt("ivaID");
 
-                Produto produto = new Produto(id, nome, marca, descricao,preco, stock , categoriaID, ivaID);
+                String imgPath = produtoJSON.getString("img");
+                String imgUrl = imgPath.isEmpty() ? "" : "http://" + ip + "/" + imgPath;
+
+                Produto produto = new Produto(id, imgUrl, nome, marca, descricao, preco, stock, categoriaID, ivaID);
                 produtos.add(produto);
             }
         } catch (JSONException e) {
@@ -58,7 +61,10 @@ public class ProdutosJsonParser {
             int categoriaID = produtoJSON.getInt("categoriaID");
             int ivaID = produtoJSON.getInt("ivaID");
 
-            produto = new Produto(id, nome, marca, descricao, preco,stock, categoriaID, ivaID);
+            String imgPath = produtoJSON.getString("img");
+            String imgUrl = imgPath.isEmpty() ? "" : imgPath;
+
+            produto = new Produto(id, imgUrl, nome, marca, descricao, preco, stock, categoriaID, ivaID);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

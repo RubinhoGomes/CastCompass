@@ -3,11 +3,12 @@ package com.example.castcompass.models;
 public class Produto {
 
     private int id, stock, categoriaID, ivaID;
-    private String nome, marca, descricao;
+    private String nome,img, marca, descricao;
     private float preco;
 
-    public Produto(int id, String nome, String marca, String descricao, float preco, int stock, int categoriaID, int ivaID) {
+    public Produto(int id, String img,String nome, String marca, String descricao, float preco, int stock, int categoriaID, int ivaID) {
         this.id = id;
+        this.img = img;
         this.nome = nome;
         this.marca = marca;
         this.descricao = descricao;
@@ -23,6 +24,14 @@ public class Produto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getNome() {
