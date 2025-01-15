@@ -22,7 +22,8 @@
         android:layout_height="48dp"
         android:ems="10"
         android:hint="@string/introduza_o_username"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:text="ze" />
 
     <Space
         android:layout_width="match_parent"
@@ -36,7 +37,8 @@
         android:height="48dp"
         android:ems="10"
         android:hint="@string/introduza_a_password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:text="12345678" />
 
     <Space
         android:layout_width="match_parent"

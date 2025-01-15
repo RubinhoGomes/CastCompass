@@ -72,7 +72,7 @@ public class ListaProdutosAdaptador extends BaseAdapter {
             tvNome = view.findViewById(R.id.tvNome);
             tvMarca = view.findViewById(R.id.tvMarca);
             tvPreco = view.findViewById(R.id.tvPreco);
-            tvDescricao = view.findViewById(R.id.tvDescricao);
+//            tvDescricao = view.findViewById(R.id.tvDescricao);
             tvCategoria = view.findViewById(R.id.tvCategoria);
             imgCapa = view.findViewById(R.id.imgCapa);
         }
@@ -81,8 +81,8 @@ public class ListaProdutosAdaptador extends BaseAdapter {
             tvNome.setText(produto.getNome());
             tvMarca.setText(produto.getMarca());
             tvPreco.setText(String.format("€ %.2f", produto.getPreco())); // Formatação de preço
-            tvDescricao.setText(produto.getDescricao());
-            tvCategoria.setText("Categoria: " + produto.getCategoriaID());
+//            tvDescricao.setText(produto.getDescricao());
+            tvCategoria.setText("" + produto.getCategoriaID());
 
             // Carrega a imagem usando Glide
             Glide.with(context)
@@ -90,7 +90,7 @@ public class ListaProdutosAdaptador extends BaseAdapter {
                     .placeholder(R.drawable.logo)
                     //guardar em cache todas as imagens
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgCapa);;
+                    .into(imgCapa);
         }
 
 
