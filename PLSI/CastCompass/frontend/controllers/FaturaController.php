@@ -41,6 +41,9 @@ class FaturaController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
         $carrinho = Carrinho::findOne(['profileID' => Yii::$app->user->identity->profile->id]);
         $faturas = Fatura::findAll(['carrinhoID' => $carrinho->id]);
       

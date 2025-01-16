@@ -109,18 +109,22 @@ $categorias = Categoria::find()->all();
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="<?= Yii::$app->homeUrl ?>" class="nav-item nav-link active">Home</a>
                                 <a href="<?= Url::to(['/site/shop']) ?>" class="nav-item nav-link">Loja</a>
-                                <div class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button">Páginas <i
-                                                class="fa fa-angle-down mt-1"></i></a>
-                                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="<?= Url::to(['/carrinho/index']) ?>" class="dropdown-item">Carrinho</a>
-                                        <a href="<?= Url::to(['/favoritos/index']) ?>"
-                                           class="dropdown-item">Favoritos</a>
-                                        <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>"
-                                           class="dropdown-item">Perfil</a>
-                                        <a href="<?= Url::to(['/fatura/index']) ?>" class="dropdown-item">Faturas</a>
+                                <?php if (!Yii::$app->user->isGuest) : ?>
+                                    <div class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button">Páginas
+                                            <i class="fa fa-angle-down mt-1"></i></a>
+                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                            <a href="<?= Url::to(['/carrinho/index']) ?>"
+                                               class="dropdown-item">Carrinho</a>
+                                            <a href="<?= Url::to(['/favoritos/index']) ?>"
+                                               class="dropdown-item">Favoritos</a>
+                                            <a href="<?= Url::to(['/user/view/', 'id' => Yii::$app->user->id]) ?>"
+                                               class="dropdown-item">Perfil</a>
+                                            <a href="<?= Url::to(['/fatura/index']) ?>"
+                                               class="dropdown-item">Faturas</a>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
                                 <a href="<?= Url::to(['/site/contact']) ?>" class="nav-item nav-link">Contacte-nos</a>
                                 <a href="<?= Url::to(['/site/about']) ?>" class="nav-item nav-link">Sobre Nós</a>
                             </div>
@@ -184,7 +188,8 @@ $categorias = Categoria::find()->all();
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Rua de Leiria</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i><a href="mailto:support@castcompass.cc">support@castcompass.cc</a></p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i><a
+                                href="mailto:support@castcompass.cc">support@castcompass.cc</a></p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+351 261 347 552</p>
                 </div>
                 <div class="col-lg-8 col-md-12">

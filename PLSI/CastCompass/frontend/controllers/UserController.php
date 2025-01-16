@@ -40,6 +40,9 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => Profile::find(),
             /*
@@ -67,6 +70,9 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
