@@ -44,17 +44,15 @@ public class ListaProdutosFragment extends Fragment implements ProdutosListener 
 
         Singleton.getInstance(getContext()).setProdutosListener(this);
         Singleton.getInstance(getContext()).getAllProdutosAPI(getContext());
-  /*
         // Configurar clique em itens da lista
         lvProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
           public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DetalhesProdutoActivity.class);
-                intent.putExtra(DetalhesProdutoActivity.ID_PRODUTO, (int) id);
-                startActivityForResult(intent, MainActivity.EDIT);
-
+                Intent intent = new Intent(getContext(), DetalhesProdutosActivity.class);
+                intent.putExtra(DetalhesProdutosActivity.IDPRODUTO, (int) id);
+                startActivity(intent);
+            }
         });
-}*/
         return view;
     }
 
