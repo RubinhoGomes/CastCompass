@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 // Imports from CastCompass
 import com.example.castcompass.listeners.LoginListener;
+import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.utils.LoginJsonParser;
 import com.example.castcompass.utils.util;
@@ -38,16 +39,21 @@ public class Singleton {
     private LoginListener loginListener;
 
     private ProdutosListener produtosListener;
+    private ProdutoListener produtoListener;
 
     private Utilizador login;
     private static String urlApiLogin = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
     private static String urlApiProdutos = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/produtos";
-
+    private static String UrlApiProduto = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/produtos/";
     private ArrayList<Produto> listaProdutos;
 
 
     public void setProdutosListener(ProdutosListener produtosListener) {
         this.produtosListener = produtosListener;
+    }
+
+    public void setProdutoListener(ProdutoListener produtoListener) {
+        this.produtoListener = produtoListener;
     }
 
     // CONSTRUCTOR
@@ -154,6 +160,34 @@ public class Singleton {
         });
 
         volleyQueue.add(request);
+    }
+
+    public Produto getProdutoAPI(final Context context, int id) {
+        Produto produto = null;
+        StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + id, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Produto produto = ProdutosJsonParser.parserJsonProduto(response);
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (produtoListener != null) {
+                        produtoListener.onRefreshProduto(produto);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar produtos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+        return produto;
     }
 
     public ArrayList<Produto> getProdutosBD() {
