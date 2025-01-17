@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.models.Produto;
 import com.example.castcompass.models.Singleton;
@@ -60,6 +62,12 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
         tvStock.setText(produto.getStock() + " unidades");
         tvDescricao.setText(produto.getDescricao());
         // imgCapa.setImageResource(produto.getImagem());
+        Glide.with(this)
+                .load(produto.getImagem())
+                .placeholder(R.drawable.logo)
+                //guardar em cache todas as imagens
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imgCapa);
     }
 
     @Override
