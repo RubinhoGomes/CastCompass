@@ -108,10 +108,11 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/favoritos',
                     'extraPatterns' => [
-                        'GET count' => 'count',
+                      'GET count' => 'count',
                         'GET profilefavoritos' => 'profilefavoritos',
                         'GET countfavoritos' => 'countfavoritos',
-                        'POST adicionarremoverfavorito' => 'adicionarremoverfavorito',
+                        'POST adicionar' => 'adicionar',
+                        'POST remover' => 'remover',
                     ],
                 ],
                 [

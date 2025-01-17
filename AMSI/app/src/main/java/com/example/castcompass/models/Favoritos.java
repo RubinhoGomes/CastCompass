@@ -2,14 +2,15 @@ package com.example.castcompass.models;
 
 public class Favoritos {
 
-    private int idProduto, idUtilizador;
+    private int id, idProduto, idUtilizador;
     private String nomeProduto, marcaProduto, descricaoProduto, categoriaProduto, imagemProduto;
     private float precoProduto;
 
     public Favoritos() {
     }
 
-    public Favoritos(int idProduto, int idUtilizador, String nomeProduto, String marcaProduto, String descricaoProduto, String categoriaProduto, String imagemProduto, float precoProduto) {
+    public Favoritos(int id, int idProduto, int idUtilizador, String nomeProduto, String marcaProduto, String descricaoProduto, String categoriaProduto, String imagemProduto, float precoProduto) {
+        this.id = id;
         this.idProduto = idProduto;
         this.idUtilizador = idUtilizador;
         this.nomeProduto = nomeProduto;
@@ -20,6 +21,13 @@ public class Favoritos {
         this.precoProduto = precoProduto;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getIdProduto() {
         return idProduto;

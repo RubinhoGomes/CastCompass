@@ -17,7 +17,7 @@ public class FavoritoBDHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase db;
 
-    private static final String IDPRODUTO = "idProduto", IDUTILIZADOR = "idUtilizador", NOME = "nome", MARCA = "marca", DESCRICAO = "descricao", PRECO = "preco", CATEGORIA = "categoria", IMAGEM = "imagem";
+    private static final String ID = "id", IDPRODUTO = "idProduto", IDUTILIZADOR = "idUtilizador", NOME = "nome", MARCA = "marca", DESCRICAO = "descricao", PRECO = "preco", CATEGORIA = "categoria", IMAGEM = "imagem";
 
     public FavoritoBDHelper(Context context) {
         super(context, DBNAME, null, DB_VERSION);
@@ -31,11 +31,21 @@ public class FavoritoBDHelper extends SQLiteOpenHelper {
     public ArrayList<Favoritos> getAllFavoritos(){
         ArrayList<Favoritos> favoritos = new ArrayList<>();
 
-        Cursor cursor = db.query(TABLE_NAME, new String[]{IDPRODUTO, IDUTILIZADOR, NOME, MARCA, DESCRICAO, CATEGORIA, IMAGEM, PRECO}, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, new String[]{ID, IDPRODUTO, IDUTILIZADOR, NOME, MARCA, DESCRICAO, CATEGORIA, IMAGEM, PRECO}, null, null, null, null, null);
 
         if(cursor.moveToFirst()){
             do{
-                Favoritos aux = new Favoritos(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
+                Favoritos aux = new Favoritos(
+                        cursor.getInt(0),    // ID
+                        cursor.getInt(1),    // IDPRODUTO
+                        cursor.getInt(2),    // IDUTILIZADOR
+                        cursor.getString(3), // NOME
+                        cursor.getString(4), // MARCA
+                        cursor.getString(5), // DESCRICAO
+                        cursor.getString(6), // CATEGORIA
+                        cursor.getString(7), // IMAGEM
+                        cursor.getFloat(8)  // PRECO
+                );
                 favoritos.add(aux);
             }while(cursor.moveToNext());
             cursor.close();
@@ -48,6 +58,7 @@ public class FavoritoBDHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABLE_NAME + "(" +
+                ID + " INTEGER, " +
                 IDPRODUTO + " INTEGER, " +
                 IDUTILIZADOR + " INTEGER, " +
                 NOME + " TEXT, " +
