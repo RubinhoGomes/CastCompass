@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Imports from CastCompass
+import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
@@ -38,10 +39,11 @@ public class Singleton {
     private static RequestQueue volleyQueue;
     private LoginListener loginListener;
 
-    private FavoritoBDHelper favoritoBD = null;
+    public FavoritoBDHelper favoritoBD = new FavoritoBDHelper(this);
 
     private ProdutosListener produtosListener;
     private ProdutoListener produtoListener;
+    private FavoritosListener favoritosListener;
 
     private Utilizador login;
     private static String urlApiLogin = "";
@@ -84,6 +86,10 @@ public class Singleton {
 
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
+    }
+
+    public void setFavoritosListener(FavoritosListener favoritosListener){
+        this.favoritosListener = favoritosListener;
     }
 
     // API

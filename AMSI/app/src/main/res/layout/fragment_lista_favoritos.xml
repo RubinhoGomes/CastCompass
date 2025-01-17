@@ -9,6 +9,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:textSize="12pt"
+        android:text="Não tens favoritos" />
+
+    <ListView
+        android:id="@+id/lvFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
