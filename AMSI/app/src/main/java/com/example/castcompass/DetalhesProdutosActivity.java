@@ -23,7 +23,7 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
     private TextView tvNome, tvPreco, tvDescricao, tvStock;
     private ImageView imgCapa;
     private Produto produto;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -38,6 +38,8 @@ public class Singleton {
     private static RequestQueue volleyQueue;
     private LoginListener loginListener;
 
+    private FavoritoBDHelper favoritoBD = null;
+
     private ProdutosListener produtosListener;
     private ProdutoListener produtoListener;
 
@@ -165,6 +167,34 @@ public class Singleton {
     public Produto getProdutoAPI(final Context context, int id) {
         Produto produto = null;
         StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + id, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Produto produto = ProdutosJsonParser.parserJsonProduto(response);
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (produtoListener != null) {
+                        produtoListener.onRefreshProduto(produto);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar produtos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+        return produto;
+    }
+
+    public Produto getFavoritoAPI(final Context context, int id) {
+        Produto produto = null;
+        StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
