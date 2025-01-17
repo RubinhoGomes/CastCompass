@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import com.example.castcompass.ListaProdutosFragment;
 import com.example.castcompass.R;
 import com.example.castcompass.models.Produto;
 
@@ -53,7 +54,7 @@ public class ListaProdutosAdaptador extends BaseAdapter {
         }
 
 
-        ViewHolderLista viewHolder = (ViewHolderLista) view.getTag();
+        ListaProdutosAdaptador.ViewHolderLista viewHolder = (ViewHolderLista) view.getTag();
         if (viewHolder == null) {
             viewHolder = new ViewHolderLista(view);
             view.setTag(viewHolder);
@@ -91,8 +92,5 @@ public class ListaProdutosAdaptador extends BaseAdapter {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgCapa);
         }
-
-
-
     }
 }

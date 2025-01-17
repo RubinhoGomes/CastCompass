@@ -39,7 +39,7 @@ public class Singleton {
     private static RequestQueue volleyQueue;
     private LoginListener loginListener;
 
-    //public FavoritoBDHelper favoritoBD = new FavoritoBDHelper(this);
+    public FavoritoBDHelper favoritoBD;
 
     private ProdutosListener produtosListener;
     private ProdutoListener produtoListener;
@@ -78,8 +78,8 @@ public class Singleton {
     // MUDA IP
     public void MudarIP(String ip) {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
-        urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos";
-        UrlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/";
+        urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
+        UrlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
     }
 
     // LISTENERS
@@ -179,7 +179,7 @@ public class Singleton {
 
     public Produto getProdutoAPI(final Context context, int id) {
         Produto produto = null;
-        StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + id, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + "?id=" + id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

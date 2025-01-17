@@ -2,19 +2,20 @@ package com.example.castcompass.models;
 
 public class Produto {
 
-    private int id, stock, categoriaID, ivaID;
-    private String nome,img, marca, descricao;
+    private int id, stock, iva;
+    private String nome,img, marca, descricao, categoria, imagem;
     private float preco;
 
-    public Produto(int id,String nome, String marca, String descricao, float preco, int stock, int categoriaID, int ivaID) {
+    public Produto(int id,String nome, String marca, String descricao, float preco, int stock, String categoria, int iva, String imagem) {
         this.id = id;
         this.nome = nome;
         this.marca = marca;
         this.descricao = descricao;
         this.preco = preco;
         this.stock = stock;
-        this.categoriaID = categoriaID;
-        this.ivaID = ivaID;
+        this.categoria = categoria;
+        this.iva = iva;
+        this.imagem = imagem;
     }
 
     public int getId() {
@@ -23,14 +24,6 @@ public class Produto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public String getNome() {
@@ -73,20 +66,24 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public int getCategoriaID() {
-        return categoriaID;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriaID(int categoriaID) {
-        this.categoriaID = categoriaID;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
+
+    public String getImagem() { return this.imagem; }
+
+    public void setImagem(String imagem) { this.imagem = imagem; }
 
     public int getIvaID() {
-        return ivaID;
+        return iva;
     }
 
-    public void setIvaID(int ivaID) {
-        this.ivaID = ivaID;
+    public void setIvaID(int iva) {
+        this.iva = iva;
     }
 
 

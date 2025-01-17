@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\auth\HttpBasicAuth;
 use backend\modules\api\components\CustomAuth;
 use common\models\Produto;
+use common\models\Imagem;
+use Yii;
 
 /**
  * Default controller for the `api` module
@@ -53,7 +55,26 @@ class FavoritosController extends ActiveController
             return ['message' => 'Nenhum favorito encontrado para este perfil.'];
         }
 
-        return $favoritos;
+        $data = [];
+
+        foreach ($favoritos as $favorito) {
+            $produto = Produto::findOne($favorito->produtoID);
+            $imagem = Imagem::findOne(['produtoID' => $produto->id]);
+
+            if ($produto) {
+                $data[] = [
+                    'idProduto' => $produto->id,
+                    'idUtilizador' => $favorito->profileID,
+                    'nome' => $produto->nome,
+                    'descricao' => $produto->descricao,
+                    'preco' => $produto->preco,
+                    'categoria' => $produto->categoria->nome,
+                    'imagem' => 'http://172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $imagem->filename,
+                ];
+            }
+        }
+
+        return $data;
     }
 
     public function actionCountfavoritos($profileID){
