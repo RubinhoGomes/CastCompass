@@ -47,7 +47,7 @@ class ProdutoController extends ActiveController
             'iva' => $produto->iva->valor * 100,
             'descricao' => $produto->descricao,
             'categoria' => $produto->categoria->nome,
-            'imagem' => '172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $imagem->filename,
+            'imagem' => 'http://172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $imagem->filename,
           ];
         }
 
