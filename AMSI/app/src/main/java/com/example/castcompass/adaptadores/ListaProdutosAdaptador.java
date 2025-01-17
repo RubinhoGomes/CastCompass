@@ -82,11 +82,11 @@ public class ListaProdutosAdaptador extends BaseAdapter {
             tvNome.setText(produto.getNome());
             tvMarca.setText(produto.getMarca());
             tvPreco.setText(String.format("%.2f€", produto.getPreco())); // Formatação de preço
-            tvCategoria.setText("" + produto.getCategoriaID());
+            tvCategoria.setText(produto.getCategoria());
 
             // Carrega a imagem usando Glide
             Glide.with(context)
-                    .load(produto.getImg())
+                    .load(produto.getImagem())
                     .placeholder(R.drawable.logo)
                     //guardar em cache todas as imagens
                     .diskCacheStrategy(DiskCacheStrategy.ALL)

@@ -30,9 +30,7 @@ class ProdutoController extends ActiveController
         return $behaviors;
     }
 
-<<<<<<< HEAD
-=======
-    public function actionAll() {
+   public function actionAll() {
 
         $produtos = $this->modelClass::find()->all();
 
@@ -75,9 +73,7 @@ class ProdutoController extends ActiveController
  
       return $data;
     }
-    
->>>>>>> f68086a (🎨 Fixing url image 🎨)
-
+ 
     public function actionCountproducts($categoriaID){
         $count = $this->modelClass::find()
             ->where(['categoriaID' => $categoriaID])
