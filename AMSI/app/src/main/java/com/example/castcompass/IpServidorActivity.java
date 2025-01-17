@@ -21,10 +21,11 @@ public class IpServidorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ip_servidor);
+
+        etIpServidor = findViewById(R.id.etIpServidor);
     }
 
     public void onClickServidor(View view) {
-        etIpServidor = findViewById(R.id.etIpServidor);
         String ipServidor = etIpServidor.getText().toString();
         Singleton singleton = Singleton.getInstance(this);
         singleton.MudarIP(ipServidor);
