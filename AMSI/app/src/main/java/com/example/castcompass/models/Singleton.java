@@ -39,7 +39,7 @@ public class Singleton {
     private static RequestQueue volleyQueue;
     private LoginListener loginListener;
 
-    public FavoritoBDHelper favoritoBD = new FavoritoBDHelper(this);
+    //public FavoritoBDHelper favoritoBD = new FavoritoBDHelper(this);
 
     private ProdutosListener produtosListener;
     private ProdutoListener produtoListener;

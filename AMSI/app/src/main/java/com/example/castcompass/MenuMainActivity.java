@@ -85,6 +85,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             fragment = new ListaProdutosFragment();
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navCarrinho) {
+            fragment = new ListaCarrinhoFragment();
             setTitle(item.getTitle());
         }else if (item.getItemId() == R.id.navFavoritos) {
             // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();

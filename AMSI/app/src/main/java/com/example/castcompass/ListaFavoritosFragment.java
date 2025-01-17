@@ -45,7 +45,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
 
         lvFavoritos = view.findViewById(R.id.lvFavoritos);
         Singleton.getInstance(getContext()).setFavoritosListener(this);
-        Singleton.getInstance(getContext()).favoritoBD.getAllFavoritos();
+       // Singleton.getInstance(getContext()).favoritoBD.getAllFavoritos();
 
         return view;
     }
