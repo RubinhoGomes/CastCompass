@@ -44,7 +44,7 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
         Singleton.getInstance(this).setProdutoListener(this);
         produto = Singleton.getInstance(this).getProdutoAPI(this, getIntent().getIntExtra(IDPRODUTO, 0));
 
-        if(produto != null){
+        if (produto != null) {
             carregarDados();
         }
     }
@@ -52,10 +52,11 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_favorito, menu);
+        getMenuInflater().inflate(R.menu.menu_nao_favorito, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void carregarDados(){
+    public void carregarDados() {
 
         tvNome.setText(produto.getNome());
         tvPreco.setText(produto.getPreco() + "€");

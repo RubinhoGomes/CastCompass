@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/itemFavorito"
-        android:icon="@drawable/ic_favorito"
-        android:title="Favorito"
-        app:showAsAction="always" />
+        android:id="@+id/itemNaoFavorito"
+        android:icon="@drawable/ic_nao_favorito"
+        android:title="Não Favorito"
+        app:showAsAction="always"/>
 </menu>
