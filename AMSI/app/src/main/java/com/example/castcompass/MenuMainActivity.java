@@ -22,6 +22,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.castcompass.models.Singleton;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -86,6 +87,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         } else if (item.getItemId() == R.id.navCarrinho) {
             setTitle(item.getTitle());
         }else if (item.getItemId() == R.id.navFavoritos) {
+            // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
+            fragment = new ListaFavoritosFragment();
             setTitle(item.getTitle());
         }else if (item.getItemId() == R.id.navMensagens) {
             setTitle(item.getTitle());

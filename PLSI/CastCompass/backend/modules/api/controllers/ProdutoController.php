@@ -8,6 +8,7 @@ use yii\filters\ContentNegotiator;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 use backend\modules\api\components\CustomAuth;
+use common\models\Imagem;
 
 
 /**
@@ -30,6 +31,50 @@ class ProdutoController extends ActiveController
         return $behaviors;
     }
 
+    public function actionAll() {
+
+        $produtos = $this->modelClass::find()->all();
+
+        foreach ($produtos as $produto) {
+
+          $imagem = Imagem::findOne(['produtoID' => $produto->id]);
+
+          $data[] = [
+            'id' => $produto->id,
+            'nome' => $produto->nome,
+            'marca' => $produto->marca,
+            'preco' => $produto->preco,
+            'stock' => $produto->stock,
+            'iva' => $produto->iva->valor * 100,
+            'descricao' => $produto->descricao,
+            'categoria' => $produto->categoria->nome,
+            'imagem' => '172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $imagem->filename,
+          ];
+        }
+
+        return $data;
+    }
+
+    public function actionProduto($id) {
+      $produto = $this->modelClass::findOne($id);
+  
+      $imagem = Imagem::findOne(['produtoID' => $id]);
+
+      $data = [
+        'id' => $produto->id,
+        'nome' => $produto->nome,
+        'marca' => $produto->marca,
+        'preco' => $produto->preco,
+        'stock' => $produto->stock,
+        'iva' => $produto->iva->valor * 100,
+        'descricao' => $produto->descricao,
+        'categoria' => $produto->categoria->nome,
+        'imagem' => '172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $imagem->filename,
+      ];
+
+      return $data;
+    }
+    
 
     public function actionCountproducts($categoriaID){
         $count = $this->modelClass::find()

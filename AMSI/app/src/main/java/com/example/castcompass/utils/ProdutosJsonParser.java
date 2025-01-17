@@ -30,13 +30,12 @@ public class ProdutosJsonParser {
                 float preco = (float) produtoJSON.getDouble("preco");
                 int stock = produtoJSON.getInt("stock");
                 String descricao = produtoJSON.getString("descricao");
-                int categoriaID = produtoJSON.getInt("categoriaID");
-                int ivaID = produtoJSON.getInt("ivaID");
+                String categoria = produtoJSON.getString("categoria");
+                int iva = produtoJSON.getInt("iva");
 
-                // String imgPath = produtoJSON.getString("img");
-                // String imgUrl = imgPath.isEmpty() ? "" : "http://" + ip + "/" + imgPath;
+                String imgPath = produtoJSON.getString("imagem");;
 
-                Produto produto = new Produto(id, nome, marca, descricao, preco, stock, categoriaID, ivaID);
+                Produto produto = new Produto(id, nome, marca, descricao, preco, stock, categoria, iva, imgPath);
                 produtos.add(produto);
             }
         } catch (JSONException e) {
@@ -58,10 +57,11 @@ public class ProdutosJsonParser {
             float preco = (float) produtoJSON.getDouble("preco");
             int stock = produtoJSON.getInt("stock");
             String descricao = produtoJSON.getString("descricao");
-            int categoriaID = produtoJSON.getInt("categoriaID");
-            int ivaID = produtoJSON.getInt("ivaID");
+            String categoria = produtoJSON.getString("categoria");
+            int iva = produtoJSON.getInt("iva");
+            String imagem = produtoJSON.getString("imagem");
 
-            produto = new Produto(id, nome, marca, descricao, preco, stock, categoriaID, ivaID);
+            produto = new Produto(id, nome, marca, descricao, preco, stock, categoria, iva, imagem);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
