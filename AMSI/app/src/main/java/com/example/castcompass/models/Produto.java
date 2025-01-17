@@ -74,7 +74,7 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public String getImagem() { return this.imagem; }
+    public String getImagem() { return imagem; }
 
     public void setImagem(String imagem) { this.imagem = imagem; }
 
