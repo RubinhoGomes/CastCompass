@@ -68,7 +68,7 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/produto',
                     'extraPatterns' => [
-                        'GET all ' => 'all',
+                        'GET all' => 'all',
                         'GET produto' =>'produto',
                         'GET count' => 'count',
                         'GET procurarnomes' => 'procurarnomes',
