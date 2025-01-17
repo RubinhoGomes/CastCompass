@@ -87,82 +87,92 @@ class FavoritosController extends ActiveController
 
   }
 
-  public function actionAdicionar($produtoID) {
-    
-    $user = \Yii::$app->user->identity;
+    public function actionAdicionar($produtoID) {
+        $user = \Yii::$app->user->identity;
 
-    if (!$user) {
-      return [
-        'success' => false,
-        'message' => 'Usuário não autenticado.',
-      ];
+        if (!$user) {
+            return [
+                'success' => false,
+                'message' => 'Usuário não autenticado.',
+            ];
+        }
+
+        $profile = \common\models\Profile::findOne(['userID' => $user->id]);
+
+        if (!$profile) {
+            return [
+                'success' => false,
+                'message' => 'Perfil do usuário não encontrado.',
+            ];
+        }
+
+        $existingFavorite = $this->modelClass::findOne(['produtoID' => $produtoID, 'profileID' => $profile->id]);
+
+        if ($existingFavorite) {
+            return [
+                'success' => false,
+                'message' => 'O produto já está na lista de favoritos.',
+            ];
+        }
+
+        $model = new \common\models\Favorito();
+        $model->profileID = $profile->id;
+        $model->produtoID = $produtoID;
+
+        if ($model->save()) {
+            return [
+                'success' => true,
+                'message' => 'Favorito adicionado com sucesso.',
+            ];
+        }
+
+        return [
+            'success' => false,
+            'message' => 'Erro ao adicionar favorito.',
+            'errors' => $model->errors,
+        ];
     }
 
-    $profile = \common\models\Profile::findOne(['user_id' => $user->id]);
+    public function actionRemover($produtoID) {
+        $user = \Yii::$app->user->identity;
 
-    if (!$profile) {
-      return [
-        'success' => false,
-        'message' => 'Perfil do usuário não encontrado.',
-      ];
+        if (!$user) {
+            return [
+                'success' => false,
+                'message' => 'Usuário não autenticado.',
+            ];
+        }
+
+        $profile = \common\models\Profile::findOne(['userID' => $user->id]);
+
+        if (!$profile) {
+            return [
+                'success' => false,
+                'message' => 'Perfil do usuário não encontrado.',
+            ];
+        }
+
+        $model = $this->modelClass::find()
+            ->where(['produtoID' => $produtoID, 'profileID' => $profile->id])
+            ->one();
+
+        if (!$model) {
+            return [
+                'success' => false,
+                'message' => 'Favorito não encontrado.',
+            ];
+        }
+
+        if ($model->delete()) {
+            return [
+                'success' => true,
+                'message' => 'Favorito removido com sucesso.',
+            ];
+        }
+
+        return [
+            'success' => false,
+            'message' => 'Erro ao remover favorito.',
+        ];
     }
-
-    // Check if the favorite already exists
-    $existingFavorite = $this->modelClass::findOne(['produtoID' => $produtoID]);
-
-    // Create and save the new favorite
-    $model = new \common\models\Favorito();
-    $model->profileID = $profile->id;
-    $model->produtoID = $produtoID;
-
-    if ($model->save()) {
-      return [
-        'success' => true,
-        'message' => 'Favorito adicionado com sucesso.',
-      ];
-    }
-
-    return [
-      'success' => false,
-      'message' => 'Erro ao adicionar favorito.',
-      'errors' => $model->errors,
-    ];
-  }
-
-  public function actionRemover($produtoID) {
-    $user = \Yii::$app->user->identity;
-
-    if (!$user) {
-      return [
-        'success' => false,
-        'message' => 'Usuário não autenticado.',
-      ];
-    }
-
-    $profile = \common\models\Profile::findOne(['userID' => $user->id]);
-
-    if (!$profile) {
-      return [
-        'success' => false,
-        'message' => 'Perfil do usuário não encontrado.',
-      ];
-    }
-
-    $model = $this->modelClass::find()
-                  ->where(['produtoID' => $produtoID, 'profileID' => $profile->id])
-                  ->one();
-
-    if(!$model) {
-      $model->delete();
-      return [
-        'success' => true,
-        'message' => 'Favorito removido com sucesso.',
-      ];
-    } else ]{
-      return [
-        'success' => false,
-        'message' => 'Favorito não encontrado.',
-      ];
-    }
-  }
 }
