@@ -8,7 +8,7 @@ use yii\filters\ContentNegotiator;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 use backend\modules\api\components\CustomAuth;
-
+use common\models\Imagem;
 
 /**
  * Default controller for the `api` module
