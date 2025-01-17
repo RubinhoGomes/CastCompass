@@ -1,6 +1,7 @@
 package com.example.castcompass;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_produtos);
 
+
         tvNome = findViewById(R.id.tvNome);
         tvPreco = findViewById(R.id.tvPreco);
         tvStock = findViewById(R.id.tvStock);
@@ -39,9 +41,16 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
 
         Singleton.getInstance(this).setProdutoListener(this);
         produto = Singleton.getInstance(this).getProdutoAPI(this, getIntent().getIntExtra(IDPRODUTO, 0));
+
         if(produto != null){
             carregarDados();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_favorito, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void carregarDados(){

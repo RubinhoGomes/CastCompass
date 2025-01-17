@@ -44,9 +44,9 @@ public class Singleton {
     private ProdutoListener produtoListener;
 
     private Utilizador login;
-    private static String urlApiLogin = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
-    private static String urlApiProdutos = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/produtos";
-    private static String UrlApiProduto = "http://172.22.21.205/CastCompass/PLSI/CastCompass/backend/web/api/produtos/";
+    private static String urlApiLogin = "";
+    private static String urlApiProdutos = "";
+    private static String UrlApiProduto = "";
     private ArrayList<Produto> listaProdutos;
 
 
@@ -71,6 +71,13 @@ public class Singleton {
     private Singleton(Context context) {
         volleyQueue = Volley.newRequestQueue(context);
         listaProdutos = new ArrayList<>();
+    }
+
+    // MUDA IP
+    public void MudarIP(String ip) {
+        urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
+        urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos";
+        UrlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/";
     }
 
     // LISTENERS
