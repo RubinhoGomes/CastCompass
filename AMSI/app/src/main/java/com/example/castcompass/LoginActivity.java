@@ -2,16 +2,11 @@ package com.example.castcompass;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.models.Singleton;
@@ -29,7 +24,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         setContentView(R.layout.activity_login);
         setTitle("Login");
         //inicializar
-        etUsername = findViewById(R.id.etUsername);
+        etUsername = findViewById(R.id.etIpServidor);
         etPassword = findViewById(R.id.etPassword);
     }
 

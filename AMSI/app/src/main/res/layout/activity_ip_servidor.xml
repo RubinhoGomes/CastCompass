@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".IpServidorActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -21,24 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:ems="10"
-        android:hint="@string/introduza_o_username"
-        android:inputType="textEmailAddress"
-        android:text="ze" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:height="48dp"
-        android:ems="10"
-        android:hint="@string/introduza_a_password"
-        android:inputType="textPassword"
-        android:text="12345678" />
+        android:hint="@string/introduza_o_ip"
+        android:inputType="text" />
 
     <Space
         android:layout_width="match_parent"
@@ -49,18 +33,7 @@
         android:id="@+id/btnEntrarServer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:onClick="onClickLogin"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3" />
-
-    <Button
-        android:id="@+id/btnRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/register" />
+        android:onClick="onClickServidor"
+        android:text="@string/entrar_no_server" />
 
 </LinearLayout>

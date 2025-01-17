@@ -80,7 +80,7 @@ public class ListaProdutosAdaptador extends BaseAdapter {
         public void update(Produto produto) {
             tvNome.setText(produto.getNome());
             tvMarca.setText(produto.getMarca());
-            tvPreco.setText(String.format("€ %.2f", produto.getPreco())); // Formatação de preço
+            tvPreco.setText(String.format("%.2f€", produto.getPreco())); // Formatação de preço
 //            tvDescricao.setText(produto.getDescricao());
             tvCategoria.setText("" + produto.getCategoriaID());
 
