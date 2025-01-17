@@ -63,6 +63,7 @@ class FavoritosController extends ActiveController
 
             if ($produto) {
                 $data[] = [
+                    'id' => $favorito->id,
                     'idProduto' => $produto->id,
                     'idUtilizador' => $favorito->profileID,
                     'nome' => $produto->nome,
