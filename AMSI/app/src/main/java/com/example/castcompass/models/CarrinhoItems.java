@@ -2,28 +2,20 @@ package com.example.castcompass.models;
 
 public class CarrinhoItems {
 
-    private int id,carrinhoID,produtoID;
+    private int carrinhoID,produtoID;
 
-    private String nome;
+    private String nome, imagem;
     private int quantidade;
     private float valortotal;
 
-    public CarrinhoItems(int id,int carrinhoID,int produtoID,String nome,int quantidade,float valortotal) {
-        this.id = id;
+    public CarrinhoItems(int carrinhoID,int produtoID,String nome, String imagem,int quantidade,float valortotal) {
         this.carrinhoID = carrinhoID;
         this.produtoID = produtoID;
         this.nome = nome;
+        this.imagem = imagem;
         this.quantidade = quantidade;
         this.valortotal = valortotal;
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getCarrinhoID() {

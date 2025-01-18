@@ -1,14 +1,19 @@
 package com.example.castcompass.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Carrinho {
     private int id,profileID,quantidade;
     private float valorTotal;
+    private ArrayList<CarrinhoItems> carrinhoItems;
 
-    public Carrinho(int id,int profileID,float valorTotal, int quantidade) {
+    public Carrinho(int id,int profileID,float valorTotal, int quantidade, ArrayList<CarrinhoItems> carrinhoItems) {
         this.id = id;
         this.profileID = profileID;
         this.valorTotal = valorTotal;
         this.quantidade = quantidade;
+        this.carrinhoItems = carrinhoItems;
     }
 
     public int getId() {

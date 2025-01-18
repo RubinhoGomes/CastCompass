@@ -41,7 +41,7 @@ public class ListaCarrinhoitemsAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return carrinhoItems.get(i).getId();
+        return carrinhoItems.get(i).getCarrinhoID();
     }
 
     @Override
