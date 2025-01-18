@@ -134,46 +134,24 @@ class FavoritosController extends ActiveController
         ];
     }
 
-    public function actionRemover($produtoID) {
-        $user = \Yii::$app->user->identity;
+    public function actionRemover($profileID,$produtoID) {
 
-        if (!$user) {
-            return [
-                'success' => false,
-                'message' => 'Usuário não autenticado.',
-            ];
-        }
-
-        $profile = \common\models\Profile::findOne(['userID' => $user->id]);
+        $profile = \common\models\Profile::findOne(['id' => $profileID]);
 
         if (!$profile) {
-            return [
-                'success' => false,
-                'message' => 'Perfil do usuário não encontrado.',
-            ];
+            return ['error' => 'Perfil do usuário não encontrado.'];
         }
 
-        $model = $this->modelClass::find()
-            ->where(['produtoID' => $produtoID, 'profileID' => $profile->id])
-            ->one();
+        $favorito = $this->modelClass::findOne(['profileID' => $profileID, 'produtoID' => $produtoID]);
 
-        if (!$model) {
-            return [
-                'success' => false,
-                'message' => 'Favorito não encontrado.',
-            ];
+        if (!$favorito) {
+            return ['error' => 'Favorito não encontrado.'];
         }
 
-        if ($model->delete()) {
-            return [
-                'success' => true,
-                'message' => 'Favorito removido com sucesso.',
-            ];
+        if ($favorito->delete()) {
+            return ['success' => 'Favorito removido com sucesso.'];
         }
 
-        return [
-            'success' => false,
-            'message' => 'Erro ao remover favorito.',
-        ];
+        return ['error' => 'Erro ao remover favorito.'];
     }
 }
