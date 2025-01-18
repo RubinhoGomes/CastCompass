@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.castcompass.adaptadores.FaturaAdaptador;
+import com.example.castcompass.adaptadores.FaturasAdaptador;
 import com.example.castcompass.listeners.FaturasListener;
 import com.example.castcompass.models.Faturas;
 import com.example.castcompass.models.Singleton;
@@ -33,22 +33,23 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_faturas, container, false);
         setHasOptionsMenu(true);
 
         lvFaturas = view.findViewById(R.id.lvFaturas);
+
         Singleton.getInstance(getContext()).setFaturasListener(this);
+        Singleton.getInstance(getContext()).getAllFaturasAPI(getContext());
 
         return view;
     }
 
     @Override
     public void onRefreshFaturas(ArrayList<Faturas> faturas) {
-        this.faturas = faturas;
-        FaturaAdaptador adaptador = new FaturaAdaptador(getContext(), faturas);
-        lvFaturas.setAdapter(adaptador);
+        if (faturas != null) {
+            lvFaturas.setAdapter(new FaturasAdaptador(getContext(), faturas));
+        }
     }
 }

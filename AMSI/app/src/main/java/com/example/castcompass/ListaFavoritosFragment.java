@@ -42,8 +42,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_favoritos, container, false);
         setHasOptionsMenu(true);
@@ -58,7 +57,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
 
     @Override
     public void onRefreshFavoritos(ArrayList<Favoritos> favoritos) {
-        if(favoritos != null){
+        if (favoritos != null) {
             lvFavoritos.setAdapter(new FavoritosAdaptador(getContext(), favoritos));
         }
     }

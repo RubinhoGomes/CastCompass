@@ -23,6 +23,7 @@ import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.listeners.UtilizadorListener;
 import com.example.castcompass.utils.CarrinhoJsonParser;
+import com.example.castcompass.utils.FaturasJsonParser;
 import com.example.castcompass.utils.FavoritosJsonParser;
 import com.example.castcompass.utils.LoginJsonParser;
 import com.example.castcompass.utils.UtilizadorJsonParser;
@@ -67,6 +68,7 @@ public class Singleton {
     private static String urlApiUtilizador = "";
     private static String urlApiAtualizarUtilizador = "";
     private static String urlApiApagarUtilizador = "";
+    private static String urlApiFaturas = "";
     private static String urlApiFavoritos = "";
     private static String urlApiFavoritosRemover = "";
     private static String urlApiCarrinho = "";
@@ -96,12 +98,13 @@ public class Singleton {
         urlApiAtualizarUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/atualizarutilizador";
         urlApiApagarUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/apagarutilizador";
         urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
+        urlApiFaturas = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/faturas/faturascliente";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
         urlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
         urlApiCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/carrinho";
     }
 
-    // LISTENERS
+    // region LISTENERS
 
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
@@ -130,6 +133,7 @@ public class Singleton {
     public void setFaturasListener(FaturasListener faturasListener) {
         this.faturasListener = faturasListener;
     }
+    // endregion
 
     // API
 
@@ -399,6 +403,39 @@ public class Singleton {
     }
     // endregion
 
+    //region Faturas
+    public void getAllFaturasAPI(final Context context) {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiFaturas + "?id=" + login.idProfile + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    ArrayList<Faturas> faturas = FaturasJsonParser.parserJsonFaturas(jsonArray);
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (faturasListener != null) {
+                        faturasListener.onRefreshFaturas(faturas);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    //endregion
+
+    // region Carrinho
     public void getCarrinhoAPI(final Context context) {
         // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
@@ -428,4 +465,5 @@ public class Singleton {
 
         volleyQueue.add(request);
     }
+    // endregion
 }

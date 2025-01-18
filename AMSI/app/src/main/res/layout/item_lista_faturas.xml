@@ -74,7 +74,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvMtdExped"
+            android:id="@+id/tvMtdExpedicao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="N/A"

@@ -43,13 +43,14 @@ public class FavoritosAdaptador extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        if(inflater == null){
+        if (inflater == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        } if(view == null){
+        }
+        if (view == null) {
             view = inflater.inflate(R.layout.item_lista_favoritos, null);
         }
         FavoritosAdaptador.ViewHolderLista viewHolder = (FavoritosAdaptador.ViewHolderLista) view.getTag();
-        if(viewHolder == null){
+        if (viewHolder == null) {
             viewHolder = new FavoritosAdaptador.ViewHolderLista(view);
             view.setTag(viewHolder);
         }
@@ -58,11 +59,11 @@ public class FavoritosAdaptador extends BaseAdapter {
         return view;
     }
 
-    private class ViewHolderLista{
-        private TextView tvNome, tvMarca, tvDescricao , tvPreco;
+    private class ViewHolderLista {
+        private TextView tvNome, tvMarca, tvDescricao, tvPreco;
         private ImageView imgCapa;
 
-        public ViewHolderLista(View view){
+        public ViewHolderLista(View view) {
 
             tvNome = view.findViewById(R.id.tvNome);
             tvMarca = view.findViewById(R.id.tvMarca);
@@ -71,7 +72,7 @@ public class FavoritosAdaptador extends BaseAdapter {
         }
 
         //invoca 1 vez por cada linha da lista
-        public void update(Favoritos favoritos){
+        public void update(Favoritos favoritos) {
             tvNome.setText(favoritos.getNomeProduto());
             tvMarca.setText(favoritos.getMarcaProduto());
             tvPreco.setText(favoritos.getPrecoProduto() + "");
