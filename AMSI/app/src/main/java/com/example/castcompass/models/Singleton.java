@@ -14,8 +14,10 @@ import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
+import com.example.castcompass.listeners.UtilizadorListener;
 import com.example.castcompass.utils.FavoritosJsonParser;
 import com.example.castcompass.utils.LoginJsonParser;
+import com.example.castcompass.utils.UtilizadorJsonParser;
 import com.example.castcompass.utils.util;
 import com.example.castcompass.utils.ProdutosJsonParser;
 // Imports from Volley
@@ -44,12 +46,15 @@ public class Singleton {
 
     private ProdutosListener produtosListener;
     private ProdutoListener produtoListener;
+    private UtilizadorListener utilizadorListener;
     private FavoritosListener favoritosListener;
 
     private Utilizador login;
     private static String urlApiLogin = "";
     private static String urlApiProdutos = "";
     private static String UrlApiProduto = "";
+    private static String urlApiUtilizador = "";
+
     private ArrayList<Produto> listaProdutos;
 
 
@@ -59,6 +64,10 @@ public class Singleton {
 
     public void setProdutoListener(ProdutoListener produtoListener) {
         this.produtoListener = produtoListener;
+    }
+
+    public void setUtilizadorListener(UtilizadorListener utiliziadorListener) {
+        this.utilizadorListener = utiliziadorListener;
     }
 
     // CONSTRUCTOR
@@ -81,6 +90,7 @@ public class Singleton {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
         urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
         UrlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
+        urlApiUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/utilizador";
     }
 
     // LISTENERS
@@ -204,6 +214,34 @@ public class Singleton {
 
         volleyQueue.add(request);
         return produto;
+    }
+
+    public Utilizador getUtilizadorAPI(final Context context, int id) {
+        Utilizador utilizador = null;
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + id + "&token=" + login.getToken(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Utilizador utilizador = UtilizadorJsonParser.parserJsonUtilizador(response);
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (utilizadorListener != null) {
+                        utilizadorListener.onRefreshUtilziador(utilizador);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar o utilizador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+        return utilizador;
     }
 
     public void getAllFavoritosAPI(final Context context, int id) {

@@ -47,11 +47,11 @@
         android:padding="12dp" />
 
     <EditText
-        android:id="@+id/etNumero"
+        android:id="@+id/etTelemovel"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:enabled="false"
-        android:hint="Número"
+        android:hint="Telemóvel"
         android:inputType="text"
         android:padding="12dp" />
 
