@@ -1,19 +1,28 @@
 package com.example.castcompass.models;
 
 public class Faturas {
-    private int metodoExpedicaoID, metodoPagamentoID;
+    private int id,metodoExpedicaoID, metodoPagamentoID;
     private float valorTotal, ivaTotal;
     private String data;
 
     public Faturas() {
     }
 
-    public Faturas(int metodoExpedicaoID, int metodoPagamentoID, float valorTotal, float ivaTotal, String data) {
-        this.metodoExpedicaoID = metodoExpedicaoID;
-        this.metodoPagamentoID = metodoPagamentoID;
+    public Faturas(int id, float valorTotal, float ivaTotal, int metodoExpedicaoID, String data,int metodoPagamentoID) {
+        this.id=id;
         this.valorTotal = valorTotal;
         this.ivaTotal = ivaTotal;
+        this.metodoExpedicaoID = metodoExpedicaoID;
         this.data = data;
+        this.metodoPagamentoID = metodoPagamentoID;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setid(int id) {
+        this.id = id;
     }
 
     public int getMetodoExpedicaoID() {

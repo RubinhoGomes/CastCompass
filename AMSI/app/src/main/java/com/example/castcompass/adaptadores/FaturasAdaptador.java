@@ -24,17 +24,17 @@ public class FaturasAdaptador extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return faturas.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return faturas.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return faturas.get(i).getId();
     }
 
     @Override
@@ -68,11 +68,11 @@ public class FaturasAdaptador extends BaseAdapter {
 
         //invoca 1 vez por cada linha da lista
         public void update(Faturas faturas) {
-            tvValorTotal.setText("" + faturas.getValorTotal());
-            tvIvaTotal.setText("" + faturas.getIvaTotal());
+            tvValorTotal.setText(faturas.getValorTotal()+"");
+            tvIvaTotal.setText(faturas.getIvaTotal()+"");
             tvData.setText(faturas.getData());
-            tvMetodoExpedicao.setText("" + faturas.getMetodoExpedicaoID());
-            tvMetodoPagamento.setText("" + faturas.getMetodoPagamentoID());
+            tvMetodoExpedicao.setText(faturas.getMetodoExpedicaoID()+"");
+            tvMetodoPagamento.setText(faturas.getMetodoPagamentoID()+"");
         }
     }
 }
