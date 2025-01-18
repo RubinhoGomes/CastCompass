@@ -51,7 +51,7 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
         etNome.setText(utilizador.getNome());
         etNumero.setText(utilizador.getTelemovel());
         etMorada.setText(utilizador.getMorada());
-        etNif.setText("" + utilizador.getNif());
+        etNif.setText(utilizador.getNif());
         etGenero.setText(utilizador.getGenero());
     }
 
@@ -61,16 +61,15 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
             etNumero.setEnabled(true);
             etMorada.setEnabled(true);
             etNif.setEnabled(true);
-            etGenero.setEnabled(true);
             btnGuardarPerfil.setText("Guardar Perfil");
         } else {
             etNome.setEnabled(false);
             etNumero.setEnabled(false);
             etMorada.setEnabled(false);
             etNif.setEnabled(false);
-            etGenero.setEnabled(false);
 
             // Guardar as alterações
+
 
 
             btnGuardarPerfil.setText("Editar Perfil");

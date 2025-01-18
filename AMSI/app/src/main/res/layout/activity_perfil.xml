@@ -1,114 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".PerfilActivity">
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="Username"
-        android:inputType="text"
-        android:padding="12dp" />
-
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="Email"
-        android:inputType="text"
-        android:padding="12dp" />
-
-    <EditText
-        android:id="@+id/etDataNascimento"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="Data de Nascimento"
-        android:inputType="text"
-        android:padding="12dp" />
-
-    <EditText
-        android:id="@+id/etNome"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="Nome"
-        android:inputType="text"
-        android:padding="12dp" />
-
-    <EditText
-        android:id="@+id/etTelemovel"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="Telemóvel"
-        android:inputType="text"
-        android:padding="12dp" />
-
-    <EditText
-        android:id="@+id/etMorada"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="Morada"
-        android:inputType="text"
-        android:padding="12dp" />
-
-    <EditText
-        android:id="@+id/etNif"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="NIF"
-        android:inputType="text"
-        android:padding="12dp" />
-
-    <EditText
-        android:id="@+id/etGenero"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:enabled="false"
-        android:hint="Género"
-        android:inputType="text"
-        android:padding="12dp" />
-
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnGuardarPerfil"
-            android:layout_width="0dp"
+        <!-- Username -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onClickEditarPerfil"
-            android:padding="12dp"
-            android:text="Editar Perfil" />
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnApagarPerfil"
-            android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="Username:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Username"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_weight="1"
-            android:backgroundTint="#FF0000"
-            android:onClick="onClickApagarPerfil"
-            android:padding="12dp"
-            android:text="Apagar Perfil"
-            android:textColor="@color/white" />
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="Email:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Email"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="Data de Nascimento:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etDataNascimento"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Data de Nascimento"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="Género:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etGenero"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Género"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="Nome:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etNome"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Nome"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="Telemóvel:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etTelemovel"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Telemóvel"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="Morada:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etMorada"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Morada"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="NIF:"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etNif"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="NIF"
+                android:inputType="text"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnGuardarPerfil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickEditarPerfil"
+                android:padding="12dp"
+                android:text="Editar Perfil" />
+
+            <Button
+                android:id="@+id/btnApagarPerfil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FF0000"
+                android:onClick="onClickApagarPerfil"
+                android:padding="12dp"
+                android:text="Apagar Perfil"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

@@ -3,13 +3,13 @@ package com.example.castcompass.models;
 public class Utilizador {
 
     public int id, idProfile;
-    public long nif;
-    public String username, email, token, genero, morada, nome, dataNascimento, telemovel;
+//    public long nif;
+    public String username, nif, email, token, genero, morada, nome, dataNascimento, telemovel;
 
     public Utilizador() {
     }
 
-    public Utilizador(int id, int idProfile, long nif, String telemovel, String dataNascimento, String username, String nome, String email, String token, String genero, String morada) {
+    public Utilizador(int id, int idProfile, String nif, String telemovel, String dataNascimento, String username, String nome, String email, String token, String genero, String morada) {
         this.id = id;
         this.idProfile = idProfile;
         this.username = username;
@@ -63,11 +63,11 @@ public class Utilizador {
         this.email = email;
     }
 
-    public long getNif() {
+    public String getNif() {
         return nif;
     }
 
-    public void setNif(long nif) {
+    public void setNif(String nif) {
         this.nif = nif;
     }
 

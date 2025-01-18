@@ -29,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 
 // For now I know this is the imports to use the HashMap and Map, and of course ArrayList
@@ -105,12 +106,13 @@ public class Singleton {
         this.loginListener = loginListener;
     }
 
-    public void setFavoritosListener(FavoritosListener favoritosListener){
+    public void setFavoritosListener(FavoritosListener favoritosListener) {
         this.favoritosListener = favoritosListener;
     }
 
     // API
 
+    // region Login
     public void loginAPI(final String username, final String password, final Context context) {
         if (!util.isConnected(context)) {
             Toast.makeText(context, "Sem conexão à internet", Toast.LENGTH_SHORT).show();
@@ -130,7 +132,7 @@ public class Singleton {
                         editor.putInt("id", jsonObject.getInt("id"));
                         editor.apply();
 
-                        if(loginListener != null) {
+                        if (loginListener != null) {
                             loginListener.onUpdateLogin(login);
                         }
 
@@ -153,6 +155,7 @@ public class Singleton {
                     //params.put("password", password);
                     return params;
                 }
+
                 @Override
                 public Map<String, String> getHeaders() {
                     Map<String, String> headers = new HashMap<>();
@@ -166,7 +169,9 @@ public class Singleton {
             volleyQueue.add(request);
         }
     }
+    // endregion
 
+    // region Produtos
     public void getAllProdutosAPI(final Context context) {
         StringRequest request = new StringRequest(Request.Method.GET, urlApiProdutos, new Response.Listener<String>() {
             @Override
@@ -223,7 +228,9 @@ public class Singleton {
         volleyQueue.add(request);
         return produto;
     }
+    // endregion
 
+    // region Utilizador
     public void getUtilizadorAPI(final Context context) {
         StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
             @Override
@@ -251,8 +258,18 @@ public class Singleton {
         volleyQueue.add(request);
     }
 
+    public void atualizarUtilizadorAPI(final Context context) {
+
+    }
+
+    public void apagarUtilizadorAPI(final Context context) {
+        
+    }
+    // endregion
+
+    // region Favoritos
     public void getAllFavoritosAPI(final Context context) {
-       // ArrayList<Favoritos> favoritos = null;
+        // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
         StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
@@ -287,7 +304,7 @@ public class Singleton {
         // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
-        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, UrlApiFavoritosRemover + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -314,4 +331,5 @@ public class Singleton {
 
         volleyQueue.add(request);
     }
+    // endregion
 }

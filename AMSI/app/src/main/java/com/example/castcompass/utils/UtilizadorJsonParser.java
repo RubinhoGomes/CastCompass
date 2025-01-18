@@ -16,7 +16,7 @@ public class UtilizadorJsonParser {
 
             utilizador.setId(utilizadorJSON.getInt("id"));
             utilizador.setIdProfile(utilizadorJSON.getInt("idProfile"));
-            utilizador.setNif(utilizadorJSON.getLong("nif"));
+            utilizador.setNif(utilizadorJSON.getString("nif"));
             utilizador.setTelemovel(utilizadorJSON.getString("telemovel"));
             utilizador.setUsername(utilizadorJSON.getString("username"));
             utilizador.setDataNascimento(utilizadorJSON.getString("dtaNascimento"));
