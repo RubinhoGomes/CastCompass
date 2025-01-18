@@ -12,12 +12,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Imports from CastCompass
+import com.example.castcompass.listeners.CarrinhoListener;
 import com.example.castcompass.listeners.FavoritoListener;
 import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.listeners.UtilizadorListener;
+import com.example.castcompass.utils.CarrinhoJsonParser;
 import com.example.castcompass.utils.FavoritosJsonParser;
 import com.example.castcompass.utils.LoginJsonParser;
 import com.example.castcompass.utils.UtilizadorJsonParser;
@@ -52,6 +54,7 @@ public class Singleton {
     private ProdutoListener produtoListener;
     private UtilizadorListener utilizadorListener;
     private FavoritosListener favoritosListener;
+    private CarrinhoListener carrinhoListener;
 
     private Utilizador login;
     private static String urlApiLogin = "";
@@ -61,6 +64,7 @@ public class Singleton {
     private static String urlApiApagarUtilizador = "";
     private static String urlApiFavoritos = "";
     private static String urlApiFavoritosRemover = "";
+    private static String urlApiCarrinho = "";
 
     private ArrayList<Produto> listaProdutos;
 
@@ -75,6 +79,10 @@ public class Singleton {
 
     public void setUtilizadorListener(UtilizadorListener utilizadorListener) {
         this.utilizadorListener = utilizadorListener;
+    }
+
+    public void setCarrinhoListener(CarrinhoListener carrinhoListener){
+        this.carrinhoListener = carrinhoListener;
     }
 
     // CONSTRUCTOR
@@ -101,6 +109,7 @@ public class Singleton {
         urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
         urlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
+        urlApiCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/carrinho";
     }
 
     // LISTENERS
@@ -350,4 +359,35 @@ public class Singleton {
         volleyQueue.add(request);
     }
     // endregion
+
+    public void getCarrinhoAPI(final Context context) {
+        // ArrayList<Favoritos> favoritos = null;
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int id = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    Carrinho carrinho = CarrinhoJsonParser.parserJsonCarrinho(response);
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (carrinhoListener != null) {
+                        carrinhoListener.onRefreshCarrinho(carrinho);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
 }
