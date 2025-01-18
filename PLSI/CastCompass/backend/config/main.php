@@ -64,7 +64,7 @@ return [
                         'GET count' => 'count',
                         'GET procurarnomes' => 'procurarnomes',
                         'GET utilizador' => 'utilizador',
-                        'PUT atualizarutilizador' => 'atualizarutilizador',
+                        'POST atualizarutilizador' => 'atualizarutilizador',
                         'DELETE apagarutilizador' => 'apagarutilizador',
                     ],
                 ],

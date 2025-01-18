@@ -71,10 +71,10 @@ class ProfileController extends ActiveController
     public function actionAtualizarutilizador($id) {
         $profile = Profile::findOne($id);
 
-        $profile->nome = \Yii::$app->request->getBodyParams('nome');
-        $profile->telemovel = \Yii::$app->request->getBodyParams('telemovel');
-        $profile->morada = \Yii::$app->request->getBodyParams('morada');
-        $profile->nif = \Yii::$app->request->getBodyParams('nif');
+        $profile->nome = \Yii::$app->request->post('nome');
+        $profile->telemovel = \Yii::$app->request->post('telemovel');
+        $profile->morada = \Yii::$app->request->post('morada');
+        $profile->nif = \Yii::$app->request->post('nif');
         $profile->save();
         return $profile;
     }
