@@ -59,7 +59,6 @@ public class ListaProdutosFragment extends Fragment implements ProdutosListener 
 
     @Override
     public void onRefreshListaProdutos(ArrayList<Produto> listaProdutos) {
-
         if(listaProdutos!=null){
             lvProdutos.setAdapter(new ListaProdutosAdaptador(getContext(),listaProdutos));
         }

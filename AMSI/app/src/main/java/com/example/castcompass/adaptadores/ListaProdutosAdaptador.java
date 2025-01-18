@@ -53,7 +53,6 @@ public class ListaProdutosAdaptador extends BaseAdapter {
             view = inflater.inflate(R.layout.item_lista_produto, null); // Alterado para layout de produto
         }
 
-
         ListaProdutosAdaptador.ViewHolderLista viewHolder = (ViewHolderLista) view.getTag();
         if (viewHolder == null) {
             viewHolder = new ViewHolderLista(view);

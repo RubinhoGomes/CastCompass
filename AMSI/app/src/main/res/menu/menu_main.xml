@@ -9,16 +9,19 @@
             android:title="Home" />
 
         <item
+            android:id="@+id/navPerfil"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/navFavoritos"
+            android:title="Favoritos" />
+        <item
             android:id="@+id/navCarrinho"
             android:title="Carrinho" />
 
         <item
-            android:id="@+id/navFavoritos"
-            android:title="Favoritos" />
-
-        <item
             android:id="@+id/navMensagens"
             android:title="Mensagens" />
+
     </group>
 
     <item android:title="Comunicar">

@@ -1,5 +1,6 @@
 package com.example.castcompass;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.castcompass.models.Singleton;
 import com.google.android.material.navigation.NavigationView;
 
-public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -87,14 +88,16 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         } else if (item.getItemId() == R.id.navCarrinho) {
             fragment = new ListaCarrinhoFragment();
             setTitle(item.getTitle());
-        }else if (item.getItemId() == R.id.navFavoritos) {
+        } else if (item.getItemId() == R.id.navPerfil) {
+            Intent intent = new Intent(this, PerfilActivity.class);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.navFavoritos) {
             // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
             fragment = new ListaFavoritosFragment();
             setTitle(item.getTitle());
-        }else if (item.getItemId() == R.id.navMensagens) {
+        } else if (item.getItemId() == R.id.navMensagens) {
             setTitle(item.getTitle());
-        }
-        else {
+        } else {
             enviarEmail();
         }
 
