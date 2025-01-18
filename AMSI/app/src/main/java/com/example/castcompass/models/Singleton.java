@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 //
+import androidx.annotation.Nullable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -61,6 +63,7 @@ public class Singleton {
     private static String urlApiProdutos = "";
     private static String urlApiProduto = "";
     private static String urlApiUtilizador = "";
+    private static String urlApiAtualizarUtilizador = "";
     private static String urlApiApagarUtilizador = "";
     private static String urlApiFavoritos = "";
     private static String urlApiFavoritosRemover = "";
@@ -81,7 +84,7 @@ public class Singleton {
         this.utilizadorListener = utilizadorListener;
     }
 
-    public void setCarrinhoListener(CarrinhoListener carrinhoListener){
+    public void setCarrinhoListener(CarrinhoListener carrinhoListener) {
         this.carrinhoListener = carrinhoListener;
     }
 
@@ -105,7 +108,8 @@ public class Singleton {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
         urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
         urlApiUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/utilizador";
-        urlApiApagarUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/apagar";
+        urlApiAtualizarUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/atualizarutilizador";
+        urlApiApagarUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/apagarutilizador";
         urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
         urlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
@@ -180,6 +184,13 @@ public class Singleton {
             };
             volleyQueue.add(request);
         }
+    }
+
+    public void logoutAPI(final Context context) {
+        SharedPreferences sp = context.getSharedPreferences("DADOS_USER", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.apply();
     }
     // endregion
 
@@ -270,8 +281,31 @@ public class Singleton {
         volleyQueue.add(request);
     }
 
-    public void atualizarUtilizadorAPI(final Context context) {
+    public void atualizarUtilizadorAPI(final Context context, final String nome, final String telemovel, final String morada, final String nif) {
+        StringRequest request = new StringRequest(Request.Method.POST, urlApiAtualizarUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("nome", nome);
+                params.put("nif", nif);
+                params.put("morada", morada);
+                params.put("telemovel", telemovel);
+
+                return params;
+            }
+        };
+        volleyQueue.add(request);
     }
 
     public void apagarUtilizadorAPI(final Context context) {
@@ -373,7 +407,7 @@ public class Singleton {
 
                     // Notificar o listener que a lista foi atualizada
                     if (carrinhoListener != null) {
-                        carrinhoListener.onRefreshCarrinho(carrinho);
+//                        carrinhoListener.onRefreshCarrinho(carrinho);
                     }
 
                 } catch (Exception e) {

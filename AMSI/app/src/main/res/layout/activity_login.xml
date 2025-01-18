@@ -46,7 +46,7 @@
         android:layout_weight="0.1" />
 
     <Button
-        android:id="@+id/btnEntrarServer"
+        android:id="@+id/btnRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login"
@@ -58,9 +58,10 @@
         android:layout_weight="0.3" />
 
     <Button
-        android:id="@+id/btnRegistar"
+        android:id="@+id/btnVisitante"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register" />
+        android:onClick="onClickVisitante"
+        android:text="Entrar como Visitante" />
 
 </LinearLayout>

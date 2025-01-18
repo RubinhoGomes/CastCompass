@@ -31,7 +31,7 @@
         android:layout_weight="0.1" />
 
     <Button
-        android:id="@+id/btnEntrarServer"
+        android:id="@+id/btnRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickServidor"

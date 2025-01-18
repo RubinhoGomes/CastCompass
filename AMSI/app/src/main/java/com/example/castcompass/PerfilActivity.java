@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +14,6 @@ import com.example.castcompass.models.Singleton;
 import com.example.castcompass.models.Utilizador;
 
 public class PerfilActivity extends AppCompatActivity implements UtilizadorListener {
-    public static final String IDUTILIZADOR = "id";
-
     private EditText etUsername, etEmail, etDataNascimento, etNome, etNumero, etMorada, etNif, etGenero;
     private Button btnGuardarPerfil, btnApagarPerfil;
     private Utilizador utilizador;
@@ -70,7 +69,8 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
             etNif.setEnabled(false);
 
             // Guardar as alterações
-
+            Singleton.getInstance(this).setUtilizadorListener(this);
+            Singleton.getInstance(this).atualizarUtilizadorAPI(this, etNome.getText().toString(), etNumero.getText().toString(), etMorada.getText().toString(), etNif.getText().toString());
 
 
             btnGuardarPerfil.setText("Editar Perfil");

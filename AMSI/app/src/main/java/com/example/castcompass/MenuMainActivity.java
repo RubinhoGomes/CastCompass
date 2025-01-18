@@ -81,23 +81,48 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
+        View headerView = navigationView.getHeaderView(0);
+        TextView nav_tvUsername = headerView.findViewById(R.id.tvUsername);
 
         if (item.getItemId() == R.id.navHome) {
             fragment = new ListaProdutosFragment();
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navCarrinho) {
-            fragment = new ListaCarrinhoFragment();
-            setTitle(item.getTitle());
+            if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                fragment = new ListaCarrinhoFragment();
+                setTitle(item.getTitle());
+            }
         } else if (item.getItemId() == R.id.navPerfil) {
-            Intent intent = new Intent(this, PerfilActivity.class);
-            startActivity(intent);
+            if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(this, PerfilActivity.class);
+                startActivity(intent);
+            }
         } else if (item.getItemId() == R.id.navFavoritos) {
-            // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
-            fragment = new ListaFavoritosFragment();
-            setTitle(item.getTitle());
+            if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
+                fragment = new ListaFavoritosFragment();
+                setTitle(item.getTitle());
+            }
+
         } else if (item.getItemId() == R.id.navLogOut) {
+            Singleton singleton = Singleton.getInstance(this);
+            singleton.logoutAPI(this);
+
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         } else if (item.getItemId() == R.id.navMensagens) {
             setTitle(item.getTitle());
         }

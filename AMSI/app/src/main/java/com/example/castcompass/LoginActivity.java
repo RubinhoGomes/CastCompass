@@ -43,6 +43,15 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
        singleton.loginAPI(user, pass, getApplicationContext());
     }
 
+    public void onClickVisitante(View view) {
+        Singleton singleton = Singleton.getInstance(this);
+        singleton.logoutAPI(this);
+
+        Intent intent = new Intent(this, MenuMainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private boolean isUsernameValido(String username) {
         if(username == null)
             return false;
