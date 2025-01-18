@@ -69,10 +69,14 @@ class ProfileController extends ActiveController
     }
 
     public function actionAtualizarutilizador($id) {
-        $utilizador = $this->modelClass::findOne($id);
-        $utilizador->load(\Yii::$app->request->getBodyParams(), '');
-        $utilizador->save();
-        return $utilizador;
+        $profile = Profile::findOne($id);
+
+        $profile->nome = \Yii::$app->request->post('nome');
+        $profile->telemovel = \Yii::$app->request->post('telemovel');
+        $profile->morada = \Yii::$app->request->post('morada');
+        $profile->nif = \Yii::$app->request->post('nif');
+        $profile->save();
+        return $profile;
     }
 
     public function actionApagarutilizador($id) {
