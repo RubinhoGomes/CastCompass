@@ -11,9 +11,14 @@
         <item
             android:id="@+id/navFavoritos"
             android:title="Favoritos" />
+
         <item
             android:id="@+id/navCarrinho"
             android:title="Carrinho" />
+
+        <item
+            android:id="@+id/navFaturas"
+            android:title="Faturas" />
 
         <item
             android:id="@+id/navMensagens"

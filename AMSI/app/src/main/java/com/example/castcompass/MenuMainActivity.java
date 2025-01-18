@@ -89,33 +89,33 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navCarrinho) {
             if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                loginRedirect();
             } else {
                 fragment = new ListaCarrinhoFragment();
                 setTitle(item.getTitle());
             }
+        } else if (item.getItemId() == R.id.navFaturas) {
+            if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+                loginRedirect();
+            } else {
+                fragment = new ListaFaturasFragment();
+                setTitle(item.getTitle());
+            }
         } else if (item.getItemId() == R.id.navPerfil) {
             if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                loginRedirect();
             } else {
                 Intent intent = new Intent(this, PerfilActivity.class);
                 startActivity(intent);
             }
         } else if (item.getItemId() == R.id.navFavoritos) {
             if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                loginRedirect();
             } else {
                 // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
                 fragment = new ListaFavoritosFragment();
                 setTitle(item.getTitle());
             }
-
         } else if (item.getItemId() == R.id.navLogOut) {
             Singleton singleton = Singleton.getInstance(this);
             singleton.logoutAPI(this);
@@ -139,5 +139,9 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         //TODO: intent implicito ACTION_SEND
     }
 
-
+    private void loginRedirect() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -14,8 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Imports from CastCompass
+import com.example.castcompass.ListaFaturasFragment;
 import com.example.castcompass.listeners.CarrinhoListener;
-import com.example.castcompass.listeners.FavoritoListener;
+import com.example.castcompass.listeners.FaturasListener;
 import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
@@ -57,6 +58,7 @@ public class Singleton {
     private UtilizadorListener utilizadorListener;
     private FavoritosListener favoritosListener;
     private CarrinhoListener carrinhoListener;
+    private FaturasListener faturasListener;
 
     private Utilizador login;
     private static String urlApiLogin = "";
@@ -70,23 +72,6 @@ public class Singleton {
     private static String urlApiCarrinho = "";
 
     private ArrayList<Produto> listaProdutos;
-
-
-    public void setProdutosListener(ProdutosListener produtosListener) {
-        this.produtosListener = produtosListener;
-    }
-
-    public void setProdutoListener(ProdutoListener produtoListener) {
-        this.produtoListener = produtoListener;
-    }
-
-    public void setUtilizadorListener(UtilizadorListener utilizadorListener) {
-        this.utilizadorListener = utilizadorListener;
-    }
-
-    public void setCarrinhoListener(CarrinhoListener carrinhoListener) {
-        this.carrinhoListener = carrinhoListener;
-    }
 
     // CONSTRUCTOR
 
@@ -124,6 +109,26 @@ public class Singleton {
 
     public void setFavoritosListener(FavoritosListener favoritosListener) {
         this.favoritosListener = favoritosListener;
+    }
+
+    public void setProdutosListener(ProdutosListener produtosListener) {
+        this.produtosListener = produtosListener;
+    }
+
+    public void setProdutoListener(ProdutoListener produtoListener) {
+        this.produtoListener = produtoListener;
+    }
+
+    public void setUtilizadorListener(UtilizadorListener utilizadorListener) {
+        this.utilizadorListener = utilizadorListener;
+    }
+
+    public void setCarrinhoListener(CarrinhoListener carrinhoListener) {
+        this.carrinhoListener = carrinhoListener;
+    }
+
+    public void setFaturasListener(FaturasListener faturasListener) {
+        this.faturasListener = faturasListener;
     }
 
     // API
@@ -423,5 +428,4 @@ public class Singleton {
 
         volleyQueue.add(request);
     }
-
 }
