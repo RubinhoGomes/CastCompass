@@ -51,7 +51,8 @@ class ProfileController extends ActiveController
         $utilizador = $this->modelClass::findOne($id);
 
         $data = [
-            'id' => $utilizador->id,
+          'id' => $utilizador->user->id,
+          'idProfile' => $utilizador->id,
             'nome' => $utilizador->nome,
             'username' => $utilizador->user->username,
             'email' => $utilizador->user->email,
@@ -60,6 +61,7 @@ class ProfileController extends ActiveController
             'genero' => $utilizador->genero,
             'telemovel' => $utilizador->telemovel,
             'morada' => $utilizador->morada,
+            'token' => $utilizador->user->auth_key,
         ];
 
         return $data;
