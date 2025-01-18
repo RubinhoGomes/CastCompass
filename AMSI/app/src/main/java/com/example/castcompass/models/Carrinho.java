@@ -4,7 +4,7 @@ public class Carrinho {
     private int id,profileID,quantidade;
     private float valorTotal;
 
-    public Carrinho(int id,float total, int user_id) {
+    public Carrinho(int id,int profileID,float valorTotal, int quantidade) {
         this.id = id;
         this.profileID = profileID;
         this.valorTotal = valorTotal;
