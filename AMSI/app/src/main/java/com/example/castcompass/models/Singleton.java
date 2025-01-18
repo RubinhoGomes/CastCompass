@@ -22,8 +22,7 @@ import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.listeners.UtilizadorListener;
-import com.example.castcompass.utils.CarrinhoJsonParser;
-import com.example.castcompass.utils.FaturasJsonParser;
+import com.example.castcompass.utils.CarrinhoItemsJsonParser;
 import com.example.castcompass.utils.FavoritosJsonParser;
 import com.example.castcompass.utils.LoginJsonParser;
 import com.example.castcompass.utils.UtilizadorJsonParser;
@@ -466,20 +465,26 @@ public class Singleton {
         // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
-        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiCarrinho + "?id=" + id + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
 
-                    Carrinho carrinho = CarrinhoJsonParser.parserJsonCarrinho(response);
+                    Log.d("RESPONSE", "RESPONSE: " + response);
+                    Log.d("API", "API: " + urlApiCarrinho + "?profileID=" + id + "&token=" + login.token);
+
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    ArrayList<CarrinhoItems> carrinhoItems = CarrinhoItemsJsonParser.parserJsonCarrinho(jsonArray);
 
                     // Notificar o listener que a lista foi atualizada
                     if (carrinhoListener != null) {
-//                        carrinhoListener.onRefreshCarrinho(carrinho);
+                        carrinhoListener.onRefreshCarrinho(carrinhoItems);
                     }
 
+
                 } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Erro ao carregar carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

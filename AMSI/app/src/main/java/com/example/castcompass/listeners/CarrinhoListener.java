@@ -1,5 +1,9 @@
 package com.example.castcompass.listeners;
 
+import com.example.castcompass.models.CarrinhoItems;
+
+import java.util.ArrayList;
+
 public interface CarrinhoListener {
-    void onRefreshDetalhes(int op);
+    void onRefreshCarrinho(ArrayList<CarrinhoItems> carrinho);
 }
