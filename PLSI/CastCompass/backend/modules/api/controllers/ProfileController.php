@@ -2,9 +2,12 @@
 
 namespace backend\modules\api\controllers;
 
+use common\models\Profile;
+use common\models\User;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\filters\ContentNegotiator;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\auth\HttpBasicAuth;
 use backend\modules\api\components\CustomAuth;
@@ -67,5 +70,25 @@ class ProfileController extends ActiveController
         return $data;
     }
 
+    public function actionAtualizar($id) {
+        $profile = Profile::findOne($id);
 
+        $profile->nome = \Yii::$app->request->post('nome');
+        $profile->nif = \Yii::$app->request->post('nif');
+        $profile->dtaNascimento = \Yii::$app->request->post('dtaNascimento');
+        $profile->genero = \Yii::$app->request->post('genero');
+        $profile->telemovel = \Yii::$app->request->post('telemovel');
+        $profile->morada = \Yii::$app->request->post('morada');
+        $profile->save();
+        return $profile;
+    }
+
+    public function actionApagar($id) {
+        $profile = Profile::findOne($id);
+        $utilizador = User::findOne($profile->userID);
+
+        $profile->delete();
+        $utilizador->delete();
+        return $utilizador;
+    }
 }

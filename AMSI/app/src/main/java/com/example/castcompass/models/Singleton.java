@@ -58,6 +58,7 @@ public class Singleton {
     private static String urlApiProdutos = "";
     private static String urlApiProduto = "";
     private static String urlApiUtilizador = "";
+    private static String urlApiApagarUtilizador = "";
     private static String urlApiFavoritos = "";
     private static String urlApiFavoritosRemover = "";
 
@@ -96,6 +97,7 @@ public class Singleton {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
         urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
         urlApiUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/utilizador";
+        urlApiApagarUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/apagar";
         urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
         urlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
@@ -264,7 +266,30 @@ public class Singleton {
     }
 
     public void apagarUtilizadorAPI(final Context context) {
+        StringRequest request = new StringRequest(Request.Method.DELETE, urlApiApagarUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Utilizador utilizador = UtilizadorJsonParser.parserJsonUtilizador(response);
 
+                    Log.d("RESPONSE", "Response: " + response);
+                    // Notificar o listener que a lista foi atualizada
+                    if (utilizadorListener != null) {
+                        utilizadorListener.onRefreshUtilziador(utilizador);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao apagar o utilizador: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
     }
     // endregion
 

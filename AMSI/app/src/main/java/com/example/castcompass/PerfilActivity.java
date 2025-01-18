@@ -77,7 +77,8 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
     }
 
     public void onClickApagarPerfil(View view) {
-
+        Singleton.getInstance(this).setUtilizadorListener(this);
+        Singleton.getInstance(this).apagarUtilizadorAPI(this);
     }
 
     @Override
