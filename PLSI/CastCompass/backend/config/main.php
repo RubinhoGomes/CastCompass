@@ -116,9 +116,13 @@ return [
                     ],
                 ],
                 [
-                    'class' => 'yii\rest\UrlRule','controller' => 'api/carrinho',
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/carrinho',
                     'extraPatterns' => [
                         'POST criarcarrinho' => 'criarcarrinho',
+                        'GET produtos/<id:\d+>' => 'produtos',
+                        'POST addproduto' => 'addproduto',
+                        'DELETE removerproduto' => 'removerproduto',
+                        'GET carrinho/<profileID:\d+>' => 'carrinho',
                     ],
                 ],
                 [

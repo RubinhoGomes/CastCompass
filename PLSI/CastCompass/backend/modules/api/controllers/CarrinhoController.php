@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\auth\HttpBasicAuth;
 use backend\modules\api\components\CustomAuth;
 use common\models\User;
+use common\models\Carrinho;
+use common\models\ItemsCarrinho;
 use Yii;
 
 /**
@@ -40,9 +42,105 @@ class CarrinhoController extends ActiveController
         return ['count' => count($recs)];
     }
 
+    public function actionProdutos($id)
+    {
+        $carrinho = Carrinho::findOne(['profileID' => $id]);
+
+        if (!$carrinho) {
+            return ['error' => 'Carrinho não encontrado.'];
+        }
+
+        $items = ItemsCarrinho::find()->where(['carrinhoID' => $carrinho->id])->all();
+
+        if (empty($items)) {
+            return ['message' => 'O carrinho está vazio.'];
+        }
+
+        $result = [];
+        foreach ($items as $item) {
+            $result[] = [
+                'id' => $item->id,
+                'produtoID' => $item->produtoID,
+                'nome' => $item->nome,
+                'quantidade' => $item->quantidade,
+                'valorTotal' => $item->valorTotal,
+                'imagem' => $item->getImagem(),
+            ];
+        }
+
+        return $result;
+    }
+
+    public function actionAddproduto($profileID, $produtoID, $quantidade)
+    {
+        $carrinho = Carrinho::findOne(['profileID' => $profileID]);
+
+        if (!$carrinho) {
+            return ['error' => 'Carrinho não encontrado.'];
+        }
+
+        $item = ItemsCarrinho::findOne(['carrinhoID' => $carrinho->id, 'produtoID' => $produtoID]);
+
+        if ($item) {
+            $item->quantidade += $quantidade;
+            $item->valorTotal += $item->produto->preco * $quantidade;
+        } else {
+            $item = new ItemsCarrinho();
+            $item->carrinhoID = $carrinho->id;
+            $item->produtoID = $produtoID;
+            $item->nome = $item->produto->nome;
+            $item->quantidade = $quantidade;
+            $item->valorTotal = $item->produto->preco * $quantidade;
+        }
+
+        if ($item->save()) {
+            $this->atualizarCarrinho($carrinho);
+            return ['success' => 'Item adicionado ao carrinho.'];
+        }
+
+        return ['error' => 'Erro ao adicionar item ao carrinho.'];
+    }
+
+    public function actionRemoverproduto($profileID, $produtoID)
+    {
+        $carrinho = Carrinho::findOne(['profileID' => $profileID]);
+
+        if (!$carrinho) {
+            return ['error' => 'Carrinho não encontrado.'];
+        }
+
+        $item = ItemsCarrinho::findOne(['carrinhoID' => $carrinho->id, 'produtoID' => $produtoID]);
+
+        if (!$item) {
+            return ['error' => 'Item não encontrado no carrinho.'];
+        }
+
+        if ($item->delete()) {
+            $this->atualizarCarrinho($carrinho);
+            return ['success' => 'Item removido do carrinho.'];
+        }
+
+        return ['error' => 'Erro ao remover item do carrinho.'];
+    }
+
+    private function atualizarCarrinho($carrinho)
+    {
+        $items = ItemsCarrinho::find()->where(['carrinhoID' => $carrinho->id])->all();
+
+        $carrinho->quantidade = 0;
+        $carrinho->valorTotal = 0;
+
+        foreach ($items as $item) {
+            $carrinho->quantidade += $item->quantidade;
+            $carrinho->valorTotal += $item->valorTotal;
+        }
+
+        $carrinho->save();
+    }
+
     public function actionCriarcarrinho()
     {
-      $user = User::findOne(['auth_key' => Yii::$app->request->get('token')]);
+        $user = User::findOne(['auth_key' => Yii::$app->request->get('token')]);
 
         if (!$user) {
             return [
@@ -78,6 +176,22 @@ class CarrinhoController extends ActiveController
                 'errors' => $carrinho->errors,
             ];
         }
+    }
+
+    public function actionCarrinho($profileID)
+    {
+        $carrinho = Carrinho::findOne(['profileID' => $profileID]);
+
+        if (!$carrinho) {
+            return ['error' => 'Carrinho não encontrado.'];
+        }
+
+        return [
+            'id' => $carrinho->id,
+            'profileID' => $carrinho->profileID,
+            'valorTotal' => $carrinho->valorTotal,
+            'quantidade' => $carrinho->quantidade,
+        ];
     }
 
 
