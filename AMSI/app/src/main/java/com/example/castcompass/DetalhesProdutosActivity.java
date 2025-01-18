@@ -60,13 +60,6 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_favorito, menu);
-        getMenuInflater().inflate(R.menu.menu_nao_favorito, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
     public void carregarDados() {
 
         tvNome.setText(produto.getNome());
