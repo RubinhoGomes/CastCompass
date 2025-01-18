@@ -88,49 +88,31 @@ class FavoritosController extends ActiveController
 
   }
 
-    public function actionAdicionar($produtoID) {
-        $user = \Yii::$app->user->identity;
-
-        if (!$user) {
-            return [
-                'success' => false,
-                'message' => 'Usuário não autenticado.',
-            ];
-        }
-
-        $profile = \common\models\Profile::findOne(['userID' => $user->id]);
+    public function actionAdicionar($profileID, $produtoID)
+    {
+        $profile = \common\models\Profile::findOne(['id' => $profileID]);
 
         if (!$profile) {
-            return [
-                'success' => false,
-                'message' => 'Perfil do usuário não encontrado.',
-            ];
+            return ['error' => 'Perfil do usuário não encontrado.'];
         }
 
-        $existingFavorite = $this->modelClass::findOne(['produtoID' => $produtoID, 'profileID' => $profile->id]);
+        $existingFavorite = \common\models\Favorito::findOne(['produtoID' => $produtoID, 'profileID' => $profileID]);
 
         if ($existingFavorite) {
-            return [
-                'success' => false,
-                'message' => 'O produto já está na lista de favoritos.',
-            ];
+            return ['error' => 'O produto já está na lista de favoritos.'];
         }
 
-        $model = new \common\models\Favorito();
-        $model->profileID = $profile->id;
-        $model->produtoID = $produtoID;
+        $favorito = new \common\models\Favorito();
+        $favorito->profileID = $profileID;
+        $favorito->produtoID = $produtoID;
 
-        if ($model->save()) {
-            return [
-                'success' => true,
-                'message' => 'Favorito adicionado com sucesso.',
-            ];
+        if ($favorito->save()) {
+            return ['success' => 'Favorito adicionado com sucesso.'];
         }
 
         return [
-            'success' => false,
-            'message' => 'Erro ao adicionar favorito.',
-            'errors' => $model->errors,
+            'error' => 'Erro ao adicionar favorito.',
+            'details' => $favorito->errors,
         ];
     }
 
