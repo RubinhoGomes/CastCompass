@@ -2,6 +2,8 @@
 
 namespace backend\modules\api\controllers;
 
+use common\models\Carrinho;
+use common\models\Profile;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\filters\ContentNegotiator;
@@ -31,12 +33,20 @@ class FaturaController extends ActiveController
         return $behaviors;
     }
 
-
     public function actionCount()
     {
         $metodosmodel = new $this->modelClass;
         $recs = $metodosmodel::find()->all();
         return ['count' => count($recs)];
+    }
+
+    public function actionFaturascliente($id)
+    {
+        $profile = Profile::findOne($id);
+        $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
+        $faturas = $carrinho->faturas;
+
+        return $faturas;
     }
 
 }

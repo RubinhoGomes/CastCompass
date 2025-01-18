@@ -144,6 +144,7 @@ return [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/fatura',
                     'extraPatterns' => [
                         'GET count' => 'count',
+                        'GET faturascliente' => 'faturascliente',
                     ],
                 ],
             ],
