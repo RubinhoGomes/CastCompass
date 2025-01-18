@@ -60,6 +60,7 @@ class ProfileController extends ActiveController
             'genero' => $utilizador->genero,
             'telemovel' => $utilizador->telemovel,
             'morada' => $utilizador->morada,
+            'token' => $utilizador->user->auth_key,
         ];
 
         return $data;
