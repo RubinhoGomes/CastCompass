@@ -1,5 +1,6 @@
 package com.example.castcompass;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.castcompass.utils.util;
 import com.example.castcompass.adaptadores.FavoritosAdaptador;
 import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.models.Favoritos;
@@ -45,7 +47,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
 
         lvFavoritos = view.findViewById(R.id.lvFavoritos);
         Singleton.getInstance(getContext()).setFavoritosListener(this);
-       // Singleton.getInstance(getContext()).favoritoBD.getAllFavoritos();
+        Singleton.getInstance(getContext()).getAllFavoritosAPI(getContext());
 
         return view;
     }
@@ -54,7 +56,6 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
     @Override
     public void onRefreshFavoritos(ArrayList<Favoritos> favoritos) {
         if(favoritos != null){
-
             lvFavoritos.setAdapter(new FavoritosAdaptador(getContext(), favoritos));
         }
     }

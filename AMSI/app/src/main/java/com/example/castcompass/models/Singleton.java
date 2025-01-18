@@ -3,6 +3,7 @@ package com.example.castcompass.models;
 // Imports from Android
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 //
@@ -52,8 +53,12 @@ public class Singleton {
     private Utilizador login;
     private static String urlApiLogin = "";
     private static String urlApiProdutos = "";
-    private static String UrlApiProduto = "";
+    private static String urlApiProduto = "";
+<<<<<<< Updated upstream
     private static String urlApiUtilizador = "";
+=======
+>>>>>>> Stashed changes
+    private static String urlApiFavoritos = "";
 
     private ArrayList<Produto> listaProdutos;
 
@@ -89,8 +94,12 @@ public class Singleton {
     public void MudarIP(String ip) {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
         urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
-        UrlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
+<<<<<<< Updated upstream
         urlApiUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/utilizador";
+=======
+>>>>>>> Stashed changes
+        urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
+        urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
     }
 
     // LISTENERS
@@ -118,9 +127,10 @@ public class Singleton {
 
                         login = LoginJsonParser.loginJsonParser(response);
 
-                        // SharedPreferences.Editor editor = context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit();
-                        // editor.putString("token", jsonObject.getString("token"));
-                        // editor.apply();
+                        SharedPreferences.Editor editor = context.getSharedPreferences("DADOS_USER", Context.MODE_PRIVATE).edit();
+                        editor.putString("token", jsonObject.getString("token"));
+                        editor.putInt("id", jsonObject.getInt("id"));
+                        editor.apply();
 
                         if(loginListener != null) {
                             loginListener.onUpdateLogin(login);
@@ -190,7 +200,7 @@ public class Singleton {
 
     public Produto getProdutoAPI(final Context context, int id) {
         Produto produto = null;
-        StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + "?id=" + id, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiProduto + "?id=" + id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -216,6 +226,7 @@ public class Singleton {
         return produto;
     }
 
+<<<<<<< Updated upstream
     public Utilizador getUtilizadorAPI(final Context context, int id) {
         Utilizador utilizador = null;
         StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + id + "&token=" + login.getToken(), new Response.Listener<String>() {
@@ -246,14 +257,21 @@ public class Singleton {
 
     public void getAllFavoritosAPI(final Context context, int id) {
        ArrayList<Favoritos> favoritos = null;
-        StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + login.token, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + login.token, new Response.Listener<String>() {
+=======
+    public void getAllFavoritosAPI(final Context context) {
+       // ArrayList<Favoritos> favoritos = null;
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int id = sp.getInt("id", login.id);
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+>>>>>>> Stashed changes
             @Override
             public void onResponse(String response) {
                 try {
 
                     JSONArray jsonArray = new JSONArray(response);
 
-                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(response);
+                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(jsonArray);
 
                     // Notificar o listener que a lista foi atualizada
                     if (favoritosListener != null) {
@@ -261,7 +279,7 @@ public class Singleton {
                     }
 
                 } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar produtos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

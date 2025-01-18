@@ -66,7 +66,6 @@ public class FavoritosAdaptador extends BaseAdapter {
 
             tvNome = view.findViewById(R.id.tvNome);
             tvMarca = view.findViewById(R.id.tvMarca);
-            tvDescricao = view.findViewById(R.id.tvDescricao);
             tvPreco = view.findViewById(R.id.tvPreco);
             imgCapa = view.findViewById(R.id.imgCapa);
         }
@@ -74,7 +73,7 @@ public class FavoritosAdaptador extends BaseAdapter {
         //invoca 1 vez por cada linha da lista
         public void update(Favoritos favoritos){
             tvNome.setText(favoritos.getNomeProduto());
-            tvDescricao.setText(favoritos.getDescricaoProduto());
+            tvMarca.setText(favoritos.getMarcaProduto());
             tvPreco.setText(favoritos.getPrecoProduto() + "");
             Glide.with(context)
                     .load(favoritos.getImagemProduto())
