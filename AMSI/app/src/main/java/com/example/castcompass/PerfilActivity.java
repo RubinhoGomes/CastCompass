@@ -1,5 +1,6 @@
 package com.example.castcompass;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -79,6 +80,8 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
     public void onClickApagarPerfil(View view) {
         Singleton.getInstance(this).setUtilizadorListener(this);
         Singleton.getInstance(this).apagarUtilizadorAPI(this);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

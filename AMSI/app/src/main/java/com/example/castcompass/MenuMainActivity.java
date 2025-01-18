@@ -95,10 +95,11 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
             fragment = new ListaFavoritosFragment();
             setTitle(item.getTitle());
+        } else if (item.getItemId() == R.id.navLogOut) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         } else if (item.getItemId() == R.id.navMensagens) {
             setTitle(item.getTitle());
-        } else {
-            enviarEmail();
         }
 
         if (fragment != null) {

@@ -270,13 +270,7 @@ public class Singleton {
             @Override
             public void onResponse(String response) {
                 try {
-                    Utilizador utilizador = UtilizadorJsonParser.parserJsonUtilizador(response);
-
-                    Log.d("RESPONSE", "Response: " + response);
-                    // Notificar o listener que a lista foi atualizada
-                    if (utilizadorListener != null) {
-                        utilizadorListener.onRefreshUtilziador(utilizador);
-                    }
+                    Toast.makeText(context, "Utilizador apagado com sucesso", Toast.LENGTH_LONG).show();
 
                 } catch (Exception e) {
                     Toast.makeText(context, "Erro ao apagar o utilizador: " + e.getMessage(), Toast.LENGTH_LONG).show();

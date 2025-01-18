@@ -9,9 +9,6 @@
             android:title="Home" />
 
         <item
-            android:id="@+id/navPerfil"
-            android:title="Perfil" />
-        <item
             android:id="@+id/navFavoritos"
             android:title="Favoritos" />
         <item
@@ -24,11 +21,14 @@
 
     </group>
 
-    <item android:title="Comunicar">
+    <item android:title="Gestão">
         <menu>
             <item
-                android:id="@+id/navEmail"
-                android:title="Email" />
+                android:id="@+id/navPerfil"
+                android:title="Perfil" />
+            <item
+                android:id="@+id/navLogOut"
+                android:title="LogOut" />
         </menu>
     </item>
 </menu>
