@@ -10,23 +10,22 @@ import org.json.JSONObject;
 public class UtilizadorJsonParser {
 
     public static Utilizador parserJsonUtilizador(String response) {
-        Utilizador utilizador = null;
+        Utilizador utilizador = new Utilizador();
         try {
             JSONObject utilizadorJSON = new JSONObject(response);
 
-            int id = utilizadorJSON.getInt("id");
-            int idProfile = utilizadorJSON.getInt("idProfile");
-            int nif = utilizadorJSON.getInt("nif");
-            int telemovel = utilizadorJSON.getInt("telemovel");
-            String dataNascimento = utilizadorJSON.getString("dtaNascimento");
-            String username = utilizadorJSON.getString("username");
-            String nome = utilizadorJSON.getString("nome");
-            String email = utilizadorJSON.getString("email");
-            String token = utilizadorJSON.getString("token");
-            String genero = utilizadorJSON.getString("genero");
-            String morada = utilizadorJSON.getString("morada");
+            utilizador.setId(utilizadorJSON.getInt("id"));
+            utilizador.setIdProfile(utilizadorJSON.getInt("idProfile"));
+            utilizador.setNif(utilizadorJSON.getLong("nif"));
+            utilizador.setTelemovel(utilizadorJSON.getString("telemovel"));
+            utilizador.setUsername(utilizadorJSON.getString("username"));
+            utilizador.setDataNascimento(utilizadorJSON.getString("dtaNascimento"));
+            utilizador.setNome(utilizadorJSON.getString("nome"));
+            utilizador.setEmail(utilizadorJSON.getString("email"));
+            utilizador.setToken(utilizadorJSON.getString("token"));
+            utilizador.setGenero(utilizadorJSON.getString("genero"));
+            utilizador.setMorada(utilizadorJSON.getString("morada"));
 
-            utilizador = new Utilizador(id, idProfile, nif, telemovel, dataNascimento, username, nome, email, token, genero, morada);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

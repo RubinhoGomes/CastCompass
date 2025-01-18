@@ -37,7 +37,7 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
 
         // Carregar os dados do utilizador
         Singleton.getInstance(this).setUtilizadorListener(this);
-        utilizador = Singleton.getInstance(this).getUtilizadorAPI(this);
+        Singleton.getInstance(this).getUtilizadorAPI(this);
 
         if (utilizador != null) {
             carregarDados();
@@ -51,7 +51,7 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
         etNome.setText(utilizador.getNome());
         etNumero.setText(utilizador.getTelemovel());
         etMorada.setText(utilizador.getMorada());
-        etNif.setText(utilizador.getNif());
+        etNif.setText("" + utilizador.getNif());
         etGenero.setText(utilizador.getGenero());
     }
 
@@ -83,8 +83,7 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
 
     @Override
     public void onRefreshUtilziador(Utilizador utilizador) {
-        if (utilizador != null) {
-            carregarDados();
-        }
+       this.utilizador = utilizador;
+       carregarDados();
     }
 }

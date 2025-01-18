@@ -70,8 +70,8 @@ public class Singleton {
         this.produtoListener = produtoListener;
     }
 
-    public void setUtilizadorListener(UtilizadorListener utiliziadorListener) {
-        this.utilizadorListener = utiliziadorListener;
+    public void setUtilizadorListener(UtilizadorListener utilizadorListener) {
+        this.utilizadorListener = utilizadorListener;
     }
 
     // CONSTRUCTOR
@@ -224,14 +224,14 @@ public class Singleton {
         return produto;
     }
 
-    public Utilizador getUtilizadorAPI(final Context context) {
-        Utilizador utilizador = null;
+    public void getUtilizadorAPI(final Context context) {
         StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     Utilizador utilizador = UtilizadorJsonParser.parserJsonUtilizador(response);
 
+                    Log.d("RESPONSE", "Response: " + response);
                     // Notificar o listener que a lista foi atualizada
                     if (utilizadorListener != null) {
                         utilizadorListener.onRefreshUtilziador(utilizador);
@@ -239,8 +239,6 @@ public class Singleton {
 
                 } catch (Exception e) {
                     Toast.makeText(context, "Erro ao carregar o utilizador: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.e("Singleton", "Erro ao carregar o utilizador: " + e.getMessage());
-                    Log.d("API_RESPONSE", "Resposta da API: " + response);
                 }
             }
         }, new Response.ErrorListener() {
@@ -251,7 +249,6 @@ public class Singleton {
         });
 
         volleyQueue.add(request);
-        return utilizador;
     }
 
     public void getAllFavoritosAPI(final Context context) {

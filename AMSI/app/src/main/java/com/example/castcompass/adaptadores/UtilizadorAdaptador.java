@@ -81,7 +81,7 @@ public class UtilizadorAdaptador extends BaseAdapter {
             etNome.setText(utilizador.getNome());
             etNumero.setText(utilizador.getTelemovel());
             etMorada.setText(utilizador.getMorada());
-            etNif.setText(utilizador.getNif());
+            etNif.setText("" + utilizador.getNif());
             etGenero.setText(utilizador.getGenero());
         }
     }
