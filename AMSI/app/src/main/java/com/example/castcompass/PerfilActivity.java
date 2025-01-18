@@ -37,7 +37,7 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
 
         // Carregar os dados do utilizador
         Singleton.getInstance(this).setUtilizadorListener(this);
-        utilizador = Singleton.getInstance(this).getUtilizadorAPI(this, getIntent().getIntExtra(IDUTILIZADOR, 0));
+        utilizador = Singleton.getInstance(this).getUtilizadorAPI(this);
 
         if (utilizador != null) {
             carregarDados();
@@ -83,7 +83,8 @@ public class PerfilActivity extends AppCompatActivity implements UtilizadorListe
 
     @Override
     public void onRefreshUtilziador(Utilizador utilizador) {
-        this.utilizador = utilizador;
-        carregarDados();
+        if (utilizador != null) {
+            carregarDados();
+        }
     }
 }

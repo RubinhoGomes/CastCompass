@@ -1,5 +1,7 @@
 package com.example.castcompass.utils;
 
+import android.util.Log;
+
 import com.example.castcompass.models.Utilizador;
 
 import org.json.JSONException;
@@ -16,7 +18,7 @@ public class UtilizadorJsonParser {
             int idProfile = utilizadorJSON.getInt("idProfile");
             int nif = utilizadorJSON.getInt("nif");
             int telemovel = utilizadorJSON.getInt("telemovel");
-            int dataNascimento = utilizadorJSON.getInt("dataNascimento");
+            String dataNascimento = utilizadorJSON.getString("dtaNascimento");
             String username = utilizadorJSON.getString("username");
             String nome = utilizadorJSON.getString("nome");
             String email = utilizadorJSON.getString("email");

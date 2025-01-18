@@ -16,7 +16,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
     private EditText etUsername, etPassword;
     public static final int MAX_CHAR = 4, MIN_CHAR = 3;
-    public static final String id = "id";
     public static final String USER = "USER";
     public static final String TOKEN = "token";
     @Override
@@ -61,7 +60,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     public void onUpdateLogin(Utilizador utilizador) {
         if(utilizador.token != null) {
             Intent intent = new Intent(this, MenuMainActivity.class);
-            intent.putExtra(id, utilizador.getId());
             intent.putExtra(TOKEN, utilizador.getToken());
             intent.putExtra(USER, utilizador.getUsername());
 

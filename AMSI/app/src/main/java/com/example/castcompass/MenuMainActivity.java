@@ -81,7 +81,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
-        int idutilizador = getIntent().getIntExtra(LoginActivity.id, 0);
 
         if (item.getItemId() == R.id.navHome) {
             fragment = new ListaProdutosFragment();
@@ -91,7 +90,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navPerfil) {
             Intent intent = new Intent(this, PerfilActivity.class);
-            intent.putExtra(PerfilActivity.IDUTILIZADOR, idutilizador);
             startActivity(intent);
         } else if (item.getItemId() == R.id.navFavoritos) {
             // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();

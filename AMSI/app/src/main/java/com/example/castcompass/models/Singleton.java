@@ -4,6 +4,7 @@ package com.example.castcompass.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 //
@@ -131,8 +132,8 @@ public class Singleton {
                             loginListener.onUpdateLogin(login);
                         }
 
-                        Toast.makeText(context, "Login efetuado com sucesso com o", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, "Token: " + login.getToken(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Login efetuado com sucesso com o " + login.username, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Token: " + login.getToken(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(context, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -221,9 +222,9 @@ public class Singleton {
         return produto;
     }
 
-    public Utilizador getUtilizadorAPI(final Context context, int id) {
+    public Utilizador getUtilizadorAPI(final Context context) {
         Utilizador utilizador = null;
-        StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + id + "&token=" + login.getToken(), new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -235,7 +236,9 @@ public class Singleton {
                     }
 
                 } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar o utilizador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Erro ao carregar o utilizador: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("Singleton", "Erro ao carregar o utilizador: " + e.getMessage());
+                    Log.d("API_RESPONSE", "Resposta da API: " + response);
                 }
             }
         }, new Response.ErrorListener() {

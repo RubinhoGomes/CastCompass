@@ -2,13 +2,13 @@ package com.example.castcompass.models;
 
 public class Utilizador {
 
-    public int id, idProfile, nif, telemovel, dataNascimento;
-    public String username, email, token, genero, morada, nome;
+    public int id, idProfile, nif, telemovel;
+    public String username, email, token, genero, morada, nome, dataNascimento;
 
     public Utilizador() {
     }
 
-    public Utilizador(int id, int idProfile, int nif, int telemovel, int dataNascimento, String username, String nome, String email, String token, String genero, String morada) {
+    public Utilizador(int id, int idProfile, int nif, int telemovel, String dataNascimento, String username, String nome, String email, String token, String genero, String morada) {
         this.id = id;
         this.idProfile = idProfile;
         this.username = username;
@@ -86,11 +86,11 @@ public class Utilizador {
         this.genero = genero;
     }
 
-    public int getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(int dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
