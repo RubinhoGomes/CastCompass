@@ -23,6 +23,7 @@ import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.listeners.UtilizadorListener;
 import com.example.castcompass.utils.CarrinhoItemsJsonParser;
+import com.example.castcompass.utils.FaturasJsonParser;
 import com.example.castcompass.utils.FavoritosJsonParser;
 import com.example.castcompass.utils.LoginJsonParser;
 import com.example.castcompass.utils.UtilizadorJsonParser;
