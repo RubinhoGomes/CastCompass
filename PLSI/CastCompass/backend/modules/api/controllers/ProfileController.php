@@ -36,26 +36,24 @@ class ProfileController extends ActiveController
     }
 
 
-    public function actionCount()
-    {
+    public function actionCount() {
         $profilesmodel = new $this->modelClass;
         $recs = $profilesmodel::find()->all();
         return ['count' => count($recs)];
     }
 
-    public function actionProcurarnomes($nome)
-    {
+    public function actionProcurarnomes($nome) {
         $profiles = $this->modelClass::find()
             ->where(['nome' => $nome])->all();
         return $profiles;
     }
-    
+
     public function actionUtilizador($id) {
         $utilizador = $this->modelClass::findOne($id);
 
         $data = [
-          'id' => $utilizador->user->id,
-          'idProfile' => $utilizador->id,
+            'id' => $utilizador->user->id,
+            'idProfile' => $utilizador->id,
             'nome' => $utilizador->nome,
             'username' => $utilizador->user->username,
             'email' => $utilizador->user->email,
@@ -70,20 +68,18 @@ class ProfileController extends ActiveController
         return $data;
     }
 
-    public function actionAtualizar($id) {
+    public function actionAtualizarutilizador($id) {
         $profile = Profile::findOne($id);
 
         $profile->nome = \Yii::$app->request->post('nome');
-        $profile->nif = \Yii::$app->request->post('nif');
-        $profile->dtaNascimento = \Yii::$app->request->post('dtaNascimento');
-        $profile->genero = \Yii::$app->request->post('genero');
         $profile->telemovel = \Yii::$app->request->post('telemovel');
         $profile->morada = \Yii::$app->request->post('morada');
+        $profile->nif = \Yii::$app->request->post('nif');
         $profile->save();
         return $profile;
     }
 
-    public function actionApagar($id) {
+    public function actionApagarutilizador($id) {
         $profile = Profile::findOne($id);
         $utilizador = User::findOne($profile->userID);
 
