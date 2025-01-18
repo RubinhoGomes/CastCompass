@@ -67,6 +67,7 @@ class FavoritosController extends ActiveController
           'idProduto' => $produto->id,
           'idUtilizador' => $favorito->profileID,
           'nome' => $produto->nome,
+          'marca' => $produto->marca,
           'descricao' => $produto->descricao,
           'preco' => $produto->preco,
           'categoria' => $produto->categoria->nome,

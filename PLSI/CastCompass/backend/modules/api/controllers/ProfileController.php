@@ -46,6 +46,24 @@ class ProfileController extends ActiveController
             ->where(['nome' => $nome])->all();
         return $profiles;
     }
+    
+    public function actionUtilizador($id) {
+        $utilizador = $this->modelClass::findOne($id);
+
+        $data = [
+            'id' => $utilizador->id,
+            'nome' => $utilizador->nome,
+            'username' => $utilizador->user->username,
+            'email' => $utilizador->user->email,
+            'nif' => $utilizador->nif,
+            'dtaNascimento' => $utilizador->dtaNascimento,
+            'genero' => $utilizador->genero,
+            'telemovel' => $utilizador->telemovel,
+            'morada' => $utilizador->morada,
+        ];
+
+        return $data;
+    }
 
 
 }

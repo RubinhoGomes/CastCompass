@@ -62,11 +62,9 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
         tvPreco.setText(produto.getPreco() + "€");
         tvStock.setText(produto.getStock() + " unidades");
         tvDescricao.setText(produto.getDescricao());
-        // imgCapa.setImageResource(produto.getImagem());
         Glide.with(this)
                 .load(produto.getImagem())
                 .placeholder(R.drawable.logo)
-                //guardar em cache todas as imagens
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgCapa);
     }

@@ -63,6 +63,7 @@ return [
                     'extraPatterns' => [
                         'GET count' => 'count',
                         'GET procurarnomes' => 'procurarnomes',
+                        'GET utilizador' => 'utilizador',
                     ],
                 ],
                 [

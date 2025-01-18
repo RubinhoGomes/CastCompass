@@ -14,6 +14,7 @@ import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
+import com.example.castcompass.utils.FavoritosJsonParser;
 import com.example.castcompass.utils.LoginJsonParser;
 import com.example.castcompass.utils.util;
 import com.example.castcompass.utils.ProdutosJsonParser;
@@ -205,17 +206,20 @@ public class Singleton {
         return produto;
     }
 
-    public Produto getFavoritoAPI(final Context context, int id) {
-        Produto produto = null;
+    public void getAllFavoritosAPI(final Context context, int id) {
+       ArrayList<Favoritos> favoritos = null;
         StringRequest request = new StringRequest(Request.Method.GET, UrlApiProduto + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    Produto produto = ProdutosJsonParser.parserJsonProduto(response);
+
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(response);
 
                     // Notificar o listener que a lista foi atualizada
-                    if (produtoListener != null) {
-                        produtoListener.onRefreshProduto(produto);
+                    if (favoritosListener != null) {
+                        favoritosListener.onRefreshFavoritos(favoritos);
                     }
 
                 } catch (Exception e) {
@@ -230,7 +234,6 @@ public class Singleton {
         });
 
         volleyQueue.add(request);
-        return produto;
     }
 
     public ArrayList<Produto> getProdutosBD() {

@@ -185,14 +185,39 @@ class CarrinhoController extends ActiveController
         if (!$carrinho) {
             return ['error' => 'Carrinho não encontrado.'];
         }
+        
+        $itens = ItemsCarrinho::find(['carrinhoID' => $carrinho->id])->all();
 
-        return [
+        if (empty($itens)) {
+            return ['message' => 'O carrinho está vazio.'];
+        }
+
+        $itensData = [];
+        foreach ($itens as $item) {
+         $itensData[] = [
+            'id' => $item->id,
+            'produtoID' => $item->produtoID,
+            'nome' => $item->nome,
+            'quantidade' => $item->quantidade,
+            'valorTotal' => $item->valorTotal,
+            'imagem' => 'http://172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $item->getImagem($item->produtoID),
+          ];
+        }
+
+        $data = [
             'id' => $carrinho->id,
             'profileID' => $carrinho->profileID,
             'valorTotal' => $carrinho->valorTotal,
             'quantidade' => $carrinho->quantidade,
+            'items' => $itensData,
         ];
+
+        return $data;
     }
 
-
+    private function getImagem($produtoID)
+    {
+        $imagem = Imagem::findOne(['produtoID' => $produtoID]);
+        return $imagem->filename;
+    }
 }

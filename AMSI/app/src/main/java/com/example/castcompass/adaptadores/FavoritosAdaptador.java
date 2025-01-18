@@ -48,7 +48,6 @@ public class FavoritosAdaptador extends BaseAdapter {
         } if(view == null){
             view = inflater.inflate(R.layout.item_lista_favoritos, null);
         }
-        //otimização
         FavoritosAdaptador.ViewHolderLista viewHolder = (FavoritosAdaptador.ViewHolderLista) view.getTag();
         if(viewHolder == null){
             viewHolder = new FavoritosAdaptador.ViewHolderLista(view);
@@ -77,7 +76,6 @@ public class FavoritosAdaptador extends BaseAdapter {
             tvNome.setText(favoritos.getNomeProduto());
             tvDescricao.setText(favoritos.getDescricaoProduto());
             tvPreco.setText(favoritos.getPrecoProduto() + "");
-            //imgCapa.setImageResource(favoritos.getImagemProduto());
             Glide.with(context)
                     .load(favoritos.getImagemProduto())
                     .placeholder(R.drawable.logo)

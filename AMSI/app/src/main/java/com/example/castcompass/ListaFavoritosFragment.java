@@ -52,7 +52,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
 
 
     @Override
-    public void onRefreshListaFavoritos(ArrayList<Favoritos> favoritos) {
+    public void onRefreshFavoritos(ArrayList<Favoritos> favoritos) {
         if(favoritos != null){
 
             lvFavoritos.setAdapter(new FavoritosAdaptador(getContext(), favoritos));

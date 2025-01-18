@@ -46,7 +46,6 @@ public class ProdutosJsonParser {
 
     public static Produto parserJsonProduto(String response) {
         Produto produto = null;
-
         try {
             JSONObject produtoJSON = new JSONObject(response);
 
@@ -66,11 +65,5 @@ public class ProdutosJsonParser {
         }
 
         return produto;
-    }
-
-    public static boolean isConnectionInternet(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return (netInfo != null && netInfo.isConnected());
     }
 }
