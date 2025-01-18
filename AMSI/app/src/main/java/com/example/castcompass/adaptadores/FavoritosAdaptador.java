@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.castcompass.R;
 import com.example.castcompass.models.Favoritos;
+import com.example.castcompass.models.Singleton;
 
 import java.util.ArrayList;
 
@@ -56,6 +58,19 @@ public class FavoritosAdaptador extends BaseAdapter {
         }
 
         viewHolder.update(favoritos.get(position));
+
+        Button btnRemover = view.findViewById(R.id.btnRemoverFav);
+        btnRemover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Remove o favorito ao clicar no botão
+                Favoritos favorito = favoritos.get(position);
+                Singleton.getInstance(context).removerFavoritoAPI(context, favorito.getIdProduto());
+                Singleton.getInstance(context).getAllFavoritosAPI(context);
+            }
+
+
+        });
         return view;
     }
 

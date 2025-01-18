@@ -81,6 +81,16 @@
         </LinearLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/btnAdicionarFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar aos Favoritos"
+        android:drawableStart="@drawable/ic_favorito"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="match_parent"
@@ -93,11 +103,8 @@
         app:srcCompat="@drawable/ic_shopcart"
         app:tint="@android:color/background_light" />
 
-    <!-- Stock Quantity -->
 
-    <!-- Price -->
 
-    <!-- Description Label -->
 
 
 </LinearLayout>

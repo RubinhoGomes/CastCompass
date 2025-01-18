@@ -3,6 +3,7 @@ package com.example.castcompass;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -26,13 +27,13 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
     private TextView tvNome, tvPreco, tvDescricao, tvStock;
     private ImageView imgCapa;
     private Produto produto;
-
+    private Button btnAdicionarFav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_produtos);
-
+        btnAdicionarFav = findViewById(R.id.btnAdicionarFav);
 
         tvNome = findViewById(R.id.tvNome);
         tvPreco = findViewById(R.id.tvPreco);
@@ -47,6 +48,16 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
         if (produto != null) {
             carregarDados();
         }
+
+        btnAdicionarFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (produto != null) {
+                    Singleton.getInstance(DetalhesProdutosActivity.this)
+                            .adicionarFavoritoAPI(DetalhesProdutosActivity.this, produto.getId());
+                }
+            }
+        });
     }
 
     @Override

@@ -71,6 +71,7 @@ public class Singleton {
     private static String urlApiFaturas = "";
     private static String urlApiFavoritos = "";
     private static String urlApiFavoritosRemover = "";
+    private static String urlApiFavoritosAdicionar = "";
     private static String urlApiCarrinho = "";
 
     private ArrayList<Produto> listaProdutos;
@@ -101,6 +102,7 @@ public class Singleton {
         urlApiFaturas = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/faturas/faturascliente";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
         urlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
+        urlApiFavoritosAdicionar = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/adicionar";
         urlApiCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/carrinho";
     }
 
@@ -374,7 +376,9 @@ public class Singleton {
 
     public void removerFavoritoAPI(final Context context, final long produtoID) {
         // ArrayList<Favoritos> favoritos = null;
-        StringRequest request = new StringRequest(Request.Method.POST, urlApiFavoritosRemover + "?produtoID=" + produtoID + "&token=" + login.token, new Response.Listener<String>() {
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int id = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.DELETE, urlApiFavoritosRemover + "?profileID="+id+"&produtoID=" + produtoID + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -402,6 +406,41 @@ public class Singleton {
         volleyQueue.add(request);
     }
     // endregion
+
+
+    public void adicionarFavoritoAPI(final Context context, final long produtoID) {
+        // ArrayList<Favoritos> favoritos = null;
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int id = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.POST, urlApiFavoritosAdicionar + "?profileID="+id+"&produtoID=" + produtoID + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(jsonArray);
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (favoritosListener != null) {
+                        favoritosListener.onRefreshFavoritos(favoritos);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+
 
     //region Faturas
     public void getAllFaturasAPI(final Context context) {
