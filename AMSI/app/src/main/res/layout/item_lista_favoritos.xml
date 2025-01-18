@@ -101,10 +101,12 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnRemoverFav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adiciona aos favoritos"
+            android:text="Remover dos favoritos"
             android:drawableEnd="@drawable/ic_favorito"
+            android:onClick="onClickRemoverFav"
             />
     </LinearLayout>
 </LinearLayout>

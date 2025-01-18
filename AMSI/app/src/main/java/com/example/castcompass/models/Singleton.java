@@ -252,7 +252,7 @@ public class Singleton {
     public void getAllFavoritosAPI(final Context context) {
        // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
-        int id = sp.getInt("idProfile", 0);
+        int id = sp.getInt("idProfile", login.idProfile);
         StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

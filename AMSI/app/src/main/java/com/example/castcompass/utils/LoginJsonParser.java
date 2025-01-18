@@ -16,6 +16,7 @@ public class LoginJsonParser {
 
             JSONObject loginJSON = new JSONObject(response);
             utilizador.setId(loginJSON.getInt("id"));
+            utilizador.setIdProfile(loginJSON.getInt("idProfile"));
             utilizador.setToken(loginJSON.getString("token"));
             utilizador.setUsername(loginJSON.getString("username"));
             utilizador.setEmail(loginJSON.getString("email"));

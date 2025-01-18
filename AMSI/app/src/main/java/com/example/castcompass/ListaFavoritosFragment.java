@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 public class ListaFavoritosFragment extends Fragment implements FavoritosListener {
 
     private ListView lvFavoritos;
+    private Button remover;
     private ArrayList<Favoritos> favoritos;
 
     private FloatingActionButton fablista;
@@ -48,6 +51,13 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
         lvFavoritos = view.findViewById(R.id.lvFavoritos);
         Singleton.getInstance(getContext()).setFavoritosListener(this);
         Singleton.getInstance(getContext()).getAllFavoritosAPI(getContext());
+
+        lvFavoritos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
 
         return view;
     }
