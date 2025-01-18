@@ -6,7 +6,7 @@
     <string name="login">Login</string>
     <string name="ndOpen">ndOpen</string>
     <string name="ndClose">ndClose</string>
-    <string name="register">Registar</string>
+    <string name="register">register</string>
     <string name="introduza_a_password_repetir">introduza a password outra vez</string>
     <string name="nome">Nome:</string>
     <string name="marca">Marca:</string>
@@ -21,4 +21,5 @@
         <item>Masculino</item>
         <item>Feminino</item>
     </string-array>
+    <string name="quantidade">Quantidade</string>
 </resources>

@@ -10,38 +10,35 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import com.example.castcompass.ListaProdutosFragment;
 import com.example.castcompass.R;
-import com.example.castcompass.models.Produto;
+import com.example.castcompass.models.CarrinhoItems;
 
-import java.time.Instant;
 import java.util.ArrayList;
 
-public class ListaProdutosAdaptador extends BaseAdapter {
+public class ListaCarrinhoAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<Produto> produtos;
-
-    public ListaProdutosAdaptador(Context context, ArrayList<Produto> produtos) {
-        this.context = context;
-        this.produtos = produtos;
-    }
+    private ArrayList<CarrinhoItems> items;
 
     @Override
     public int getCount() {
-        return produtos.size();
+        return items.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return produtos.get(i);
+    public Object getItem(int position) {
+        return items.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return produtos.get(i).getId();
+    public long getItemId(int position) {
+        return items.get(position).getId();
+    }
+
+    public ListaCarrinhoAdaptador(Context context, ArrayList<CarrinhoItems> items){
+        this.context = context;
+        this.items = items;
     }
 
     @Override
@@ -50,41 +47,37 @@ public class ListaProdutosAdaptador extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if (view == null) {
-            view = inflater.inflate(R.layout.item_lista_produto, null); // Alterado para layout de produto
+            view = inflater.inflate(R.layout.item_lista_carrinho_item, null); // Alterado para layout de produto
         }
 
-        ListaProdutosAdaptador.ViewHolderLista viewHolder = (ViewHolderLista) view.getTag();
+        ListaCarrinhoAdaptador.ViewHolderLista viewHolder = (ListaCarrinhoAdaptador.ViewHolderLista) view.getTag();
         if (viewHolder == null) {
-            viewHolder = new ViewHolderLista(view);
+            viewHolder = new ListaCarrinhoAdaptador.ViewHolderLista(view);
             view.setTag(viewHolder);
         }
 
-        viewHolder.update(produtos.get(position));
+        viewHolder.update(items.get(position));
         return view;
     }
 
-
     private class ViewHolderLista {
-        private TextView tvNome, tvMarca, tvPreco, tvDescricao, tvCategoria;
+        private TextView tvNome, tvQuantidade, tvPreco;
         private ImageView imgCapa;
 
         public ViewHolderLista(View view) {
             tvNome = view.findViewById(R.id.tvNome);
-            tvMarca = view.findViewById(R.id.tvMarca);
             tvPreco = view.findViewById(R.id.tvPreco);
-            tvDescricao = view.findViewById(R.id.tvDescricao);
-            tvCategoria = view.findViewById(R.id.tvCategoria);
+            tvQuantidade = view.findViewById(R.id.tvQuantidade);
             imgCapa = view.findViewById(R.id.imgCapa);
         }
 
-        public void update(Produto produto) {
-            tvNome.setText(produto.getNome());
-            tvMarca.setText(produto.getMarca());
-            tvPreco.setText(String.format("%.2f€", produto.getPreco()));
-            tvCategoria.setText(produto.getCategoria());
+        public void update(CarrinhoItems items) {
+            tvNome.setText(items.getNome());
+            tvQuantidade.setText(items.getQuantidade());
+            tvPreco.setText(String.format("%.2f€", items.getValortotal()));
 
             Glide.with(context)
-                    .load(produto.getImagem())
+                    .load(items.getImagem())
                     .placeholder(R.drawable.logo)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgCapa);
