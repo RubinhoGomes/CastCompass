@@ -57,6 +57,7 @@ public class Singleton {
     private static String urlApiProduto = "";
     private static String urlApiUtilizador = "";
     private static String urlApiFavoritos = "";
+    private static String UrlApiFavoritosRemover = "";
 
     private ArrayList<Produto> listaProdutos;
 
@@ -95,6 +96,7 @@ public class Singleton {
         urlApiUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/utilizador";
         urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
+        UrlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
     }
 
     // LISTENERS
@@ -284,7 +286,35 @@ public class Singleton {
         volleyQueue.add(request);
     }
 
-    public ArrayList<Produto> getProdutosBD() {
-        return listaProdutos;
+    public void removerFavoritoAPI(final Context context) {
+        // ArrayList<Favoritos> favoritos = null;
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int id = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(jsonArray);
+
+                    // Notificar o listener que a lista foi atualizada
+                    if (favoritosListener != null) {
+                        favoritosListener.onRefreshFavoritos(favoritos);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
     }
 }
