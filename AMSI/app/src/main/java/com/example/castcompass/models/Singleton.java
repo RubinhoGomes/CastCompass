@@ -54,10 +54,7 @@ public class Singleton {
     private static String urlApiLogin = "";
     private static String urlApiProdutos = "";
     private static String urlApiProduto = "";
-<<<<<<< Updated upstream
     private static String urlApiUtilizador = "";
-=======
->>>>>>> Stashed changes
     private static String urlApiFavoritos = "";
 
     private ArrayList<Produto> listaProdutos;
@@ -94,10 +91,7 @@ public class Singleton {
     public void MudarIP(String ip) {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
         urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
-<<<<<<< Updated upstream
         urlApiUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/utilizador";
-=======
->>>>>>> Stashed changes
         urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
     }
@@ -129,6 +123,7 @@ public class Singleton {
 
                         SharedPreferences.Editor editor = context.getSharedPreferences("DADOS_USER", Context.MODE_PRIVATE).edit();
                         editor.putString("token", jsonObject.getString("token"));
+                        editor.putString("idProfile", jsonObject.getString("idProfile"));
                         editor.putInt("id", jsonObject.getInt("id"));
                         editor.apply();
 
@@ -226,7 +221,6 @@ public class Singleton {
         return produto;
     }
 
-<<<<<<< Updated upstream
     public Utilizador getUtilizadorAPI(final Context context, int id) {
         Utilizador utilizador = null;
         StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + id + "&token=" + login.getToken(), new Response.Listener<String>() {
@@ -255,16 +249,11 @@ public class Singleton {
         return utilizador;
     }
 
-    public void getAllFavoritosAPI(final Context context, int id) {
-       ArrayList<Favoritos> favoritos = null;
-        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + login.token, new Response.Listener<String>() {
-=======
     public void getAllFavoritosAPI(final Context context) {
        // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
-        int id = sp.getInt("id", login.id);
+        int id = sp.getInt("idProfile", 0);
         StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
->>>>>>> Stashed changes
             @Override
             public void onResponse(String response) {
                 try {

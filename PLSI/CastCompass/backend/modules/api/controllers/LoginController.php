@@ -44,6 +44,7 @@ class LoginController extends Controller
         if ($this->user->profile) {
             return [
                 'id' => $this->user->id,
+                'idProfile' => $this->user->profile->id,
                 'username' => $this->user->username,
                 'email' => $this->user->email,
                 'token' => $this->user->auth_key,
