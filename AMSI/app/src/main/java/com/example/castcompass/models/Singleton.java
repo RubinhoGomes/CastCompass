@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Imports from CastCompass
+import com.example.castcompass.listeners.FavoritoListener;
 import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
@@ -58,7 +59,7 @@ public class Singleton {
     private static String urlApiProduto = "";
     private static String urlApiUtilizador = "";
     private static String urlApiFavoritos = "";
-    private static String UrlApiFavoritosRemover = "";
+    private static String urlApiFavoritosRemover = "";
 
     private ArrayList<Produto> listaProdutos;
 
@@ -97,7 +98,7 @@ public class Singleton {
         urlApiUtilizador = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/profile/utilizador";
         urlApiProduto = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/produto";
         urlApiFavoritos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/profilefavoritos";
-        UrlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
+        urlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
     }
 
     // LISTENERS
@@ -263,7 +264,7 @@ public class Singleton {
     }
 
     public void apagarUtilizadorAPI(final Context context) {
-        
+
     }
     // endregion
 
@@ -300,11 +301,9 @@ public class Singleton {
         volleyQueue.add(request);
     }
 
-    public void removerFavoritoAPI(final Context context) {
+    public void removerFavoritoAPI(final Context context, final long produtoID) {
         // ArrayList<Favoritos> favoritos = null;
-        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
-        int id = sp.getInt("idProfile", login.idProfile);
-        StringRequest request = new StringRequest(Request.Method.GET, UrlApiFavoritosRemover + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, urlApiFavoritosRemover + "?produtoID=" + produtoID + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

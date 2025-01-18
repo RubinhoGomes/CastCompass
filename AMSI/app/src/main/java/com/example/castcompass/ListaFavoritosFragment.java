@@ -52,13 +52,6 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
         Singleton.getInstance(getContext()).setFavoritosListener(this);
         Singleton.getInstance(getContext()).getAllFavoritosAPI(getContext());
 
-        lvFavoritos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Singleton.getInstance(getContext()).removerFavoritoAPI(getContext());
-            }
-        });
-
         return view;
     }
 
