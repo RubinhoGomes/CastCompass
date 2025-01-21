@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"
+            android:text="@string/username"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -32,13 +32,12 @@
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/introduza_o_username"
             android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome"
+            android:text="@string/nome"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -46,13 +45,12 @@
             android:id="@+id/etNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduza o nome"
             android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/email"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -60,13 +58,12 @@
             android:id="@+id/editTextTextEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduza o email"
             android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="@string/password"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -74,13 +71,12 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/introduza_a_password"
             android:inputType="textPassword" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NIF"
+            android:text="@string/nif"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -88,13 +84,12 @@
             android:id="@+id/etNif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduza o NIF"
             android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Género"
+            android:text="@string/g_nero"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -108,7 +103,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Telemóvel"
+            android:text="@string/telem_vel"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -116,13 +111,12 @@
             android:id="@+id/etTelemovel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduza o telemóvel"
             android:inputType="phone" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Morada"
+            android:text="@string/morada"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
@@ -130,7 +124,6 @@
             android:id="@+id/etMorada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduza a morada"
             android:inputType="text" />
 
         <Button
@@ -146,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickViewLogin"
-            android:text="Voltar para o Login"
+            android:text="@string/voltar_para_o_login"
             android:layout_marginTop="8dp" />
 
     </LinearLayout>

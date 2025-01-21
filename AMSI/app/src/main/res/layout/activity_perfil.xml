@@ -26,7 +26,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="Username:"
+                android:text="@string/username"
                 android:textSize="16sp" />
 
             <EditText
@@ -35,7 +35,6 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="Username"
                 android:inputType="text"
                 android:padding="12dp" />
         </LinearLayout>
@@ -51,7 +50,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="Email:"
+                android:text="@string/email"
                 android:textSize="16sp" />
 
             <EditText
@@ -60,8 +59,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="Email"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:padding="12dp" />
         </LinearLayout>
 
@@ -76,7 +74,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="Data de Nascimento:"
+                android:text="@string/data_de_nascimento"
                 android:textSize="16sp" />
 
             <EditText
@@ -85,7 +83,6 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="Data de Nascimento"
                 android:inputType="text"
                 android:padding="12dp" />
         </LinearLayout>
@@ -101,7 +98,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="Género:"
+                android:text="@string/g_nero"
                 android:textSize="16sp" />
 
             <EditText
@@ -110,7 +107,6 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="Género"
                 android:inputType="text"
                 android:padding="12dp" />
         </LinearLayout>
@@ -126,7 +122,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="Nome:"
+                android:text="@string/nomePerfil"
                 android:textSize="16sp" />
 
             <EditText
@@ -135,7 +131,6 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="Nome"
                 android:inputType="text"
                 android:padding="12dp" />
         </LinearLayout>
@@ -151,7 +146,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="Telemóvel:"
+                android:text="@string/telem_vel"
                 android:textSize="16sp" />
 
             <EditText
@@ -160,7 +155,6 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="Telemóvel"
                 android:inputType="text"
                 android:padding="12dp" />
         </LinearLayout>
@@ -176,7 +170,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="Morada:"
+                android:text="@string/morada"
                 android:textSize="16sp" />
 
             <EditText
@@ -185,7 +179,6 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="Morada"
                 android:inputType="text"
                 android:padding="12dp" />
         </LinearLayout>
@@ -201,7 +194,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:text="NIF:"
+                android:text="@string/nif"
                 android:textSize="16sp" />
 
             <EditText
@@ -210,7 +203,6 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="NIF"
                 android:inputType="text"
                 android:padding="12dp" />
         </LinearLayout>
@@ -230,7 +222,7 @@
                 android:layout_weight="1"
                 android:onClick="onClickEditarPerfil"
                 android:padding="12dp"
-                android:text="Editar Perfil" />
+                android:text="@string/editar_perfil" />
 
             <Button
                 android:id="@+id/btnApagarPerfil"
@@ -241,7 +233,7 @@
                 android:backgroundTint="#FF0000"
                 android:onClick="onClickApagarPerfil"
                 android:padding="12dp"
-                android:text="Apagar Perfil"
+                android:text="@string/apagar_perfil"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

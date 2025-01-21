@@ -6,34 +6,34 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navHome"
-            android:title="Home" />
+            android:title="@string/home" />
 
         <item
             android:id="@+id/navFavoritos"
-            android:title="Favoritos" />
+            android:title="@string/favoritos" />
 
         <item
             android:id="@+id/navCarrinho"
-            android:title="Carrinho" />
+            android:title="@string/carrinho" />
 
         <item
             android:id="@+id/navFaturas"
-            android:title="Faturas" />
+            android:title="@string/faturas" />
 
         <item
             android:id="@+id/navMensagens"
-            android:title="Mensagens" />
+            android:title="@string/mensagens" />
 
     </group>
 
-    <item android:title="Gestão">
+    <item android:title="@string/gest_o">
         <menu>
             <item
                 android:id="@+id/navPerfil"
-                android:title="Perfil" />
+                android:title="@string/perfil" />
             <item
                 android:id="@+id/navLogOut"
-                android:title="LogOut" />
+                android:title="@string/logout" />
         </menu>
     </item>
 </menu>

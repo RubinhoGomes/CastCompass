@@ -5,6 +5,6 @@
     <item
         android:id="@+id/itemNaoFavorito"
         android:icon="@drawable/ic_nao_favorito"
-        android:title="Não Favorito"
+        android:title="@string/n_o_favorito"
         app:showAsAction="always"/>
 </menu>

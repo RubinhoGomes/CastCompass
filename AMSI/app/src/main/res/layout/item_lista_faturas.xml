@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Valor Total:"
+            android:text="@string/valor_total"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
             android:id="@+id/tvValorTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0.00€"
+            android:text="@string/_0_00"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="IVA Total:"
+            android:text="@string/iva_total"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
             android:id="@+id/tvIvaTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0.00€"
+            android:text="@string/_0_00"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -69,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Método de Expedição:"
+            android:text="@string/m_todo_de_expedi_o"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -77,7 +77,7 @@
             android:id="@+id/tvMtdExpedicao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="N/A"
+            android:text="@string/n_a"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -91,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Método de Pagamento:"
+            android:text="@string/m_todo_de_pagamento"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -99,7 +99,7 @@
             android:id="@+id/tvMtdPagamento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="N/A"
+            android:text="@string/n_a"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -113,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Data:"
+            android:text="@string/data"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -121,7 +121,7 @@
             android:id="@+id/tvData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="01/01/2025"
+            android:text="@string/_01_01_2025"
             android:textSize="16sp" />
     </LinearLayout>
 

@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="Product Name"
+                android:text="@string/product_name"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:text="Stock Quantity: 0"
+                android:text="@string/stock_quantity_0"
                 android:textSize="16sp" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:text="Price: 0.00€"
+                android:text="@string/price_0_00"
                 android:textSize="16sp" />
 
             <TextView
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:text="Descrição:"
+                android:text="@string/descri_o"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:scrollbars="vertical"
-                android:text="Description:"
+                android:text="@string/description"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -85,11 +85,9 @@
         android:id="@+id/btnAdicionarFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar aos Favoritos"
+        android:text="@string/adicionar_aos_favoritos"
         android:drawableStart="@drawable/ic_favorito"
-        android:layout_marginTop="0dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_marginTop="0dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -99,12 +97,7 @@
         android:layout_margin="16dp"
         android:backgroundTint="@color/green"
         android:clickable="true"
-        android:contentDescription="Comprar"
+        android:contentDescription="@string/comprar"
         app:srcCompat="@drawable/ic_shopcart"
         app:tint="@android:color/background_light" />
-
-
-
-
-
 </LinearLayout>

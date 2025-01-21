@@ -41,4 +41,27 @@ public class FavoritosJsonParser {
 
         return favoritos;
     }
+
+    public static Favoritos parserJsonFavorito(String response) {
+        Favoritos favorito = null;
+        try {
+            JSONObject favoritoJSON = new JSONObject(response);
+
+            int id = favoritoJSON.getInt("id");
+            int idProduto = favoritoJSON.getInt("idProduto");
+            int idUtilizador = favoritoJSON.getInt("idUtilizador");
+            String nome = favoritoJSON.getString("nome");
+            String marca = favoritoJSON.getString("marca");
+            String descricao = favoritoJSON.getString("descricao");
+            String categoria = favoritoJSON.getString("categoria");
+            String imagem = favoritoJSON.getString("imagem");
+            int preco = favoritoJSON.getInt("preco");
+
+            favorito = new Favoritos(id, idProduto, idUtilizador, nome, marca, descricao, categoria, imagem, preco);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return favorito;
+    }
 }

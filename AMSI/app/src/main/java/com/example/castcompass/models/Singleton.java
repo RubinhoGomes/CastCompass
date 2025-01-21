@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Imports from CastCompass
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.castcompass.ListaFaturasFragment;
 import com.example.castcompass.listeners.CarrinhoListener;
 import com.example.castcompass.listeners.FaturasListener;
@@ -52,7 +53,9 @@ public class Singleton {
     private static RequestQueue volleyQueue;
     private LoginListener loginListener;
 
-    public FavoritoBDHelper favoritoBD;
+    private ArrayList<Favoritos> favoritos;
+
+    public FavoritoBDHelper favoritoBD = null;
 
     private ProdutosListener produtosListener;
     private ProdutoListener produtoListener;
@@ -88,6 +91,7 @@ public class Singleton {
 
     private Singleton(Context context) {
         volleyQueue = Volley.newRequestQueue(context);
+        favoritoBD = new FavoritoBDHelper(context);
         listaProdutos = new ArrayList<>();
     }
 
@@ -296,7 +300,11 @@ public class Singleton {
         StringRequest request = new StringRequest(Request.Method.POST, urlApiAtualizarUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                try {
+                    Toast.makeText(context, "Utilizador atualizado com sucesso", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao atualizar o utilizador: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -341,37 +349,77 @@ public class Singleton {
     }
     // endregion
 
+    //region BD Favoritos
+    public Favoritos getFavorito(int id) {
+        for (Favoritos favorito : favoritos) {
+            if (favorito.getId() == id) {
+                return favorito;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Favoritos> getFavoritosBD() {
+        favoritos = favoritoBD.getAllFavoritosBD();
+        return new ArrayList<>(favoritos);
+    }
+
+    public void adicionarFavoritoBD(Favoritos favorito) {
+        favoritoBD.adicionarFavoritoBD(favorito);
+    }
+
+    public void removerFavoritoBD(int id) {
+        Favoritos favorito = getFavorito(id);
+        if (favorito != null) {
+            favoritoBD.removerFavoritoBD(id);
+        }
+    }
+
+    public void adicionarFavoritosBD(ArrayList<Favoritos> favoritos) {
+        favoritoBD.removerAllFavoritosBD();
+        for (Favoritos favorito : favoritos) {
+            adicionarFavoritoBD(favorito);
+        }
+    }
+    //endregion
+
     // region Favoritos
     public void getAllFavoritosAPI(final Context context) {
-        // ArrayList<Favoritos> favoritos = null;
-        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
-        int id = sp.getInt("idProfile", login.idProfile);
-        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
+        if (!util.isConnected(context)) {
+            Toast.makeText(context, "Sem ligação à internet", Toast.LENGTH_LONG).show();
 
-                    JSONArray jsonArray = new JSONArray(response);
+            favoritos = getFavoritosBD();
 
-                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(jsonArray);
+            if (favoritosListener != null) {
+                favoritosListener.onRefreshFavoritos(favoritos);
+            }
 
-                    // Notificar o listener que a lista foi atualizada
+        } else {
+            // ArrayList<Favoritos> favoritos = null;
+            SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+            int id = sp.getInt("idProfile", login.idProfile);
+            JsonArrayRequest reqSelect = new JsonArrayRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    favoritos = FavoritosJsonParser.parserJsonFavoritos(response);
+                    //só para o modo offline
+                    adicionarFavoritosBD(favoritos);
+
+                    //TODO: atualizar a vista
                     if (favoritosListener != null) {
                         favoritosListener.onRefreshFavoritos(favoritos);
                     }
-
-                } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
-        volleyQueue.add(request);
+            volleyQueue.add(reqSelect);
+        }
+
     }
 
     public void adicionarFavoritoAPI(final Context context, final long produtoID) {
@@ -381,15 +429,13 @@ public class Singleton {
         StringRequest request = new StringRequest(Request.Method.POST, urlApiFavoritosAdicionar + "?profileID=" + id + "&produtoID=" + produtoID + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
+//                Favoritos favorito = FavoritosJsonParser.parserJsonFavorito(response);
+//                adicionarFavoritoBD(favorito);
 
-                    JSONArray jsonArray = new JSONArray(response);
-
-                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(jsonArray);
-
-                } catch (Exception e) {
-                    Toast.makeText(context, "Produto adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                if (favoritosListener != null) {
+                    favoritosListener.onRefreshFavoritos(favoritos);
                 }
+                Toast.makeText(context, "Produto adicionado com sucesso", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -409,13 +455,10 @@ public class Singleton {
             @Override
             public void onResponse(String response) {
                 try {
-
-                    JSONArray jsonArray = new JSONArray(response);
-
-                    ArrayList<Favoritos> favoritos = FavoritosJsonParser.parserJsonFavoritos(jsonArray);
-
-                } catch (Exception e) {
+                    removerFavoritoBD((int) produtoID);
                     Toast.makeText(context, "Produto removido com sucesso", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao remover produto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -431,22 +474,17 @@ public class Singleton {
 
     //region Faturas
     public void getAllFaturasAPI(final Context context) {
-        StringRequest request = new StringRequest(Request.Method.GET, urlApiFaturas + "?id=" + login.idProfile + "&token=" + login.token, new Response.Listener<String>() {
+        JsonArrayRequest reqSelect = new JsonArrayRequest(Request.Method.GET, urlApiFaturas + "?id=" + login.idProfile + "&token=" + login.token, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONArray response) {
                 try {
+                    ArrayList<Faturas> faturas = FaturasJsonParser.parserJsonFaturas(response);
 
-                    JSONArray jsonArray = new JSONArray(response);
-
-                    ArrayList<Faturas> faturas = FaturasJsonParser.parserJsonFaturas(jsonArray);
-
-                    // Notificar o listener que a lista foi atualizada
                     if (faturasListener != null) {
                         faturasListener.onRefreshFaturas(faturas);
                     }
-
                 } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Erro ao carregar faturas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -455,8 +493,6 @@ public class Singleton {
                 Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        volleyQueue.add(request);
     }
 
     //endregion
@@ -466,7 +502,7 @@ public class Singleton {
         // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
-        StringRequest request = new StringRequest(Request.Method.GET, urlApiFavoritos + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiCarrinho + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -479,7 +515,7 @@ public class Singleton {
                     }
 
                 } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar favoritos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Erro ao carregar carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

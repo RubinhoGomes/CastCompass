@@ -24,17 +24,13 @@ public class FavoritoBDHelper extends SQLiteOpenHelper {
         db = getWritableDatabase();
     }
 
-    public void removerAllFavoritos(){
-        db.delete(TABLE_NAME, null, null);
-    }
-
-    public ArrayList<Favoritos> getAllFavoritos(){
+    public ArrayList<Favoritos> getAllFavoritosBD() {
         ArrayList<Favoritos> favoritos = new ArrayList<>();
 
         Cursor cursor = db.query(TABLE_NAME, new String[]{ID, IDPRODUTO, IDUTILIZADOR, NOME, MARCA, DESCRICAO, CATEGORIA, IMAGEM, PRECO}, null, null, null, null, null);
 
-        if(cursor.moveToFirst()){
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 Favoritos aux = new Favoritos(
                         cursor.getInt(0),    // ID
                         cursor.getInt(1),    // IDPRODUTO
@@ -47,13 +43,55 @@ public class FavoritoBDHelper extends SQLiteOpenHelper {
                         cursor.getFloat(8)  // PRECO
                 );
                 favoritos.add(aux);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
             cursor.close();
         }
-
         return favoritos;
     }
 
+    public Favoritos adicionarFavoritoBD(Favoritos favorito) {
+        ContentValues values = new ContentValues();
+        values.put(IDUTILIZADOR, favorito.getIdUtilizador());
+        values.put(IDPRODUTO, favorito.getIdProduto());
+        values.put(NOME, favorito.getNomeProduto());
+        values.put(MARCA, favorito.getMarcaProduto());
+        values.put(DESCRICAO, favorito.getDescricaoProduto());
+        values.put(CATEGORIA, favorito.getCategoriaProduto());
+        values.put(IMAGEM, favorito.getImagemProduto());
+        values.put(PRECO, favorito.getPrecoProduto());
+
+        long id = db.insert(TABLE_NAME, null, values);
+        //se o id=-1 significa que não inseriu registo
+        if (id > -1) {
+            favorito.setId((int) id);
+            return favorito;
+        }
+
+        return null;
+    }
+
+    public boolean editarFavoritoBD(Favoritos favorito) {
+        ContentValues values = new ContentValues();
+        values.put(IDUTILIZADOR, favorito.getIdUtilizador());
+        values.put(IDPRODUTO, favorito.getIdProduto());
+        values.put(NOME, favorito.getNomeProduto());
+        values.put(MARCA, favorito.getMarcaProduto());
+        values.put(DESCRICAO, favorito.getDescricaoProduto());
+        values.put(CATEGORIA, favorito.getCategoriaProduto());
+        values.put(IMAGEM, favorito.getImagemProduto());
+        values.put(PRECO, favorito.getPrecoProduto());
+
+        int edit = this.db.update(TABLE_NAME, values, ID + "=?", new String[]{favorito.getId() + ""});
+        return edit == 1;
+    }
+
+    public void removerFavoritoBD(int id) {
+        int delete = this.db.delete(TABLE_NAME, ID + "=?", new String[]{id + ""});
+    }
+
+    public void removerAllFavoritosBD() {
+        db.delete(TABLE_NAME, null, null);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -78,18 +116,4 @@ public class FavoritoBDHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
         onCreate(db);
     }
-
-    public void adicionarFavorito(Favoritos favorito){
-        ContentValues values = new ContentValues();
-        values.put(IDUTILIZADOR, favorito.getIdUtilizador());
-        values.put(IDPRODUTO, favorito.getIdProduto());
-        values.put(NOME, favorito.getNomeProduto());
-        values.put(MARCA, favorito.getMarcaProduto());
-        values.put(DESCRICAO, favorito.getDescricaoProduto());
-        values.put(CATEGORIA, favorito.getCategoriaProduto());
-        values.put(IMAGEM, favorito.getImagemProduto());
-        values.put(PRECO, favorito.getPrecoProduto());
-        db.insert(TABLE_NAME, null, values);
-    }
-
 }

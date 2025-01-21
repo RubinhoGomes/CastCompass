@@ -68,14 +68,12 @@ public class FavoritosAdaptador extends BaseAdapter {
                 Singleton.getInstance(context).removerFavoritoAPI(context, favorito.getIdProduto());
                 Singleton.getInstance(context).getAllFavoritosAPI(context);
             }
-
-
         });
         return view;
     }
 
     private class ViewHolderLista {
-        private TextView tvNome, tvMarca, tvDescricao, tvPreco;
+        private TextView tvNome, tvMarca, tvCategoria, tvPreco;
         private ImageView imgCapa;
 
         public ViewHolderLista(View view) {
@@ -83,6 +81,7 @@ public class FavoritosAdaptador extends BaseAdapter {
             tvNome = view.findViewById(R.id.tvNome);
             tvMarca = view.findViewById(R.id.tvMarca);
             tvPreco = view.findViewById(R.id.tvPreco);
+            tvCategoria = view.findViewById(R.id.tvCategoria);
             imgCapa = view.findViewById(R.id.imgCapa);
         }
 
@@ -91,6 +90,7 @@ public class FavoritosAdaptador extends BaseAdapter {
             tvNome.setText(favoritos.getNomeProduto());
             tvMarca.setText(favoritos.getMarcaProduto());
             tvPreco.setText(favoritos.getPrecoProduto() + "");
+            tvCategoria.setText(favoritos.getCategoriaProduto());
             Glide.with(context)
                     .load(favoritos.getImagemProduto())
                     .placeholder(R.drawable.logo)

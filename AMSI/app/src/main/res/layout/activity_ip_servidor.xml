@@ -23,7 +23,7 @@
         android:ems="10"
         android:hint="@string/introduza_o_ip"
         android:inputType="text"
-        android:text="172.22.21.205" />
+        android:text="@string/IPServidor" />
 
     <Space
         android:layout_width="match_parent"

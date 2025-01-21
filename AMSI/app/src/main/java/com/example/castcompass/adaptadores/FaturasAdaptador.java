@@ -24,17 +24,17 @@ public class FaturasAdaptador extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return faturas.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return faturas.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return faturas.get(i).getId();
     }
 
     @Override
@@ -45,7 +45,9 @@ public class FaturasAdaptador extends BaseAdapter {
         if (view == null) {
             view = inflater.inflate(R.layout.item_lista_faturas, null);
         }
+
         FaturasAdaptador.ViewHolderLista viewHolder = (FaturasAdaptador.ViewHolderLista) view.getTag();
+
         if (viewHolder == null) {
             viewHolder = new FaturasAdaptador.ViewHolderLista(view);
             view.setTag(viewHolder);
@@ -58,7 +60,6 @@ public class FaturasAdaptador extends BaseAdapter {
         private TextView tvValorTotal, tvIvaTotal, tvData, tvMetodoExpedicao, tvMetodoPagamento;
 
         public ViewHolderLista(View view) {
-
             tvValorTotal = view.findViewById(R.id.tvNome);
             tvIvaTotal = view.findViewById(R.id.tvIvaTotal);
             tvData = view.findViewById(R.id.tvData);
