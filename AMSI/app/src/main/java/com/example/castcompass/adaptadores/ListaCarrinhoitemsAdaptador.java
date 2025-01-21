@@ -46,6 +46,8 @@ public class ListaCarrinhoitemsAdaptador extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
+
+
         if(inflater == null){
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         } if(view == null){
