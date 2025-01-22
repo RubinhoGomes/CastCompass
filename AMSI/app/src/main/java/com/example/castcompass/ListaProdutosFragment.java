@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.castcompass.adaptadores.ListaProdutosAdaptador;
 import com.example.castcompass.listeners.ProdutosListener;
@@ -27,7 +28,7 @@ public class ListaProdutosFragment extends Fragment implements ProdutosListener 
 
 
     private ListView lvProdutos;
-
+    TextView tvCount;
 
     public ListaProdutosFragment() {
         // Required empty public constructor
@@ -44,10 +45,13 @@ public class ListaProdutosFragment extends Fragment implements ProdutosListener 
 
         Singleton.getInstance(getContext()).setProdutosListener(this);
         Singleton.getInstance(getContext()).getAllProdutosAPI(getContext());
+
+
+
         // Configurar clique em itens da lista
         lvProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-          public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetalhesProdutosActivity.class);
                 intent.putExtra(DetalhesProdutosActivity.IDPRODUTO, (int) id);
                 startActivity(intent);
@@ -59,8 +63,10 @@ public class ListaProdutosFragment extends Fragment implements ProdutosListener 
 
     @Override
     public void onRefreshListaProdutos(ArrayList<Produto> listaProdutos) {
-        if(listaProdutos!=null){
-            lvProdutos.setAdapter(new ListaProdutosAdaptador(getContext(),listaProdutos));
+        if (listaProdutos != null) {
+            tvCount = getView().findViewById(R.id.tvCount);
+            tvCount.setText("Total de produtos: " + Singleton.getInstance(getContext()).ProdutoCount);
+            lvProdutos.setAdapter(new ListaProdutosAdaptador(getContext(), listaProdutos));
         }
     }
 }

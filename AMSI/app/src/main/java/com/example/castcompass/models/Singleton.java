@@ -23,7 +23,7 @@ import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.listeners.UtilizadorListener;
-import com.example.castcompass.utils.CarrinhoJsonParser;
+import com.example.castcompass.utils.CarrinhoItemsJsonParser;
 import com.example.castcompass.utils.FaturasJsonParser;
 import com.example.castcompass.utils.FavoritosJsonParser;
 import com.example.castcompass.utils.LoginJsonParser;
@@ -76,6 +76,8 @@ public class Singleton {
     private static String urlApiFavoritosRemover = "";
     private static String urlApiFavoritosAdicionar = "";
     private static String urlApiCarrinho = "";
+
+    public int ProdutoCount = 0;
 
     private ArrayList<Produto> listaProdutos;
 
@@ -219,6 +221,8 @@ public class Singleton {
                     JSONArray jsonArray = new JSONArray(response);
 
                     ArrayList<Produto> produto = ProdutosJsonParser.parserJsonProdutos(jsonArray, context);
+
+                    ProdutoCount = produto.size();
 
                     // Notificar o listener que a lista foi atualizada
                     if (produtosListener != null) {
@@ -506,8 +510,9 @@ public class Singleton {
             @Override
             public void onResponse(String response) {
                 try {
+                    JSONArray json = new JSONArray(response);
 
-                    Carrinho carrinho = CarrinhoJsonParser.parserJsonCarrinho(response);
+                    ArrayList<CarrinhoItems> carrinho = CarrinhoItemsJsonParser.parserJsonCarrinho(json);
 
                     // Notificar o listener que a lista foi atualizada
                     if (carrinhoListener != null) {
