@@ -6,6 +6,8 @@ use common\models\User;
 use backend\models\UserSearch;
 use backend\models\UserForm;
 use common\models\Profile;
+use common\models\Carrinho;
+use common\models\Fatura;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,13 +64,25 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-      
+      // Redirect the user to the login page if they don't have the necessary permissions
       if(!Yii::$app->user->can('userViewBO')) {
-          return $this->redirect(['site/login']);
+        return $this->redirect(['site/login']);
       }
 
+      // Find's the user and the profile using the id passed
+      $user = $this->findModel($id);
+      $profile = Profile::findOne(['userID' => $id]);
+      $carrinho = Carrinho::findOne(['profileID' => $profile->id]) ?? null;
+
+      // If the user has a cart, the find all the invoices related to that cart
+      // If null, set the fatura to null
+      if($carrinho != null) {
+        $fatura = Fatura::find(['carrinhoID' => $carrinho->id])->all() ?? null;
+      } else { $fatura = null; }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+          'model' => $user,
+          'fatura' => $fatura,
         ]);
     }
 
@@ -79,7 +93,6 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-
       if(!Yii::$app->user->can('userCreateBO')) {
         return $this->redirect(['site/login']);
       }
