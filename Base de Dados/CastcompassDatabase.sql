@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 08-Jan-2025 às 23:50
+-- Tempo de geração: 25-Jan-2025 às 15:31
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.2.0
 
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `nome` varchar(255) NOT NULL,
   `genero` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `categoria`
@@ -287,7 +287,6 @@ CREATE TABLE IF NOT EXISTS `favorito` (
 --
 
 INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
-(1, 39, 21),
 (2, 19, 21),
 (3, 41, 21),
 (4, 4, 22);
@@ -359,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `iva` (
   `valor` decimal(5,2) NOT NULL,
   `label` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `iva`
@@ -443,33 +442,6 @@ INSERT INTO `metodopagamento` (`id`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `migration`
---
-
-DROP TABLE IF EXISTS `migration`;
-CREATE TABLE IF NOT EXISTS `migration` (
-  `version` varchar(180) NOT NULL,
-  `apply_time` int DEFAULT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Extraindo dados da tabela `migration`
---
-
-INSERT INTO `migration` (`version`, `apply_time`) VALUES
-('m000000_000000_base', 1729593937),
-('m130524_201442_init', 1729595190),
-('m140506_102106_rbac_init', 1731344065),
-('m170907_052038_rbac_add_index_on_auth_assignment_user_id', 1731344065),
-('m180523_151638_rbac_updates_indexes_without_prefix', 1731344065),
-('m190124_110200_add_verification_token_column_to_user_table', 1729595191),
-('m200409_110543_rbac_update_mssql_trigger', 1731344065),
-('m241111_165133_init_rbac', 1731344028);
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `produto`
 --
 
@@ -486,7 +458,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
   PRIMARY KEY (`id`),
   KEY `categoriaID` (`categoriaID`),
   KEY `ivaID` (`ivaID`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `produto`
@@ -519,7 +491,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `morada` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `profile`
@@ -536,7 +508,7 @@ INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`,
 (22, 53, '12345', 'Carolina', '2024-11-26', 'Feminino', '12345', 'Morada'),
 (27, 58, '12345678', 'Teste', '2024-12-20', 'Masculino', '123456789', 'Morada'),
 (32, 63, '12345678', 'TesteCarrinho', '2024-12-21', 'Masculino', '123456789', 'Morada'),
-(41, 72, '12435', 'ze', '2025-01-08', 'Masculino', '723456', 'ghusdf');
+(41, 72, '987654321', 'zezinho', '2025-01-08', 'Masculino', '91775566', 'rua');
 
 -- --------------------------------------------------------
 
@@ -560,7 +532,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
@@ -590,10 +562,46 @@ ALTER TABLE `carrinho`
   ADD CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Limitadores para a tabela `fatura`
+--
+ALTER TABLE `fatura`
+  ADD CONSTRAINT `fatura_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fatura_ibfk_2` FOREIGN KEY (`metodoExpedicaoID`) REFERENCES `metodoexpedicao` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fatura_ibfk_3` FOREIGN KEY (`metodoPagamentoID`) REFERENCES `metodopagamento` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Limitadores para a tabela `favorito`
+--
+ALTER TABLE `favorito`
+  ADD CONSTRAINT `favorito_ibfk_1` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorito_ibfk_2` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `imagem`
+--
+ALTER TABLE `imagem`
+  ADD CONSTRAINT `imagem_ibfk_1` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `itemscarrinho`
+--
+ALTER TABLE `itemscarrinho`
+  ADD CONSTRAINT `itemscarrinho_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `itemscarrinho_ibfk_2` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Limitadores para a tabela `linhafatura`
+--
+ALTER TABLE `linhafatura`
+  ADD CONSTRAINT `linhafatura_ibfk_1` FOREIGN KEY (`faturaID`) REFERENCES `fatura` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `linhafatura_ibfk_2` FOREIGN KEY (`ivaID`) REFERENCES `iva` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `linhafatura_ibfk_3` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Limitadores para a tabela `produto`
 --
 ALTER TABLE `produto`
-  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`categoriaID`) REFERENCES `categoria` (`id`),
+  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`categoriaID`) REFERENCES `categoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `produto_ibfk_2` FOREIGN KEY (`ivaID`) REFERENCES `iva` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
