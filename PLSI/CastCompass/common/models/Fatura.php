@@ -11,9 +11,10 @@ use Yii;
  * @property int $carrinhoID
  * @property float $valorTotal
  * @property float $ivaTotal
+ * @property int $metodoExpedicaoID
  * @property int $data
  * @property int $metodoPagamentoID
- * @property int $metodoExpedicaoID
+ * @property string $estado
  *
  * @property Carrinho $carrinho
  * @property Linhafatura[] $linhafaturas
@@ -22,6 +23,55 @@ use Yii;
  */
 class Fatura extends \yii\db\ActiveRecord
 {
+
+  public static function getEstado(int $position){
+    switch ($position) {
+      case 0:
+        return "Em Processamento";
+        break;
+      case 1:
+        return "Expedido";
+        break;
+      case 2:
+        return "Entregue";
+        break;
+      default:
+        return "Em Processamento";
+        break;
+    } 
+  }
+
+  public static function getEstadoPosition(string $estado){
+    switch ($estado) {
+      case "Em Processamento":
+        return 0;
+        break;
+      case "Expedido":
+        return 1;
+        break;
+      case "Entregue":
+        return 2;
+        break;
+      default:
+        return 0;
+        break;
+    }
+  }
+
+  public static function updateEstado(string $estado){
+    switch ($estado) {
+      case "Em Processamento":
+        return "Expedido";
+        break;
+      case "Expedido":
+        return "Entregue";
+        break;
+      default:
+        return "Erro";
+        break;
+    }
+  }
+
     /**
      * {@inheritdoc}
      */
@@ -36,9 +86,10 @@ class Fatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['carrinhoID', 'valorTotal', 'ivaTotal', 'metodoPagamentoID', 'metodoExpedicaoID', 'data'], 'required'],
-            [['carrinhoID', 'metodoPagamentoID', 'metodoExpedicaoID', 'data'], 'integer'],
+            [['carrinhoID', 'valorTotal', 'ivaTotal', 'metodoExpedicaoID', 'data', 'metodoPagamentoID'], 'required'],
+            [['carrinhoID', 'metodoExpedicaoID', 'data', 'metodoPagamentoID'], 'integer'],
             [['valorTotal', 'ivaTotal'], 'number'],
+            [['estado'], 'string'],
             [['carrinhoID'], 'exist', 'skipOnError' => true, 'targetClass' => Carrinho::class, 'targetAttribute' => ['carrinhoID' => 'id']],
             [['metodoExpedicaoID'], 'exist', 'skipOnError' => true, 'targetClass' => Metodoexpedicao::class, 'targetAttribute' => ['metodoExpedicaoID' => 'id']],
             [['metodoPagamentoID'], 'exist', 'skipOnError' => true, 'targetClass' => Metodopagamento::class, 'targetAttribute' => ['metodoPagamentoID' => 'id']],
@@ -52,12 +103,13 @@ class Fatura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'carrinhoID' => 'Carrinho',
+            'carrinhoID' => 'Carrinho ID',
             'valorTotal' => 'Valor Total',
             'ivaTotal' => 'Iva Total',
+            'metodoExpedicaoID' => 'Metodo Expedicao ID',
             'data' => 'Data',
-            'metodoPagamentoID' => 'Metodo Pagamento',
-            'metodoExpedicaoID' => 'Metodo Expedicao',
+            'metodoPagamentoID' => 'Metodo Pagamento ID',
+            'estado' => 'Estado',
         ];
     }
 

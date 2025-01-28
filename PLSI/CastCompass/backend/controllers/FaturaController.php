@@ -33,6 +33,25 @@ class FaturaController extends Controller
         );
     }
 
+    public function actionUpdateEstado($idUser, $idFatura, $estado){
+
+      if($idUser == null){
+        throw new ErrorException('ID não pode ser nulo');
+      }
+      
+      if($estado == null){
+        throw new ErrorException('Estado não pode ser nulo');
+      }
+
+      if($idFatura != null){
+        $model = $this->findModel($idFatura);
+        $model->estado = $estado;
+        $model->save();
+      }
+       
+      return $this->redirect(['user/view', 'id' => $idUser]);
+    }
+
     /**
      * Lists all Fatura models.
      *
