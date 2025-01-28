@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <th>Preço</th>
         <th>IVA</th>
         <th>Data</th>
+        <th>Estado</th>
         <th>Ações</th>
       </tr>          
     </thead>        
@@ -39,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <td>€ <?= $fatura->valorTotal ?></td>
           <td>€ <?= $fatura->ivaTotal ?></td>
           <td><?= Yii::$app->formatter->asDate($fatura->data) ?></td>
+          <td><?= $fatura->estado ?></td>
           <td>
             <button class="btn btn-sm btn-primary">Detalhes</button>
           </td>
@@ -66,7 +68,17 @@ $this->params['breadcrumbs'][] = $this->title;
                       <td>€ <?= $item->valor ?></td>
                     </tr>
                   <?php endforeach; ?>
-                </tbody>
+  <?php if($fatura->estado != $fatura->getEstado(2)){ ?>
+                  <tr>
+                    <td colspan="5" class="text-center">
+                    <a href="<?= Url::to(['fatura/update-estado', 'idUser' => $fatura->getUserId($fatura), 'idFatura' => $fatura->id, 'estado' => $fatura->updateEstado($fatura->estado)]) ?>">
+                    <button class="btn btn-sm btn-success">Alterar Estado (<?= $fatura->updateEstado($fatura->estado) ?>)
+                </button></a>
+                    </td>
+                  </tr>
+                  <?php } ?>
+
+               </tbody>
               </table>
             </div>
           </td>

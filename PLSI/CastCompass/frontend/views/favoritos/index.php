@@ -14,6 +14,9 @@ $this->title = 'Favoritos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- Favoritos Start -->
+
+<h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-12 table-responsive mb-5">

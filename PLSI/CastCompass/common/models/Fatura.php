@@ -71,6 +71,12 @@ class Fatura extends \yii\db\ActiveRecord
         break;
     }
   }
+  
+  public static function getUserId(Fatura $fatura){
+    return $fatura->carrinho->profile->user->id;
+  }
+
+
 
     /**
      * {@inheritdoc}
