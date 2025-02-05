@@ -61,7 +61,6 @@ public class Faturas {
         return data;
     }
 
-
     public void setData(String data) {
         this.data = data;
     }

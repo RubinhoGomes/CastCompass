@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical"
     android:padding="16dp">
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Detalhes da Fatura"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -124,5 +115,11 @@
             android:text="@string/_01_01_2025"
             android:textSize="16sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnFaturaDownload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transferir Fatura" />
 
 </LinearLayout>

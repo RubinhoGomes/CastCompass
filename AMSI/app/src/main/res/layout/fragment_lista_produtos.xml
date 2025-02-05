@@ -6,17 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ListaProdutosFragment">
 
-
-    <TextView
-        android:id="@+id/tvCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="20sp" />
-
     <ListView
         android:id="@+id/lvProdutos"
-        android:paddingTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

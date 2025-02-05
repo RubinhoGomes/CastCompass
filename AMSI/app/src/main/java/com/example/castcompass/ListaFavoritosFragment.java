@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.castcompass.utils.util;
 import com.example.castcompass.adaptadores.FavoritosAdaptador;

@@ -54,6 +54,7 @@ public class Singleton {
     private LoginListener loginListener;
 
     private ArrayList<Favoritos> favoritos;
+    private ArrayList<Faturas> faturas;
 
     public FavoritoBDHelper favoritoBD = null;
 
@@ -76,8 +77,6 @@ public class Singleton {
     private static String urlApiFavoritosRemover = "";
     private static String urlApiFavoritosAdicionar = "";
     private static String urlApiCarrinho = "";
-
-    public int ProdutoCount = 0;
 
     private ArrayList<Produto> listaProdutos;
 
@@ -113,7 +112,6 @@ public class Singleton {
     }
 
     // region LISTENERS
-
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
     }
@@ -221,8 +219,6 @@ public class Singleton {
                     JSONArray jsonArray = new JSONArray(response);
 
                     ArrayList<Produto> produto = ProdutosJsonParser.parserJsonProdutos(jsonArray, context);
-
-                    ProdutoCount = produto.size();
 
                     // Notificar o listener que a lista foi atualizada
                     if (produtosListener != null) {
@@ -482,11 +478,12 @@ public class Singleton {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    ArrayList<Faturas> faturas = FaturasJsonParser.parserJsonFaturas(response);
+                    faturas = FaturasJsonParser.parserJsonFaturas(response);
 
                     if (faturasListener != null) {
                         faturasListener.onRefreshFaturas(faturas);
                     }
+
                 } catch (Exception e) {
                     Toast.makeText(context, "Erro ao carregar faturas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -497,6 +494,7 @@ public class Singleton {
                 Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        volleyQueue.add(reqSelect);
     }
 
     //endregion

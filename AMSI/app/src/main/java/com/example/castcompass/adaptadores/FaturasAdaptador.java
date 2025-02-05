@@ -60,7 +60,7 @@ public class FaturasAdaptador extends BaseAdapter {
         private TextView tvValorTotal, tvIvaTotal, tvData, tvMetodoExpedicao, tvMetodoPagamento;
 
         public ViewHolderLista(View view) {
-            tvValorTotal = view.findViewById(R.id.tvNome);
+            tvValorTotal = view.findViewById(R.id.tvValorTotal);
             tvIvaTotal = view.findViewById(R.id.tvIvaTotal);
             tvData = view.findViewById(R.id.tvData);
             tvMetodoExpedicao = view.findViewById(R.id.tvMtdExpedicao);
@@ -69,9 +69,12 @@ public class FaturasAdaptador extends BaseAdapter {
 
         //invoca 1 vez por cada linha da lista
         public void update(Faturas faturas) {
+            long timestamp = Long.parseLong(faturas.getData()) * 1000;
+            String data = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date(timestamp));
+
             tvValorTotal.setText(faturas.getValorTotal()+"");
             tvIvaTotal.setText(faturas.getIvaTotal()+"");
-            tvData.setText(faturas.getData());
+            tvData.setText(data);
             tvMetodoExpedicao.setText(faturas.getMetodoExpedicaoID()+"");
             tvMetodoPagamento.setText(faturas.getMetodoPagamentoID()+"");
         }
