@@ -68,6 +68,11 @@ class CarrinhoController extends Controller
         ]);
     }
 
+    public function atualizarPagamento(){
+      var_dump($_POST);
+      die();
+    }
+
     public function CreateCarrinho($profileID) {
         $carrinho = new Carrinho();
         $carrinho->profileID = $profileID;

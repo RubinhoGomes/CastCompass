@@ -9,8 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property string $nome
+ * @property string $tipo
  *
- * @property Carrinhocompra[] $carrinhocompras
+ * @property Fatura[] $faturas
  */
 class Metodopagamento extends \yii\db\ActiveRecord
 {
@@ -22,13 +23,23 @@ class Metodopagamento extends \yii\db\ActiveRecord
         return 'metodopagamento';
     }
 
+    public function getMetodos()
+    {
+        return [
+            'Cartao' => 'Cartão de Crédito',
+            'MBWay' => 'MBWay',
+            'Email' => 'Email',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['nome'], 'required'],
+            [['nome', 'tipo'], 'required'],
+            [['tipo'], 'string'],
             [['nome'], 'string', 'max' => 255],
         ];
     }
@@ -41,16 +52,17 @@ class Metodopagamento extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
+            'tipo' => 'Tipo',
         ];
     }
 
     /**
-     * Gets query for [[Carrinhocompras]].
+     * Gets query for [[Faturas]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCarrinhocompras()
+    public function getFaturas()
     {
-        return $this->hasMany(Carrinhocompra::class, ['metodoPagamentoID' => 'id']);
+        return $this->hasMany(Fatura::class, ['metodoPagamentoID' => 'id']);
     }
 }

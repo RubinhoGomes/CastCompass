@@ -14,10 +14,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+    <?= $form->field($model, 'tipo')->dropDownList($metodos, ['prompt' => 'Escolha o tipo de pagamento']) ?>
 
-    <?php ActiveForm::end(); ?>
+      <div class="form-group">
+          <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+      </div>
 
-</div>
+      <?php ActiveForm::end(); ?>
+
+  </div>

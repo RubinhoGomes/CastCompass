@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -31,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nome',
+            'tipo',
         ],
     ]) ?>
 
