@@ -402,6 +402,7 @@ public class Singleton {
                 @Override
                 public void onResponse(JSONArray response) {
                     favoritos = FavoritosJsonParser.parserJsonFavoritos(response);
+
                     //só para o modo offline
                     adicionarFavoritosBD(favoritos);
 
@@ -431,10 +432,7 @@ public class Singleton {
             public void onResponse(String response) {
 //                Favoritos favorito = FavoritosJsonParser.parserJsonFavorito(response);
 //                adicionarFavoritoBD(favorito);
-
-                if (favoritosListener != null) {
-                    favoritosListener.onRefreshFavoritos(favoritos);
-                }
+                
                 Toast.makeText(context, "Produto adicionado com sucesso", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
@@ -457,6 +455,10 @@ public class Singleton {
                 try {
                     removerFavoritoBD((int) produtoID);
                     Toast.makeText(context, "Produto removido com sucesso", Toast.LENGTH_SHORT).show();
+
+                    if (favoritosListener != null) {
+                        favoritosListener.onRefreshFavoritos(favoritos);
+                    }
                 } catch (Exception e) {
                     Toast.makeText(context, "Erro ao remover produto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

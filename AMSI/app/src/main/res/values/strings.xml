@@ -64,4 +64,6 @@
         <item>Feminino</item>
     </string-array>
     <string name="quantidade">Quantidade</string>
+    <string name="estado">Estado:</string>
+    <string name="transferir_fatura">Transferir Fatura</string>
 </resources>

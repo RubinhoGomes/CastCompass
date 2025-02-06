@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.castcompass.models.Singleton;
+import com.example.castcompass.utils.util;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,6 +89,18 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         if (item.getItemId() == R.id.navHome) {
             fragment = new ListaProdutosFragment();
             setTitle(item.getTitle());
+        } else if (item.getItemId() == R.id.navFavoritos) {
+            if (!util.isConnected(this)) {
+                Toast.makeText(this, "Sem ligação à internet!", Toast.LENGTH_SHORT).show();
+                fragment = new ListaFavoritosFragment();
+                setTitle("Faturas");
+            } else if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+                loginRedirect();
+            } else {
+                // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
+                fragment = new ListaFavoritosFragment();
+                setTitle(item.getTitle());
+            }
         } else if (item.getItemId() == R.id.navCarrinho) {
             if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
                 loginRedirect();
@@ -107,14 +121,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             } else {
                 Intent intent = new Intent(this, PerfilActivity.class);
                 startActivity(intent);
-            }
-        } else if (item.getItemId() == R.id.navFavoritos) {
-            if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
-                loginRedirect();
-            } else {
-                // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
-                fragment = new ListaFavoritosFragment();
-                setTitle(item.getTitle());
             }
         } else if (item.getItemId() == R.id.navLogOut) {
             Singleton singleton = Singleton.getInstance(this);

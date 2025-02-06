@@ -3,6 +3,7 @@
 namespace backend\modules\api\controllers;
 
 use common\models\Carrinho;
+use common\models\Fatura;
 use common\models\Profile;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
@@ -33,20 +34,31 @@ class FaturaController extends ActiveController
         return $behaviors;
     }
 
-    public function actionCount()
-    {
+    public function actionCount() {
         $metodosmodel = new $this->modelClass;
         $recs = $metodosmodel::find()->all();
         return ['count' => count($recs)];
     }
 
-    public function actionFaturascliente($id)
-    {
+    public function actionFaturascliente($id) {
         $profile = Profile::findOne($id);
         $carrinho = Carrinho::findOne(['profileID' => $profile->id]);
         $faturas = $carrinho->faturas;
 
-        return $faturas;
+        $dados = [];
+
+        foreach ($faturas as $fatura) {
+            $dados[] = [
+                'valorTotal' => $fatura->valorTotal,
+                'ivaTotal' => $fatura->ivaTotal,
+                'metodoExpedicao' => $fatura->metodoExpedicao->nome,
+                'metodoPagamento' => $fatura->metodoPagamento->nome,
+                'data' => $fatura->data,
+                'estado' => $fatura->estado,
+            ];
+        }
+
+        return $dados;
     }
 
 }
