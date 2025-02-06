@@ -49,6 +49,7 @@ class FaturaController extends ActiveController
 
         foreach ($faturas as $fatura) {
             $dados[] = [
+                'id' => $fatura->id,
                 'valorTotal' => $fatura->valorTotal,
                 'ivaTotal' => $fatura->ivaTotal,
                 'metodoExpedicao' => $fatura->metodoExpedicao->nome,
