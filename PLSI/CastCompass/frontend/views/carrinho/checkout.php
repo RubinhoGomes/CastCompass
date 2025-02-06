@@ -72,18 +72,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
 
+                  <div class="row">
                     <div class="col-lg-6 mb-3">
                         <h5 class="mb-3">Método de Pagamento:</h5>
                         <div class="form-group">
-                            <div class="input-group">
+                           <div class="input-group">
+<?php $formMetodo = ActiveForm::begin(['action' => ['carinho/checkout']]); ?>
                                 <?= Html::dropDownList('metodoPagamento', \yii\helpers\ArrayHelper::map($metodoPagamento, 'id', 'id'),
                                     \yii\helpers\ArrayHelper::map($metodoPagamento, 'id', 'nome'), [
                                         'class' => 'form-control custom-select me',
-                                        'prompt' => 'Selecione um método'
+                                        'prompt' => 'Selecione um método',
+                                        'onchange' => 'this.form.submit()'
                                     ])
                                 ?>
                             </div>
-                        </div>
+
+                            <?php $metodoSelecionado = Yii::$app->request->post('metodoPagamento')?>
+
+                          
                     </div>
 
                     <div class="col-lg-12 text-center mt-4">

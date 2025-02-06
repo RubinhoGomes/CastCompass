@@ -93,6 +93,7 @@ class MetodopagamentoController extends Controller
 
     return $this->render('create', [
       'model' => $model,
+      'metodos' => $model->getMetodos(),
     ]);
   }
 
@@ -118,6 +119,7 @@ class MetodopagamentoController extends Controller
 
     return $this->render('update', [
       'model' => $model,
+      'metodos' => $model->getMetodos(),
     ]);
   }
 
@@ -138,6 +140,7 @@ class MetodopagamentoController extends Controller
 
     return $this->redirect(['index']);
   }
+
 
   /**
    * Finds the Metodopagamento model based on its primary key value.

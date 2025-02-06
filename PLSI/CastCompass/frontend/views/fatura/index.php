@@ -31,7 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
                          aria-controls="collapse-<?php echo $fatura->id; ?>"
                          style="cursor: pointer;">
                         <h5 class="mb-0"><?= Yii::$app->formatter->asDate($fatura->data) ?></h5>
-                    </div>
+                        <?php if($fatura->estado != 'Entregue'): ?>
+                        <span class="badge bg-light text-dark"><?= $fatura->estado ?></span>
+                        <?php else: ?>
+                        <span class="badge bg-success border"><?= $fatura->estado ?></span>
+                        <?php endif; ?>
+    
+                      </div>
                     <div id="collapse-<?= $fatura->id ?>" class="collapse">
                         <div class="card-body">
                             <h6>Products:</h6>
