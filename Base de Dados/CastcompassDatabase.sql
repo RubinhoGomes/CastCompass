@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Tempo de geração: 25-Jan-2025 às 15:31
--- Versão do servidor: 8.0.31
--- versão do PHP: 8.2.0
+-- Host: localhost:8889
+-- Generation Time: Feb 06, 2025 at 12:11 PM
+-- Server version: 8.0.35
+-- PHP Version: 8.2.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `castcompass`
+-- Database: `castcompass`
 --
 CREATE DATABASE IF NOT EXISTS `castcompass` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `castcompass`;
@@ -26,20 +26,17 @@ USE `castcompass`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_assignment`
+-- Table structure for table `auth_assignment`
 --
 
-DROP TABLE IF EXISTS `auth_assignment`;
-CREATE TABLE IF NOT EXISTS `auth_assignment` (
+CREATE TABLE `auth_assignment` (
   `item_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `user_id` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `created_at` int DEFAULT NULL,
-  PRIMARY KEY (`item_name`,`user_id`),
-  KEY `idx-auth_assignment-user_id` (`user_id`)
+  `created_at` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Extraindo dados da tabela `auth_assignment`
+-- Dumping data for table `auth_assignment`
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
@@ -52,25 +49,21 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_item`
+-- Table structure for table `auth_item`
 --
 
-DROP TABLE IF EXISTS `auth_item`;
-CREATE TABLE IF NOT EXISTS `auth_item` (
+CREATE TABLE `auth_item` (
   `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `type` smallint NOT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `rule_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `data` blob,
   `created_at` int DEFAULT NULL,
-  `updated_at` int DEFAULT NULL,
-  PRIMARY KEY (`name`),
-  KEY `rule_name` (`rule_name`),
-  KEY `idx-auth_item-type` (`type`)
+  `updated_at` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Extraindo dados da tabela `auth_item`
+-- Dumping data for table `auth_item`
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
@@ -114,19 +107,16 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_item_child`
+-- Table structure for table `auth_item_child`
 --
 
-DROP TABLE IF EXISTS `auth_item_child`;
-CREATE TABLE IF NOT EXISTS `auth_item_child` (
+CREATE TABLE `auth_item_child` (
   `parent` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `child` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  PRIMARY KEY (`parent`,`child`),
-  KEY `child` (`child`)
+  `child` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Extraindo dados da tabela `auth_item_child`
+-- Dumping data for table `auth_item_child`
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
@@ -170,62 +160,55 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_rule`
+-- Table structure for table `auth_rule`
 --
 
-DROP TABLE IF EXISTS `auth_rule`;
-CREATE TABLE IF NOT EXISTS `auth_rule` (
+CREATE TABLE `auth_rule` (
   `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `data` blob,
   `created_at` int DEFAULT NULL,
-  `updated_at` int DEFAULT NULL,
-  PRIMARY KEY (`name`)
+  `updated_at` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `carrinho`
+-- Table structure for table `carrinho`
 --
 
-DROP TABLE IF EXISTS `carrinho`;
-CREATE TABLE IF NOT EXISTS `carrinho` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `carrinho` (
+  `id` int NOT NULL,
   `profileID` int NOT NULL,
   `valorTotal` decimal(10,2) DEFAULT NULL,
-  `quantidade` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `profileID` (`profileID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `quantidade` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `carrinho`
+-- Dumping data for table `carrinho`
 --
 
 INSERT INTO `carrinho` (`id`, `profileID`, `valorTotal`, `quantidade`) VALUES
 (2, 32, NULL, NULL),
-(3, 22, '0.00', 5),
-(5, 4, '0.00', 0),
-(14, 41, '0.00', 0),
-(15, 19, '115.61', 1),
-(16, 20, '115.61', 1);
+(3, 22, 115.61, 1),
+(5, 4, 0.00, 0),
+(14, 41, 0.00, 0),
+(15, 19, 115.61, 1),
+(16, 20, 115.61, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categoria`
+-- Table structure for table `categoria`
 --
 
-DROP TABLE IF EXISTS `categoria`;
-CREATE TABLE IF NOT EXISTS `categoria` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categoria` (
+  `id` int NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `genero` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `genero` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `categoria`
+-- Dumping data for table `categoria`
 --
 
 INSERT INTO `categoria` (`id`, `nome`, `genero`) VALUES
@@ -240,50 +223,51 @@ INSERT INTO `categoria` (`id`, `nome`, `genero`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fatura`
+-- Table structure for table `fatura`
 --
 
-DROP TABLE IF EXISTS `fatura`;
-CREATE TABLE IF NOT EXISTS `fatura` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `fatura` (
+  `id` int NOT NULL,
   `carrinhoID` int NOT NULL,
   `valorTotal` decimal(10,2) NOT NULL,
   `ivaTotal` decimal(10,2) NOT NULL,
   `metodoExpedicaoID` int NOT NULL,
   `data` int NOT NULL,
   `metodoPagamentoID` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `carrinhoID` (`carrinhoID`),
-  KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
-  KEY `metodoPagamentoID` (`metodoPagamentoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `estado` enum('Em Processamento','Expedido','Entregue','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Em Processamento'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `fatura`
+-- Dumping data for table `fatura`
 --
 
-INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoExpedicaoID`, `data`, `metodoPagamentoID`) VALUES
-(30, 14, '171.75', '32.12', 1, 1736294400, 1),
-(31, 5, '153.73', '28.75', 1, 1736294400, 1);
+INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoExpedicaoID`, `data`, `metodoPagamentoID`, `estado`) VALUES
+(30, 14, 171.75, 32.12, 1, 1736294400, 1, 'Entregue'),
+(31, 5, 153.73, 28.75, 1, 1736294400, 1, 'Entregue'),
+(32, 3, 171.75, 32.12, 1, 1738022400, 1, 'Entregue'),
+(34, 3, 56.14, 10.50, 1, 1738195200, 2, 'Em Processamento'),
+(35, 3, 171.75, 32.12, 1, 1738195200, 2, 'Em Processamento'),
+(36, 3, 115.61, 21.62, 1, 1738281600, 2, 'Em Processamento'),
+(37, 3, 115.61, 21.62, 1, 1738281600, 2, 'Em Processamento'),
+(38, 3, 115.61, 21.62, 1, 1738281600, 2, 'Em Processamento'),
+(39, 3, 115.61, 21.62, 1, 1738281600, 1, 'Em Processamento'),
+(40, 3, 115.61, 21.62, 1, 1738281600, 1, 'Em Processamento'),
+(41, 3, 115.61, 21.62, 1, 1738281600, 1, 'Em Processamento');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `favorito`
+-- Table structure for table `favorito`
 --
 
-DROP TABLE IF EXISTS `favorito`;
-CREATE TABLE IF NOT EXISTS `favorito` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `favorito` (
+  `id` int NOT NULL,
   `profileID` int NOT NULL,
-  `produtoID` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `profileID` (`profileID`),
-  KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `produtoID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `favorito`
+-- Dumping data for table `favorito`
 --
 
 INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
@@ -294,20 +278,17 @@ INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `imagem`
+-- Table structure for table `imagem`
 --
 
-DROP TABLE IF EXISTS `imagem`;
-CREATE TABLE IF NOT EXISTS `imagem` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `imagem` (
+  `id` int NOT NULL,
   `filename` varchar(255) NOT NULL,
-  `produtoID` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `produtoID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `imagem`
+-- Dumping data for table `imagem`
 --
 
 INSERT INTO `imagem` (`id`, `filename`, `produtoID`) VALUES
@@ -322,98 +303,97 @@ INSERT INTO `imagem` (`id`, `filename`, `produtoID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `itemscarrinho`
+-- Table structure for table `itemscarrinho`
 --
 
-DROP TABLE IF EXISTS `itemscarrinho`;
-CREATE TABLE IF NOT EXISTS `itemscarrinho` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `itemscarrinho` (
+  `id` int NOT NULL,
   `carrinhoID` int NOT NULL,
   `produtoID` int NOT NULL,
   `nome` varchar(255) NOT NULL,
   `quantidade` int NOT NULL,
-  `valorTotal` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `carrinhoID` (`carrinhoID`),
-  KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `valorTotal` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `itemscarrinho`
+-- Dumping data for table `itemscarrinho`
 --
 
 INSERT INTO `itemscarrinho` (`id`, `carrinhoID`, `produtoID`, `nome`, `quantidade`, `valorTotal`) VALUES
-(55, 15, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, '115.61'),
-(56, 16, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, '115.61');
+(55, 15, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61),
+(56, 16, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61),
+(72, 3, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `iva`
+-- Table structure for table `iva`
 --
 
-DROP TABLE IF EXISTS `iva`;
-CREATE TABLE IF NOT EXISTS `iva` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `iva` (
+  `id` int NOT NULL,
   `valor` decimal(5,2) NOT NULL,
-  `label` varchar(150) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `label` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `iva`
+-- Dumping data for table `iva`
 --
 
 INSERT INTO `iva` (`id`, `valor`, `label`) VALUES
-(1, '0.23', 'IVA'),
-(2, '0.12', 'Bens Essenciais');
+(1, 0.23, 'IVA'),
+(2, 0.12, 'Bens Essenciais');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `linhafatura`
+-- Table structure for table `linhafatura`
 --
 
-DROP TABLE IF EXISTS `linhafatura`;
-CREATE TABLE IF NOT EXISTS `linhafatura` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `linhafatura` (
+  `id` int NOT NULL,
   `faturaID` int NOT NULL,
   `ivaID` int NOT NULL,
   `quantidade` int NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `valorIva` decimal(10,2) NOT NULL,
-  `produtoID` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `faturaID` (`faturaID`),
-  KEY `ivaID` (`ivaID`),
-  KEY `produtoID` (`produtoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `produtoID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `linhafatura`
+-- Dumping data for table `linhafatura`
 --
 
 INSERT INTO `linhafatura` (`id`, `faturaID`, `ivaID`, `quantidade`, `valor`, `valorIva`, `produtoID`) VALUES
-(13, 30, 1, 1, '115.61', '21.62', 21),
-(14, 30, 1, 1, '56.14', '10.50', 22),
-(15, 31, 1, 1, '115.61', '21.62', 21),
-(16, 31, 1, 1, '38.12', '7.13', 23);
+(13, 30, 1, 1, 115.61, 21.62, 21),
+(14, 30, 1, 1, 56.14, 10.50, 22),
+(15, 31, 1, 1, 115.61, 21.62, 21),
+(16, 31, 1, 1, 38.12, 7.13, 23),
+(17, 32, 1, 1, 115.61, 21.62, 21),
+(18, 32, 1, 1, 56.14, 10.50, 22),
+(19, 34, 1, 1, 56.14, 10.50, 22),
+(20, 35, 1, 1, 115.61, 21.62, 21),
+(21, 35, 1, 1, 56.14, 10.50, 22),
+(22, 36, 1, 1, 115.61, 21.62, 21),
+(23, 37, 1, 1, 115.61, 21.62, 21),
+(24, 38, 1, 1, 115.61, 21.62, 21),
+(25, 39, 1, 1, 115.61, 21.62, 21),
+(26, 40, 1, 1, 115.61, 21.62, 21),
+(27, 41, 1, 1, 115.61, 21.62, 21);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `metodoexpedicao`
+-- Table structure for table `metodoexpedicao`
 --
 
-DROP TABLE IF EXISTS `metodoexpedicao`;
-CREATE TABLE IF NOT EXISTS `metodoexpedicao` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `metodoexpedicao` (
+  `id` int NOT NULL,
+  `nome` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `metodoexpedicao`
+-- Dumping data for table `metodoexpedicao`
 --
 
 INSERT INTO `metodoexpedicao` (`id`, `nome`) VALUES
@@ -422,79 +402,72 @@ INSERT INTO `metodoexpedicao` (`id`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `metodopagamento`
+-- Table structure for table `metodopagamento`
 --
 
-DROP TABLE IF EXISTS `metodopagamento`;
-CREATE TABLE IF NOT EXISTS `metodopagamento` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `metodopagamento` (
+  `id` int NOT NULL,
   `nome` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `tipo` enum('Cartao','Telemovel','Email','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `metodopagamento`
+-- Dumping data for table `metodopagamento`
 --
 
-INSERT INTO `metodopagamento` (`id`, `nome`) VALUES
-(1, 'MBWay');
+INSERT INTO `metodopagamento` (`id`, `nome`, `tipo`) VALUES
+(1, 'MBWay', 'Telemovel'),
+(2, 'VISA', 'Cartao');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produto`
+-- Table structure for table `produto`
 --
 
-DROP TABLE IF EXISTS `produto`;
-CREATE TABLE IF NOT EXISTS `produto` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `produto` (
+  `id` int NOT NULL,
   `nome` varchar(255) NOT NULL,
   `marca` varchar(255) NOT NULL,
   `preco` decimal(10,2) NOT NULL,
   `stock` int NOT NULL,
   `descricao` text NOT NULL,
   `categoriaID` int NOT NULL,
-  `ivaID` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `categoriaID` (`categoriaID`),
-  KEY `ivaID` (`ivaID`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ivaID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `produto`
+-- Dumping data for table `produto`
 --
 
 INSERT INTO `produto` (`id`, `nome`, `marca`, `preco`, `stock`, `descricao`, `categoriaID`, `ivaID`) VALUES
-(21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 'VIDAXL', '115.61', 10, 'Esta tenda de campismo com aspeto moderno protege-o de intempéries e proporciona um local confortável para aventuras de todo o tipo.\r\n\r\nDesign totalmente à prova de água: esta tenda de campismo, feita de poliéster com revestimento de PU, é à prova de água e resistente ao vento.\r\nAs costuras coladas evitam eficazmente a infiltração da água da chuva, enquanto a cobertura de chão resistente ajuda a manter o interior seco e confortável.\r\n\r\nBoa ventilação e proteção contra mosquitos: as paredes de malha não só oferecem uma excelente ventilação, como também mantêm eficazmente os insetos afastados, garantindo aos utilizadores uma experiência confortável e livre de insetos.\r\n\r\nCobertura impermeável removível: a cobertura impermeável removível pode ser anexada ao topo da tenda para proteção contra intempéries e privacidade.\r\n\r\nLeve e portátil: o design dobrável e leve permite-lhe embalar facilmente a tenda e guardá-la no saco de transporte incluído para facilitar o transporte.\r\n\r\nFácil montagem e desmontagem: montar e desmontar a tenda é muito fácil graças aos postes de fibra de vidro altamente flexíveis e leves e ao conveniente sistema de conexão por pinos e anéis.\r\n\r\nAtenção: Mantenha todas as chamas e fontes de calor afastadas do tecido deste produto.\r\n\r\nCor: azul\r\nMaterial da tenda: poliéster 185T revestido a PU\r\nMaterial de rede: poliéster 68D\r\nMaterial da base: PE\r\nDimensões internas da tenda: 200 x 234 x 122 cm (C x L x A) Dimensões externas: 300 x 250 x 132 cm (C x L x A)\r\nDimensões da embalagem: 58 x 16,5 x 16,5 cm (C x L x A)\r\nQuantidade de utilizadores: 4 pessoas\r\nPeso: 5 kg\r\nTipo de tenda: tenda de campismo\r\nForma: cúpula\r\nQuantidade de quartos: 1\r\nNúmero de portas: 1\r\nQuantidade de janelas: 2\r\nCom acesso duplo com fecho de correr e cobertura impermeável removível\r\nInclui porta e Montagem necessária: sim\r\n\r\nA entrega inclui: 1 x Toldo 1 x Cobertura impermeável para tenda 1 x Saco de transporte', 1, 1),
-(22, 'Saco-cama Bestway', 'PAVILLO', '56.14', 26, 'Se procura as novidades mais procuradas no mercado, apresentamos-lhe Saco-cama Bestway Azul\r\n\r\nTipo: Saco-cama\r\nInclui: Bolsa de transporte\r\nTemperatura aprox.: 3º - 8 ºC\r\nMedidas aprox.: 190 x 84 cm\r\nCor: Azul\r\nMaterial: Plástico e Poliéster\r\nCaracterísticas: Exterior\r\nLimpar com pano húmido\r\nUso recomendado: Praia, Jardim e Camping\r\nForma: Quadrado\r\nTipo de fecho: Fecho de correr\r\nGénero: Unissexo adultos\r\nIdade recomendada: Todas as idades', 4, 1),
-(23, 'Bomba Elétrica Desportos Outdoor Adulto Preto', 'BESTWAY', '38.12', 41, 'Bomba de Ar Elétrica\r\nDescrição\r\nA Bomba de Ar Elétrica é a escolha ideal para inflar rapidamente seus equipamentos esportivos aquáticos. Com um design elegante, esta bomba elétrica de alta qualidade garante eficiência e praticidade em suas atividades ao ar livre.\r\n\r\nCaracterísticas Principais\r\n• Alta eficiência: Infla bóias, colchões de ar, piscinas infláveis e outros equipamentos aquáticos com facilidade e rapidez.\r\n• Fácil de usar: Compatível com tomadas padrão, é simples de operar e transportar.\r\n• Leve e compacta: Ideal para levar em suas aventuras ao ar livre.\r\nBenefícios\r\n• Rapidez e praticidade: Nunca mais perca tempo inflando manualmente e aproveite ao máximo suas atividades na água.\r\n• Portabilidade: Leve e fácil de transportar, podendo ser utilizada em diversos locais.\r\n• Durabilidade: Construída com materiais de alta qualidade para garantir longa vida útil.\r\nUtilização\r\nEsta bomba elétrica é perfeita para desportos outdoor, proporcionando momentos de lazer e diversão sem preocupações. Seja na praia, piscina ou acampamento, tenha sempre à disposição esta bomba eficiente e durável.\r\n\r\nCompra Segura\r\nAdquira agora a Bomba de Ar Elétrica e garanta inflar seus equipamentos esportivos de forma rápida e conveniente. Leve sua diversão aquática a um novo nível com esta bomba de alto desempenho.\r\n\r\nNão perca mais tempo e invista na Bomba de Ar Elétrica para garantir momentos de lazer inesquecíveis e práticos. Aproveite a liberdade de inflar seus equipamentos onde quer que esteja, de maneira rápida e eficiente.', 5, 1),
-(24, 'Almofada de viagem', 'HIGHLANDER', '17.21', 12, 'Almofada\r\n\r\nDescanse a sua cabeça numa almofada de viagem macia e confortável.\r\n\r\nVantagens:\r\nLeve e muito compacta\r\nFácil de utilizar\r\nConcebida para utilização em actividades de lazer no exterior\r\nCaracterísticas:\r\nPeso: 165g\r\nTamanho: 22 cm x 30 cm x 7 cm\r\nMaterial: Tecido - 65% poliéster, 35% algodão - Enchimento - 450g/m2 de fibra oca de poliéster', 6, 1),
-(25, 'Colchão de campismo Intex Dura-Beam Deluxe Ultra Plush com cabeceira', 'INTEX', '122.94', 33, 'Dura-Beam Deluxe Series INTEX modelo Ultra Plush Headbed Airbed com cabeceira e medidas: 152 x 236 x 46 cm. Superfície flocada e nervurada, estrutura interior com tecnologia Fiber-Tech. Possui bomba elétrica integrada para inflar e esvaziar, pronta em apenas 5 minutos. Inclui bolsa de transporte com alças. Colchão de fácil dobragem, em vinil resistente. Projetado para duas pessoas, peso máximo 272 kg.\r\n\r\n• Cama insuflável INTEX para duas pessoas, série Dura-Beam Deluxe modleo Ultra Plush com cabeceiro, medidas: 152x236x46 cm, suporta um peso máximo de 272 kg\r\n• Construção interior com tecnologia Fiber-Tech, maior adaptação, rigidez e conforto, a cama não deforma com as utilizações, superfície e borda flocadas\r\n• Cabeceiro embutido de tato suave e estrutura afunilada para maior conforto, perfeita para ler, ver televisão ou evitar que as almofadas caiam no solo\r\n• Bomba elétrica embutida de enchimento e esvaziamento, tempo de enchimento aproximado: 5 minutos, inclui-se saco de transporte com asas\r\n• Fabricada em vinil de elevada qualidade e resistência, a altura da cama facilitao acesso e a saída, perfeita como cama de convidados ou para viajar', 3, 1),
-(26, 'Cobertor elétrico - Manta de aquecimento - 200 x 180 cm', 'Rockerz Fitness', '98.34', 18, 'Quer manter-se bem quente durante o inverno? Então o cobertor elétrico de dupla face Rockerz Home é a solução ideal! O cobertor é perfeito para uma noite agradável no sofá ou como cobertor extra na sua cama. Com nada menos que 9 ajustes de temperatura, pode definir exatamente o calor que mais lhe convém. Quer precise de um calor subtil para dormir confortavelmente ou de um calor intenso para vencer o frio do inverno, este cobertor é a sua fonte de calor fiável. Além disso, o cobertor elétrico é um investimento inteligente porque pode baixar um pouco a temperatura do termóstato, o que pode ajudar a reduzir os seus custos de energia.\r\n\r\n9 definições de aquecimento e desligamento automático\r\nCom o prático comando à distância, tem controlo total sobre o calor do seu cobertor de aquecimento elétrico. Desfrute de nada menos que 9 configurações de calor diferentes, que variam entre uns agradáveis ​​29 °C e uns aconchegantes 43 °C, tudo ao seu alcance com o toque de um botão. A definição da função de desligamento automático é igualmente fácil, com 9 definições de tempo disponíveis, que variam entre 20 minutos e 3 horas. Após este tempo, o cobertor desligar-se-á automaticamente. O cobertor está também equipado com proteção contra sobreaquecimento, tornando-o à prova de fogo. E para maior facilidade de utilização, este cobertor elétrico tem um cabo generoso de nada mais nada menos que 2,3 metros.\r\n\r\nMaterial excecionalmente macio para um conforto ideal\r\nEste cobertor elétrico é cuidadosamente feito de 100% flanela (exterior) e lã sherpa (interior). A flanela proporciona uma camada exterior macia e sedosa, enquanto o velo sherpa acrescenta uma camada extra de calor e suavidade. Com a sua combinação única de flanela e lã sherpa, o cobertor elétrico aquecido Rockerz Home envolve-o num oásis de conforto. Graças ao material grosso com forro quente, este é um item essencial para enfrentar os dias frios com conforto!\r\n\r\nOs benefícios do cobertor elétrico Rockerz Home:\r\n• O must-have para os dias frios\r\n• Tecido macio e sedoso\r\n• Eficiência energética - bom para a sua carteira\r\n• 9 regulações de calor (29° C a 43° C)\r\n• Desligamento automático até 3 horas\r\n• Tamanho ideal - 180 x 200 cm (duplo)\r\n• Cabo XL - 2,3 metros\r\n• Adapta-se a qualquer interior\r\n• Lavável: lavar à mão\r\n\r\nConteúdo da embalagem\r\n➜ 1 x cobertor elétrico\r\n➜ 1 x Comando à distância com cabo\r\n➜ 1 x Manual\r\n\r\nEspecificações\r\nVoltagem: 220V-240V\r\nFrequência: 50-60Hz\r\nWatts: 160 watts\r\nLavável: Lavar à mão\r\nCertificados: CE, FC, RoHS', 7, 1),
-(27, 'Pesca de Fundo no Mar SEACOAST 500 350 80-150 G (Conjunto)', 'CAPERLAN', '73.80', 26, 'Características da Cana SEACOAST-500 350 Telescópica\r\n- Comprimento: 3,50 m\r\n- Volume: 1,03 m\r\n- Número de secções: 6 elementos\r\n- Peso: 430 g\r\n- Potência: 80-150 g\r\n- Peso otimizado para lançar: 110 g\r\n- Material: carbono e fibra de vidro\r\n- Passadores: 4 passadores ligados + 1 passador de cabeça colado\r\n- Porta-carreto: tubular de enroscar\r\n- Ação semiparabólica', 2, 1);
+(21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 'VIDAXL', 115.61, 10, 'Esta tenda de campismo com aspeto moderno protege-o de intempéries e proporciona um local confortável para aventuras de todo o tipo.\r\n\r\nDesign totalmente à prova de água: esta tenda de campismo, feita de poliéster com revestimento de PU, é à prova de água e resistente ao vento.\r\nAs costuras coladas evitam eficazmente a infiltração da água da chuva, enquanto a cobertura de chão resistente ajuda a manter o interior seco e confortável.\r\n\r\nBoa ventilação e proteção contra mosquitos: as paredes de malha não só oferecem uma excelente ventilação, como também mantêm eficazmente os insetos afastados, garantindo aos utilizadores uma experiência confortável e livre de insetos.\r\n\r\nCobertura impermeável removível: a cobertura impermeável removível pode ser anexada ao topo da tenda para proteção contra intempéries e privacidade.\r\n\r\nLeve e portátil: o design dobrável e leve permite-lhe embalar facilmente a tenda e guardá-la no saco de transporte incluído para facilitar o transporte.\r\n\r\nFácil montagem e desmontagem: montar e desmontar a tenda é muito fácil graças aos postes de fibra de vidro altamente flexíveis e leves e ao conveniente sistema de conexão por pinos e anéis.\r\n\r\nAtenção: Mantenha todas as chamas e fontes de calor afastadas do tecido deste produto.\r\n\r\nCor: azul\r\nMaterial da tenda: poliéster 185T revestido a PU\r\nMaterial de rede: poliéster 68D\r\nMaterial da base: PE\r\nDimensões internas da tenda: 200 x 234 x 122 cm (C x L x A) Dimensões externas: 300 x 250 x 132 cm (C x L x A)\r\nDimensões da embalagem: 58 x 16,5 x 16,5 cm (C x L x A)\r\nQuantidade de utilizadores: 4 pessoas\r\nPeso: 5 kg\r\nTipo de tenda: tenda de campismo\r\nForma: cúpula\r\nQuantidade de quartos: 1\r\nNúmero de portas: 1\r\nQuantidade de janelas: 2\r\nCom acesso duplo com fecho de correr e cobertura impermeável removível\r\nInclui porta e Montagem necessária: sim\r\n\r\nA entrega inclui: 1 x Toldo 1 x Cobertura impermeável para tenda 1 x Saco de transporte', 1, 1),
+(22, 'Saco-cama Bestway', 'PAVILLO', 56.14, 26, 'Se procura as novidades mais procuradas no mercado, apresentamos-lhe Saco-cama Bestway Azul\r\n\r\nTipo: Saco-cama\r\nInclui: Bolsa de transporte\r\nTemperatura aprox.: 3º - 8 ºC\r\nMedidas aprox.: 190 x 84 cm\r\nCor: Azul\r\nMaterial: Plástico e Poliéster\r\nCaracterísticas: Exterior\r\nLimpar com pano húmido\r\nUso recomendado: Praia, Jardim e Camping\r\nForma: Quadrado\r\nTipo de fecho: Fecho de correr\r\nGénero: Unissexo adultos\r\nIdade recomendada: Todas as idades', 4, 1),
+(23, 'Bomba Elétrica Desportos Outdoor Adulto Preto', 'BESTWAY', 38.12, 41, 'Bomba de Ar Elétrica\r\nDescrição\r\nA Bomba de Ar Elétrica é a escolha ideal para inflar rapidamente seus equipamentos esportivos aquáticos. Com um design elegante, esta bomba elétrica de alta qualidade garante eficiência e praticidade em suas atividades ao ar livre.\r\n\r\nCaracterísticas Principais\r\n• Alta eficiência: Infla bóias, colchões de ar, piscinas infláveis e outros equipamentos aquáticos com facilidade e rapidez.\r\n• Fácil de usar: Compatível com tomadas padrão, é simples de operar e transportar.\r\n• Leve e compacta: Ideal para levar em suas aventuras ao ar livre.\r\nBenefícios\r\n• Rapidez e praticidade: Nunca mais perca tempo inflando manualmente e aproveite ao máximo suas atividades na água.\r\n• Portabilidade: Leve e fácil de transportar, podendo ser utilizada em diversos locais.\r\n• Durabilidade: Construída com materiais de alta qualidade para garantir longa vida útil.\r\nUtilização\r\nEsta bomba elétrica é perfeita para desportos outdoor, proporcionando momentos de lazer e diversão sem preocupações. Seja na praia, piscina ou acampamento, tenha sempre à disposição esta bomba eficiente e durável.\r\n\r\nCompra Segura\r\nAdquira agora a Bomba de Ar Elétrica e garanta inflar seus equipamentos esportivos de forma rápida e conveniente. Leve sua diversão aquática a um novo nível com esta bomba de alto desempenho.\r\n\r\nNão perca mais tempo e invista na Bomba de Ar Elétrica para garantir momentos de lazer inesquecíveis e práticos. Aproveite a liberdade de inflar seus equipamentos onde quer que esteja, de maneira rápida e eficiente.', 5, 1),
+(24, 'Almofada de viagem', 'HIGHLANDER', 17.21, 12, 'Almofada\r\n\r\nDescanse a sua cabeça numa almofada de viagem macia e confortável.\r\n\r\nVantagens:\r\nLeve e muito compacta\r\nFácil de utilizar\r\nConcebida para utilização em actividades de lazer no exterior\r\nCaracterísticas:\r\nPeso: 165g\r\nTamanho: 22 cm x 30 cm x 7 cm\r\nMaterial: Tecido - 65% poliéster, 35% algodão - Enchimento - 450g/m2 de fibra oca de poliéster', 6, 1),
+(25, 'Colchão de campismo Intex Dura-Beam Deluxe Ultra Plush com cabeceira', 'INTEX', 122.94, 33, 'Dura-Beam Deluxe Series INTEX modelo Ultra Plush Headbed Airbed com cabeceira e medidas: 152 x 236 x 46 cm. Superfície flocada e nervurada, estrutura interior com tecnologia Fiber-Tech. Possui bomba elétrica integrada para inflar e esvaziar, pronta em apenas 5 minutos. Inclui bolsa de transporte com alças. Colchão de fácil dobragem, em vinil resistente. Projetado para duas pessoas, peso máximo 272 kg.\r\n\r\n• Cama insuflável INTEX para duas pessoas, série Dura-Beam Deluxe modleo Ultra Plush com cabeceiro, medidas: 152x236x46 cm, suporta um peso máximo de 272 kg\r\n• Construção interior com tecnologia Fiber-Tech, maior adaptação, rigidez e conforto, a cama não deforma com as utilizações, superfície e borda flocadas\r\n• Cabeceiro embutido de tato suave e estrutura afunilada para maior conforto, perfeita para ler, ver televisão ou evitar que as almofadas caiam no solo\r\n• Bomba elétrica embutida de enchimento e esvaziamento, tempo de enchimento aproximado: 5 minutos, inclui-se saco de transporte com asas\r\n• Fabricada em vinil de elevada qualidade e resistência, a altura da cama facilitao acesso e a saída, perfeita como cama de convidados ou para viajar', 3, 1),
+(26, 'Cobertor elétrico - Manta de aquecimento - 200 x 180 cm', 'Rockerz Fitness', 98.34, 18, 'Quer manter-se bem quente durante o inverno? Então o cobertor elétrico de dupla face Rockerz Home é a solução ideal! O cobertor é perfeito para uma noite agradável no sofá ou como cobertor extra na sua cama. Com nada menos que 9 ajustes de temperatura, pode definir exatamente o calor que mais lhe convém. Quer precise de um calor subtil para dormir confortavelmente ou de um calor intenso para vencer o frio do inverno, este cobertor é a sua fonte de calor fiável. Além disso, o cobertor elétrico é um investimento inteligente porque pode baixar um pouco a temperatura do termóstato, o que pode ajudar a reduzir os seus custos de energia.\r\n\r\n9 definições de aquecimento e desligamento automático\r\nCom o prático comando à distância, tem controlo total sobre o calor do seu cobertor de aquecimento elétrico. Desfrute de nada menos que 9 configurações de calor diferentes, que variam entre uns agradáveis ​​29 °C e uns aconchegantes 43 °C, tudo ao seu alcance com o toque de um botão. A definição da função de desligamento automático é igualmente fácil, com 9 definições de tempo disponíveis, que variam entre 20 minutos e 3 horas. Após este tempo, o cobertor desligar-se-á automaticamente. O cobertor está também equipado com proteção contra sobreaquecimento, tornando-o à prova de fogo. E para maior facilidade de utilização, este cobertor elétrico tem um cabo generoso de nada mais nada menos que 2,3 metros.\r\n\r\nMaterial excecionalmente macio para um conforto ideal\r\nEste cobertor elétrico é cuidadosamente feito de 100% flanela (exterior) e lã sherpa (interior). A flanela proporciona uma camada exterior macia e sedosa, enquanto o velo sherpa acrescenta uma camada extra de calor e suavidade. Com a sua combinação única de flanela e lã sherpa, o cobertor elétrico aquecido Rockerz Home envolve-o num oásis de conforto. Graças ao material grosso com forro quente, este é um item essencial para enfrentar os dias frios com conforto!\r\n\r\nOs benefícios do cobertor elétrico Rockerz Home:\r\n• O must-have para os dias frios\r\n• Tecido macio e sedoso\r\n• Eficiência energética - bom para a sua carteira\r\n• 9 regulações de calor (29° C a 43° C)\r\n• Desligamento automático até 3 horas\r\n• Tamanho ideal - 180 x 200 cm (duplo)\r\n• Cabo XL - 2,3 metros\r\n• Adapta-se a qualquer interior\r\n• Lavável: lavar à mão\r\n\r\nConteúdo da embalagem\r\n➜ 1 x cobertor elétrico\r\n➜ 1 x Comando à distância com cabo\r\n➜ 1 x Manual\r\n\r\nEspecificações\r\nVoltagem: 220V-240V\r\nFrequência: 50-60Hz\r\nWatts: 160 watts\r\nLavável: Lavar à mão\r\nCertificados: CE, FC, RoHS', 7, 1),
+(27, 'Pesca de Fundo no Mar SEACOAST 500 350 80-150 G (Conjunto)', 'CAPERLAN', 73.80, 26, 'Características da Cana SEACOAST-500 350 Telescópica\r\n- Comprimento: 3,50 m\r\n- Volume: 1,03 m\r\n- Número de secções: 6 elementos\r\n- Peso: 430 g\r\n- Potência: 80-150 g\r\n- Peso otimizado para lançar: 110 g\r\n- Material: carbono e fibra de vidro\r\n- Passadores: 4 passadores ligados + 1 passador de cabeça colado\r\n- Porta-carreto: tubular de enroscar\r\n- Ação semiparabólica', 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `profile`
+-- Table structure for table `profile`
 --
 
-DROP TABLE IF EXISTS `profile`;
-CREATE TABLE IF NOT EXISTS `profile` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `profile` (
+  `id` int NOT NULL,
   `userID` int NOT NULL,
   `nif` varchar(50) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `dtaNascimento` date NOT NULL,
   `genero` varchar(50) NOT NULL,
   `telemovel` varchar(20) NOT NULL,
-  `morada` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `morada` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `profile`
+-- Dumping data for table `profile`
 --
 
 INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`, `telemovel`, `morada`) VALUES
@@ -513,12 +486,11 @@ INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int NOT NULL,
   `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `auth_key` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `password_hash` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -527,15 +499,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` smallint NOT NULL DEFAULT '10',
   `created_at` int NOT NULL,
   `updated_at` int NOT NULL,
-  `verification_token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `verification_token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Extraindo dados da tabela `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
@@ -552,17 +520,227 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (72, 'ze', 'R_XJGzcf_y80bsY4lmN7t26YNr06H3KX', '$2y$13$B6/dvGZGB2trA/2UHuJS.umYiihQKuNK.dCOmeDBIWBsmMDHj8ksu', NULL, 'ze@gmail.com', 10, 1736370179, 1736370179, '-2nWbHDvWnwHlyWvdFSnB_T8iU8pp8Aq_1736370179');
 
 --
--- Restrições para despejos de tabelas
+-- Indexes for dumped tables
 --
 
 --
--- Limitadores para a tabela `carrinho`
+-- Indexes for table `auth_assignment`
+--
+ALTER TABLE `auth_assignment`
+  ADD PRIMARY KEY (`item_name`,`user_id`),
+  ADD KEY `idx-auth_assignment-user_id` (`user_id`);
+
+--
+-- Indexes for table `auth_item`
+--
+ALTER TABLE `auth_item`
+  ADD PRIMARY KEY (`name`),
+  ADD KEY `rule_name` (`rule_name`),
+  ADD KEY `idx-auth_item-type` (`type`);
+
+--
+-- Indexes for table `auth_item_child`
+--
+ALTER TABLE `auth_item_child`
+  ADD PRIMARY KEY (`parent`,`child`),
+  ADD KEY `child` (`child`);
+
+--
+-- Indexes for table `auth_rule`
+--
+ALTER TABLE `auth_rule`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Indexes for table `carrinho`
+--
+ALTER TABLE `carrinho`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `profileID` (`profileID`);
+
+--
+-- Indexes for table `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fatura`
+--
+ALTER TABLE `fatura`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `carrinhoID` (`carrinhoID`),
+  ADD KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
+  ADD KEY `metodoPagamentoID` (`metodoPagamentoID`);
+
+--
+-- Indexes for table `favorito`
+--
+ALTER TABLE `favorito`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `profileID` (`profileID`),
+  ADD KEY `produtoID` (`produtoID`);
+
+--
+-- Indexes for table `imagem`
+--
+ALTER TABLE `imagem`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `produtoID` (`produtoID`);
+
+--
+-- Indexes for table `itemscarrinho`
+--
+ALTER TABLE `itemscarrinho`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `carrinhoID` (`carrinhoID`),
+  ADD KEY `produtoID` (`produtoID`);
+
+--
+-- Indexes for table `iva`
+--
+ALTER TABLE `iva`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `linhafatura`
+--
+ALTER TABLE `linhafatura`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `faturaID` (`faturaID`),
+  ADD KEY `ivaID` (`ivaID`),
+  ADD KEY `produtoID` (`produtoID`);
+
+--
+-- Indexes for table `metodoexpedicao`
+--
+ALTER TABLE `metodoexpedicao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `metodopagamento`
+--
+ALTER TABLE `metodopagamento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `produto`
+--
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categoriaID` (`categoriaID`),
+  ADD KEY `ivaID` (`ivaID`);
+
+--
+-- Indexes for table `profile`
+--
+ALTER TABLE `profile`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userID` (`userID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `carrinho`
+--
+ALTER TABLE `carrinho`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `fatura`
+--
+ALTER TABLE `fatura`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `favorito`
+--
+ALTER TABLE `favorito`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `imagem`
+--
+ALTER TABLE `imagem`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `itemscarrinho`
+--
+ALTER TABLE `itemscarrinho`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT for table `iva`
+--
+ALTER TABLE `iva`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `linhafatura`
+--
+ALTER TABLE `linhafatura`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `metodoexpedicao`
+--
+ALTER TABLE `metodoexpedicao`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `metodopagamento`
+--
+ALTER TABLE `metodopagamento`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `produto`
+--
+ALTER TABLE `produto`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT for table `profile`
+--
+ALTER TABLE `profile`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `carrinho`
 --
 ALTER TABLE `carrinho`
   ADD CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `fatura`
+-- Constraints for table `fatura`
 --
 ALTER TABLE `fatura`
   ADD CONSTRAINT `fatura_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -570,27 +748,27 @@ ALTER TABLE `fatura`
   ADD CONSTRAINT `fatura_ibfk_3` FOREIGN KEY (`metodoPagamentoID`) REFERENCES `metodopagamento` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Limitadores para a tabela `favorito`
+-- Constraints for table `favorito`
 --
 ALTER TABLE `favorito`
   ADD CONSTRAINT `favorito_ibfk_1` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `favorito_ibfk_2` FOREIGN KEY (`profileID`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `imagem`
+-- Constraints for table `imagem`
 --
 ALTER TABLE `imagem`
   ADD CONSTRAINT `imagem_ibfk_1` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `itemscarrinho`
+-- Constraints for table `itemscarrinho`
 --
 ALTER TABLE `itemscarrinho`
   ADD CONSTRAINT `itemscarrinho_ibfk_1` FOREIGN KEY (`carrinhoID`) REFERENCES `carrinho` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `itemscarrinho_ibfk_2` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Limitadores para a tabela `linhafatura`
+-- Constraints for table `linhafatura`
 --
 ALTER TABLE `linhafatura`
   ADD CONSTRAINT `linhafatura_ibfk_1` FOREIGN KEY (`faturaID`) REFERENCES `fatura` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -598,14 +776,14 @@ ALTER TABLE `linhafatura`
   ADD CONSTRAINT `linhafatura_ibfk_3` FOREIGN KEY (`produtoID`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Limitadores para a tabela `produto`
+-- Constraints for table `produto`
 --
 ALTER TABLE `produto`
   ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`categoriaID`) REFERENCES `categoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `produto_ibfk_2` FOREIGN KEY (`ivaID`) REFERENCES `iva` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Limitadores para a tabela `profile`
+-- Constraints for table `profile`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
