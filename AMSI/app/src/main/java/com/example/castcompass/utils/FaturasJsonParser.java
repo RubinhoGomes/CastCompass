@@ -19,11 +19,12 @@ public class FaturasJsonParser {
                 int id = faturaJSON.getInt("id");
                 float valorTotal = (float) faturaJSON.getDouble("valorTotal");
                 float ivaTotal = (float) faturaJSON.getDouble("ivaTotal");
-                int metodoExpedicaoID = faturaJSON.getInt("metodoExpedicaoID");
-                int metodoPagamentoID = faturaJSON.getInt("metodoPagamentoID");
+                String metodoExpedicaoID = faturaJSON.getString("metodoExpedicaoID");
+                String metodoPagamentoID = faturaJSON.getString("metodoPagamentoID");
                 String data = faturaJSON.getString("data");
+                String estado = faturaJSON.getString("estado");
 
-                Faturas fatura = new Faturas(id, metodoExpedicaoID, metodoPagamentoID, valorTotal, ivaTotal, data);
+                Faturas fatura = new Faturas(id, metodoExpedicaoID, metodoPagamentoID, valorTotal, ivaTotal, data, estado);
                 faturas.add(fatura);
             }
         } catch (JSONException e) {

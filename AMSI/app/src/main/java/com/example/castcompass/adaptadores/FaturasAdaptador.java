@@ -57,7 +57,7 @@ public class FaturasAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderLista {
-        private TextView tvValorTotal, tvIvaTotal, tvData, tvMetodoExpedicao, tvMetodoPagamento;
+        private TextView tvValorTotal, tvIvaTotal, tvData, tvMetodoExpedicao, tvMetodoPagamento, tvEstado;
 
         public ViewHolderLista(View view) {
             tvValorTotal = view.findViewById(R.id.tvValorTotal);
@@ -65,6 +65,7 @@ public class FaturasAdaptador extends BaseAdapter {
             tvData = view.findViewById(R.id.tvData);
             tvMetodoExpedicao = view.findViewById(R.id.tvMtdExpedicao);
             tvMetodoPagamento = view.findViewById(R.id.tvMtdPagamento);
+            tvEstado = view.findViewById(R.id.tvEstado);
         }
 
         //invoca 1 vez por cada linha da lista
@@ -75,8 +76,9 @@ public class FaturasAdaptador extends BaseAdapter {
             tvValorTotal.setText(faturas.getValorTotal()+"");
             tvIvaTotal.setText(faturas.getIvaTotal()+"");
             tvData.setText(data);
-            tvMetodoExpedicao.setText(faturas.getMetodoExpedicaoID()+"");
-            tvMetodoPagamento.setText(faturas.getMetodoPagamentoID()+"");
+            tvMetodoExpedicao.setText(faturas.getMetodoExpedicaoID());
+            tvMetodoPagamento.setText(faturas.getMetodoPagamentoID());
+            tvEstado.setText(faturas.getEstado()+"");
         }
     }
 }
