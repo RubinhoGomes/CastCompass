@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </table>
 
                 <div class="row py-3">
-                    <?php $form = ActiveForm::begin(['id' => 'form-checkout', 'enableClientValidation' => true, 'options' => ['method' => 'post']]); ?>
+                    <?php $form = ActiveForm::begin(['id' => 'form-checkout', 'enableClientValidation' => true]); ?>
 
                     <div class="col-lg-6 mb-3">
                         <h5 class="mb-3">Método de Expedição:</h5>
@@ -77,12 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h5 class="mb-3">Método de Pagamento:</h5>
                         <div class="form-group">
                            <div class="input-group">
-<?php $formMetodo = ActiveForm::begin(['action' => ['carinho/checkout']]); ?>
                                 <?= Html::dropDownList('metodoPagamento', \yii\helpers\ArrayHelper::map($metodoPagamento, 'id', 'id'),
                                     \yii\helpers\ArrayHelper::map($metodoPagamento, 'id', 'nome'), [
                                         'class' => 'form-control custom-select me',
                                         'prompt' => 'Selecione um método',
-                                        'onchange' => 'this.form.submit()'
                                     ])
                                 ?>
                             </div>
