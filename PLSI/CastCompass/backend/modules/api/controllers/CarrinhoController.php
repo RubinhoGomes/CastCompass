@@ -35,15 +35,13 @@ class CarrinhoController extends ActiveController
     }
 
 
-    public function actionCount()
-    {
+    public function actionCount() {
         $metodosmodel = new $this->modelClass;
         $recs = $metodosmodel::find()->all();
         return ['count' => count($recs)];
     }
 
-    public function actionProdutos($id)
-    {
+    public function actionProdutos($id) {
         $carrinho = Carrinho::findOne(['profileID' => $id]);
 
         if (!$carrinho) {
@@ -71,8 +69,7 @@ class CarrinhoController extends ActiveController
         return $result;
     }
 
-    public function actionAddproduto($profileID, $produtoID, $quantidade)
-    {
+    public function actionAddproduto($profileID, $produtoID, $quantidade) {
         $carrinho = Carrinho::findOne(['profileID' => $profileID]);
 
         if (!$carrinho) {
@@ -101,8 +98,7 @@ class CarrinhoController extends ActiveController
         return ['error' => 'Erro ao adicionar item ao carrinho.'];
     }
 
-    public function actionRemoverproduto($profileID, $produtoID)
-    {
+    public function actionRemoverproduto($profileID, $produtoID) {
         $carrinho = Carrinho::findOne(['profileID' => $profileID]);
 
         if (!$carrinho) {
@@ -123,8 +119,7 @@ class CarrinhoController extends ActiveController
         return ['error' => 'Erro ao remover item do carrinho.'];
     }
 
-    private function atualizarCarrinho($carrinho)
-    {
+    private function atualizarCarrinho($carrinho) {
         $items = ItemsCarrinho::find()->where(['carrinhoID' => $carrinho->id])->all();
 
         $carrinho->quantidade = 0;
@@ -138,8 +133,7 @@ class CarrinhoController extends ActiveController
         $carrinho->save();
     }
 
-    public function actionCriarcarrinho()
-    {
+    public function actionCriarcarrinho() {
         $user = User::findOne(['auth_key' => Yii::$app->request->get('token')]);
 
         if (!$user) {
@@ -178,15 +172,14 @@ class CarrinhoController extends ActiveController
         }
     }
 
-    public function actionCarrinho($profileID)
-    {
+    public function actionCarrinho($profileID) {
         $carrinho = Carrinho::findOne(['profileID' => $profileID]);
 
         if (!$carrinho) {
             return ['error' => 'Carrinho não encontrado.'];
         }
-        
-        $itens = ItemsCarrinho::find(['carrinhoID' => $carrinho->id])->all();
+
+        $itens = ItemsCarrinho::find()->where(['carrinhoID' => $carrinho->id])->all();
 
         if (empty($itens)) {
             return ['message' => 'O carrinho está vazio.'];
@@ -194,14 +187,14 @@ class CarrinhoController extends ActiveController
 
         $itensData = [];
         foreach ($itens as $item) {
-         $itensData[] = [
-            'id' => $item->id,
-            'produtoID' => $item->produtoID,
-            'nome' => $item->nome,
-            'quantidade' => $item->quantidade,
-            'valorTotal' => $item->valorTotal,
-            'imagem' => 'http://172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $item->getImagem($item->produtoID),
-          ];
+            $itensData[] = [
+                'id' => $item->id,
+                'produtoID' => $item->produtoID,
+                'nome' => $item->nome,
+                'quantidade' => $item->quantidade,
+                'valorTotal' => $item->valorTotal,
+                'imagem' => 'http://172.22.21.205/CastCompass/PLSI/CastCompass/frontend/web/uploads/' . $item->getImagem($item->produtoID),
+            ];
         }
 
         $data = [
@@ -215,8 +208,7 @@ class CarrinhoController extends ActiveController
         return $data;
     }
 
-    private function getImagem($produtoID)
-    {
+    private function getImagem($produtoID) {
         $imagem = Imagem::findOne(['produtoID' => $produtoID]);
         return $imagem->filename;
     }
