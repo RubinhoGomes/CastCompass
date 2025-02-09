@@ -15,7 +15,6 @@ import org.json.JSONObject;
 
 // Imports from CastCompass
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.castcompass.ListaFaturasFragment;
 import com.example.castcompass.listeners.CarrinhoListener;
 import com.example.castcompass.listeners.FaturasListener;
 import com.example.castcompass.listeners.FavoritosListener;
@@ -55,6 +54,7 @@ public class Singleton {
 
     private ArrayList<Favoritos> favoritos;
     private ArrayList<Faturas> faturas;
+    private ArrayList<CarrinhoItems> carrinho;
 
     public FavoritoBDHelper favoritoBD = null;
 
@@ -64,6 +64,8 @@ public class Singleton {
     private FavoritosListener favoritosListener;
     private CarrinhoListener carrinhoListener;
     private FaturasListener faturasListener;
+
+    public float total = 0;
 
     private Utilizador login;
     private static String urlApiLogin = "";
@@ -77,6 +79,8 @@ public class Singleton {
     private static String urlApiFavoritosRemover = "";
     private static String urlApiFavoritosAdicionar = "";
     private static String urlApiCarrinho = "";
+    private static String urlApiAdicionarItemCarrinho = "";
+    private static String urlApiApagarItemCarrinho = "";
 
     private ArrayList<Produto> listaProdutos;
 
@@ -96,7 +100,7 @@ public class Singleton {
         listaProdutos = new ArrayList<>();
     }
 
-    // MUDA IP
+    // MUDAR IP
     public void MudarIP(String ip) {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
         urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
@@ -109,6 +113,8 @@ public class Singleton {
         urlApiFavoritosRemover = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/remover";
         urlApiFavoritosAdicionar = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/adicionar";
         urlApiCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/carrinho";
+        urlApiAdicionarItemCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/addproduto";
+        urlApiApagarItemCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/removerproduto";
     }
 
     // region LISTENERS
@@ -206,6 +212,7 @@ public class Singleton {
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         editor.apply();
+        favoritoBD.removerAllFavoritosBD();
     }
     // endregion
 
@@ -414,7 +421,7 @@ public class Singleton {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Não tem favoritos", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -432,7 +439,7 @@ public class Singleton {
             public void onResponse(String response) {
 //                Favoritos favorito = FavoritosJsonParser.parserJsonFavorito(response);
 //                adicionarFavoritoBD(favorito);
-                
+
                 Toast.makeText(context, "Produto adicionado com sucesso", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
@@ -459,6 +466,7 @@ public class Singleton {
                     if (favoritosListener != null) {
                         favoritosListener.onRefreshFavoritos(favoritos);
                     }
+
                 } catch (Exception e) {
                     Toast.makeText(context, "Erro ao remover produto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -487,7 +495,7 @@ public class Singleton {
                     }
 
                 } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar faturas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Não tem faturas", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -503,24 +511,25 @@ public class Singleton {
 
     // region Carrinho
     public void getCarrinhoAPI(final Context context) {
-        // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
         StringRequest request = new StringRequest(Request.Method.GET, urlApiCarrinho + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONArray json = new JSONArray(response);
+                    JSONObject jsonObject = new JSONObject(response);
 
-                    ArrayList<CarrinhoItems> carrinho = CarrinhoItemsJsonParser.parserJsonCarrinho(json);
+                    JSONArray jsonItems = jsonObject.getJSONArray("items");
+
+                    ArrayList<CarrinhoItems> carrinho = CarrinhoItemsJsonParser.parserJsonCarrinho(jsonItems);
 
                     // Notificar o listener que a lista foi atualizada
                     if (carrinhoListener != null) {
-//                        carrinhoListener.onRefreshCarrinho(carrinho);
+                        carrinhoListener.onRefreshCarrinho(carrinho);
                     }
 
                 } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao carregar carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Não tem items no carrinho", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -531,6 +540,88 @@ public class Singleton {
         });
 
         volleyQueue.add(request);
+    }
+
+    public void comprarCarrinhoAPI(final Context context) {
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int id = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.POST, urlApiCarrinho + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Toast.makeText(context, "Compra efetuada com sucesso", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao comprar carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("ERRO", "Erro: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    public void adicionarItemCarrinhoAPI(final Context context, final int idProduto) {
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int idProfile = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.POST, urlApiAdicionarItemCarrinho + "?profileID=" + idProfile + "&produtoID=" + idProduto + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Toast.makeText(context, "Item adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao adicionar item ao carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("ERRO", "Erro: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    public void eliminarItemCarrinhoAPI(final Context context, final int id) {
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int idProfile = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.DELETE, urlApiApagarItemCarrinho + "?profileID=" + idProfile + "&produtoID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Toast.makeText(context, "Item removido com sucesso", Toast.LENGTH_SHORT).show();
+
+                    if (carrinhoListener != null) {
+                        carrinhoListener.onRefreshCarrinho(carrinho);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao remover item do carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("ERRO", "Erro: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    public void getMetodosExpedicaoAPI(final Context context) {
+
+    }
+
+    public void getMetodosPagamentoAPI(final Context context) {
+
     }
     // endregion
 }

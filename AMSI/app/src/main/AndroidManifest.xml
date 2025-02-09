@@ -16,7 +16,9 @@
         android:theme="@style/Theme.CastCompass"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".CompraActivity"
+            android:exported="false" />
         <activity
             android:name=".IpServidorActivity"
             android:exported="true">
@@ -26,32 +28,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MenuMainActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:theme="@style/Theme.CastCompass.NoActionBar" />
-
         <activity
             android:name=".PerfilActivity"
             android:exported="false"
             android:parentActivityName=".MenuMainActivity" />
-
         <activity
             android:name=".DetalhesProdutosActivity"
             android:exported="false"
             android:parentActivityName=".MenuMainActivity" />
-
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="false"
             android:launchMode="singleTop" />
-
         <activity
             android:name=".LoginActivity"
             android:exported="false" />

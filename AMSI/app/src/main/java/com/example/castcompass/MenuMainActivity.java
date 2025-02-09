@@ -34,6 +34,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
     private String username = "Sem Username!";
+    private MenuItem navLogOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
         drawer = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navView);
+        navLogOut = navigationView.getMenu().findItem(R.id.navLogOut);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.ndOpen, R.string.ndClose);
         toggle.syncState();
@@ -58,7 +60,14 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
     private boolean carregarFragmentoInicial() {
         Menu menu = navigationView.getMenu();
-        MenuItem item = menu.getItem(0);
+        int menuconexao = 0;
+
+        if (!util.isConnected(this)) {
+            Toast.makeText(this, "Sem ligação à internet!", Toast.LENGTH_SHORT).show();
+            menuconexao = 1;
+        }
+
+        MenuItem item = menu.getItem(menuconexao);
         item.setChecked(true);
         return onNavigationItemSelected(item);
     }
@@ -86,15 +95,15 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         View headerView = navigationView.getHeaderView(0);
         TextView nav_tvUsername = headerView.findViewById(R.id.tvUsername);
 
+        if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+            navLogOut.setTitle("Login");
+        }
+
         if (item.getItemId() == R.id.navHome) {
             fragment = new ListaProdutosFragment();
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navFavoritos) {
-            if (!util.isConnected(this)) {
-                Toast.makeText(this, "Sem ligação à internet!", Toast.LENGTH_SHORT).show();
-                fragment = new ListaFavoritosFragment();
-                setTitle("Faturas");
-            } else if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+            if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
                 loginRedirect();
             } else {
                 // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
@@ -123,14 +132,18 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 startActivity(intent);
             }
         } else if (item.getItemId() == R.id.navLogOut) {
-            Singleton singleton = Singleton.getInstance(this);
-            singleton.logoutAPI(this);
+            if (navLogOut.getTitle().equals("Login")) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Singleton singleton = Singleton.getInstance(this);
+                singleton.logoutAPI(this);
 
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (item.getItemId() == R.id.navMensagens) {
-            setTitle(item.getTitle());
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
         if (fragment != null) {

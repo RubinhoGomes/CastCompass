@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.castcompass.listeners.LoginListener;
 import com.example.castcompass.models.Singleton;
 import com.example.castcompass.models.Utilizador;
+import com.example.castcompass.utils.util;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
@@ -18,9 +19,16 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     public static final int MAX_CHAR = 4, MIN_CHAR = 3;
     public static final String USER = "USER";
     public static final String TOKEN = "token";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!util.isConnected(this)) {
+            Intent intent = new Intent(this, MenuMainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         setContentView(R.layout.activity_login);
         setTitle("Login");
         //inicializar
@@ -32,15 +40,15 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         String user = etUsername.getText().toString();
         String pass = etPassword.getText().toString();
 
-       // if(!isPasswordValida(pass)) {
-         //   etPassword.setError("Password inválida");
-           // return;
-     //   }
+        // if(!isPasswordValida(pass)) {
+        //   etPassword.setError("Password inválida");
+        // return;
+        //   }
 
-       Singleton singleton = Singleton.getInstance(this);
-       singleton.setLoginListener(this);
+        Singleton singleton = Singleton.getInstance(this);
+        singleton.setLoginListener(this);
 
-       singleton.loginAPI(user, pass, getApplicationContext());
+        singleton.loginAPI(user, pass, getApplicationContext());
     }
 
     public void onClickVisitante(View view) {
@@ -53,21 +61,21 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     private boolean isUsernameValido(String username) {
-        if(username == null)
+        if (username == null)
             return false;
 
         return username.length() >= MIN_CHAR;
     }
 
     private boolean isPasswordValida(String pass) {
-        if(pass == null)
+        if (pass == null)
             return false;
         return pass.length() >= MAX_CHAR;
     }
 
     @Override
     public void onUpdateLogin(Utilizador utilizador) {
-        if(utilizador.token != null) {
+        if (utilizador.token != null) {
             Intent intent = new Intent(this, MenuMainActivity.class);
             intent.putExtra(TOKEN, utilizador.getToken());
             intent.putExtra(USER, utilizador.getUsername());
@@ -80,8 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             // editor.apply();
             // startActivity(intent);
             finish();
-        }
-        else {
+        } else {
             Toast.makeText(this, "Token incorreto", Toast.LENGTH_SHORT).show();
         }
 

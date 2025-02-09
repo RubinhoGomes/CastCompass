@@ -1,24 +1,19 @@
 package com.example.castcompass;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.models.Produto;
 import com.example.castcompass.models.Singleton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class DetalhesProdutosActivity extends AppCompatActivity implements ProdutoListener {
 
@@ -28,12 +23,12 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
     private ImageView imgCapa;
     private Produto produto;
     private Button btnAdicionarFav;
+    private FloatingActionButton fabAdicionarCarrinho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_produtos);
-        btnAdicionarFav = findViewById(R.id.btnAdicionarFav);
 
         tvNome = findViewById(R.id.tvNome);
         tvPreco = findViewById(R.id.tvPreco);
@@ -49,12 +44,24 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
             carregarDados();
         }
 
+        btnAdicionarFav = findViewById(R.id.btnAdicionarFav);
         btnAdicionarFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (produto != null) {
                     Singleton.getInstance(DetalhesProdutosActivity.this)
                             .adicionarFavoritoAPI(DetalhesProdutosActivity.this, produto.getId());
+                }
+            }
+        });
+
+        fabAdicionarCarrinho = findViewById(R.id.fabAdicionarCarrinho);
+        fabAdicionarCarrinho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (produto != null) {
+                    Singleton.getInstance(DetalhesProdutosActivity.this)
+                            .adicionarItemCarrinhoAPI(DetalhesProdutosActivity.this, produto.getId());
                 }
             }
         });

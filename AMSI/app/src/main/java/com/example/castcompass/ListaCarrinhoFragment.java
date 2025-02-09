@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.castcompass.adaptadores.ListaCarrinhoAdaptador;
+import com.example.castcompass.adaptadores.ListaCarrinhoitemsAdaptador;
 import com.example.castcompass.listeners.CarrinhoListener;
 import com.example.castcompass.models.CarrinhoItems;
 import com.example.castcompass.models.Singleton;
@@ -24,10 +24,11 @@ import java.util.ArrayList;
 public class ListaCarrinhoFragment extends Fragment implements CarrinhoListener {
 
     private ListView lvProdutos;
+    private ArrayList<CarrinhoItems> carrinhoItems;
     private Button btnComprar;
     private TextView tvTotal;
     private SearchView searchView;
-
+    private ListaCarrinhoitemsAdaptador adapter;
 
 
     public ListaCarrinhoFragment() {
@@ -35,35 +36,38 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhoListener 
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_lista_carrinho , container , false);
+        View view = inflater.inflate(R.layout.fragment_lista_carrinho, container, false);
         setHasOptionsMenu(true);
 
         lvProdutos = view.findViewById(R.id.lvProdutos);
         btnComprar = view.findViewById(R.id.btnComprar);
-        tvTotal = view.findViewById(R.id.tvTotal);
+
+        carrinhoItems = new ArrayList<>();
+        adapter = new ListaCarrinhoitemsAdaptador(getContext(), carrinhoItems);
+        lvProdutos.setAdapter(adapter);
+
+
+        Singleton.getInstance(getContext()).setCarrinhoListener(this);
         Singleton.getInstance(getContext()).getCarrinhoAPI(getContext());
 
-       /* btnComprar.setOnClickListener(new View.OnClickListener(){
-
-            public void onClick(View view) {
-
+        btnComprar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Singleton.getInstance(getContext()).comprarCarrinhoAPI(getContext());
             }
-
-
-        }); */
+        });
 
         return view;
     }
 
-
     public void onRefreshCarrinho(ArrayList<CarrinhoItems> itens) {
-        if(itens != null){
-            //tvTotal.setText("" + carrinho.getValorTotal());
-            lvProdutos.setAdapter(new ListaCarrinhoAdaptador(getContext(), itens));
+        if (itens != null) {
+            carrinhoItems.clear();
+            carrinhoItems.addAll(itens);
+            adapter.notifyDataSetChanged();
         }
     }
 }

@@ -63,7 +63,9 @@
         <item>Masculino</item>
         <item>Feminino</item>
     </string-array>
-    <string name="quantidade">Quantidade</string>
+    <string name="quantidade">Quantidade:</string>
     <string name="estado">Estado:</string>
     <string name="transferir_fatura">Transferir Fatura</string>
+    <string name="total_a_pagar">Total a pagar:</string>
+    <string name="finalizar_compra">Finalizar Compra</string>
 </resources>

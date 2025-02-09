@@ -9,33 +9,23 @@
     <ListView
         android:id="@+id/lvProdutos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="490dp" />
 
     <LinearLayout
-        android:background="#7cb360"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="bottom|start"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp">
-
-
-        <TextView
-            android:id="@+id/tvTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="16dp"
+        android:background="#7cb360"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btnComprar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/comprar"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:text="@string/comprar" />
 
     </LinearLayout>
 

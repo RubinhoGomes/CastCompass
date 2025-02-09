@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.castcompass.R;
 import com.example.castcompass.models.CarrinhoItems;
+import com.example.castcompass.models.Singleton;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class ListaCarrinhoAdaptador extends BaseAdapter {
         return items.get(position).getId();
     }
 
-    public ListaCarrinhoAdaptador(Context context, ArrayList<CarrinhoItems> items){
+    public ListaCarrinhoAdaptador(Context context, ArrayList<CarrinhoItems> items) {
         this.context = context;
         this.items = items;
     }
@@ -51,12 +53,14 @@ public class ListaCarrinhoAdaptador extends BaseAdapter {
         }
 
         ListaCarrinhoAdaptador.ViewHolderLista viewHolder = (ListaCarrinhoAdaptador.ViewHolderLista) view.getTag();
+
         if (viewHolder == null) {
             viewHolder = new ListaCarrinhoAdaptador.ViewHolderLista(view);
             view.setTag(viewHolder);
         }
 
         viewHolder.update(items.get(position));
+
         return view;
     }
 

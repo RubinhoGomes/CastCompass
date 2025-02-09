@@ -41,7 +41,6 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -54,7 +53,6 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
 
         return view;
     }
-
 
     @Override
     public void onRefreshFavoritos(ArrayList<Favoritos> favoritos) {

@@ -66,7 +66,8 @@ public class FavoritosAdaptador extends BaseAdapter {
                 // Remove o favorito ao clicar no botão
                 Favoritos favorito = favoritos.get(position);
                 Singleton.getInstance(context).removerFavoritoAPI(context, favorito.getIdProduto());
-                Singleton.getInstance(context).getAllFavoritosAPI(context);
+                favoritos.remove(position);
+                notifyDataSetChanged();
             }
         });
         return view;
