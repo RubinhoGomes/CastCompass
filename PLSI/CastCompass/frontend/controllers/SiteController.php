@@ -220,13 +220,51 @@ class SiteController extends Controller
     {
         $produto = Produto::findOne($id);
 
+        $quantidade = 1;
 
         $imagens = $produto->getImagens()->all();
 
         return $this->render('detail', [
             'produto' => $produto,
             'imagens' => $imagens,
+            'quantidade' => $quantidade,
         ]);
+    }
+
+    public function actionAdicionar($id, $quantidade){
+ 
+      $produto = Produto::findOne($id);
+
+      $imagens = $produto->getImagens()->all();
+
+      return $this->render('detail', [
+        'produto' => $produto,
+        'imagens' => $imagens,
+        'quantidade' => ++$quantidade,
+      ]);
+
+    }
+ 
+    public function actionSubtrair($id, $quantidade){
+ 
+      $produto = Produto::findOne($id);
+
+      $imagens = $produto->getImagens()->all();
+
+      if($quantidade == 1) {
+        return $this->render('detail', [
+          'produto' => $produto,
+          'imagens' => $imagens,
+          'quantidade' => $quantidade,
+        ]);
+      }
+
+      return $this->render('detail', [
+        'produto' => $produto,
+        'imagens' => $imagens,
+        'quantidade' => --$quantidade,
+      ]);
+
     }
 
     /**
