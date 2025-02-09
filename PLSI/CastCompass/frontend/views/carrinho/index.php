@@ -11,12 +11,12 @@ use yii\grid\GridView;
 /** @var common\models\CarrinhoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Carrinho';
+$this->title = 'Carrinho de Compras';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="carrinho-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
 <div class="container-fluid">
     <div class="row px-xl-5">

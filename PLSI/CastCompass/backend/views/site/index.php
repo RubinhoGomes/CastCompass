@@ -7,6 +7,7 @@ use common\models\Produto;
 use common\models\Iva;
 use common\models\Metodopagamento;
 use common\models\Metodoexpedicao;
+use common\models\Fatura;
 
 ?>
 <div class="container-fluid">
@@ -18,7 +19,7 @@ use common\models\Metodoexpedicao;
                 'text' => 'Perfis',
                 'icon' => 'fas fa-user',
                 'theme' => 'success',
-                'linkText' => 'More Info',
+                'linkText' => 'Mais Informações',
                 'linkUrl' => ['/user/index'],
             ]) ?>
             <?php \hail812\adminlte\widgets\SmallBox::end() ?>
@@ -27,14 +28,14 @@ use common\models\Metodoexpedicao;
                 'text' => 'Categorias',
                 'icon' => 'fa fa-list',
                 'theme'=> 'red',
-                'linkText' => 'More Info',
+                'linkText' => 'Mais Informações',
                 'linkUrl' => ['/categoria/index'],
             ]) ?>
             <?= \hail812\adminlte\widgets\SmallBox::widget([
                 'title' => $numMetodopagamentos = Metodopagamento::find()->count(),
                 'text' => 'Metodos de pagamento',
                 'icon' => 'fa fa-credit-card',
-                'linkText' => 'More Info',
+                'linkText' => 'Mais Informações',
                 'linkUrl' => ['/metodopagamento/index'],
             ]) ?>
         </div>
@@ -45,7 +46,7 @@ use common\models\Metodoexpedicao;
                 'text' => 'Produtos',
                 'icon' => 'fa fa-store',
                 'theme' => 'success',
-                'linkText' => 'More Info',
+                'linkText' => 'Mais Informações',
                 'linkUrl' => ['/produto/index'],
             ]) ?>
             <?php \hail812\adminlte\widgets\SmallBox::end() ?>
@@ -54,18 +55,44 @@ use common\models\Metodoexpedicao;
                 'text' => 'Ivas',
                 'theme'=> 'red',
                 'icon' => 'fa fa-money-bill',
-                'linkText' => 'More Info',
+                'linkText' => 'Mais Informações',
                 'linkUrl' => ['/iva/index'],
             ]) ?>
             <?= \hail812\adminlte\widgets\SmallBox::widget([
                 'title' => $numMetodoexpedicao = Metodoexpedicao::find()->count(),
                 'text' => 'Metodos de Entrega',
                 'icon' => 'fa fa-truck',
-                'linkText' => 'More Info',
+                'linkText' => 'Mais Informações',
                 'linkUrl' => ['/metodoexpedicao/index'],
             ]) ?>
         </div>
 
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <?php $smallBox = \hail812\adminlte\widgets\SmallBox::begin([
+                'title' => $numFaturas = Fatura::find()->count(),
+                'text' => 'Faturas',
+                'icon' => 'fas fa-file-invoice-dollar',
+                'theme' => 'success',
+                'linkText' => 'Mais Informações',
+                'linkUrl' => ['/fatura/index'],
+            ]) ?>
+            <?php \hail812\adminlte\widgets\SmallBox::end() ?>
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+              'title' => $numFaturasProcessadas = Fatura::find()->where(['estado' => 'Expedido'])->count(),
+                'text' => 'Faturas Expedidas',
+                'icon' => 'fa fa-file-invoice-dollar',
+                'theme'=> 'red',
+                'linkText' => 'Mais Informações',
+                'linkUrl' => ['/fatura/index'],
+            ]) ?>
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => $numFaturasEntregues = Fatura::find()->where(['estado' => 'Entregue'])->count(),
+                'text' => 'Faturas Entregues',
+                'icon' => 'fa fa-credit-card',
+                'linkText' => 'Mais Informações',
+                'linkUrl' => ['/fatura/index'],
+            ]) ?>
+        </div>
     </div>
 
 
