@@ -100,12 +100,14 @@ return [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/metodopagamento',
                     'extraPatterns' => [
                         'GET count' => 'count',
+                        'GET metodospagamento' => 'metodospagamento',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/metodoexpedicao',
                     'extraPatterns' => [
                         'GET count' => 'count',
+                        'GET metodosexpedicao' => 'metodosexpedicao',
                     ],
                 ],
                 [
@@ -145,6 +147,7 @@ return [
                     'extraPatterns' => [
                         'GET count' => 'count',
                         'GET faturascliente' => 'faturascliente',
+                        'POST comprafinal' => 'comprafinal',
                     ],
                 ],
             ],

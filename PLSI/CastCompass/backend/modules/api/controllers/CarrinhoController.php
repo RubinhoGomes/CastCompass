@@ -41,6 +41,10 @@ class CarrinhoController extends ActiveController
         return ['count' => count($recs)];
     }
 
+    public function actionCarregarcomprafinal() {
+
+    }
+
     public function actionProdutos($id) {
         $carrinho = Carrinho::findOne(['profileID' => $id]);
 

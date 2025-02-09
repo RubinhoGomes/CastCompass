@@ -2,6 +2,7 @@
 
 namespace backend\modules\api\controllers;
 
+use common\models\Metodopagamento;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\filters\ContentNegotiator;
@@ -20,10 +21,6 @@ class MetodopagamentoController extends ActiveController
     public function behaviors() {
         $behaviors = parent::behaviors();
 
-        $behaviors['authenticator'] = [
-            'class' => CustomAuth::className(),
-        ];
-
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::class,
             'formats' => [
@@ -38,5 +35,12 @@ class MetodopagamentoController extends ActiveController
         $metodosmodel = new $this->modelClass;
         $recs = $metodosmodel::find()->all();
         return ['count' => count($recs)];
+    }
+
+    public function actionMetodospagamento()
+    {
+        $metodopagamento = Metodopagamento::find()->all();
+
+        return $metodopagamento;
     }
 }

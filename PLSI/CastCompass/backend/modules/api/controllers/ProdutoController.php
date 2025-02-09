@@ -20,7 +20,6 @@ class ProdutoController extends ActiveController
     public function behaviors() {
         $behaviors = parent::behaviors();
 
-
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::class,
             'formats' => [
