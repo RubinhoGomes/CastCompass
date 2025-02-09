@@ -17,4 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h2><?= Html::encode($this->title) ?></h2>
 
     <p>Na nossa loja de campismo, a aventura está sempre à tua espera! Oferecemos uma vasta seleção de tendas, equipamentos e acessórios para todas as tuas aventuras ao ar livre. Seja para iniciantes ou exploradores experientes, garantimos produtos de alta qualidade e atendimento especializado para que possas aproveitar ao máximo a natureza com segurança e conforto.</p>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 </div>
