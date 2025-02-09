@@ -154,4 +154,53 @@ class ItemsCarrinhoController extends \yii\web\Controller
         return $carrinho->save();
     }
 
+    public function actionAdicionarProduto($idProduto, $quantidade){
+
+      $userId = Yii::$app->user->id;
+
+      $profileId = Profile::findOne(['userID' => $userId])->id;
+
+      $carrinho = Carrinho::findOne(['profileID' => $profileId]);
+
+      if($carrinho == NULL){
+        if($this->createCarrinho($userId)){
+          $carrinho = Carrinho::findOne(['profileID' => $profileId]);
+        }
+      }
+      
+      $produto = Produto::findOne($idProduto);
+  
+      if($this->checkExists($idProduto, $carrinho)){
+        $item = Itemscarrinho::findOne(['produtoID' => $idProduto, 'carrinhoID' => $carrinho->id]);
+        $item->quantidade += $quantidade;
+        $item->valorTotal += $produto->preco * $quantidade;
+        $item->save();
+  
+        $carrinho->valorTotal += $produto->preco * $quantidade;
+        $carrinho->quantidade += $quantidade;
+        $carrinho->save();
+  
+        Yii::$app->session->setFlash('success', 'Produto ja existe no carrinho, foi adicionado mais ' . $quantidade . ' quantidade(s) ao produto com sucesso!');
+  
+      } else {
+        $item = new Itemscarrinho();
+        $item->produtoID = $idProduto;
+        $item->carrinhoID = $carrinho->id;
+        $item->nome = $produto->nome;
+        $item->quantidade = $quantidade;
+        $item->valorTotal = $produto->preco * $quantidade;
+        $item->save();
+  
+        $carrinho->valorTotal += $produto->preco * $quantidade;
+        $carrinho->quantidade += $quantidade;
+        $carrinho->save();
+  
+        Yii::$app->session->setFlash('success', 'Produto adicionado ao carrinho com sucesso!');
+  
+      }
+
+      return $this->redirect(['site/shop']);
+
+    }
+
 }
