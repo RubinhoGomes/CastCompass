@@ -78,10 +78,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/white"
-        android:drawableStart="@drawable/ic_favorito"
+        android:drawableEnd="@drawable/ic_favorito"
         android:padding="12dp"
         android:text="@string/adicionar_aos_favoritos"
-        android:textColor="@android:color/black" />
+        android:background="@color/green"
+        android:textColor="@android:color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdicionarCarrinho"

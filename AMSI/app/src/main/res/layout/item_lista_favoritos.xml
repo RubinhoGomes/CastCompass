@@ -5,26 +5,31 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/imgCapa"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="0.3"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_weight="0.7"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingEnd="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -37,13 +42,17 @@
                 android:id="@+id/tvNome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7" />
+                android:layout_weight="0.7"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -56,13 +65,15 @@
                 android:id="@+id/tvMarca"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7" />
+                android:layout_weight="0.7"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -75,18 +86,15 @@
                 android:id="@+id/tvPreco"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7" />
+                android:layout_weight="0.7"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -99,15 +107,19 @@
                 android:id="@+id/tvCategoria"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7" />
+                android:layout_weight="0.7"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnRemoverFav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_favorito"
+            android:drawableEnd="@drawable/ic_nao_favorito"
             android:onClick="onClickRemoverFav"
-            android:text="Remover dos favoritos" />
+            android:text="@string/remover_dos_favoritos"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
     </LinearLayout>
+
 </LinearLayout>

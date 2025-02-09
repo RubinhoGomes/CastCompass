@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ListaCarrinhoFragment">
 
-
     <ListView
         android:id="@+id/lvProdutos"
         android:layout_width="match_parent"
-        android:layout_height="490dp" />
+        android:layout_height="465dp"
+        android:layout_gravity="top"
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,15 +18,27 @@
         android:layout_gravity="bottom|start"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:background="#7cb360"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnComprar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/comprar" />
+            android:layout_marginTop="8dp"
+            android:text="@string/comprar"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

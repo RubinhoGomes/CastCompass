@@ -32,7 +32,6 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
 
         tvNome = findViewById(R.id.tvNome);
         tvPreco = findViewById(R.id.tvPreco);
-        tvStock = findViewById(R.id.tvStock);
         tvDescricao = findViewById(R.id.tvDescricao);
         imgCapa = findViewById(R.id.ivImage);
 
@@ -71,7 +70,6 @@ public class DetalhesProdutosActivity extends AppCompatActivity implements Produ
 
         tvNome.setText(produto.getNome());
         tvPreco.setText(produto.getPreco() + "€");
-        tvStock.setText(produto.getStock() + " unidades");
         tvDescricao.setText(produto.getDescricao());
         Glide.with(this)
                 .load(produto.getImagem())
