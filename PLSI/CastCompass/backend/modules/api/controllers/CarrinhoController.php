@@ -69,8 +69,9 @@ class CarrinhoController extends ActiveController
         return $result;
     }
 
-    public function actionAddproduto($profileID, $produtoID, $quantidade) {
+    public function actionAddproduto($profileID, $produtoID) {
         $carrinho = Carrinho::findOne(['profileID' => $profileID]);
+        $quantidade = 1;
 
         if (!$carrinho) {
             return ['error' => 'Carrinho não encontrado.'];
