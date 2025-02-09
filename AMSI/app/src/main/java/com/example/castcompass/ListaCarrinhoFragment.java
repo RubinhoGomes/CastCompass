@@ -1,6 +1,7 @@
 package com.example.castcompass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -56,7 +57,8 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhoListener 
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Singleton.getInstance(getContext()).comprarCarrinhoAPI(getContext());
+                Intent intent = new Intent(getContext(), CompraActivity.class);
+                startActivity(intent);
             }
         });
 

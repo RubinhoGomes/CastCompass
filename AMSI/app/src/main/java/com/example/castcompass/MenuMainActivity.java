@@ -52,9 +52,14 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         toggle.syncState();
         drawer.addDrawerListener(toggle);
 
-        carregarCabecalho(); //TODO:criar método
+        carregarCabecalho();
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager = getSupportFragmentManager();
+
+        if (getIntent().getBooleanExtra("produtos", false)) {
+            carregarFragmentoInicial();
+        }
+
         carregarFragmentoInicial();
     }
 

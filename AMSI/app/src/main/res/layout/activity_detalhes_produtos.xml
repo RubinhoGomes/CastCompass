@@ -5,25 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".DetalhesProdutosActivity">
-
-
-    <!-- Product Image -->
-
 
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="0.4"
+        android:scaleType="centerCrop"
         android:src="@drawable/logo" />
-
-    <!-- Product Name -->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="0.6">
 
         <LinearLayout
@@ -35,36 +34,27 @@
                 android:id="@+id/tvNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_marginBottom="8dp"
                 android:text="@string/product_name"
-                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvStock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:text="@string/stock_quantity_0"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvPreco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
+                android:layout_marginBottom="16dp"
                 android:text="@string/price_0_00"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/labelDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
+                android:layout_marginBottom="8dp"
                 android:text="@string/descri_o"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -72,11 +62,11 @@
                 android:id="@+id/tvDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:lineSpacingExtra="4dp"
                 android:scrollbars="vertical"
                 android:text="@string/description"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>
@@ -85,13 +75,17 @@
         android:id="@+id/btnAdicionarFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/adicionar_aos_favoritos"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/white"
         android:drawableStart="@drawable/ic_favorito"
-        android:layout_marginTop="0dp"/>
+        android:padding="12dp"
+        android:text="@string/adicionar_aos_favoritos"
+        android:textColor="@android:color/black" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdicionarCarrinho"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"

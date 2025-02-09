@@ -6,67 +6,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white"
     tools:context=".CompraActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/m_todo_de_expedi_o"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp" />
 
         <Spinner
             android:id="@+id/spMetodoExpedicao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown" />
+            android:background="@android:drawable/btn_dropdown"
+            android:padding="8dp"
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/m_todo_de_pagamento"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp" />
 
         <Spinner
             android:id="@+id/spMetodoPagamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown" />
+            android:background="@android:drawable/btn_dropdown"
+            android:padding="8dp"
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
 
         <TextView
             android:id="@+id/tvTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:text="@string/total_a_pagar"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnCompraFinal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="@string/finalizar_compra" />
+        android:text="@string/finalizar_compra"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="14dp"
+        android:layout_gravity="center" />
 
 </LinearLayout>

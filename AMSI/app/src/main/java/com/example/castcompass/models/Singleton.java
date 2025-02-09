@@ -11,14 +11,18 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 // Imports from CastCompass
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.castcompass.listeners.CarrinhoFinalListener;
 import com.example.castcompass.listeners.CarrinhoListener;
 import com.example.castcompass.listeners.FaturasListener;
 import com.example.castcompass.listeners.FavoritosListener;
 import com.example.castcompass.listeners.LoginListener;
+import com.example.castcompass.listeners.MetodoExpedicaoListener;
+import com.example.castcompass.listeners.MetodoPagamentoListener;
 import com.example.castcompass.listeners.ProdutoListener;
 import com.example.castcompass.listeners.ProdutosListener;
 import com.example.castcompass.listeners.UtilizadorListener;
@@ -41,7 +45,9 @@ import java.util.ArrayList;
 
 // For now I know this is the imports to use the HashMap and Map, and of course ArrayList
 // I will need to check the import for the Volley
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Singleton {
@@ -54,7 +60,7 @@ public class Singleton {
 
     private ArrayList<Favoritos> favoritos;
     private ArrayList<Faturas> faturas;
-    private ArrayList<CarrinhoItems> carrinho;
+    public ArrayList<CarrinhoItems> carrinho;
 
     public FavoritoBDHelper favoritoBD = null;
 
@@ -64,6 +70,9 @@ public class Singleton {
     private FavoritosListener favoritosListener;
     private CarrinhoListener carrinhoListener;
     private FaturasListener faturasListener;
+    private CarrinhoFinalListener carrinhoFinalListener;
+    private MetodoPagamentoListener metodoPagamentoListener;
+    private MetodoExpedicaoListener metodoExpedicaoListener;
 
     public float total = 0;
 
@@ -80,7 +89,10 @@ public class Singleton {
     private static String urlApiFavoritosAdicionar = "";
     private static String urlApiCarrinho = "";
     private static String urlApiAdicionarItemCarrinho = "";
+    private static String urlApiCompraFinal = "";
     private static String urlApiApagarItemCarrinho = "";
+    private static String urlApiMetodosExpedicao = "";
+    private static String urlApiMetodosPagamento = "";
 
     private ArrayList<Produto> listaProdutos;
 
@@ -114,7 +126,10 @@ public class Singleton {
         urlApiFavoritosAdicionar = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/adicionar";
         urlApiCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/carrinho";
         urlApiAdicionarItemCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/addproduto";
+        urlApiCompraFinal = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/fatura/comprafinal";
         urlApiApagarItemCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/removerproduto";
+        urlApiMetodosExpedicao = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/metodoexpedicao/metodosexpedicao";
+        urlApiMetodosPagamento = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/metodopagamento/metodospagamento";
     }
 
     // region LISTENERS
@@ -144,6 +159,18 @@ public class Singleton {
 
     public void setFaturasListener(FaturasListener faturasListener) {
         this.faturasListener = faturasListener;
+    }
+
+    public void setCarrinhoFinalListener(CarrinhoFinalListener carrinhoFinalListener) {
+        this.carrinhoFinalListener = carrinhoFinalListener;
+    }
+
+    public void setMetodoPagamentoListener(MetodoPagamentoListener metodoPagamentoListener) {
+        this.metodoPagamentoListener = metodoPagamentoListener;
+    }
+
+    public void setMetodoExpedicaoListener(MetodoExpedicaoListener metodoExpedicaoListener) {
+        this.metodoExpedicaoListener = metodoExpedicaoListener;
     }
     // endregion
 
@@ -490,6 +517,8 @@ public class Singleton {
                 try {
                     faturas = FaturasJsonParser.parserJsonFaturas(response);
 
+                    Collections.reverse(faturas);
+
                     if (faturasListener != null) {
                         faturasListener.onRefreshFaturas(faturas);
                     }
@@ -506,7 +535,6 @@ public class Singleton {
         });
         volleyQueue.add(reqSelect);
     }
-
     //endregion
 
     // region Carrinho
@@ -530,29 +558,6 @@ public class Singleton {
 
                 } catch (Exception e) {
                     Toast.makeText(context, "Não tem items no carrinho", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        volleyQueue.add(request);
-    }
-
-    public void comprarCarrinhoAPI(final Context context) {
-        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
-        int id = sp.getInt("idProfile", login.idProfile);
-        StringRequest request = new StringRequest(Request.Method.POST, urlApiCarrinho + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Toast.makeText(context, "Compra efetuada com sucesso", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Toast.makeText(context, "Erro ao comprar carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e("ERRO", "Erro: " + e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
@@ -603,6 +608,66 @@ public class Singleton {
 
                 } catch (Exception e) {
                     Toast.makeText(context, "Erro ao remover item do carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    public void getCarrinhoFinalAPI(final Context context) {
+        SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+        int id = sp.getInt("idProfile", login.idProfile);
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiCarrinho + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.d("DEBUG", "Resposta bruta da API: " + response);
+
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    int carrinhoID = jsonObject.getInt("id");
+                    String totalCarrinho = jsonObject.getString("valorTotal");
+
+                    SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putInt("carrinhoid", carrinhoID);
+                    editor.apply();
+
+                    // Notificar o listener que o carrinho foi carregado
+                    if (carrinhoFinalListener != null) {
+                        carrinhoFinalListener.onCarrinhoLoaded(totalCarrinho, carrinhoID);
+                    }
+
+                } catch (JSONException e) {
+                    Log.e("DEBUG", "Erro ao processar JSON: " + e.getMessage());
+                    Toast.makeText(context, "Erro ao carregar carrinho", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    public void comprarCarrinhoAPI(final Context context, final int carrinhoID, final int metodoExpedicaoID, final int metodoPagamentoID) {
+        StringRequest request = new StringRequest(Request.Method.POST, urlApiCompraFinal + "?carrinhoID=" + carrinhoID + "&metodoExpedicaoID="
+                + metodoExpedicaoID + "&metodoPagamentoID=" + metodoPagamentoID + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Toast.makeText(context, "Compra efetuada com sucesso", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao comprar carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.e("ERRO", "Erro: " + e.getMessage());
                 }
             }
@@ -617,11 +682,63 @@ public class Singleton {
     }
 
     public void getMetodosExpedicaoAPI(final Context context) {
+        JsonArrayRequest reqSelect = new JsonArrayRequest(Request.Method.GET, urlApiMetodosExpedicao, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    ArrayList<MetodoExpedicao> metodosExped = new ArrayList<>();
 
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        MetodoExpedicao metodoExpedicao = new MetodoExpedicao(jsonObject.getInt("id"), jsonObject.getString("nome"));
+                        metodosExped.add(metodoExpedicao);
+                    }
+
+                    if (metodoExpedicaoListener != null) {
+                        metodoExpedicaoListener.onMetodoExpedicaoCarregado(metodosExped);
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(context, "Erro ao carregar métodos de expedição: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro ao obter métodos de pagamento: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(reqSelect);
     }
 
     public void getMetodosPagamentoAPI(final Context context) {
+        JsonArrayRequest reqSelect = new JsonArrayRequest(Request.Method.GET, urlApiMetodosPagamento, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    ArrayList<MetodoPagamento> metodosPag = new ArrayList<>();
 
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        MetodoPagamento metodosPagamento = new MetodoPagamento(jsonObject.getInt("id"), jsonObject.getString("nome"), jsonObject.getString("tipo"));
+                        metodosPag.add(metodosPagamento);
+                    }
+
+                    if (metodoPagamentoListener != null) {
+                        metodoPagamentoListener.onMetodoPagamentoCarregado(metodosPag);
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(context, "Erro ao carregar métodos de pagamento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro ao obter métodos de pagamento: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(reqSelect);
     }
     // endregion
 }
