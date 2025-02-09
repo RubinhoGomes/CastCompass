@@ -70,7 +70,7 @@ use common\models\Fatura;
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <?php $smallBox = \hail812\adminlte\widgets\SmallBox::begin([
                 'title' => $numFaturas = Fatura::find()->count(),
-                'text' => 'Faturas',
+                'text' => 'Faturas Emitidas',
                 'icon' => 'fas fa-file-invoice-dollar',
                 'theme' => 'success',
                 'linkText' => 'Mais Informações',
@@ -88,7 +88,7 @@ use common\models\Fatura;
             <?= \hail812\adminlte\widgets\SmallBox::widget([
                 'title' => $numFaturasEntregues = Fatura::find()->where(['estado' => 'Entregue'])->count(),
                 'text' => 'Faturas Entregues',
-                'icon' => 'fa fa-credit-card',
+                'icon' => 'fa fa-truck-loading',
                 'linkText' => 'Mais Informações',
                 'linkUrl' => ['/fatura/index'],
             ]) ?>
