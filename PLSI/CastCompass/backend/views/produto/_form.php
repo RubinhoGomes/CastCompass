@@ -39,8 +39,9 @@ use common\models\Iva;
     <?= $form->field($model, 'ivaID')->dropDownList(\yii\helpers\ArrayHelper::map(Iva::find()->all(), 'id', 'valor'), ['prompt' => 'Selecione um IVA']) ?>
 
     <?= $form->field($imagem, 'imagens[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+ 
 
-    <div class="form-group">
+   <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 

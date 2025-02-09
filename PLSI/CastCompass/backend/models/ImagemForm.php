@@ -16,7 +16,8 @@ class ImagemForm extends Model
     public function rules()
     {
         return [
-            [['imagens'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 0, 'skipOnEmpty' => false],
+            [['imagens'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 0, 'skipOnEmpty' => false, 'on' => 'create'],
+            [['imagens'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 0, 'skipOnEmpty' => true, 'on' => 'update'],
         ];
     }
     

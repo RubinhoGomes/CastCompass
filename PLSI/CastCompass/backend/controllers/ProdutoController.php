@@ -11,6 +11,7 @@ use app\models\ProdutoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
+use yii\web\Exception;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
@@ -166,9 +167,15 @@ class ProdutoController extends Controller
     $imagem = new ImagemForm();
     $model->preco = $this->subIva($model->preco, $model->ivaID);
 
-    if ($this->request->isPost && $model->load($this->request->post()) && $model->save(false)) {
-      $this->uploadImage($model->id, $imagem);
-      return $this->redirect(['view', 'id' => $model->id]);
+    if ($this->request->isPost) {
+      if($model->load($this->request->post())) {
+          $model->save();
+          if($this->request->post('ImagemForm')){
+            $imagem->imagens = UploadedFile::getInstances($imagem, 'imagens');
+            $this->uploadImage($model->id, $imagem);
+        }
+       return $this->redirect(['view', 'id' => $model->id]);
+      }
     }
 
     return $this->render('update', [
@@ -187,7 +194,7 @@ class ProdutoController extends Controller
     $imagem = Imagem::findOne($id);
 
     if(!$imagem){
-      throw new Exception("Error Processing Request", 1);
+      throw new Exception('Image not found');
     }
  
     if($imagem->deleteImage()){
