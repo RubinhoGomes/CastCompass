@@ -49,7 +49,7 @@ class FaturaController extends Controller
         $model->save();
       }
        
-      return $this->redirect(['user/view', 'id' => $idUser]);
+      return $this->redirect(['fatura/index']);
     }
 
     /**

@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <label class="custom-control-label" for="price-5">100€ - 150€</label>
                         <span class="badge border font-weight-normal"><?= count($produtos) ?></span>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Aplciar Filtros</button>
+                    <button type="submit" class="btn btn-primary mt-3">Aplicar Filtros</button>
                 </form>
             </div>
             <!-- Price End -->
