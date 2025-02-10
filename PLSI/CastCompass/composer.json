@@ -26,7 +26,8 @@
         "yidas/yii2-fontawesome": "^5.0",
         "hail812/yii2-adminlte3": "~1.1",
         "php-webdriver/webdriver": "^1.15",
-        "codeception/module-db": "^3.1"
+        "codeception/module-db": "^3.1",
+        "miloschuman/yii2-highcharts-widget": "^11.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

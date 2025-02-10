@@ -156,7 +156,13 @@ class ItemsCarrinhoController extends \yii\web\Controller
 
     public function actionAdicionarProduto($idProduto, $quantidade){
 
+
       $userId = Yii::$app->user->id;
+
+      if($userId == NULL) {
+        Yii::$app->session->setFlash('error', 'Tens de estar logado para adicionar produtos ao carrinho!');
+        return $this->redirect(['site/login']);
+      }
 
       $profileId = Profile::findOne(['userID' => $userId])->id;
 

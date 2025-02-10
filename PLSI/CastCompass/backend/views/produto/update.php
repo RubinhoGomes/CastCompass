@@ -8,10 +8,10 @@ use common\models\Iva;
 /** @var yii\web\View $this */
 /** @var common\models\Produto $model */
 
-$this->title = 'Update Produto: ' . $model->nome;
+$this->title = 'Editar Produto: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Editar';
 ?>
 <div class="produto-update">
 
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = 'Update';
   <?= $form->field($imagem, 'imagens[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?> 
 
       <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
       </div>
 
     <?php ActiveForm::end(); ?>

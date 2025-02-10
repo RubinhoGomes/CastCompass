@@ -69,29 +69,22 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $fatura = Fatura::find()->all();
-  
-        $valores = $this->calculoProdutosTotais($fatura);
 
-        return $this->render('index', ['valores' => $valores]);
+        $calculoProdutosTotais[] = $this->calculoProdutosTotais($fatura);
+
+        return $this->render('index', ['calculoProdutosTotais' => $calculoProdutosTotais]);
     }
 
     public function calculoProdutosTotais($fatura){
-      $produtosTotais = array_fill(0, 12, 0);
-      $total = 0;
+        $produtosTotais = [];
         foreach($fatura as $f){
-            $linha = LinhaFatura::find()->where(['faturaID' => $f->id])->all();
-            foreach($linha as $l){
-              $total += $l->valor;
-            }
-            
-            if($total != null){
-              $produtosTotais[(int)Yii::$app->formatter->asDate($f->data, 'M') - 1] += round($total, 2);
-            }
+          $linha = LinhaFatura::find()->where(['faturaID' => $f->id])->all();
+          foreach($linha as $l){
+            $produtosTotais[] = $l->quantidade;
+          }
 
-            $total = 0;
         }
-
-      return $produtosTotais;
+        return $produtosTotais;
     }
 
     /**

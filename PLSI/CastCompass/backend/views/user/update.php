@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
 
-$this->title = 'Update User: ' . $user->username;
+$this->title = 'Editar: ' . $user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $user->username, 'url' => ['view', 'id' => $user->id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <?php /*= $form->field($user, 'password')->passwordInput()*/?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

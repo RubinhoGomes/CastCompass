@@ -8,6 +8,7 @@ use common\models\Iva;
 use common\models\Metodopagamento;
 use common\models\Metodoexpedicao;
 use common\models\Fatura;
+use miloschuman\highcharts\Highcharts;
 
 ?>
 <div class="container-fluid">
@@ -94,6 +95,21 @@ use common\models\Fatura;
             ]) ?>
         </div>
     </div>
+
+<?= Highcharts::widget([
+    'options' => [
+        'title' => ['text' => 'Valor Total Vendidos por Mês'],
+        'xAxis' => ['categories' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']],
+        'yAxis' => ['title' => ['text' => 'Valor Monetario']],
+        'series' => [
+            [
+                'name' => 'Valor Monetario',
+                'data' => $valores
+            ]
+        ]
+    ]
+]) ?>
+
 
 
 </div>
