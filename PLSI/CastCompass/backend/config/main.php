@@ -128,6 +128,8 @@ return [
                         'POST addproduto' => 'addproduto',
                         'DELETE removerproduto' => 'removerproduto',
                         'GET carrinho/<profileID:\d+>' => 'carrinho',
+                        'POST aumentarquantidade' => 'aumentarquantidade',
+                        'POST diminuirquantidade' => 'diminuirquantidade',
                     ],
                 ],
                 [

@@ -217,4 +217,32 @@ class CarrinhoController extends ActiveController
         $imagem = Imagem::findOne(['produtoID' => $produtoID]);
         return $imagem->filename;
     }
+
+    public function actionAumentarquantidade() {
+        $item = ItemsCarrinho::findOne(Yii::$app->request->post('id'));
+        $item->quantidade += 1;
+        $item->valorTotal += $item->produto->preco;
+
+        if ($item->save()) {
+            $carrinho = Carrinho::findOne($item->carrinhoID);
+            $this->atualizarCarrinho($carrinho);
+            return ['success' => 'Quantidade aumentada com sucesso.'];
+        }
+
+        return ['error' => 'Erro ao aumentar quantidade.'];
+    }
+
+    public function actionDiminuirquantidade() {
+        $item = ItemsCarrinho::findOne(Yii::$app->request->post('id'));
+        $item->quantidade -= 1;
+        $item->valorTotal -= $item->produto->preco;
+
+        if ($item->save()) {
+            $carrinho = Carrinho::findOne($item->carrinhoID);
+            $this->atualizarCarrinho($carrinho);
+            return ['success' => 'Quantidade diminuída com sucesso.'];
+        }
+
+        return ['error' => 'Erro ao diminuir quantidade.'];
+    }
 }

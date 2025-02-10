@@ -140,6 +140,5 @@ class FaturaController extends ActiveController
         }
 
         return $ivaTotal;
-
     }
 }
