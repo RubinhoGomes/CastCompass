@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Feb 06, 2025 at 12:11 PM
--- Server version: 8.0.35
--- PHP Version: 8.2.20
+-- Host: 127.0.0.1:3306
+-- Generation Time: Feb 10, 2025 at 07:20 PM
+-- Server version: 8.3.0
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,10 +29,13 @@ USE `castcompass`;
 -- Table structure for table `auth_assignment`
 --
 
-CREATE TABLE `auth_assignment` (
+DROP TABLE IF EXISTS `auth_assignment`;
+CREATE TABLE IF NOT EXISTS `auth_assignment` (
   `item_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `user_id` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `created_at` int DEFAULT NULL
+  `created_at` int DEFAULT NULL,
+  PRIMARY KEY (`item_name`,`user_id`),
+  KEY `idx-auth_assignment-user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
@@ -52,14 +55,18 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 -- Table structure for table `auth_item`
 --
 
-CREATE TABLE `auth_item` (
+DROP TABLE IF EXISTS `auth_item`;
+CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `type` smallint NOT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `rule_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `data` blob,
   `created_at` int DEFAULT NULL,
-  `updated_at` int DEFAULT NULL
+  `updated_at` int DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `rule_name` (`rule_name`),
+  KEY `idx-auth_item-type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
@@ -110,9 +117,12 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 -- Table structure for table `auth_item_child`
 --
 
-CREATE TABLE `auth_item_child` (
+DROP TABLE IF EXISTS `auth_item_child`;
+CREATE TABLE IF NOT EXISTS `auth_item_child` (
   `parent` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `child` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL
+  `child` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
@@ -163,11 +173,13 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 -- Table structure for table `auth_rule`
 --
 
-CREATE TABLE `auth_rule` (
+DROP TABLE IF EXISTS `auth_rule`;
+CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `data` blob,
   `created_at` int DEFAULT NULL,
-  `updated_at` int DEFAULT NULL
+  `updated_at` int DEFAULT NULL,
+  PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
@@ -176,12 +188,15 @@ CREATE TABLE `auth_rule` (
 -- Table structure for table `carrinho`
 --
 
-CREATE TABLE `carrinho` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `carrinho`;
+CREATE TABLE IF NOT EXISTS `carrinho` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `profileID` int NOT NULL,
   `valorTotal` decimal(10,2) DEFAULT NULL,
-  `quantidade` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `quantidade` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `profileID` (`profileID`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `carrinho`
@@ -191,8 +206,8 @@ INSERT INTO `carrinho` (`id`, `profileID`, `valorTotal`, `quantidade`) VALUES
 (2, 32, NULL, NULL),
 (3, 22, 115.61, 1),
 (5, 4, 0.00, 0),
-(14, 41, 0.00, 0),
-(15, 19, 115.61, 1),
+(14, 41, 115.61, 1),
+(15, 19, 578.05, 5),
 (16, 20, 115.61, 1);
 
 -- --------------------------------------------------------
@@ -201,11 +216,13 @@ INSERT INTO `carrinho` (`id`, `profileID`, `valorTotal`, `quantidade`) VALUES
 -- Table structure for table `categoria`
 --
 
-CREATE TABLE `categoria` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `categoria`;
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
-  `genero` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `genero` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `categoria`
@@ -226,16 +243,21 @@ INSERT INTO `categoria` (`id`, `nome`, `genero`) VALUES
 -- Table structure for table `fatura`
 --
 
-CREATE TABLE `fatura` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `fatura`;
+CREATE TABLE IF NOT EXISTS `fatura` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `carrinhoID` int NOT NULL,
   `valorTotal` decimal(10,2) NOT NULL,
   `ivaTotal` decimal(10,2) NOT NULL,
   `metodoExpedicaoID` int NOT NULL,
   `data` int NOT NULL,
   `metodoPagamentoID` int NOT NULL,
-  `estado` enum('Em Processamento','Expedido','Entregue','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Em Processamento'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `estado` enum('Em Processamento','Expedido','Entregue','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Em Processamento',
+  PRIMARY KEY (`id`),
+  KEY `carrinhoID` (`carrinhoID`),
+  KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
+  KEY `metodoPagamentoID` (`metodoPagamentoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `fatura`
@@ -252,7 +274,13 @@ INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoExped
 (38, 3, 115.61, 21.62, 1, 1738281600, 2, 'Em Processamento'),
 (39, 3, 115.61, 21.62, 1, 1738281600, 1, 'Em Processamento'),
 (40, 3, 115.61, 21.62, 1, 1738281600, 1, 'Em Processamento'),
-(41, 3, 115.61, 21.62, 1, 1738281600, 1, 'Em Processamento');
+(41, 3, 115.61, 21.62, 1, 1738281600, 1, 'Em Processamento'),
+(42, 14, 56.14, 10.50, 1, 1738800000, 2, 'Expedido'),
+(43, 14, 38.12, 7.13, 1, 1738800000, 2, 'Em Processamento'),
+(44, 14, 115.61, 21.62, 1, 1739059200, 1, 'Em Processamento'),
+(45, 14, 56.14, 10.50, 1, 1739059200, 2, 'Em Processamento'),
+(46, 14, 38.12, 7.13, 1, 1739059200, 1, 'Em Processamento'),
+(47, 14, 209.87, 39.24, 1, 1739145600, 1, 'Em Processamento');
 
 -- --------------------------------------------------------
 
@@ -260,11 +288,15 @@ INSERT INTO `fatura` (`id`, `carrinhoID`, `valorTotal`, `ivaTotal`, `metodoExped
 -- Table structure for table `favorito`
 --
 
-CREATE TABLE `favorito` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `favorito`;
+CREATE TABLE IF NOT EXISTS `favorito` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `profileID` int NOT NULL,
-  `produtoID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `produtoID` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `profileID` (`profileID`),
+  KEY `produtoID` (`produtoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `favorito`
@@ -272,8 +304,10 @@ CREATE TABLE `favorito` (
 
 INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
 (2, 19, 21),
-(3, 41, 21),
-(4, 4, 22);
+(4, 4, 22),
+(9, 41, 21),
+(10, 41, 23),
+(11, 41, 26);
 
 -- --------------------------------------------------------
 
@@ -281,11 +315,14 @@ INSERT INTO `favorito` (`id`, `profileID`, `produtoID`) VALUES
 -- Table structure for table `imagem`
 --
 
-CREATE TABLE `imagem` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `imagem`;
+CREATE TABLE IF NOT EXISTS `imagem` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) NOT NULL,
-  `produtoID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `produtoID` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `produtoID` (`produtoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `imagem`
@@ -306,23 +343,28 @@ INSERT INTO `imagem` (`id`, `filename`, `produtoID`) VALUES
 -- Table structure for table `itemscarrinho`
 --
 
-CREATE TABLE `itemscarrinho` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `itemscarrinho`;
+CREATE TABLE IF NOT EXISTS `itemscarrinho` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `carrinhoID` int NOT NULL,
   `produtoID` int NOT NULL,
   `nome` varchar(255) NOT NULL,
   `quantidade` int NOT NULL,
-  `valorTotal` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `valorTotal` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `carrinhoID` (`carrinhoID`),
+  KEY `produtoID` (`produtoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `itemscarrinho`
 --
 
 INSERT INTO `itemscarrinho` (`id`, `carrinhoID`, `produtoID`, `nome`, `quantidade`, `valorTotal`) VALUES
-(55, 15, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61),
+(55, 15, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 5, 578.05),
 (56, 16, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61),
-(72, 3, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61);
+(72, 3, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61),
+(121, 14, 21, 'Tenda de campismo cúpula para 4 pessoas impermeável azul', 1, 115.61);
 
 -- --------------------------------------------------------
 
@@ -330,11 +372,13 @@ INSERT INTO `itemscarrinho` (`id`, `carrinhoID`, `produtoID`, `nome`, `quantidad
 -- Table structure for table `iva`
 --
 
-CREATE TABLE `iva` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `iva`;
+CREATE TABLE IF NOT EXISTS `iva` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `valor` decimal(5,2) NOT NULL,
-  `label` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `label` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `iva`
@@ -350,15 +394,20 @@ INSERT INTO `iva` (`id`, `valor`, `label`) VALUES
 -- Table structure for table `linhafatura`
 --
 
-CREATE TABLE `linhafatura` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `linhafatura`;
+CREATE TABLE IF NOT EXISTS `linhafatura` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `faturaID` int NOT NULL,
   `ivaID` int NOT NULL,
   `quantidade` int NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `valorIva` decimal(10,2) NOT NULL,
-  `produtoID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `produtoID` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `faturaID` (`faturaID`),
+  KEY `ivaID` (`ivaID`),
+  KEY `produtoID` (`produtoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `linhafatura`
@@ -379,7 +428,15 @@ INSERT INTO `linhafatura` (`id`, `faturaID`, `ivaID`, `quantidade`, `valor`, `va
 (24, 38, 1, 1, 115.61, 21.62, 21),
 (25, 39, 1, 1, 115.61, 21.62, 21),
 (26, 40, 1, 1, 115.61, 21.62, 21),
-(27, 41, 1, 1, 115.61, 21.62, 21);
+(27, 41, 1, 1, 115.61, 21.62, 21),
+(28, 42, 1, 1, 56.14, 10.50, 22),
+(29, 43, 1, 1, 38.12, 7.13, 23),
+(30, 44, 1, 1, 115.61, 21.62, 21),
+(31, 45, 1, 1, 56.14, 10.50, 22),
+(32, 46, 1, 1, 38.12, 7.13, 23),
+(33, 47, 1, 1, 115.61, 21.62, 21),
+(34, 47, 1, 1, 56.14, 10.50, 22),
+(35, 47, 1, 1, 38.12, 7.13, 23);
 
 -- --------------------------------------------------------
 
@@ -387,10 +444,12 @@ INSERT INTO `linhafatura` (`id`, `faturaID`, `ivaID`, `quantidade`, `valor`, `va
 -- Table structure for table `metodoexpedicao`
 --
 
-CREATE TABLE `metodoexpedicao` (
-  `id` int NOT NULL,
-  `nome` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `metodoexpedicao`;
+CREATE TABLE IF NOT EXISTS `metodoexpedicao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `metodoexpedicao`
@@ -405,11 +464,13 @@ INSERT INTO `metodoexpedicao` (`id`, `nome`) VALUES
 -- Table structure for table `metodopagamento`
 --
 
-CREATE TABLE `metodopagamento` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `metodopagamento`;
+CREATE TABLE IF NOT EXISTS `metodopagamento` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
-  `tipo` enum('Cartao','Telemovel','Email','') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `tipo` enum('Cartao','Telemovel','Email','') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `metodopagamento`
@@ -425,16 +486,20 @@ INSERT INTO `metodopagamento` (`id`, `nome`, `tipo`) VALUES
 -- Table structure for table `produto`
 --
 
-CREATE TABLE `produto` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `produto`;
+CREATE TABLE IF NOT EXISTS `produto` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `marca` varchar(255) NOT NULL,
   `preco` decimal(10,2) NOT NULL,
   `stock` int NOT NULL,
   `descricao` text NOT NULL,
   `categoriaID` int NOT NULL,
-  `ivaID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ivaID` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `categoriaID` (`categoriaID`),
+  KEY `ivaID` (`ivaID`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `produto`
@@ -455,16 +520,19 @@ INSERT INTO `produto` (`id`, `nome`, `marca`, `preco`, `stock`, `descricao`, `ca
 -- Table structure for table `profile`
 --
 
-CREATE TABLE `profile` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `profile`;
+CREATE TABLE IF NOT EXISTS `profile` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
   `nif` varchar(50) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `dtaNascimento` date NOT NULL,
   `genero` varchar(50) NOT NULL,
   `telemovel` varchar(20) NOT NULL,
-  `morada` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `morada` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userID` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `profile`
@@ -489,8 +557,9 @@ INSERT INTO `profile` (`id`, `userID`, `nif`, `nome`, `dtaNascimento`, `genero`,
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `auth_key` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `password_hash` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -499,8 +568,12 @@ CREATE TABLE `user` (
   `status` smallint NOT NULL DEFAULT '10',
   `created_at` int NOT NULL,
   `updated_at` int NOT NULL,
-  `verification_token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `verification_token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `password_reset_token` (`password_reset_token`)
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `user`
@@ -518,216 +591,6 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (58, 'TesteCarrinho', 'RI67ZlEShy3xsUnOjWygxWN-MOJQo7Si', '$2y$13$/bysTsjPh5uFp7H5B8mngen5IgN1Rl7Ozd8S7Je3XJIql/z44X0zm', NULL, 'testeCarrinho@teste.com', 10, 1734709117, 1734709117, 'kHpP7U6YvGUZIXXwE4LwDa-FweoGeKJq_1734709117'),
 (63, 'TesteCarrinho2', 'B9i393yLMh3y3VkOEm6bXPlWtaac7wmB', '$2y$13$gUXNvOCECaij4gP1OMi/te1owzf/hvFGBTR3e8J3POLAgHKSFnN0K', NULL, 'testecarrinho@hotmail.com', 10, 1734809462, 1734809462, 'nkAYsosM6DBzCAkpEBq21Htgra92q9FE_1734809462'),
 (72, 'ze', 'R_XJGzcf_y80bsY4lmN7t26YNr06H3KX', '$2y$13$B6/dvGZGB2trA/2UHuJS.umYiihQKuNK.dCOmeDBIWBsmMDHj8ksu', NULL, 'ze@gmail.com', 10, 1736370179, 1736370179, '-2nWbHDvWnwHlyWvdFSnB_T8iU8pp8Aq_1736370179');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `auth_assignment`
---
-ALTER TABLE `auth_assignment`
-  ADD PRIMARY KEY (`item_name`,`user_id`),
-  ADD KEY `idx-auth_assignment-user_id` (`user_id`);
-
---
--- Indexes for table `auth_item`
---
-ALTER TABLE `auth_item`
-  ADD PRIMARY KEY (`name`),
-  ADD KEY `rule_name` (`rule_name`),
-  ADD KEY `idx-auth_item-type` (`type`);
-
---
--- Indexes for table `auth_item_child`
---
-ALTER TABLE `auth_item_child`
-  ADD PRIMARY KEY (`parent`,`child`),
-  ADD KEY `child` (`child`);
-
---
--- Indexes for table `auth_rule`
---
-ALTER TABLE `auth_rule`
-  ADD PRIMARY KEY (`name`);
-
---
--- Indexes for table `carrinho`
---
-ALTER TABLE `carrinho`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `profileID` (`profileID`);
-
---
--- Indexes for table `categoria`
---
-ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fatura`
---
-ALTER TABLE `fatura`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `carrinhoID` (`carrinhoID`),
-  ADD KEY `metodoExpedicaoID` (`metodoExpedicaoID`),
-  ADD KEY `metodoPagamentoID` (`metodoPagamentoID`);
-
---
--- Indexes for table `favorito`
---
-ALTER TABLE `favorito`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `profileID` (`profileID`),
-  ADD KEY `produtoID` (`produtoID`);
-
---
--- Indexes for table `imagem`
---
-ALTER TABLE `imagem`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `produtoID` (`produtoID`);
-
---
--- Indexes for table `itemscarrinho`
---
-ALTER TABLE `itemscarrinho`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `carrinhoID` (`carrinhoID`),
-  ADD KEY `produtoID` (`produtoID`);
-
---
--- Indexes for table `iva`
---
-ALTER TABLE `iva`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `linhafatura`
---
-ALTER TABLE `linhafatura`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `faturaID` (`faturaID`),
-  ADD KEY `ivaID` (`ivaID`),
-  ADD KEY `produtoID` (`produtoID`);
-
---
--- Indexes for table `metodoexpedicao`
---
-ALTER TABLE `metodoexpedicao`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `metodopagamento`
---
-ALTER TABLE `metodopagamento`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `produto`
---
-ALTER TABLE `produto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `categoriaID` (`categoriaID`),
-  ADD KEY `ivaID` (`ivaID`);
-
---
--- Indexes for table `profile`
---
-ALTER TABLE `profile`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `userID` (`userID`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `carrinho`
---
-ALTER TABLE `carrinho`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `fatura`
---
-ALTER TABLE `fatura`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- AUTO_INCREMENT for table `favorito`
---
-ALTER TABLE `favorito`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `imagem`
---
-ALTER TABLE `imagem`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `itemscarrinho`
---
-ALTER TABLE `itemscarrinho`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
-
---
--- AUTO_INCREMENT for table `iva`
---
-ALTER TABLE `iva`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `linhafatura`
---
-ALTER TABLE `linhafatura`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `metodoexpedicao`
---
-ALTER TABLE `metodoexpedicao`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `metodopagamento`
---
-ALTER TABLE `metodopagamento`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `produto`
---
-ALTER TABLE `produto`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- AUTO_INCREMENT for table `profile`
---
-ALTER TABLE `profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- Constraints for dumped tables
