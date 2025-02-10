@@ -89,6 +89,8 @@ public class Singleton {
     private static String urlApiFavoritosAdicionar = "";
     private static String urlApiCarrinho = "";
     private static String urlApiAdicionarItemCarrinho = "";
+    private static String urlApiAumentarQuantidade = "";
+    private static String urlApiDiminuirQuantidade = "";
     private static String urlApiCompraFinal = "";
     private static String urlApiApagarItemCarrinho = "";
     private static String urlApiMetodosExpedicao = "";
@@ -112,7 +114,7 @@ public class Singleton {
         listaProdutos = new ArrayList<>();
     }
 
-    // MUDAR IP
+    // region IP
     public void MudarIP(String ip) {
         urlApiLogin = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/login/login";
         urlApiProdutos = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/produtos/all";
@@ -126,11 +128,14 @@ public class Singleton {
         urlApiFavoritosAdicionar = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/favoritos/adicionar";
         urlApiCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/carrinho";
         urlApiAdicionarItemCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/addproduto";
+        urlApiAumentarQuantidade = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/aumentarquantidade";
+        urlApiDiminuirQuantidade = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/diminuirquantidade";
         urlApiCompraFinal = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/fatura/comprafinal";
         urlApiApagarItemCarrinho = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/carrinho/removerproduto";
         urlApiMetodosExpedicao = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/metodoexpedicao/metodosexpedicao";
         urlApiMetodosPagamento = "http://" + ip + "/CastCompass/PLSI/CastCompass/backend/web/api/metodopagamento/metodospagamento";
     }
+    // endregion
 
     // region LISTENERS
     public void setLoginListener(LoginListener loginListener) {
@@ -174,7 +179,7 @@ public class Singleton {
     }
     // endregion
 
-    // API
+    //region API
 
     // region Login
     public void loginAPI(final String username, final String password, final Context context) {
@@ -620,6 +625,48 @@ public class Singleton {
         volleyQueue.add(request);
     }
 
+    public void aumentarQuantidadeAPI(final Context context, final int id) {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiAumentarQuantidade + "?id=" + id + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Toast.makeText(context, "Quantidade adicionada", Toast.LENGTH_SHORT).show();
+                    getCarrinhoAPI(context);
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao aumentar quantidade do item do carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
+    public void diminuirQuantidadeAPI(final Context context, final int id) {
+        StringRequest request = new StringRequest(Request.Method.GET, urlApiDiminuirQuantidade + "?id=" + id + "&token=" + login.token, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Toast.makeText(context, "Quantidade diminuida", Toast.LENGTH_SHORT).show();
+                    getCarrinhoAPI(context);
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro ao diminuir quantidade do item do carrinho: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro na API: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volleyQueue.add(request);
+    }
+
     public void getCarrinhoFinalAPI(final Context context) {
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
@@ -740,5 +787,6 @@ public class Singleton {
 
         volleyQueue.add(reqSelect);
     }
+    // endregion
     // endregion
 }

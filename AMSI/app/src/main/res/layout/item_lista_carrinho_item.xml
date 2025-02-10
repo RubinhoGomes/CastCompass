@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/imgCapa"
@@ -15,7 +16,7 @@
         app:srcCompat="@drawable/logo" />
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_weight="0.7"
@@ -23,7 +24,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -40,11 +41,11 @@
                 android:layout_weight="0.7" />
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="0dp"
@@ -53,16 +54,33 @@
                 android:text="@string/quantidade"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/btnDiminuir"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="−"
+                android:backgroundTint="@color/green"
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/tvQuantidade"
-                android:layout_width="0dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7" />
+                android:gravity="center"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnAumentar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="+"
+                android:backgroundTint="@color/green"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -78,8 +96,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.7" />
         </LinearLayout>
-
-
     </LinearLayout>
 
     <Button

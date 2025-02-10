@@ -23,6 +23,7 @@ public class ListaCarrinhoitemsAdaptador extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<CarrinhoItems> carrinhoItems;
+    private float valorUnico;
 
 
     public ListaCarrinhoitemsAdaptador(Context context, ArrayList<CarrinhoItems> carrinhoItems) {
@@ -71,6 +72,27 @@ public class ListaCarrinhoitemsAdaptador extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
+
+        Button btnAumentar = view.findViewById(R.id.btnAumentar);
+        btnAumentar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Singleton.getInstance(context).aumentarQuantidadeAPI(context, carrinhoItems.get(position).getId());
+            }
+        });
+
+        Button btnDiminuir = view.findViewById(R.id.btnDiminuir);
+        btnDiminuir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (carrinhoItems.get(position).getQuantidade() > 1) {
+                    Singleton.getInstance(context).diminuirQuantidadeAPI(context, carrinhoItems.get(position).getId());
+                } else {
+                    showToast("A quantidade não pode ser menos que 1");
+                }
+            }
+        });
+
         return view;
     }
 
@@ -91,7 +113,7 @@ public class ListaCarrinhoitemsAdaptador extends BaseAdapter {
 
         public void update(CarrinhoItems carrinhoItems) {
             tvNome.setText(carrinhoItems.getNome());
-            tvPreco.setText(carrinhoItems.getValortotal() + "");
+            tvPreco.setText(carrinhoItems.getValortotal() + "€");
             tvQuantidade.setText(carrinhoItems.getQuantidade() + "");
             Glide.with(context).load(carrinhoItems.getImagem()).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivImagem);
         }

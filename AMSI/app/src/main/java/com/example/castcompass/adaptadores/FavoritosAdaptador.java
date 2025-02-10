@@ -90,7 +90,7 @@ public class FavoritosAdaptador extends BaseAdapter {
         public void update(Favoritos favoritos) {
             tvNome.setText(favoritos.getNomeProduto());
             tvMarca.setText(favoritos.getMarcaProduto());
-            tvPreco.setText(favoritos.getPrecoProduto() + "");
+            tvPreco.setText(favoritos.getPrecoProduto() + "€");
             tvCategoria.setText(favoritos.getCategoriaProduto());
             Glide.with(context)
                     .load(favoritos.getImagemProduto())

@@ -4,12 +4,12 @@ public class Favoritos {
 
     private int id, idProduto, idUtilizador;
     private String nomeProduto, marcaProduto, descricaoProduto, categoriaProduto, imagemProduto;
-    private float precoProduto;
+    private double precoProduto;
 
     public Favoritos() {
     }
 
-    public Favoritos(int id, int idProduto, int idUtilizador, String nomeProduto, String marcaProduto, String descricaoProduto, String categoriaProduto, String imagemProduto, float precoProduto) {
+    public Favoritos(int id, int idProduto, int idUtilizador, String nomeProduto, String marcaProduto, String descricaoProduto, String categoriaProduto, String imagemProduto, double precoProduto) {
         this.id = id;
         this.idProduto = idProduto;
         this.idUtilizador = idUtilizador;
@@ -85,7 +85,7 @@ public class Favoritos {
         this.imagemProduto = imagemProduto;
     }
 
-    public float getPrecoProduto() {
+    public double getPrecoProduto() {
         return precoProduto;
     }
 

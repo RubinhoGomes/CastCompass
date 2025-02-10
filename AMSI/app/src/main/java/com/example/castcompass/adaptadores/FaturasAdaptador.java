@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.castcompass.R;
 import com.example.castcompass.models.Faturas;
+import com.example.castcompass.models.Singleton;
 
 import java.util.ArrayList;
 
@@ -52,7 +55,9 @@ public class FaturasAdaptador extends BaseAdapter {
             viewHolder = new FaturasAdaptador.ViewHolderLista(view);
             view.setTag(viewHolder);
         }
+
         viewHolder.update(faturas.get(position));
+
         return view;
     }
 
@@ -73,12 +78,12 @@ public class FaturasAdaptador extends BaseAdapter {
             long timestamp = Long.parseLong(faturas.getData()) * 1000;
             String data = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date(timestamp));
 
-            tvValorTotal.setText(faturas.getValorTotal()+"");
-            tvIvaTotal.setText(faturas.getIvaTotal()+"");
+            tvValorTotal.setText(faturas.getValorTotal() + "€");
+            tvIvaTotal.setText(faturas.getIvaTotal() + "€");
             tvData.setText(data);
             tvMetodoExpedicao.setText(faturas.getMetodoExpedicaoID());
             tvMetodoPagamento.setText(faturas.getMetodoPagamentoID());
-            tvEstado.setText(faturas.getEstado()+"");
+            tvEstado.setText(faturas.getEstado() + "");
         }
     }
 }

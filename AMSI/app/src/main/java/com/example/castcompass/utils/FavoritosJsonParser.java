@@ -30,7 +30,7 @@ public class FavoritosJsonParser {
                 String descricao = favoritoJSON.getString("descricao");
                 String categoria = favoritoJSON.getString("categoria");
                 String imagem = favoritoJSON.getString("imagem");
-                int preco = favoritoJSON.getInt("preco");
+                double preco = favoritoJSON.getDouble("preco");
 
                 Favoritos favorito = new Favoritos(id, idProduto, idUtilizador, nome, marca, descricao, categoria, imagem, preco);
                 favoritos.add(favorito);
