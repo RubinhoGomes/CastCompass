@@ -68,7 +68,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         int menuconexao = 0;
 
         if (!util.isConnected(this)) {
-            Toast.makeText(this, "Sem ligação à internet!", Toast.LENGTH_SHORT).show();
             menuconexao = 1;
         }
 
@@ -108,10 +107,14 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             fragment = new ListaProdutosFragment();
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navFavoritos) {
-            if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
+            if (nav_tvUsername.getText().toString().equals("Sem Username!") && !util.isConnected(this)) {
+                Toast.makeText(this, "Para aceder offline à lista de favoritos deves primeiro fazer login", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, IpServidorActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (nav_tvUsername.getText().toString().equals("Sem Username!")) {
                 loginRedirect();
             } else {
-                // Singleton.getInstance(getApplicationContext()).favoritoBD.getAllFavoritos();
                 fragment = new ListaFavoritosFragment();
                 setTitle(item.getTitle());
             }
@@ -164,6 +167,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void loginRedirect() {
+        Toast.makeText(this, "Tem de fazer o login primeiro", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

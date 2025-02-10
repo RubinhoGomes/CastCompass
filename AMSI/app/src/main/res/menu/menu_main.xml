@@ -20,10 +20,6 @@
             android:id="@+id/navFaturas"
             android:title="@string/faturas" />
 
-        <item
-            android:id="@+id/navMensagens"
-            android:title="@string/mensagens" />
-
     </group>
 
     <item android:title="@string/gest_o">

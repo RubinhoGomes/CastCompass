@@ -3,6 +3,7 @@ package com.example.castcompass.models;
 // Imports from Android
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 // Imports from CastCompass
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.castcompass.IpServidorActivity;
 import com.example.castcompass.listeners.CarrinhoFinalListener;
 import com.example.castcompass.listeners.CarrinhoListener;
 import com.example.castcompass.listeners.FaturasListener;
@@ -47,7 +49,6 @@ import java.util.ArrayList;
 // I will need to check the import for the Volley
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Singleton {
@@ -183,63 +184,64 @@ public class Singleton {
 
     // region Login
     public void loginAPI(final String username, final String password, final Context context) {
-        if (!util.isConnected(context)) {
-            Toast.makeText(context, "Sem conexão à internet", Toast.LENGTH_SHORT).show();
-        } else {
+        if (verificaconexao(context)){
+            return;
+        }
+        StringRequest request = new StringRequest(Request.Method.POST, urlApiLogin, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
 
-            StringRequest request = new StringRequest(Request.Method.POST, urlApiLogin, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
+                    login = LoginJsonParser.loginJsonParser(response);
 
-                        login = LoginJsonParser.loginJsonParser(response);
+                    SharedPreferences.Editor editor = context.getSharedPreferences("DADOS_USER", Context.MODE_PRIVATE).edit();
+                    editor.putString("token", jsonObject.getString("token"));
+                    editor.putString("idProfile", jsonObject.getString("idProfile"));
+                    editor.putInt("id", jsonObject.getInt("id"));
+                    editor.apply();
 
-                        SharedPreferences.Editor editor = context.getSharedPreferences("DADOS_USER", Context.MODE_PRIVATE).edit();
-                        editor.putString("token", jsonObject.getString("token"));
-                        editor.putString("idProfile", jsonObject.getString("idProfile"));
-                        editor.putInt("id", jsonObject.getInt("id"));
-                        editor.apply();
-
-                        if (loginListener != null) {
-                            loginListener.onUpdateLogin(login);
-                        }
+                    if (loginListener != null) {
+                        loginListener.onUpdateLogin(login);
+                    }
 
 //                        Toast.makeText(context, "Login efetuado com sucesso com o " + login.username, Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(context, "Token: " + login.getToken(), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(context, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                } catch (Exception e) {
+                    Toast.makeText(context, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Erro: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<>();
-                    //params.put("username", username);
-                    //params.put("password", password);
-                    return params;
-                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                //params.put("username", username);
+                //params.put("password", password);
+                return params;
+            }
 
-                @Override
-                public Map<String, String> getHeaders() {
-                    Map<String, String> headers = new HashMap<>();
-                    String credentials = username + ":" + password;
-                    String auth = "Basic " + android.util.Base64.encodeToString(credentials.getBytes(), android.util.Base64.NO_WRAP);
-                    headers.put("Authorization", auth);
-                    return headers;
-                }
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                String credentials = username + ":" + password;
+                String auth = "Basic " + android.util.Base64.encodeToString(credentials.getBytes(), android.util.Base64.NO_WRAP);
+                headers.put("Authorization", auth);
+                return headers;
+            }
 
-            };
-            volleyQueue.add(request);
-        }
+        };
+        volleyQueue.add(request);
     }
 
     public void logoutAPI(final Context context) {
+        if (verificaconexao(context)){
+            return;
+        }
         SharedPreferences sp = context.getSharedPreferences("DADOS_USER", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
@@ -250,6 +252,9 @@ public class Singleton {
 
     // region Produtos
     public void getAllProdutosAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         StringRequest request = new StringRequest(Request.Method.GET, urlApiProdutos, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -279,6 +284,9 @@ public class Singleton {
     }
 
     public Produto getProdutoAPI(final Context context, int id) {
+        if (verificaconexao(context)) {
+            return null;
+        }
         Produto produto = null;
         StringRequest request = new StringRequest(Request.Method.GET, urlApiProduto + "?id=" + id, new Response.Listener<String>() {
             @Override
@@ -309,6 +317,9 @@ public class Singleton {
 
     // region Utilizador
     public void getUtilizadorAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         StringRequest request = new StringRequest(Request.Method.GET, urlApiUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -336,6 +347,9 @@ public class Singleton {
     }
 
     public void atualizarUtilizadorAPI(final Context context, final String nome, final String telemovel, final String morada, final String nif) {
+        if (verificaconexao(context)) {
+            return;
+        }
         StringRequest request = new StringRequest(Request.Method.POST, urlApiAtualizarUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -367,6 +381,9 @@ public class Singleton {
     }
 
     public void apagarUtilizadorAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         StringRequest request = new StringRequest(Request.Method.DELETE, urlApiApagarUtilizador + "?id=" + login.idProfile + "&token=" + login.getToken(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -445,7 +462,6 @@ public class Singleton {
                     //só para o modo offline
                     adicionarFavoritosBD(favoritos);
 
-                    //TODO: atualizar a vista
                     if (favoritosListener != null) {
                         favoritosListener.onRefreshFavoritos(favoritos);
                     }
@@ -463,6 +479,9 @@ public class Singleton {
     }
 
     public void adicionarFavoritoAPI(final Context context, final long produtoID) {
+        if (verificaconexao(context)) {
+            return;
+        }
         // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
@@ -485,6 +504,9 @@ public class Singleton {
     }
 
     public void removerFavoritoAPI(final Context context, final long produtoID) {
+        if (verificaconexao(context)) {
+            return;
+        }
         // ArrayList<Favoritos> favoritos = null;
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
@@ -492,7 +514,7 @@ public class Singleton {
             @Override
             public void onResponse(String response) {
                 try {
-                    removerFavoritoBD((int) produtoID);
+//                    removerFavoritoBD((int) produtoID);
                     Toast.makeText(context, "Produto removido com sucesso", Toast.LENGTH_SHORT).show();
 
                     if (favoritosListener != null) {
@@ -516,6 +538,9 @@ public class Singleton {
 
     //region Faturas
     public void getAllFaturasAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         JsonArrayRequest reqSelect = new JsonArrayRequest(Request.Method.GET, urlApiFaturas + "?id=" + login.idProfile + "&token=" + login.token, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -544,6 +569,9 @@ public class Singleton {
 
     // region Carrinho
     public void getCarrinhoAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
         StringRequest request = new StringRequest(Request.Method.GET, urlApiCarrinho + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
@@ -576,6 +604,9 @@ public class Singleton {
     }
 
     public void adicionarItemCarrinhoAPI(final Context context, final int idProduto) {
+        if (verificaconexao(context)) {
+            return;
+        }
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int idProfile = sp.getInt("idProfile", login.idProfile);
         StringRequest request = new StringRequest(Request.Method.POST, urlApiAdicionarItemCarrinho + "?profileID=" + idProfile + "&produtoID=" + idProduto + "&token=" + login.token, new Response.Listener<String>() {
@@ -599,6 +630,9 @@ public class Singleton {
     }
 
     public void eliminarItemCarrinhoAPI(final Context context, final int id) {
+        if (verificaconexao(context)) {
+            return;
+        }
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int idProfile = sp.getInt("idProfile", login.idProfile);
         StringRequest request = new StringRequest(Request.Method.DELETE, urlApiApagarItemCarrinho + "?profileID=" + idProfile + "&produtoID=" + id + "&token=" + login.token, new Response.Listener<String>() {
@@ -626,6 +660,9 @@ public class Singleton {
     }
 
     public void aumentarQuantidadeAPI(final Context context, final int id) {
+        if (verificaconexao(context)) {
+            return;
+        }
         StringRequest request = new StringRequest(Request.Method.GET, urlApiAumentarQuantidade + "?id=" + id + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -647,6 +684,9 @@ public class Singleton {
     }
 
     public void diminuirQuantidadeAPI(final Context context, final int id) {
+        if (verificaconexao(context)) {
+            return;
+        }
         StringRequest request = new StringRequest(Request.Method.GET, urlApiDiminuirQuantidade + "?id=" + id + "&token=" + login.token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -668,6 +708,9 @@ public class Singleton {
     }
 
     public void getCarrinhoFinalAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         SharedPreferences sp = context.getSharedPreferences("DADOSUSER", Context.MODE_PRIVATE);
         int id = sp.getInt("idProfile", login.idProfile);
         StringRequest request = new StringRequest(Request.Method.GET, urlApiCarrinho + "?profileID=" + id + "&token=" + login.token, new Response.Listener<String>() {
@@ -707,6 +750,9 @@ public class Singleton {
     }
 
     public void comprarCarrinhoAPI(final Context context, final int carrinhoID, final int metodoExpedicaoID, final int metodoPagamentoID) {
+        if (verificaconexao(context)) {
+            return;
+        }
         StringRequest request = new StringRequest(Request.Method.POST, urlApiCompraFinal + "?carrinhoID=" + carrinhoID + "&metodoExpedicaoID="
                 + metodoExpedicaoID + "&metodoPagamentoID=" + metodoPagamentoID + "&token=" + login.token, new Response.Listener<String>() {
             @Override
@@ -729,6 +775,9 @@ public class Singleton {
     }
 
     public void getMetodosExpedicaoAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         JsonArrayRequest reqSelect = new JsonArrayRequest(Request.Method.GET, urlApiMetodosExpedicao, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -759,6 +808,9 @@ public class Singleton {
     }
 
     public void getMetodosPagamentoAPI(final Context context) {
+        if (verificaconexao(context)) {
+            return;
+        }
         JsonArrayRequest reqSelect = new JsonArrayRequest(Request.Method.GET, urlApiMetodosPagamento, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -788,5 +840,17 @@ public class Singleton {
         volleyQueue.add(reqSelect);
     }
     // endregion
+    // endregion
+
+    // region Verifica conexao para segurança
+    public boolean verificaconexao(final Context context) {
+        if (!util.isConnected(context)) {
+            Toast.makeText(context, "Sem conexão à internet", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, IpServidorActivity.class);
+            context.startActivity(intent);
+            return true;
+        }
+        return false;
+    }
     // endregion
 }

@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (!util.isConnected(this)) {
             Intent intent = new Intent(this, MenuMainActivity.class);
             startActivity(intent);
