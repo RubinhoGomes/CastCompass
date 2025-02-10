@@ -58,19 +58,9 @@ $this->title = 'Home';
             <div class="col-lg-4">
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-1.jpg" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
-                        <h3 class="text-white mb-3">Oferta Especial</h3>
-                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
-                    </div>
                 </div>
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-2.jpg" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
-                        <h3 class="text-white mb-3">Oferta Especial</h3>
-                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -171,21 +161,11 @@ $this->title = 'Home';
             <div class="col-md-6">
                 <div class="product-offer mb-30" style="height: 300px;">
                 <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-1.jpg" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
-                        <h3 class="text-white mb-3">Oferta Especial</h3>
-                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
-                    </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="product-offer mb-30" style="height: 300px;">
                     <img class="img-fluid" src="<?= Yii::getAlias('@image') . '/'?>oferta-2.jpg" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Poupa 20%</h6>
-                        <h3 class="text-white mb-3">Oferta Especial</h3>
-                        <a href="site/shop" class="btn btn-primary">Compre Agora</a>
-                    </div>
                 </div>
             </div>
         </div>
