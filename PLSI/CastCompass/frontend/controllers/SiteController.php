@@ -237,12 +237,19 @@ class SiteController extends Controller
 
       $imagens = $produto->getImagens()->all();
 
+      if($produto->stock <= 0) {
+        return $this->render('detail', [
+          'produto' => $produto,
+          'imagens' => $imagens,
+          'quantidade' => $quantidade,
+        ]);
+      }
+
       return $this->render('detail', [
         'produto' => $produto,
         'imagens' => $imagens,
         'quantidade' => ++$quantidade,
       ]);
-
     }
  
     public function actionSubtrair($id, $quantidade){
@@ -251,7 +258,7 @@ class SiteController extends Controller
 
       $imagens = $produto->getImagens()->all();
 
-      if($quantidade == 1) {
+      if($quantidade == 1 || $produto->stock <= 0) {
         return $this->render('detail', [
           'produto' => $produto,
           'imagens' => $imagens,

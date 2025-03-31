@@ -41,24 +41,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h5>Marca: <?= Html::encode($produto->marca) ?></h5>
                 <h5>Categoria: <?= Html::encode($produto->categoria->genero) ?></h5>
                 <h4 class="font-weight-semi-bold mb-4"><?= number_format($produto->preco, 2, ',', '.') ?>€</h4>
+                <h5 class="font-weight-semi-bold mb-4">Stock: <?=Html::encode(($produto->stock == 0) ? "Sem Stock" : $produto->stock) ?></p>
 
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
+                        <?php if(!$produto->stock <= 0) { ?>
                         <a class="btn btn-primary" href="<?= yii\helpers\Url::to(['site/subtrair', 'id' => $produto->id, 'quantidade' => $quantidade]) ?>">
                             <i class="fa fa-minus"></i>
                           </a>
+                        <?php } ?>
                         </div>
                         <span class="form-control text-center"><?= $quantidade ?></span>
                         <div class="input-group-btn">
+                        <?php if(!$produto->stock <= 0) { ?>
                         <a class="btn btn-primary" href="<?= yii\helpers\Url::to(['site/adicionar', 'id' => $produto->id, 'quantidade' => $quantidade ]) ?>">
                                 <i class="fa fa-plus"></i>
                           </a>
+                        <?php } ?>
                         </div>
                     </div>
+                    <?php if(!$produto->stock <= 0) { ?>
                     <a class="btn btn-primary px-3"
-                       href="<?= yii\helpers\Url::to(['items-carrinho/adicionar-produto', 'idProduto' => $produto->id, 'quantidade' => $quantidade]) ?>"><i
+                       href="<?= yii\helpers\Url::to(['items-carrinho/adicionar-produto', 'idProduto' => $produto->id, 'quantidade' => $quantidade]) ?>" >
+                              <i
                                 class="fa fa-shopping-cart mr-1"></i> Adicionar ao Carrinho</a>
+                    <?php } else { ?>
+                    <a class="btn btn-primary px-3" href="" >
+                              <i
+                                class="fa fa-shopping-cart mr-1"></i> Adicionar ao Carrinho</a>
+                    <?php } ?>
                 </div>
             </div>
 

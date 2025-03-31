@@ -20,6 +20,7 @@ use Yii;
 
 /**
  * ProdutoController implements the CRUD actions for Produto model.
+ * TODO:  Discount Management
  */
 class ProdutoController extends Controller
 {

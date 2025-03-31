@@ -155,8 +155,6 @@ class ItemsCarrinhoController extends \yii\web\Controller
     }
 
     public function actionAdicionarProduto($idProduto, $quantidade){
-
-
       $userId = Yii::$app->user->id;
 
       if($userId == NULL) {
@@ -202,11 +200,9 @@ class ItemsCarrinhoController extends \yii\web\Controller
         $carrinho->save();
   
         Yii::$app->session->setFlash('success', 'Produto adicionado ao carrinho com sucesso!');
-  
       }
 
       return $this->redirect(['site/shop']);
-
     }
 
 }

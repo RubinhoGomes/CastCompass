@@ -151,6 +151,8 @@ class CarrinhoController extends Controller
                 $linhaFatura->valorIva = $item->valorTotal - ($this->subIva($produto->preco, $produto->ivaID) * $item->quantidade);
                 $linhaFatura->ivaID = Produto::findOne(['id' => $item->produtoID])->ivaID;
                 $linhaFatura->save(false);
+                $produto->stock -= $item->quantidade;
+                $produto->save(false);
             }
         }
 
@@ -164,7 +166,6 @@ class CarrinhoController extends Controller
 
         Yii::$app->session->setFlash('success', 'Compra efetuada com sucesso!');
         return $this->redirect(['site/index']);
-
     }
 
     public function calcularValorTotal($carrinhoId) {
@@ -245,59 +246,6 @@ class CarrinhoController extends Controller
         $item->carrinhoID = idCarrinho;
         $item->produtoID = idProduto;
         $item->quantidade = $quantidade;
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Creates a new Carrinho model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate() {
-        $model = new Carrinho();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Carrinho model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id) {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Carrinho model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id) {
-        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

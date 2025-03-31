@@ -142,7 +142,6 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        
         if (!Yii::$app->user->can('userDeleteBO')) {
             return $this->redirect(['site/login']);
         }
