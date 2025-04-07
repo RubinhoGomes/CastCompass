@@ -38,8 +38,7 @@ class MetodopagamentoController extends Controller
    *
    * @return string
    */
-  public function actionIndex()
-  {
+  public function actionIndex() {
     if(!Yii::$app->user->can('mpIndexBO')) {
       throw new ForbiddenHttpException('Access denied');
     }
@@ -59,8 +58,7 @@ class MetodopagamentoController extends Controller
    * @return string
    * @throws NotFoundHttpException if the model cannot be found
    */
-  public function actionView($id)
-  {
+  public function actionView($id) {
     if(!Yii::$app->user->can('mpViewBO')) {
       throw new ForbiddenHttpException('Access denied');
     }
@@ -75,8 +73,7 @@ class MetodopagamentoController extends Controller
    * If creation is successful, the browser will be redirected to the 'view' page.
    * @return string|\yii\web\Response
    */
-  public function actionCreate()
-  {
+  public function actionCreate() {
     if(!Yii::$app->user->can('mpCreateBO')) {
       throw new ForbiddenHttpException('Access denied');
     }
@@ -104,9 +101,7 @@ class MetodopagamentoController extends Controller
    * @return string|\yii\web\Response
    * @throws NotFoundHttpException if the model cannot be found
    */
-  public function actionUpdate($id)
-  {
-
+  public function actionUpdate($id) {
     if(!Yii::$app->user->can('mpUpdateBO')) {
       throw new ForbiddenHttpException('Access denied');
     }
@@ -130,8 +125,7 @@ class MetodopagamentoController extends Controller
    * @return \yii\web\Response
    * @throws NotFoundHttpException if the model cannot be found
    */
-  public function actionDelete($id)
-  {
+  public function actionDelete($id) {
     if(!Yii::$app->user->can('mpDeleteBO')) {
       throw new ForbiddenHttpException('Access denied');
     }
@@ -149,8 +143,7 @@ class MetodopagamentoController extends Controller
    * @return Metodopagamento the loaded model
    * @throws NotFoundHttpException if the model cannot be found
    */
-  protected function findModel($id)
-  {
+  protected function findModel($id) {
     if (($model = Metodopagamento::findOne(['id' => $id])) !== null) {
       return $model;
     }

@@ -29,6 +29,11 @@ class ItemsCarrinhoController extends \yii\web\Controller
         $produto = Produto::findOne($produtoId);
         $carrinho = Carrinho::findOne(['profileID' => $this->getProfile(Yii::$app->user->id)]);
 
+        if($produto->stock <= 0) {
+            Yii::$app->session->setFlash('error', 'Produto sem stock!');
+            return $this->redirect(['site/shop']);
+        }
+
         if ($carrinho === NULL) {
             if ($this->CreateCarrinho($profile->id)) {
                 $carrinho = Carrinho::findOne(['profileID' => $profile->id]);

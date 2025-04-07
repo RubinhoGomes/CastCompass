@@ -20,7 +20,7 @@ use Yii;
 
 /**
  * ProdutoController implements the CRUD actions for Produto model.
- * TODO:  Discount Management
+ * TODO Discount Management
  */
 class ProdutoController extends Controller
 {
@@ -32,6 +32,26 @@ class ProdutoController extends Controller
     return array_merge(
       parent::behaviors(),
       [
+        'access' => [
+          'class' => AccessControl::class,
+          'rules' => [
+            [
+              'actions' => ['error'],
+              'allow' => true,
+              'roles' => ['?'],
+            ], 
+            /*[
+              'actions' => ['create'],
+              'allow' => true,
+              'roles' => ['worker'],
+            ],*/
+            [
+              'actions' => ['create', 'view', 'delete', 'index', 'error'],
+              'allow' => true,
+              'roles' => ['admin', 'worker'],
+            ],
+          ],
+        ],
         'verbs' => [
           'class' => VerbFilter::className(),
           'actions' => [
@@ -149,8 +169,7 @@ class ProdutoController extends Controller
    * @return string|\yii\web\Response
    * @throws NotFoundHttpException if the model cannot be found
    */
-  public function actionUpdate($id)
-  {
+  public function actionUpdate($id) {
   
     if(!Yii::$app->user->can('produtoUpdateBO')) {
       throw new ForbiddenHttpException('Access denied');
@@ -159,7 +178,7 @@ class ProdutoController extends Controller
     $model = $this->findModel($id);
     $imagemProduto = Imagem::findAll(['produtoID' => $id]) ?? null;
   
-    if($imagemProduto){
+    if($imagemProduto) {
       foreach ($imagemProduto as $img) {
         $img->filename = Yii::getAlias('@backendUploads') . '/' . $img->filename;
       }
@@ -170,12 +189,12 @@ class ProdutoController extends Controller
 
     if ($this->request->isPost) {
       if($model->load($this->request->post())) {
-          $model->save();
-          if($this->request->post('ImagemForm')){
-            $imagem->imagens = UploadedFile::getInstances($imagem, 'imagens');
-            $this->uploadImage($model->id, $imagem);
+        $model->save();
+        if($this->request->post('ImagemForm')){
+          $imagem->imagens = UploadedFile::getInstances($imagem, 'imagens');
+          $this->uploadImage($model->id, $imagem);
         }
-       return $this->redirect(['view', 'id' => $model->id]);
+        return $this->redirect(['view', 'id' => $model->id]);
       }
     }
 
@@ -194,15 +213,15 @@ class ProdutoController extends Controller
       
     $imagem = Imagem::findOne($id);
 
-    if(!$imagem){
+    if(!$imagem) {
       throw new Exception('Image not found');
     }
  
-    if($imagem->deleteImage()){
+    if($imagem->deleteImage()) {
       Yii::$app->session->setFlash('success', 'Image deleted successfully.');     
     } else {
       Yii::$app->session->setFlash('success', 'Image deleted successfully.');
-     }
+    }
 
     return $this->render('update', [
       'model' => $this->findModel($imagem->produtoID),
@@ -224,7 +243,7 @@ class ProdutoController extends Controller
       return null;
     }
  
-   $imagem->filename = Yii::getAlias('@backendUploads') . '/' . $imagem->filename;
+    $imagem->filename = Yii::getAlias('@backendUploads') . '/' . $imagem->filename;
 
     return $imagem;
   }

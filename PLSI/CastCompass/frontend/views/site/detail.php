@@ -67,8 +67,8 @@ $this->params['breadcrumbs'][] = $this->title;
                               <i
                                 class="fa fa-shopping-cart mr-1"></i> Adicionar ao Carrinho</a>
                     <?php } else { ?>
-                    <a class="btn btn-primary px-3" href="" >
-                              <i
+                    <a class="btn btn-secondary px-3">
+                              <i 
                                 class="fa fa-shopping-cart mr-1"></i> Adicionar ao Carrinho</a>
                     <?php } ?>
                 </div>
